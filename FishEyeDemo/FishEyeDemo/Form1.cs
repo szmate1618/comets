@@ -95,7 +95,7 @@ namespace FishEyeDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            String className = vt.GetType().ToString().Split('.').Last();
+            String className = vt.GetType().Name;
             if (className.Equals("ViewTransformationSqrt"))
             {
                 vt = new ViewTransformationLog(vt.zoom, vt.offset_x, vt.offset_y);
