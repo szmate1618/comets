@@ -19,7 +19,7 @@ namespace FishEyeDemo
             InitializeComponent();
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
-            vt = new ViewTransformation(1, pictureBox1.Width / 2, pictureBox1.Height / 2);
+            vt = new ViewTransformationSqrt(1, pictureBox1.Width / 2, pictureBox1.Height / 2);
             shapes = new List<Shape>();
             shapes.Add(new Circle(new ModelPoint(100, 100), 20, 0.1));
             shapes.Add(new Circle(new ModelPoint(200, 300), 32, 0.1));
@@ -91,6 +91,19 @@ namespace FishEyeDemo
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            String className = vt.GetType().ToString().Split('.').Last();
+            if (className.Equals("ViewTransformationSqrt"))
+            {
+                vt = new ViewTransformationLog(vt.zoom, vt.offset_x, vt.offset_y);
+            }
+            else
+            {
+                vt = new ViewTransformationSqrt(vt.zoom, vt.offset_x, vt.offset_y);
+            }
         }
 
     }
