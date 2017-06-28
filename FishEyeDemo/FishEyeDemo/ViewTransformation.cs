@@ -21,7 +21,7 @@ namespace FishEyeDemo
 
         public abstract Point ModelPointToPoint(ModelPoint mp);
 
-     /*   public ModelPoint PointToModelPoint(Point p)
+        /*public ModelPoint PointToModelPoint(Point p)
         {
             return new ModelPoint((p.X - offset_x) / zoom, (offset_y - p.Y) / zoom);
         }*/
