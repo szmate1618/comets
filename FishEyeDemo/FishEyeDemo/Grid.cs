@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FishEyeDemo
 {
-    class Grid: Shape
+    class Grid : Shape
     {
         double precision;
         List<Line> lines;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FishEyeDemo
 {
-    class Line: Shape
+    class Line : Shape
     {
         ModelPoint start;
         ModelPoint end;

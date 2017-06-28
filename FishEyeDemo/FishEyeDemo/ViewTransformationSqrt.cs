@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FishEyeDemo
 {
-    class ViewTransformationSqrt: ViewTransformation
+    class ViewTransformationSqrt : ViewTransformation
     {
         public ViewTransformationSqrt(double zoom, double offset_x, double offset_y) : base(zoom, offset_x, offset_y) { }
 

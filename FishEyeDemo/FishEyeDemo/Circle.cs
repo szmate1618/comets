@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FishEyeDemo
 {
-    class Circle: Shape
+    class Circle : Shape
     {
         ModelPoint origo;
         double radius;
