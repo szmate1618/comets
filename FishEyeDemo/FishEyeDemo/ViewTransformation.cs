@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace FishEyeDemo
 {
-    class ViewTransformation
+    abstract class ViewTransformation
     {
         public double zoom;
         public double offset_x;
@@ -19,31 +19,7 @@ namespace FishEyeDemo
             this.offset_y = offset_y;
         }
 
-        public Point ModelPointToPoint(ModelPoint mp)
-        {
-            ModelPoint euclidean = new ModelPoint(mp.x - offset_x, -offset_y + mp.y);
-            double distance = euclidean.Length();
-           /* if (distance <= 128.7463)
-            {
-                return new Point(Convert.ToInt32(300 + zoom * euclidean.x),
-                                 Convert.ToInt32(300 - zoom * euclidean.y));
-            }
-            else
-            {
-                return new Point(Convert.ToInt32(300 + zoom * euclidean.x / distance * Math.Log(distance + 1, 1.5) / 12 * 129.7463),
-                                 Convert.ToInt32(300 - zoom * euclidean.y / distance * Math.Log(distance + 1, 1.5) / 12 * 129.7463));
-            }*/
-            if (distance <= 100)
-            {
-                return new Point(Convert.ToInt32(300 + zoom * euclidean.x),
-                                 Convert.ToInt32(300 - zoom * euclidean.y));
-            }
-            else
-            {
-                return new Point(Convert.ToInt32(300 + zoom * euclidean.x / distance * Math.Sqrt(distance) * 10),
-                                 Convert.ToInt32(300 - zoom * euclidean.y / distance * Math.Sqrt(distance) * 10));
-            }
-        }
+        public abstract Point ModelPointToPoint(ModelPoint mp);
 
      /*   public ModelPoint PointToModelPoint(Point p)
         {
