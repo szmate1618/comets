@@ -8,7 +8,9 @@ namespace FishEyeDemo
 {
     class ViewTransformationLog: ViewTransformation
     {
-        public Point ModelPointToPoint(ModelPoint mp)
+        public ViewTransformationLog(double zoom, double offset_x, double offset_y): base(zoom, offset_x, offset_y){}
+
+        override public Point ModelPointToPoint(ModelPoint mp)
         {
             ModelPoint euclidean = new ModelPoint(mp.x - offset_x, -offset_y + mp.y);
             double distance = euclidean.Length();
