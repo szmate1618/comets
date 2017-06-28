@@ -14,11 +14,11 @@ namespace FishEyeDemo
         {
             this.precision = precision;
             lines = new List<Line>();
-            for (double d = lower_left.x; d <= upper_right.x; d+= gap)
+            for (double d = lower_left.x; d <= upper_right.x; d += gap)
             {
                 lines.Add(new Line(new ModelPoint(d, lower_left.y), new ModelPoint(d, upper_right.y), precision));
             }
-            for (double d = lower_left.y; d <= upper_right.y; d+= gap)
+            for (double d = lower_left.y; d <= upper_right.y; d += gap)
             {
                 lines.Add(new Line(new ModelPoint(lower_left.x, d), new ModelPoint(upper_right.y, d), precision));
             }
