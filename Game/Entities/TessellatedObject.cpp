@@ -35,11 +35,11 @@ bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
 	arr_counter++;
 	int other_start = arr_counter;
 	int j = 0;
-	for(trianlge_tile& t: faces)
+	for(trianlge_tile& t: other.faces)
 	{
-		if (geo::is_inside(otherframe, vertices[t.a])
-			|| geo::is_inside(otherframe, vertices[t.b])
-			|| geo::is_inside(otherframe, vertices[t.c]))
+		if (geo::is_inside(otherframe, other.vertices[t.a])
+			|| geo::is_inside(otherframe, other.vertices[t.b])
+			|| geo::is_inside(otherframe, other.vertices[t.c]))
 		{
 			arr[arr_counter] = j;
 			arr_counter++;
@@ -56,7 +56,7 @@ bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
 		{
 			//TODO measure if this outer conditional is really neccesary
 			//One thing is for sure: we should move the tri_as_frame call outside of the loop, since it will be used multiple times.
-			if (geo::is_inside(geo::tri_as_frame(other.vertices[faces[j].a], other.vertices[faces[j].b], other.vertices[faces[j].c]), vertices[i]))
+			if (geo::is_inside(geo::tri_as_frame(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c]), vertices[i]))
 			{
 				return true;
 			}
