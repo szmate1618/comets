@@ -52,14 +52,14 @@ bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
 	
 	for (j = other_start; arr[j] != -1; j++) //TODO declare j here
 	{
-		geo::EmptyFrame other_face_frame =
-			geo::tri_as_frame(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c]);
+		geo::triangle other_face = { other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c] };
+		geo::EmptyFrame other_face_frame = geo::tri_as_frame(other_face);
 		for (int i = 0; arr[i] != -1; i++)
 		{
 			//TODO measure if this outer conditional is really neccesary
 			if (geo::is_inside(other_face_frame, vertices[i]))
 			{
-				if (geo::is_inside(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c], vertices[i]))
+				if (geo::is_inside(other_face, vertices[i]))
 				{
 					return true;
 				}
