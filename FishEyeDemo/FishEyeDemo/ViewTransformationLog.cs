@@ -6,9 +6,9 @@ using System.Text;
 
 namespace FishEyeDemo
 {
-    class ViewTransformationLog : ViewTransformation
+    class ViewTransformationLog: ViewTransformation
     {
-        public ViewTransformationLog(double zoom, double offset_x, double offset_y) : base(zoom, offset_x, offset_y){}
+        public ViewTransformationLog(double zoom, double offset_x, double offset_y): base(zoom, offset_x, offset_y){}
 
         override public Point ModelPointToPoint(ModelPoint mp)
         {
