@@ -49,14 +49,15 @@ bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
 	arr[arr_counter] = -1;
 
 	if (arr[0] == -1 || arr[other_start] == -1) return false; //at least one of the frames is empty
-
-	for (int i = 0; arr[i] != -1; i++)
+	
+	for (j = other_start; arr[j] != -1; j++) //TODO declare j here
 	{
-		for (j = other_start; arr[j] != -1; j++) //TODO declare j here
+		geo::EmptyFrame other_face_frame =
+			geo::tri_as_frame(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c]);
+		for (int i = 0; arr[i] != -1; i++)
 		{
 			//TODO measure if this outer conditional is really neccesary
-			//One thing is for sure: we should move the tri_as_frame call outside of the loop, since it will be used multiple times.
-			if (geo::is_inside(geo::tri_as_frame(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c]), vertices[i]))
+			if (geo::is_inside(other_face_frame, vertices[i]))
 			{
 				return true;
 			}
