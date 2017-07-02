@@ -60,8 +60,6 @@ namespace geo
 	point_2d point_2d_rotated(point_2d, double);
 
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
-
-	bool mofo();
 }
 
 #endif

@@ -162,11 +162,6 @@ namespace geo
 
 }
 
-	bool geo::mofo()
-	{
-		return true;
-	}
-
 	
 	geo::point_2d geo::point_2d_rotated(geo::point_2d p, double radian)
 	{

@@ -3,7 +3,6 @@
 
 void Engine::Rotate(double radian)
 {
-	volatile bool m = geo::mofo();
 /*	for(geo::point_2d& p: ship.vertices)
 	{
 		p = geo::point_2d_rotated(p, radian);
