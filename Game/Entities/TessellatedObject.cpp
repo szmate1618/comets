@@ -59,7 +59,10 @@ bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
 			//TODO measure if this outer conditional is really neccesary
 			if (geo::is_inside(other_face_frame, vertices[i]))
 			{
-				return true;
+				if (geo::is_inside(other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c], vertices[i]))
+				{
+					return true;
+				}
 			}
 		}
 	}
