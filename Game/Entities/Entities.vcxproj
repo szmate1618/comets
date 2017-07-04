@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="TessellatedObject.hpp" />
+    <ClInclude Include="TessellatedObjectPrecomputedRotation.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.vcxproj">
@@ -136,6 +137,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TessellatedObject.cpp" />
+    <ClCompile Include="TessellatedObjectPrecomputedRotation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
