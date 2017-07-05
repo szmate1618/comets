@@ -7,20 +7,25 @@
 #include <vector>
 
 
-class TessellatedObjectPrecomputedRotation: public TessellatedObject
+namespace entity
 {
-public:
 
-	TessellatedObjectPrecomputedRotation();
-	TessellatedObjectPrecomputedRotation(TessellatedObject);
-	~TessellatedObjectPrecomputedRotation();
-	override void SetRotation(geo::real);
+	class TessellatedObjectPrecomputedRotation: public TessellatedObject
+	{
+	public:
 
-private:
+		TessellatedObjectPrecomputedRotation();
+		TessellatedObjectPrecomputedRotation(TessellatedObject);
+		~TessellatedObjectPrecomputedRotation();
+		override void SetRotation(geo::real);
 
-	static const int granularity = 3600;
+	private:
 
-	std::vector<geo::point_2d> rotated_vertices[granularity];
-};
+		static const int granularity = 3600;
+
+		std::vector<geo::point_2d> rotated_vertices[granularity];
+	};
+
+}
 
 #endif

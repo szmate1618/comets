@@ -60,6 +60,7 @@ namespace geo
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
 
 	EmptyFrame tri_as_frame(triangle);
+
 }
 
 #endif

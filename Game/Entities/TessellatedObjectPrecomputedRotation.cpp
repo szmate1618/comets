@@ -1,14 +1,20 @@
 #include "TessellatedObjectPrecomputedRotation.hpp"
 
-TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation()
+
+namespace entity
 {
 
-}
+	TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation()
+	{
 
-TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation(TessellatedObject to)
-{
-}
+	}
 
-TessellatedObjectPrecomputedRotation::~TessellatedObjectPrecomputedRotation()
-{
+	TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation(TessellatedObject to)
+	{
+	}
+
+	TessellatedObjectPrecomputedRotation::~TessellatedObjectPrecomputedRotation()
+	{
+	}
+
 }
