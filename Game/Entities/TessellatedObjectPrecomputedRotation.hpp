@@ -17,7 +17,7 @@ namespace entity
 		TessellatedObjectPrecomputedRotation();
 		TessellatedObjectPrecomputedRotation(TessellatedObject);
 		~TessellatedObjectPrecomputedRotation();
-		override void SetRotation(geo::real);
+		void SetOrientation(double);
 
 	private:
 

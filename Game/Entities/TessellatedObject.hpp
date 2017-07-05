@@ -21,7 +21,7 @@ namespace entity
 						geo::Frame<TessellatedObject>,
 						TessellatedObject&);
 		double GetOrientation();
-		double StOrientation(double radian);
+		void SetOrientation(double radian);
 					
 	private:
 
