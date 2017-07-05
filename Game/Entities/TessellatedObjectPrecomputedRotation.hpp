@@ -14,7 +14,7 @@ public:
 	TessellatedObjectPrecomputedRotation();
 	TessellatedObjectPrecomputedRotation(TessellatedObject);
 	~TessellatedObjectPrecomputedRotation();
-	void SetRotation(geo::real);
+	override void SetRotation(geo::real);
 
 private:
 

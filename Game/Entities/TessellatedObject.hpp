@@ -25,11 +25,14 @@ public:
 	bool CollideInto(geo::Frame<TessellatedObject>,
 					geo::Frame<TessellatedObject>,
 					TessellatedObject&);
+	double GetOrientation();
+	double SetOrientation(double radian);
 					
 private:
 
 	static int arr[];  //Some preallocated general purpose memory, here goes thread safety.
 	                   //Wouldn't a local be better, though?
+	geo::real orientation;
 	geo::point_2d pivot;
 	geo::vector_2d velocity;
 	geo::vector_2d acceleration;
