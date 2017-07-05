@@ -1,7 +1,5 @@
 #include "TessellatedObject.hpp"
 
-#include <fstream>
-
 
 namespace entity 
 {
