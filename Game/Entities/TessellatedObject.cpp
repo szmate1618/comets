@@ -1,5 +1,4 @@
 #include "TessellatedObject.hpp"
-//#include "QuadTree.hpp"
 
 #include <fstream>
 

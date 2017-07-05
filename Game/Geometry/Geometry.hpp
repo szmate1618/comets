@@ -1,10 +1,8 @@
 #ifndef SZM_GEOMETRY
 #define SZM_GEOMETRY
 
-/*#define FLOAT double
-#define EPSILON 0.0005*/
-
 #include <math.h>
+
 
 namespace geo
 {
