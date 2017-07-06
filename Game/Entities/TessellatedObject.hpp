@@ -16,12 +16,11 @@ namespace entity
 	public:
 
 		TessellatedObject();
-		TessellatedObject(std::string);
-		~TessellatedObject();
+		TessellatedObject(std::string); //TODO: figure out why I declared this.
+		virtual ~TessellatedObject();
+		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, Shape&);
 		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TessellatedObject&);
-		std::string GetName();
-		double GetOrientation();
-		void SetOrientation(double radian);
+		virtual void SetOrientation(double radian) = 0;
 					
 	private:
 

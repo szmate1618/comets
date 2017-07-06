@@ -15,9 +15,10 @@ namespace entity
 	public:
 
 		TessellatedObjectPrecomputedRotation();
-		TessellatedObjectPrecomputedRotation(TessellatedObject);
+		TessellatedObjectPrecomputedRotation(TessellatedObject&);
 		~TessellatedObjectPrecomputedRotation();
 		void SetOrientation(double);
+	    std::string GetName();
 
 	private:
 

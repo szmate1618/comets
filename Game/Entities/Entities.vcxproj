@@ -122,6 +122,7 @@
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="TessellatedObject.hpp" />
+    <ClInclude Include="TessellatedObjectNaiveRotation.hpp" />
     <ClInclude Include="TessellatedObjectPrecomputedRotation.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="TessellatedObject.cpp" />
+    <ClCompile Include="TessellatedObjectNaiveRotation.cpp" />
     <ClCompile Include="TessellatedObjectPrecomputedRotation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

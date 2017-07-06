@@ -17,6 +17,11 @@ namespace entity
 	{
 	}
 
+	bool TessellatedObject::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Shape& that)
+	{
+		return that.CollideInto(otherframe, myframe, *this); //Notice how we switched myframe and otherframe here.
+	}
+
 	bool TessellatedObject::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TessellatedObject& other)
 	{
 		int arr_counter = 0;
@@ -65,11 +70,6 @@ namespace entity
 		}
 
 		return false;
-	}
-
-	std::string TessellatedObject::GetName()
-	{
-		return std::string("TessellatedObject");
 	}
 
 }

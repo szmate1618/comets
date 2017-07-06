@@ -9,12 +9,22 @@ namespace entity
 
 	}
 
-	TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation(TessellatedObject to)
+	TessellatedObjectPrecomputedRotation::TessellatedObjectPrecomputedRotation(TessellatedObject& to)
 	{
 	}
 
 	TessellatedObjectPrecomputedRotation::~TessellatedObjectPrecomputedRotation()
 	{
+	}
+
+	void TessellatedObjectPrecomputedRotation::SetOrientation(double radian)
+	{
+		//TODO: implement this.
+	}
+
+	std::string TessellatedObjectPrecomputedRotation::GetName()
+	{
+		return "TessellatedObjectPrecomputedRotation";
 	}
 
 }
