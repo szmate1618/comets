@@ -15,27 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TessellatedObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Test.hpp">
+    <ClInclude Include="TriangulatedPoly.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangulatedPolyNaiveRotation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TessellatedObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
+    <ClCompile Include="TriangulatedPoly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangulatedPolyNaiveRotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

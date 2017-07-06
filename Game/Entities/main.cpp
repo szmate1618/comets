@@ -1,4 +1,4 @@
-//#include "TessellatedObject.hpp"
+//#include "TriangulatedPoly.hpp"
 //#include "Engine.hpp"
 
 int main()

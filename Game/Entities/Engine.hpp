@@ -3,44 +3,50 @@
 
 #include "..\Geometry\Geometry.hpp"
 
-class Engine
+
+namespace entity
 {
-public:
 
-	Engine();
-	virtual ~Engine();
-	virtual void Rotate(double);
-	virtual void Accelerate(geo::vector_2d);
+	class Engine
+	{
+	public:
 
-protected:
+		Engine();
+		virtual ~Engine();
+		virtual void Rotate(double);
+		virtual void Accelerate(geo::vector_2d);
+
+	protected:
 	
-	//TessellatedObject& ship;
-	geo::real max_speed;
-};
+		//TriangulatedPoly& ship;
+		geo::real max_speed;
+	};
 
-class InertialEngine: public Engine
-{
-public:
+	class InertialEngine: public Engine
+	{
+	public:
 
-	~InertialEngine();
-	void Accelerate(geo::vector_2d);
-};
+		~InertialEngine();
+		void Accelerate(geo::vector_2d);
+	};
 
-class AntiInertialEngine: public Engine
-{
-public:
+	class AntiInertialEngine: public Engine
+	{
+	public:
 
-	~AntiInertialEngine();
-	void Accelerate(geo::vector_2d);
-};
+		~AntiInertialEngine();
+		void Accelerate(geo::vector_2d);
+	};
 
-class ParaInertialEngine: public Engine
-{
-public:
+	class ParaInertialEngine: public Engine
+	{
+	public:
 
-	~ParaInertialEngine();
-	void Rotate(double);
-	void Accelerate(geo::vector_2d);
-};
+		~ParaInertialEngine();
+		void Rotate(double);
+		void Accelerate(geo::vector_2d);
+	};
+
+}
 
 #endif

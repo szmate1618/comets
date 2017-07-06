@@ -129,6 +129,13 @@ namespace geo
 		}
 	}
 
+	point_2d point_2d_rotated(point_2d p, double radian)
+	{
+		point_2d ret;
+		ret.x = cos(radian) * p.x + sin(radian) * p.y;
+		ret.y = -sin(radian) * p.x + cos(radian) * p.y;
+		return ret;
+	}
 
 	EmptyFrame tri_as_frame(point_2d a, point_2d b, point_2d c)
 	{
@@ -160,18 +167,9 @@ namespace geo
 		return f;
 	}
 
+	EmptyFrame tri_as_frame(triangle t)
+	{
+		return tri_as_frame(t.a, t.b, t.c);
+	}
+
 }
-
-	bool geo::mofo()
-	{
-		return true;
-	}
-
-	
-	geo::point_2d geo::point_2d_rotated(geo::point_2d p, double radian)
-	{
-		geo::point_2d ret;
-		ret.x = cos(radian) * p.x + sin(radian) * p.y;
-		ret.y = -sin(radian) * p.x + cos(radian) * p.y;
-		return ret;
-	}
