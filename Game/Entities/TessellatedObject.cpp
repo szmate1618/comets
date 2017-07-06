@@ -17,9 +17,7 @@ namespace entity
 	{
 	}
 
-	bool TessellatedObject::CollideInto(geo::Frame<TessellatedObject> myframe,
-										geo::Frame<TessellatedObject> otherframe,
-										TessellatedObject& other)
+	bool TessellatedObject::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TessellatedObject& other)
 	{
 		int arr_counter = 0;
 		for(int& i: hull)
@@ -67,6 +65,11 @@ namespace entity
 		}
 
 		return false;
+	}
+
+	std::string TessellatedObject::GetName()
+	{
+		return std::string("TessellatedObject");
 	}
 
 }

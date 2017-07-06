@@ -1,6 +1,7 @@
 #ifndef SZM_TESSELLATED_OBJECT
 #define SZM_TESSELLATED_OBJECT
 
+#include "Shape.hpp"
 #include "..\Geometry\Geometry.hpp"
 
 #include <vector>
@@ -10,16 +11,15 @@
 namespace entity
 {
 
-	class TessellatedObject
+	class TessellatedObject: public Shape
 	{
 	public:
 
 		TessellatedObject();
 		TessellatedObject(std::string);
 		~TessellatedObject();
-		bool CollideInto(geo::Frame<TessellatedObject>,
-						geo::Frame<TessellatedObject>,
-						TessellatedObject&);
+		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TessellatedObject&);
+		std::string GetName();
 		double GetOrientation();
 		void SetOrientation(double radian);
 					
