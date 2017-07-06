@@ -10,6 +10,8 @@ namespace entity
 {
 	class TessellatedObject;
 
+	//With its derived classes, it implements a Visitor for double dispatch, so that the correct 
+	//collision detection function is called for the dynamic types of the two involved shapes.
 	class Shape
 	{
 	public:
