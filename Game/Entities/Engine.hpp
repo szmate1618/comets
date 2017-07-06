@@ -18,7 +18,7 @@ namespace entity
 
 	protected:
 	
-		//TessellatedObject& ship;
+		//TriangulatedPoly& ship;
 		geo::real max_speed;
 	};
 

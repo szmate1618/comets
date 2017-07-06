@@ -1,28 +1,28 @@
-#include "TessellatedObject.hpp"
+#include "TriangulatedPoly.hpp"
 
 
 namespace entity 
 {
-	int TessellatedObject::arr[5000];
+	int TriangulatedPoly::arr[5000];
 
-	TessellatedObject::TessellatedObject()
+	TriangulatedPoly::TriangulatedPoly()
 	{
 	}
 
-	TessellatedObject::TessellatedObject(std::string)
+	TriangulatedPoly::TriangulatedPoly(std::string)
 	{
 	}
 
-	TessellatedObject::~TessellatedObject()
+	TriangulatedPoly::~TriangulatedPoly()
 	{
 	}
 
-	bool TessellatedObject::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Shape& that)
+	bool TriangulatedPoly::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, CollisionShape& that)
 	{
 		return that.CollideInto(otherframe, myframe, *this); //Notice how we switched myframe and otherframe here.
 	}
 
-	bool TessellatedObject::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TessellatedObject& other)
+	bool TriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TriangulatedPoly& other)
 	{
 		int arr_counter = 0;
 		for(int& i: hull)

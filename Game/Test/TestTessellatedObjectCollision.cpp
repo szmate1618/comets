@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "..\Entities\TessellatedObject.hpp"
+#include "..\Entities\TriangulatedPoly.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Test
 {		
-	TEST_CLASS(TestTessellatedObjectCollision)
+	TEST_CLASS(TestTriangulatedPolyCollision)
 	{
 	public:
 		

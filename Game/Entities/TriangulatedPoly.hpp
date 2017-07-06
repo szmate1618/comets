@@ -1,7 +1,7 @@
-#ifndef SZM_TESSELLATED_OBJECT
-#define SZM_TESSELLATED_OBJECT
+#ifndef SZM_TRIANGULATED_POLY
+#define SZM_TRIANGULATED_POLY
 
-#include "Shape.hpp"
+#include "CollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
 
 #include <vector>
@@ -11,15 +11,15 @@
 namespace entity
 {
 
-	class TessellatedObject: public Shape
+	class TriangulatedPoly: public CollisionShape
 	{
 	public:
 
-		TessellatedObject();
-		TessellatedObject(std::string); //TODO: figure out why I declared this.
-		virtual ~TessellatedObject();
-		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, Shape&);
-		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TessellatedObject&);
+		TriangulatedPoly();
+		TriangulatedPoly(std::string); //TODO: figure out why I declared this.
+		virtual ~TriangulatedPoly();
+		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&);
+		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&);
 		virtual void SetOrientation(double radian) = 0;
 					
 	private:
