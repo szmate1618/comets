@@ -20,6 +20,7 @@ namespace entity
 		virtual ~TriangulatedPoly();
 		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&);
 		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&);
+		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&);
 		virtual void SetOrientation(double radian) = 0;
 					
 	private:
