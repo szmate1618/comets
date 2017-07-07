@@ -3,6 +3,7 @@
 
 #include "..\Geometry\Geometry.hpp"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 const double Pi = 3.14159265358979323846;
