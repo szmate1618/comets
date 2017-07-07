@@ -29,7 +29,7 @@
     <ClCompile Include="TestGeometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestTessellatedObjectCollision.cpp">
+    <ClCompile Include="TestTriangulatedPolyCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

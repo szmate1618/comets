@@ -19,11 +19,13 @@ namespace entity
 
 	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TriangulatedPoly& that)
 	{
+		return false;
 		//TODO: implement this.
 	}
 	
 	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
+		return false;
 		//TODO: implement this.
 	}
 	

@@ -30,6 +30,9 @@
     <ClInclude Include="CollisionShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Circle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CollisionShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
