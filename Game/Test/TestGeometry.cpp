@@ -156,7 +156,54 @@ namespace Test
 			geo::vector_2d v6 = {1, 0};
 			Assert::AreEqual(0.0, geo::length_cross(v5, v6), L"Cross product of parallel vectors should be 0.");
 		}
+		
+		TEST_METHOD(TestInHexagonRandom)
+		{
+			srand(6);
+			for (int i = 0; i < 20; i = i)
+			{
+				geo::point_2d r = {1, 0};
+				geo::point_2d convex_hexagon_attempt[6];
+				for (int j = 0; j < 6; rotate_point_2d(r, Pi / 3), j++)
+				{
+					geo::real length = rand();
+					convex_hexagon_attempt[j] = geo::mul(r, length);
+				}
 
+				for (int j = 0; j < 6 - 2; j++)
+				{
+					for (int k = j + 1; k < 6 - 1; k++)
+					{
+						for (int l = k + 1; l < 6; l++)
+						{
+							for (int m = 0; m < 6; m++)
+							{
+								if (m == j || m == k || m == l) continue;
+
+								geo::triangle slice = {convex_hexagon_attempt[j], convex_hexagon_attempt[k], convex_hexagon_attempt[l]};
+								if (geo::is_inside(slice, convex_hexagon_attempt[m])) goto not_convex;
+							}
+						}
+					}
+				}
+				
+				geo::point_2d* hexa = convex_hexagon_attempt; // Hah! It's not just an attempt anymore!
+				for (int j = 0; j < 1000; j++)
+				{
+					geo::point_2d p = {rand(), rand()};
+					bool in_a_triangle =
+						geo::is_inside(hexa[0], hexa[1], hexa[2], p) ||
+						geo::is_inside(hexa[0], hexa[2], hexa[3], p) ||
+						geo::is_inside(hexa[0], hexa[3], hexa[4], p) ||
+						geo::is_inside(hexa[0], hexa[4], hexa[5], p);
+					bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry");
+				}
+				i++;
+
+not_convex:		;
+			}
+		}
 
 	};
 }
