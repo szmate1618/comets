@@ -38,11 +38,15 @@ namespace Test
 		TEST_METHOD(TestRotation)
 		{
 			geo::point_2d O = {0, 0};
+			geo::point_2d _1 = {1, 0};
+			geo::point_2d i = {0, 1};
 			geo::point_2d p1 = {1.23456789, 1.23456789};
 			Assert::IsTrue(geo::equals(p1, geo::point_2d_rotated(p1, Pi * 2)), L"Identity transformation failed.");
 			Assert::IsTrue(geo::equals(O, geo::add(p1, geo::point_2d_rotated(p1, Pi))), L"Inverting failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, Pi / 2)), geo::epsilon, L"90° rotation failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, Pi / 2)), geo::epsilon, L"90° rotation of origo failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation of origo failed.");
+			Assert::IsTrue(geo::equals(i, geo::point_2d_rotated(_1, Pi / 2)), L"90° rotation failed.");
+			Assert::IsTrue(geo::equals(_1, geo::point_2d_rotated(i, -Pi / 2)), L"-90° rotation failed.");
 		}
 			
 		TEST_METHOD(TestTriangleBounds)
@@ -218,7 +222,7 @@ find_convex_hexa:
 				{
 					geo::point_2d p = {rand(), rand()};
 					bool in_a_triangle =
-						geo::is_inside(hexa[0], hexa[1], hexa[2], p) ||
+						geo::is_inside(hexa[0], hexa[1], hexa[2], p) || //Outcommenting this line doesn't do anything; this is strange.
 						geo::is_inside(hexa[0], hexa[2], hexa[3], p) ||
 						geo::is_inside(hexa[0], hexa[3], hexa[4], p) ||
 						geo::is_inside(hexa[0], hexa[4], hexa[5], p);
