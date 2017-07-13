@@ -47,6 +47,9 @@ namespace Test
 			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation of origo failed.");
 			Assert::IsTrue(geo::equals(i, geo::point_2d_rotated(_1, Pi / 2)), L"90° rotation failed.");
 			Assert::IsTrue(geo::equals(_1, geo::point_2d_rotated(i, -Pi / 2)), L"-90° rotation failed.");
+			geo::point_2d rotated_p1 = geo::point_2d_rotated(p1, 123);
+			geo::rotate_point_2d(p1, 123);
+			Assert::IsTrue(geo::equals(rotated_p1, p1), L"Mutable and immutable rotations provide different results.");
 		}
 			
 		TEST_METHOD(TestTriangleBounds)
