@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractServer.hpp" />
     <ClInclude Include="Server.hpp" />
   </ItemGroup>
   <ItemGroup>
