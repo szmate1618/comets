@@ -8,6 +8,10 @@ namespace entity
 	{
 	}
 
+	Circle::Circle(geo::real radius): r(radius)
+	{
+	}
+
 	Circle::~Circle()
 	{
 	}
