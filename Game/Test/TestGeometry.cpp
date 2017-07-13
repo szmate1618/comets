@@ -160,8 +160,9 @@ namespace Test
 		TEST_METHOD(TestInHexagonRandom)
 		{
 			srand(6);
-			for (int i = 0; i < 20; i = i)
+			for (int i = 0; i < 20; i++)
 			{
+find_convex_hexa:
 				geo::point_2d r = {1, 0};
 				geo::point_2d convex_hexagon_attempt[6];
 				for (int j = 0; j < 6; rotate_point_2d(r, Pi / 3), j++)
@@ -181,7 +182,7 @@ namespace Test
 								if (m == j || m == k || m == l) continue;
 
 								geo::triangle slice = {convex_hexagon_attempt[j], convex_hexagon_attempt[k], convex_hexagon_attempt[l]};
-								if (geo::is_inside(slice, convex_hexagon_attempt[m])) goto not_convex;
+								if (geo::is_inside(slice, convex_hexagon_attempt[m])) goto find_convex_hexa;
 							}
 						}
 					}
@@ -199,9 +200,6 @@ namespace Test
 					bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
 					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry");
 				}
-				i++;
-
-not_convex:		;
 			}
 		}
 
