@@ -157,6 +157,31 @@ namespace Test
 			Assert::AreEqual(0.0, geo::length_cross(v5, v6), L"Cross product of parallel vectors should be 0.");
 		}
 		
+		TEST_METHOD(TestInHexagon)
+		{
+			geo::point_2d hexa[] = {{1, 0}, {0.5, 0.866}, {-0.5, 0.866}, {-1, 0}, {-0.5, -0.866}, {0.5, -0.866}};
+
+			geo::point_2d p = {100, 100};
+			bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsFalse(in_convex_hexagon, L"Problem with detecting point outside of convex hexagon.");
+
+			p.x = hexa[1].x; p.y = hexa[1].y - 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 1st triangle slice.");
+
+			p.x = hexa[2].x; p.y = hexa[2].y - 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 2nd triangle slice.");
+			
+			p.x = hexa[4].x; p.y = hexa[4].y + 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 3rd triangle slice.");
+			
+			p.x = hexa[5].x; p.y = hexa[5].y + 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 4th triangle slice.");
+		}
+
 		TEST_METHOD(TestInHexagonRandom)
 		{
 			srand(6);
