@@ -12,14 +12,10 @@ namespace server
 		virtual ~AbstractServer();
 		virtual void MainLoop() = 0;
 		virtual bool Running() = 0;
+		virtual void Finish() = 0;
 
 	private:
 
-		virtual void ReadPackets() = 0;
-		virtual void ProcessPackets() = 0;
-		virtual void TestCollisions() = 0;
-		virtual void UpdateState() = 0;
-		virtual void SendPackets() = 0;
 	};
 
 }

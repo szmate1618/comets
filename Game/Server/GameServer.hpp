@@ -1,5 +1,5 @@
-#ifndef SZM_SERVER
-#define SZM_SERVER
+#ifndef SZM_GAME_SERVER
+#define SZM_GAME_SERVER
 
 #include "AbstractServer.hpp"
 
@@ -7,15 +7,19 @@
 namespace server
 {
 
-	class Server: public AbstractServer
+	class GameServer: public AbstractServer
 	{
 	public:
 
-		Server();
-		~Server();
+		GameServer();
+		~GameServer();
 		void MainLoop();
+		bool Running();
+		void Finish();
 
 	private:
+
+		bool running;
 
 		void ReadPackets();
 		void ProcessPackets();
