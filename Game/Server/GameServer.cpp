@@ -10,6 +10,7 @@ namespace server
 
 	GameServer::~GameServer()
 	{
+		Finish();
 	}
 
 	void GameServer::MainLoop()
