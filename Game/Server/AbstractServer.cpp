@@ -1,10 +1,15 @@
 #include "AbstractServer.hpp"
 
 
-AbstractServer::AbstractServer()
+namespace server
 {
-}
 
-AbstractServer::~AbstractServer()
-{
+	AbstractServer::AbstractServer()
+	{
+	}
+
+	AbstractServer::~AbstractServer()
+	{
+	}
+
 }

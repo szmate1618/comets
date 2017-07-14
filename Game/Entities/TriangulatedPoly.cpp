@@ -3,6 +3,7 @@
 
 namespace entity 
 {
+
 	int TriangulatedPoly::arr[5000];
 
 	TriangulatedPoly::TriangulatedPoly()

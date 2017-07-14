@@ -1,21 +1,29 @@
 #ifndef SZM_SERVER
 #define SZM_SERVER
 
-class Server
+#include "AbstractServer.hpp"
+
+
+namespace server
 {
-public:
 
-	Server();
-	~Server();
-	void MainLoop();
+	class Server: public AbstractServer
+	{
+	public:
 
-private:
+		Server();
+		~Server();
+		void MainLoop();
 
-	void ReadPackets();
-	void ProcessPackets();
-	void TestCollisions();
-	void UpdateState();
-	void SendPackets();
-};
+	private:
+
+		void ReadPackets();
+		void ProcessPackets();
+		void TestCollisions();
+		void UpdateState();
+		void SendPackets();
+	};
+
+}
 
 #endif

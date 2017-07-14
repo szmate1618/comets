@@ -1,39 +1,44 @@
 #include "Server.hpp"
 
 
-Server::Server()
+namespace server
 {
-}
 
-Server::~Server()
-{
-}
+	Server::Server()
+	{
+	}
 
-void Server::MainLoop()
-{
-	ReadPackets();
-	ProcessPackets();
-	TestCollisions();
-	UpdateState();
-	SendPackets();
-}
+	Server::~Server()
+	{
+	}
 
-void Server::ReadPackets()
-{
-}
+	void Server::MainLoop()
+	{
+		ReadPackets();
+		ProcessPackets();
+		TestCollisions();
+		UpdateState();
+		SendPackets();
+	}
 
-void Server::ProcessPackets()
-{
-}
+	void Server::ReadPackets()
+	{
+	}
 
-void Server::TestCollisions()
-{
-}
+	void Server::ProcessPackets()
+	{
+	}
 
-void Server::UpdateState()
-{
-}
+	void Server::TestCollisions()
+	{
+	}
 
-void Server::SendPackets()
-{
+	void Server::UpdateState()
+	{
+	}
+
+	void Server::SendPackets()
+	{
+	}
+
 }
