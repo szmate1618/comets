@@ -111,11 +111,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Server.hpp" />
+    <ClInclude Include="AbstractServer.hpp" />
+    <ClInclude Include="GameServer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractServer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="GameServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
