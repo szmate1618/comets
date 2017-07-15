@@ -15,7 +15,6 @@ namespace server
 		~GameServer();
 		void MainLoop();
 		bool Running();
-		void Finish();
 
 	private:
 

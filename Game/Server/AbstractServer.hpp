@@ -12,7 +12,6 @@ namespace server
 		virtual ~AbstractServer();
 		virtual void MainLoop() = 0;
 		virtual bool Running() = 0;
-		virtual void Finish() = 0;
 
 	private:
 

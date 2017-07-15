@@ -10,7 +10,6 @@ namespace server
 
 	GameServer::~GameServer()
 	{
-		Finish();
 	}
 
 	void GameServer::MainLoop()
@@ -25,11 +24,6 @@ namespace server
 	bool GameServer::Running()
 	{
 		return running;
-	}
-
-	void GameServer::Finish()
-	{
-		running = false;
 	}
 
 	void GameServer::ReadPackets()

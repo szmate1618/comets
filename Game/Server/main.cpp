@@ -1,9 +1,10 @@
 #include "AbstractServer.hpp"
 #include "GameServer.hpp"
 
+
 int main()
 {
-	server::GameServer concretegameserver = server::GameServer();
+	server::GameServer concretegameserver;
 	server::AbstractServer* gameserver = &concretegameserver;
 	
 	volatile bool running = true;
@@ -12,7 +13,6 @@ int main()
 	{
 		gameserver->MainLoop();
 	}
-	gameserver->Finish(); //Should Finish() be called automatically only, from the destructor?
 
 	return 0;
 }
