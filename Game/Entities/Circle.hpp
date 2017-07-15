@@ -1,5 +1,5 @@
-#ifndef SZM_TRIANGULATED_POLY
-#define SZM_TRIANGULATED_POLY
+#ifndef SZM_CIRCLE
+#define SZM_CIRCLE
 
 #include "CollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
