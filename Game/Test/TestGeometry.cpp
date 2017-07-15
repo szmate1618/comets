@@ -3,6 +3,7 @@
 
 #include "..\Geometry\Geometry.hpp"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 const double Pi = 3.14159265358979323846;
@@ -37,11 +38,18 @@ namespace Test
 		TEST_METHOD(TestRotation)
 		{
 			geo::point_2d O = {0, 0};
+			geo::point_2d _1 = {1, 0};
+			geo::point_2d i = {0, 1};
 			geo::point_2d p1 = {1.23456789, 1.23456789};
 			Assert::IsTrue(geo::equals(p1, geo::point_2d_rotated(p1, Pi * 2)), L"Identity transformation failed.");
 			Assert::IsTrue(geo::equals(O, geo::add(p1, geo::point_2d_rotated(p1, Pi))), L"Inverting failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, Pi / 2)), geo::epsilon, L"90° rotation failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, Pi / 2)), geo::epsilon, L"90° rotation of origo failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation of origo failed.");
+			Assert::IsTrue(geo::equals(i, geo::point_2d_rotated(_1, Pi / 2)), L"90° rotation failed.");
+			Assert::IsTrue(geo::equals(_1, geo::point_2d_rotated(i, -Pi / 2)), L"-90° rotation failed.");
+			geo::point_2d rotated_p1 = geo::point_2d_rotated(p1, 123);
+			geo::rotate_point_2d(p1, 123);
+			Assert::IsTrue(geo::equals(rotated_p1, p1), L"Mutable and immutable rotations provide different results.");
 		}
 			
 		TEST_METHOD(TestTriangleBounds)
@@ -155,7 +163,77 @@ namespace Test
 			geo::vector_2d v6 = {1, 0};
 			Assert::AreEqual(0.0, geo::length_cross(v5, v6), L"Cross product of parallel vectors should be 0.");
 		}
+		
+		TEST_METHOD(TestInHexagon)
+		{
+			geo::point_2d hexa[] = {{1, 0}, {0.5, 0.866}, {-0.5, 0.866}, {-1, 0}, {-0.5, -0.866}, {0.5, -0.866}};
 
+			geo::point_2d p = {100, 100};
+			bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsFalse(in_convex_hexagon, L"Problem with detecting point outside of convex hexagon.");
+
+			p.x = hexa[1].x; p.y = hexa[1].y - 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 1st triangle slice.");
+
+			p.x = hexa[2].x; p.y = hexa[2].y - 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 2nd triangle slice.");
+			
+			p.x = hexa[4].x; p.y = hexa[4].y + 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 3rd triangle slice.");
+			
+			p.x = hexa[5].x; p.y = hexa[5].y + 0.0001;
+			in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 4th triangle slice.");
+		}
+
+		TEST_METHOD(TestInHexagonRandom)
+		{
+			srand(6);
+			for (int i = 0; i < 20; i++)
+			{
+find_convex_hexa:
+				geo::point_2d r = {1, 0};
+				geo::point_2d convex_hexagon_attempt[6];
+				for (int j = 0; j < 6; rotate_point_2d(r, Pi / 3), j++)
+				{
+					geo::real length = rand();
+					convex_hexagon_attempt[j] = geo::mul(r, length);
+				}
+
+				for (int j = 0; j < 6 - 2; j++)
+				{
+					for (int k = j + 1; k < 6 - 1; k++)
+					{
+						for (int l = k + 1; l < 6; l++)
+						{
+							for (int m = 0; m < 6; m++)
+							{
+								if (m == j || m == k || m == l) continue;
+
+								geo::triangle slice = {convex_hexagon_attempt[j], convex_hexagon_attempt[k], convex_hexagon_attempt[l]};
+								if (geo::is_inside(slice, convex_hexagon_attempt[m])) goto find_convex_hexa;
+							}
+						}
+					}
+				}
+				
+				geo::point_2d* hexa = convex_hexagon_attempt; // Hah! It's not just an attempt anymore!
+				for (int j = 0; j < 1000; j++)
+				{
+					geo::point_2d p = {rand(), rand()};
+					bool in_a_triangle =
+						geo::is_inside(hexa[0], hexa[1], hexa[2], p) || //Outcommenting this line doesn't do anything; this is strange.
+						geo::is_inside(hexa[0], hexa[2], hexa[3], p) ||
+						geo::is_inside(hexa[0], hexa[3], hexa[4], p) ||
+						geo::is_inside(hexa[0], hexa[4], hexa[5], p);
+					bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
+					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry");
+				}
+			}
+		}
 
 	};
 }

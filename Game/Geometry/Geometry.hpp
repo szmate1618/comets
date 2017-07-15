@@ -47,6 +47,8 @@ namespace geo
 
 	bool is_inside(EmptyFrame, point_2d);
 
+	bool is_inside_convex(point_2d, point_2d, point_2d, point_2d, point_2d, point_2d, point_2d);
+
 	double tri_minx(triangle);
 
 	double tri_maxx(triangle);
@@ -56,6 +58,8 @@ namespace geo
 	double tri_maxy(triangle);
 
 	point_2d point_2d_rotated(point_2d, double);
+
+	void rotate_point_2d(point_2d&, double);
 
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
 

@@ -72,4 +72,10 @@ namespace entity
 		return false;
 	}
 
+	bool TriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
+	{
+		return false;
+		//TODO: implement this.
+	}
+
 }

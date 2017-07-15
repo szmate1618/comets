@@ -3,6 +3,7 @@
 
 #include "..\Entities\TriangulatedPoly.hpp"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Test

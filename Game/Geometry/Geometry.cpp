@@ -69,6 +69,18 @@ namespace geo
 		return (f.minx <= p.x && f.maxx >= p.x && f.miny <= p.y && f.maxy >= p.y);
 	}
 
+	bool is_inside_convex(point_2d a, point_2d b, point_2d c, point_2d d, point_2d e, point_2d f, point_2d p)
+	{
+		double sign1 = length_cross(sub(b, a), sub(p, a));
+		double sign2 = length_cross(sub(c, b), sub(p, b));
+		double sign3 = length_cross(sub(d, c), sub(p, c));
+		double sign4 = length_cross(sub(e, d), sub(p, d));
+		double sign5 = length_cross(sub(f, e), sub(p, e));
+		double sign6 = length_cross(sub(a, f), sub(p, f));
+		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) && (sign4 >= 0) && (sign5 >= 0) && (sign6 >= 0)
+			|| (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0) && (sign4 <= 0) && (sign5 <= 0) && (sign6 <= 0); 
+	}
+
 	//a<b b<c c<a 
 	//1x0 4,6 a 0
 	//01x 2,3 b 1
@@ -132,9 +144,16 @@ namespace geo
 	point_2d point_2d_rotated(point_2d p, double radian)
 	{
 		point_2d ret;
-		ret.x = cos(radian) * p.x + sin(radian) * p.y;
-		ret.y = -sin(radian) * p.x + cos(radian) * p.y;
+		ret.x = cos(radian) * p.x - sin(radian) * p.y;
+		ret.y = sin(radian) * p.x + cos(radian) * p.y;
 		return ret;
+	}
+
+	void rotate_point_2d(point_2d& p, double radian)
+	{
+		real original_x = p.x; //Does this optimization actually do anything?
+		p.x = cos(radian) * p.x - sin(radian) * p.y;
+		p.y = sin(radian) * original_x + cos(radian) * p.y;
 	}
 
 	EmptyFrame tri_as_frame(point_2d a, point_2d b, point_2d c)
