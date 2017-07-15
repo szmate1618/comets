@@ -16,9 +16,9 @@ namespace entity
 
 		TriangulatedPolyPrecomputedRotation();
 		TriangulatedPolyPrecomputedRotation(TriangulatedPoly&);
-		~TriangulatedPolyPrecomputedRotation();
-		void SetOrientation(double);
-	    std::string GetName();
+		virtual ~TriangulatedPolyPrecomputedRotation() override;
+		virtual void SetOrientation(double) override;
+	    virtual std::string GetName() override;
 
 	private:
 

@@ -16,11 +16,11 @@ namespace entity
 
 		Circle();
 		Circle(geo::real);
-		~Circle();
-		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&);
-		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&);
-		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&);
-		std::string GetName();
+		virtual ~Circle() override;
+		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&) override;
+		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&) override;
+		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
+		virtual std::string GetName() override;
 
 		geo::real r;
 
