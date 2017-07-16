@@ -12,9 +12,9 @@ namespace server
 	public:
 
 		GameServer();
-		~GameServer();
-		void MainLoop();
-		bool Running();
+		virtual ~GameServer() override;
+		virtual void MainLoop() override;
+		virtual bool Running() override;
 
 	private:
 

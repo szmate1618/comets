@@ -17,10 +17,10 @@ namespace entity
 
 		TriangulatedPoly();
 		TriangulatedPoly(std::string); //TODO: figure out why I declared this.
-		virtual ~TriangulatedPoly();
-		bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&);
-		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&);
-		bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&);
+		virtual ~TriangulatedPoly() override;
+		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&) override;
+		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&) override;
+		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
 		virtual void SetOrientation(double radian) = 0;
 					
 	private:

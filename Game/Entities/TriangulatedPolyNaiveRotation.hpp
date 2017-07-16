@@ -1,7 +1,7 @@
 #ifndef SZM_TRIANGULATED_POLY_NAIVE_ROTATION
 #define SZM_TRIANGULATED_POLY_NAIVE_ROTATION
 
-#include "CollisionShape.hpp"
+#include "TriangulatedPoly.hpp"
 #include "..\Geometry\Geometry.hpp"
 
 #include <string>
@@ -10,15 +10,15 @@
 namespace entity
 {
 
-	class TriangulatedPolyNaiveRotation
+	class TriangulatedPolyNaiveRotation: public TriangulatedPoly
 	{
 	public:
 
 		TriangulatedPolyNaiveRotation();
 		TriangulatedPolyNaiveRotation(TriangulatedPoly&); //TODO: do I really need this here? And in TriangulatedPolyPrecomputedRotation?
-		~TriangulatedPolyNaiveRotation();
-		void SetOrientation(double);
-		std::string GetName();
+		virtual ~TriangulatedPolyNaiveRotation() override;
+		virtual void SetOrientation(double) override;
+		virtual std::string GetName() override;
 
 	private:
 

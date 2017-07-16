@@ -26,25 +26,25 @@ namespace entity
 	{
 	public:
 
-		~InertialEngine();
-		void Accelerate(geo::vector_2d);
+		virtual ~InertialEngine() override;
+		virtual void Accelerate(geo::vector_2d) override;
 	};
 
 	class AntiInertialEngine: public Engine
 	{
 	public:
 
-		~AntiInertialEngine();
-		void Accelerate(geo::vector_2d);
+		virtual ~AntiInertialEngine() override;
+		virtual void Accelerate(geo::vector_2d) override;
 	};
 
 	class ParaInertialEngine: public Engine
 	{
 	public:
 
-		~ParaInertialEngine();
-		void Rotate(double);
-		void Accelerate(geo::vector_2d);
+		virtual ~ParaInertialEngine() override;
+		virtual void Rotate(double) override;
+		virtual void Accelerate(geo::vector_2d) override;
 	};
 
 }
