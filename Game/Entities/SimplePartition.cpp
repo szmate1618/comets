@@ -1,5 +1,6 @@
 #include "SimplePartition.hpp"
 
+#include <assert.h>
 
 namespace entity 
 {
@@ -15,6 +16,7 @@ namespace entity
 
     void SimplePartition::Add(StaticEntity* entity)
 	{
+		assert(count < capacity);
 		elements[count] = entity;
 		++count;
 	}
@@ -26,7 +28,7 @@ namespace entity
 
     Iterator<StaticEntity*> SimplePartition::end()
 	{
-		return Iterator<StaticEntity*>(elements[count]);
+		return Iterator<StaticEntity*>(elements[count + 1]);
 	}
 
 }
