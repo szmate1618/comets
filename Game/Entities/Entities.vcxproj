@@ -119,11 +119,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractPartition.hpp" />
+    <ClInclude Include="AbstractPartitioner.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="AbstractCollisionShape.hpp" />
     <ClInclude Include="AbstractTriangulatedPoly.hpp" />
     <ClInclude Include="Entities.hpp" />
+    <ClInclude Include="Iterator.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
   </ItemGroup>

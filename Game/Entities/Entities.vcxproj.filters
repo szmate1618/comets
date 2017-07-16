@@ -54,6 +54,15 @@
     <ClInclude Include="Entities.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractPartitioner.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractPartition.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterator.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
