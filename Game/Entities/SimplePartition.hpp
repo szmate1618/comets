@@ -20,6 +20,12 @@ namespace entity
 		virtual Iterator<StaticEntity*> begin() override;
 		virtual Iterator<StaticEntity*> end() override;
 
+	private:
+
+		static const long capacity = 1000;
+		long count;
+		StaticEntity* elements[capacity];
+
 	};
 
 }

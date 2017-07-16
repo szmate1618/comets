@@ -20,7 +20,7 @@ namespace entity
 	{
     public:
 
-		Iterator<T>(T& element): element(element) {}
+		Iterator<T>(T& element): element(&element) {}
 		virtual ~Iterator<T>() {}
         virtual Iterator<T>& operator++() {++element; return *this;}
         virtual Iterator<T> operator++(int) {++element; return *this;} //We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
