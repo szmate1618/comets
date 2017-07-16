@@ -14,21 +14,21 @@ namespace entity
 	{
 	}
 
-    void SimplePartition::Add(StaticEntity* entity)
+    void SimplePartition::Add(StaticEntity* const entity)
 	{
 		assert(count < capacity);
 		elements[count] = entity;
 		++count;
 	}
 
-	Iterator<StaticEntity*> SimplePartition::begin()
+	Iterator<StaticEntity* const> SimplePartition::begin()
 	{
-		return Iterator<StaticEntity*>(elements[0]);
+		return Iterator<StaticEntity* const>(elements[0]);
 	}
 
-    Iterator<StaticEntity*> SimplePartition::end()
+    Iterator<StaticEntity* const> SimplePartition::end()
 	{
-		return Iterator<StaticEntity*>(elements[count + 1]);
+		return Iterator<StaticEntity* const>(elements[count + 1]);
 	}
 
 }
