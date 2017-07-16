@@ -15,9 +15,9 @@ namespace entity
 
 		AbstractPartition();
 		virtual ~AbstractPartition();
-		virtual void Add(StaticEntity entity) = 0;
-		virtual Iterator<StaticEntity> begin() = 0;
-		virtual Iterator<StaticEntity> end() = 0;
+		virtual void Add(StaticEntity* entity) = 0;
+		virtual Iterator<StaticEntity*> begin() = 0;
+		virtual Iterator<StaticEntity*> end() = 0;
 
 	};
 

@@ -12,15 +12,15 @@ namespace entity
 	{
 	}
 
-    void SimplePartition::Add(StaticEntity entity)
+    void SimplePartition::Add(StaticEntity* entity)
 	{
 	}
 
-	Iterator<StaticEntity> SimplePartition::begin()
+	Iterator<StaticEntity*> SimplePartition::begin()
 	{
 	}
 
-    Iterator<StaticEntity> SimplePartition::end()
+    Iterator<StaticEntity*> SimplePartition::end()
 	{
 	}
 
