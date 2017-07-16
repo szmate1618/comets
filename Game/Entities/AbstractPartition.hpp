@@ -19,7 +19,6 @@ namespace entity
 		virtual Iterator<AbstractEntity> begin() = 0;
 		virtual Iterator<AbstractEntity> end() = 0;
 
-	private:
 	};
 
 }
