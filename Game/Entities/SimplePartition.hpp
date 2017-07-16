@@ -16,9 +16,9 @@ namespace entity
 
 		SimplePartition();
 		virtual ~SimplePartition() override;
-		virtual void Add(AbstractEntity entity) override;
-		virtual Iterator<AbstractEntity> begin() override;
-		virtual Iterator<AbstractEntity> end() override;
+		virtual void Add(StaticEntity entity) override;
+		virtual Iterator<StaticEntity> begin() override;
+		virtual Iterator<StaticEntity> end() override;
 
 	};
 

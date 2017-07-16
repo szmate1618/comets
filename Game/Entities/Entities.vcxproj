@@ -127,6 +127,7 @@
     <ClInclude Include="AbstractTriangulatedPoly.hpp" />
     <ClInclude Include="Entities.hpp" />
     <ClInclude Include="Iterator.hpp" />
+    <ClInclude Include="SimplePartition.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
   </ItemGroup>
@@ -141,11 +142,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractPartition.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AbstractCollisionShape.cpp" />
     <ClCompile Include="AbstractTriangulatedPoly.cpp" />
+    <ClCompile Include="SimplePartition.cpp" />
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp" />
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp" />
   </ItemGroup>

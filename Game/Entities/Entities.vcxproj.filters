@@ -63,6 +63,9 @@
     <ClInclude Include="Iterator.hpp">
       <Filter>Header Files\Partitioners</Filter>
     </ClInclude>
+    <ClInclude Include="SimplePartition.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -85,6 +88,12 @@
     </ClCompile>
     <ClCompile Include="AbstractTriangulatedPoly.cpp">
       <Filter>Source Files\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractPartition.cpp">
+      <Filter>Source Files\Partitioners</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePartition.cpp">
+      <Filter>Source Files\Partitioners</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

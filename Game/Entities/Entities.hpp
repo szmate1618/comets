@@ -8,21 +8,17 @@
 namespace entity
 {
 
-	//An entity that has a collision shape.
-	struct AbstractEntity{AbstractCollisionShape* shape;};
-
-	//A stationary entity.
-	struct StaticEntity: public AbstractEntity
+	//A stationary entity that has a collision shape.
+	struct StaticEntity
 	{
+		AbstractCollisionShape* shape;
 		geo::vector_2d orientation;
 		geo::vector_2d position;
 	};
 
 	//A dynamic entity that can move and possibly moved by other entities.
-	struct DynamicEntity: public AbstractEntity
+	struct DynamicEntity: public StaticEntity
 	{
-		geo::vector_2d orientation;
-		geo::vector_2d position;
 		geo::vector_2d velocity;
 		geo::real max_speed;
 		geo::vector_2d inertial_velocity;
