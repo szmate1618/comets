@@ -121,8 +121,8 @@
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
-    <ClInclude Include="CollisionShape.hpp" />
-    <ClInclude Include="TriangulatedPoly.hpp" />
+    <ClInclude Include="AbstractCollisionShape.hpp" />
+    <ClInclude Include="AbstractTriangulatedPoly.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
   </ItemGroup>
@@ -140,8 +140,8 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="CollisionShape.cpp" />
-    <ClCompile Include="TriangulatedPoly.cpp" />
+    <ClCompile Include="AbstractCollisionShape.cpp" />
+    <ClCompile Include="AbstractTriangulatedPoly.cpp" />
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp" />
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp" />
   </ItemGroup>

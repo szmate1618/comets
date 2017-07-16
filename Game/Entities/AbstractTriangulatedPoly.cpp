@@ -1,29 +1,29 @@
-#include "TriangulatedPoly.hpp"
+#include "AbstractTriangulatedPoly.hpp"
 
 
 namespace entity 
 {
 
-	int TriangulatedPoly::arr[5000];
+	int AbstractTriangulatedPoly::arr[5000];
 
-	TriangulatedPoly::TriangulatedPoly()
+	AbstractTriangulatedPoly::AbstractTriangulatedPoly()
 	{
 	}
 
-	TriangulatedPoly::TriangulatedPoly(std::string)
+	AbstractTriangulatedPoly::AbstractTriangulatedPoly(std::string)
 	{
 	}
 
-	TriangulatedPoly::~TriangulatedPoly()
+	AbstractTriangulatedPoly::~AbstractTriangulatedPoly()
 	{
 	}
 
-	bool TriangulatedPoly::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, CollisionShape& that)
+	bool AbstractTriangulatedPoly::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractCollisionShape& that)
 	{
 		return that.CollideInto(otherframe, myframe, *this); //Notice how we switched myframe and otherframe here.
 	}
 
-	bool TriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TriangulatedPoly& other)
+	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& other)
 	{
 		int arr_counter = 0;
 		for(int& i: hull)
@@ -73,7 +73,7 @@ namespace entity
 		return false;
 	}
 
-	bool TriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
+	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
 		return false;
 		//TODO: implement this.

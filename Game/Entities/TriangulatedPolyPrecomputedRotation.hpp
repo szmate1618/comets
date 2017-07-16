@@ -1,7 +1,7 @@
 #ifndef SZM_TRIANGULATED_POLY_PRECOMPUTED_ROTATION
 #define SZM_TRIANGULATED_POLY_PRECOMPUTED_ROTATION
 
-#include "TriangulatedPoly.hpp"
+#include "AbstractTriangulatedPoly.hpp"
 #include "..\Geometry\Geometry.hpp"
 
 #include <vector>
@@ -10,12 +10,12 @@
 namespace entity
 {
 
-	class TriangulatedPolyPrecomputedRotation: public TriangulatedPoly
+	class TriangulatedPolyPrecomputedRotation: public AbstractTriangulatedPoly
 	{
 	public:
 
 		TriangulatedPolyPrecomputedRotation();
-		TriangulatedPolyPrecomputedRotation(TriangulatedPoly&);
+		TriangulatedPolyPrecomputedRotation(AbstractTriangulatedPoly&);
 		virtual ~TriangulatedPolyPrecomputedRotation() override;
 		virtual void SetOrientation(double) override;
 	    virtual std::string GetName() override;

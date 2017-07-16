@@ -39,16 +39,16 @@
     <ClInclude Include="Circle.hpp">
       <Filter>Header Files\CollisionShapes</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionShape.hpp">
-      <Filter>Header Files\CollisionShapes</Filter>
-    </ClInclude>
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp">
       <Filter>Header Files\CollisionShapes</Filter>
     </ClInclude>
-    <ClInclude Include="TriangulatedPoly.hpp">
+    <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp">
       <Filter>Header Files\CollisionShapes</Filter>
     </ClInclude>
-    <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp">
+    <ClInclude Include="AbstractCollisionShape.hpp">
+      <Filter>Header Files\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractTriangulatedPoly.hpp">
       <Filter>Header Files\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,16 +62,16 @@
     <ClCompile Include="Circle.cpp">
       <Filter>Source Files\CollisionShapes</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionShape.cpp">
-      <Filter>Source Files\CollisionShapes</Filter>
-    </ClCompile>
-    <ClCompile Include="TriangulatedPoly.cpp">
-      <Filter>Source Files\CollisionShapes</Filter>
-    </ClCompile>
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp">
       <Filter>Source Files\CollisionShapes</Filter>
     </ClCompile>
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp">
+      <Filter>Source Files\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractCollisionShape.cpp">
+      <Filter>Source Files\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractTriangulatedPoly.cpp">
       <Filter>Source Files\CollisionShapes</Filter>
     </ClCompile>
   </ItemGroup>
