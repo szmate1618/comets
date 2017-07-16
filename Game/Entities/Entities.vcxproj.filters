@@ -51,6 +51,9 @@
     <ClInclude Include="AbstractTriangulatedPoly.hpp">
       <Filter>Header Files\CollisionShapes</Filter>
     </ClInclude>
+    <ClInclude Include="Entities.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
