@@ -18,7 +18,7 @@ namespace Test
 		{
 			entity::SimplePartition partition;
 
-			const long n = 10000;
+			const long n = 10000; //TODO: Refactor these into an initializer method.
 			assert(n >= partition.getCapacity());
 			long numbers[n];
 			for (long i = 0; i < n; i++)
