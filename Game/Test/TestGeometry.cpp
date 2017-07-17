@@ -6,10 +6,11 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-const double Pi = 3.14159265358979323846;
-
 namespace Test
 {		
+
+	const double Pi = 3.14159265358979323846;
+
 	TEST_CLASS(TestGeometry)
 	{
 	public:
