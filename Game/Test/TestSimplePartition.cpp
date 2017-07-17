@@ -10,8 +10,13 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Test
 {
+
 	TEST_CLASS(TestSimplePartition)
 	{
+
+		typedef entity::StaticEntity* const pointer;
+		typedef entity::Iterator<pointer> iterator;
+
 	public:
 		
 		TEST_METHOD(TestAddNumbers)
@@ -28,11 +33,11 @@ namespace Test
 
 			for(long i = 0; i < partition.getCapacity(); ++i)
 			{
-				partition.Add((entity::StaticEntity* const)numbers[i]);
+				partition.Add((pointer)numbers[i]);
 			}
 
 			long j = 1;
-			for (entity::Iterator<entity::StaticEntity* const> i = partition.begin(); i != partition.end(); i++)
+			for (iterator i = partition.begin(); i != partition.end(); i++)
 			{
 				Assert::AreEqual(j, (long)(*i), L"Failed to retrieve an inserted element.");
 				j++;
