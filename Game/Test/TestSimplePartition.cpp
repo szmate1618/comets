@@ -37,7 +37,6 @@ namespace Test
 				Assert::AreEqual(j, (long)(*i), L"Failed to retrieve an inserted element.");
 				j++;
 			}
-			Assert::IsTrue(true);//If there's a Fail, why is there no Success?
 		}
 
 		TEST_METHOD(TestNestedLoops)
