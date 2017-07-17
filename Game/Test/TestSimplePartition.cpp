@@ -40,5 +40,9 @@ namespace Test
 			Assert::IsTrue(true);//If there's a Fail, why is there no Success?
 		}
 
+		TEST_METHOD(TestNestedLoops)
+		{
+		}
+
 	};
 }
