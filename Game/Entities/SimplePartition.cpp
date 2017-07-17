@@ -21,6 +21,11 @@ namespace entity
 		++count;
 	}
 
+    void SimplePartition::Reset()
+	{
+		count = 0;
+	}
+
 	Iterator<StaticEntity* const> SimplePartition::begin()
 	{
 		return Iterator<StaticEntity* const>(elements[0]);
@@ -29,6 +34,11 @@ namespace entity
     Iterator<StaticEntity* const> SimplePartition::end()
 	{
 		return Iterator<StaticEntity* const>(elements[count + 1]);
+	}
+
+	long SimplePartition::getCapacity()
+	{
+		return capacity;
 	}
 
 }
