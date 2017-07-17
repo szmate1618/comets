@@ -24,9 +24,9 @@ namespace entity
 		virtual ~Iterator<T>() {}
         virtual Iterator<T>& operator++() {++element; return *this;}
         virtual Iterator<T> operator++(int) {++element; return *this;} //We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
-        virtual bool operator==(Iterator<T> other) const {return this == &other;}
-        virtual bool operator!=(Iterator<T> other) const {return !(this == &other);}
-        T& operator*() const {return *T;} //Apparently dereference operators cannot be virtual.
+		virtual bool operator==(Iterator<T> other) const {return element == other.element;}
+        virtual bool operator!=(Iterator<T> other) const {return element != other.element;}
+		virtual T& operator*() const {return *element;}
 
 	private:
 

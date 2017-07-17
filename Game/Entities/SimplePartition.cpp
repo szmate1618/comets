@@ -33,7 +33,7 @@ namespace entity
 
     Iterator<StaticEntity* const> SimplePartition::end()
 	{
-		return Iterator<StaticEntity* const>(elements[count + 1]);
+		return Iterator<StaticEntity* const>(elements[count]);
 	}
 
 	long SimplePartition::getCapacity()
