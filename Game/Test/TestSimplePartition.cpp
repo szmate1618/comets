@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
-	TEST_CLASS(TestSimplePartition)
+	TEST_CLASS(TestSimplePartition) //TODO: Add more testcases here, mainly for testing Iterator methods separately.
 	{
 
 		typedef entity::StaticEntity* const pointer;
