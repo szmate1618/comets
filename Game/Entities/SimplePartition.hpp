@@ -20,7 +20,7 @@ namespace entity
 		virtual void Add(StaticEntity* const entity) override;
 		virtual Iterator<StaticEntity* const> begin() override;
 		virtual Iterator<StaticEntity* const> end() override;
-		long getCapacity();
+		static long getCapacity();
 
 	private:
 
