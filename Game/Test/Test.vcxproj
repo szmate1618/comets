@@ -113,7 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\x64\Debug\AbstractPartition.obj;..\Entities\x64\Debug\SimplePartition.obj;..\Entities\x64\Debug\AbstractCollisionShape.obj;..\Entities\x64\Debug\AbstractTriangulatedPoly.obj;..\Geometry\x64\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\x64\Debug\AbstractPartitioner.obj;..\Entities\x64\Debug\SimplePartitioner.obj;..\Entities\x64\Debug\AbstractPartition.obj;..\Entities\x64\Debug\SimplePartition.obj;..\Entities\x64\Debug\AbstractCollisionShape.obj;..\Entities\x64\Debug\AbstractTriangulatedPoly.obj;..\Geometry\x64\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -169,6 +169,7 @@
     </ClCompile>
     <ClCompile Include="TestGeometry.cpp" />
     <ClCompile Include="TestSimplePartition.cpp" />
+    <ClCompile Include="TestSimplePartitioner.cpp" />
     <ClCompile Include="TestTriangulatedPolyCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
