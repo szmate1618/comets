@@ -17,7 +17,7 @@ namespace entity
 
 		SimplePartitioner();
 		virtual ~SimplePartitioner() override;
-		virtual void Insert(geo::Frame<StaticEntity>) override;
+		virtual void Insert(geo::Frame<StaticEntity>&) override;
 		virtual Iterator<AbstractPartition* const> begin() override;
 		virtual Iterator<AbstractPartition* const> end() override;
 

@@ -16,7 +16,7 @@ namespace entity
 
 		AbstractPartitioner();
 		virtual ~AbstractPartitioner();
-		virtual void Insert(geo::Frame<StaticEntity>) = 0;
+		virtual void Insert(geo::Frame<StaticEntity>&) = 0;
 		virtual Iterator<AbstractPartition* const> begin() = 0;
 		virtual Iterator<AbstractPartition* const> end() = 0;
 

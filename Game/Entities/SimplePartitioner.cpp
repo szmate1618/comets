@@ -12,7 +12,7 @@ namespace entity
 	{
 	}
 
-	void SimplePartitioner::Insert(geo::Frame<StaticEntity> entity_frame)
+	void SimplePartitioner::Insert(geo::Frame<StaticEntity>& entity_frame)
 	{
 		the_partition.Add(entity_frame.entity);
 	}
@@ -24,7 +24,7 @@ namespace entity
 
 	Iterator<AbstractPartition* const> SimplePartitioner::end()
 	{
-		return Iterator<AbstractPartition* const>(&the_partition + 1); //Also, I think I met the 'most perplexing parse' here, but then it went away.
+		return Iterator<AbstractPartition* const>(&the_partition + 1);
 	}
 
 }
