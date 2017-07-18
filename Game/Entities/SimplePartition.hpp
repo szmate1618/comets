@@ -10,14 +10,14 @@
 namespace entity
 {
 
-	class SimplePartition: AbstractPartition
+	class SimplePartition: public AbstractPartition
 	{
 	public:
 
 		SimplePartition();
 		virtual ~SimplePartition() override;
 		virtual void Reset() override;
-		virtual void Add(StaticEntity* const entity) override;
+		virtual void Add(StaticEntity* const) override;
 		virtual Iterator<StaticEntity* const> begin() override;
 		virtual Iterator<StaticEntity* const> end() override;
 		static long getCapacity();

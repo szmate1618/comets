@@ -11,17 +11,19 @@
 namespace entity
 {
 
-	class SimplePartitioner: AbstractPartitioner
+	class SimplePartitioner: public AbstractPartitioner
 	{
 	public:
 
 		SimplePartitioner();
 		virtual ~SimplePartitioner() override;
-		virtual void Insert(geo::Frame<StaticEntity> entity) override;
+		virtual void Insert(geo::Frame<StaticEntity>) override;
 		virtual Iterator<AbstractPartition* const> begin() override;
 		virtual Iterator<AbstractPartition* const> end() override;
 
 	private:
+
+		SimplePartition the_partition;
 	};
 
 }

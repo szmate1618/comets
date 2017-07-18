@@ -16,7 +16,7 @@ namespace entity
 		AbstractPartition();
 		virtual ~AbstractPartition();
 		virtual void Reset() = 0;
-		virtual void Add(StaticEntity* const entity) = 0;
+		virtual void Add(StaticEntity* const) = 0;
 		virtual Iterator<StaticEntity* const> begin() = 0;
 		virtual Iterator<StaticEntity* const> end() = 0;
 
