@@ -66,6 +66,9 @@
     <ClInclude Include="SimplePartition.hpp">
       <Filter>Header Files\Partitioners</Filter>
     </ClInclude>
+    <ClInclude Include="SimplePartitioner.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -93,6 +96,12 @@
       <Filter>Source Files\Partitioners</Filter>
     </ClCompile>
     <ClCompile Include="SimplePartition.cpp">
+      <Filter>Source Files\Partitioners</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractPartitioner.cpp">
+      <Filter>Source Files\Partitioners</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePartitioner.cpp">
       <Filter>Source Files\Partitioners</Filter>
     </ClCompile>
   </ItemGroup>
