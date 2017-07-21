@@ -17,14 +17,14 @@ namespace entity
 		the_partition.Add(entity_frame.entity);
 	}
 
-	Iterator<AbstractPartition* const> SimplePartitioner::begin()
+	Iterator<AbstractPartition> SimplePartitioner::begin()
 	{
-		return Iterator<AbstractPartition* const>(&the_partition); //Wait? I'm passing an rvalue reference here?! C++11 FTW!
+		return Iterator<AbstractPartition>(the_partition); //Wait? I'm passing an rvalue reference here?! C++11 FTW!
 	}
 
-	Iterator<AbstractPartition* const> SimplePartitioner::end()
+	Iterator<AbstractPartition> SimplePartitioner::end()
 	{
-		return Iterator<AbstractPartition* const>(&the_partition + 1);
+		return Iterator<AbstractPartition>(*(&the_partition + 1));
 	}
 
 }
