@@ -17,15 +17,13 @@ namespace Test
 		typedef entity::StaticEntity* const pointer;
 		typedef entity::Iterator<pointer> iterator;
 
-		entity::SimplePartition InitPartition(long input_array[], long count)
+		void InitPartition(entity::SimplePartition& partition, const long input_array[], const long count)
 		{
-			entity::SimplePartition partition;
 			assert(count <= partition.getCapacity());
 			for(long i = 0; i < count; ++i)
 			{
 				partition.Add((pointer)input_array[i]);
 			}
-			return partition;
 		}
 
 	public:
@@ -39,7 +37,8 @@ namespace Test
 			{
 				numbers[i] = i + 1;
 			}
-			entity::SimplePartition partition = InitPartition(numbers, entity::SimplePartition::getCapacity()); //Fill up to full capacity.
+			entity::SimplePartition partition;
+			InitPartition(partition, numbers, entity::SimplePartition::getCapacity()); //Fill up to full capacity.
 
 
 			long j = 1;
@@ -53,7 +52,8 @@ namespace Test
 		TEST_METHOD(TestNestedLoops)
 		{
 			long numbers[] = {1, 2};
-			entity::SimplePartition partition = InitPartition(numbers, sizeof(numbers) / sizeof(long));
+			entity::SimplePartition partition;
+			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
 			long accumulator = 0;
 			for(iterator i: partition)
 			{
@@ -68,7 +68,8 @@ namespace Test
 		TEST_METHOD(TestNestedLoopsWithContinue)
 		{
 			long numbers[] = {1, 2, 3};
-			entity::SimplePartition partition = InitPartition(numbers, sizeof(numbers) / sizeof(long));
+			entity::SimplePartition partition;
+			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
 			long accumulator = 0;
 			for(iterator i: partition)
 			{
