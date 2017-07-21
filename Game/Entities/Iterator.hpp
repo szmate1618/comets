@@ -29,7 +29,7 @@ namespace entity
         virtual bool operator!=(const Iterator<T> other) const {return element != other.element;}
 		virtual T& operator*() const {return *element;}
 
-	private:
+	protected:
 
 		T* element;
     };

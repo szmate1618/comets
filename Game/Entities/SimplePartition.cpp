@@ -14,7 +14,7 @@ namespace entity
 	{
 	}
 
-    void SimplePartition::Add(StaticEntity* const entity)
+    void SimplePartition::Add(StaticEntity* entity)
 	{
 		assert(count < capacity);
 		elements[count] = entity;
@@ -26,14 +26,14 @@ namespace entity
 		count = 0;
 	}
 
-	Iterator<StaticEntity* const> SimplePartition::begin()
+	Iterator<StaticEntity> SimplePartition::begin()
 	{
-		return Iterator<StaticEntity* const>(elements[0]);
+		return Iterator<StaticEntity>(*elements[0]);
 	}
 
-    Iterator<StaticEntity* const> SimplePartition::end()
+    Iterator<StaticEntity> SimplePartition::end()
 	{
-		return Iterator<StaticEntity* const>(elements[count]);
+		return Iterator<StaticEntity>(*elements[count]);
 	}
 
 	long SimplePartition::getCapacity()

@@ -47,7 +47,7 @@ namespace Test
 			{
 				for(auto j: (*i))
 				{
-					Assert::AreEqual(1, (int)j, L"Failed to retrieve correct entity pointer.");
+					Assert::AreEqual(1, *(int*)&j, L"Failed to retrieve correct entity pointer.");
 				}
 			}
 		}

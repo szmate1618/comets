@@ -14,15 +14,15 @@ namespace Test
 	TEST_CLASS(TestSimplePartition) //TODO: Add more testcases here, mainly for testing Iterator methods separately.
 	{
 
-		typedef entity::StaticEntity* const pointer;
-		typedef entity::Iterator<pointer> iterator;
+		typedef entity::StaticEntity type;
+		typedef entity::Iterator<type> iterator;
 
 		void InitPartition(entity::SimplePartition& partition, const long input_array[], const long count)
 		{
 			assert(count <= partition.getCapacity());
 			for(long i = 0; i < count; ++i)
 			{
-				partition.Add((pointer)input_array[i]);
+				partition.Add(((type*)&input_array[i]));
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Test
 			long j = 1;
 			for (iterator i = partition.begin(); i != partition.end(); i++)
 			{
-				Assert::AreEqual(j, (long)(*i), L"Failed to retrieve an inserted element.");
+				Assert::AreEqual(j, *(long*)(&*i), L"Failed to retrieve an inserted element.");
 				j++;
 			}
 		}
@@ -57,9 +57,11 @@ namespace Test
 			long accumulator = 0;
 			for(iterator i: partition)
 			{
+				long li = *(long*)(&*i);
 				for(iterator j: partition)
 				{
-					(accumulator *= 100) += 10 * (long)(*i) + (long)(*j);
+					long lj = *(long*)(&*j);
+					(accumulator *= 100) += 10 * li + lj;
 				}
 			}
 			Assert::AreEqual(11122122L, accumulator, L"Apparently things got tangled up in this nested iteration.");
@@ -73,11 +75,13 @@ namespace Test
 			long accumulator = 0;
 			for(iterator i: partition)
 			{
-				if ((long)(*i) == 1) continue;
+				long li = *(long*)(&*i);
+				if (li == 1) continue;
 				for(iterator j: partition)
 				{
-					if ((long)(*j) == 2) continue;
-					(accumulator *= 100) += 10 * (long)(*i) + (long)(*j);
+					long lj = *(long*)(&*j);
+					if (lj == 2) continue;
+					(accumulator *= 100) += 10 * li + lj;
 				}
 			}
 			Assert::AreEqual(21233133L, accumulator, L"Apparently things got tangled up in this continued nested iteration.");
