@@ -9,7 +9,7 @@ namespace entity
 
 	}
 
-	TriangulatedPolyNaiveRotation::TriangulatedPolyNaiveRotation(TriangulatedPoly& to)
+	TriangulatedPolyNaiveRotation::TriangulatedPolyNaiveRotation(AbstractTriangulatedPoly& to)
 	{
 	}
 

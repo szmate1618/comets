@@ -18,7 +18,7 @@ namespace entity
 
 	protected:
 	
-		//TriangulatedPoly& ship;
+		//AbstractTriangulatedPoly& ship;
 		geo::real max_speed;
 	};
 

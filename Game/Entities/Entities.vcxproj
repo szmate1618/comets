@@ -119,10 +119,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractPartition.hpp" />
+    <ClInclude Include="AbstractPartitioner.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
-    <ClInclude Include="CollisionShape.hpp" />
-    <ClInclude Include="TriangulatedPoly.hpp" />
+    <ClInclude Include="AbstractCollisionShape.hpp" />
+    <ClInclude Include="AbstractTriangulatedPoly.hpp" />
+    <ClInclude Include="Entities.hpp" />
+    <ClInclude Include="Iterator.hpp" />
+    <ClInclude Include="SimplePartition.hpp" />
+    <ClInclude Include="SimplePartitioner.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
   </ItemGroup>
@@ -137,11 +143,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractPartition.cpp" />
+    <ClCompile Include="AbstractPartitioner.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="CollisionShape.cpp" />
-    <ClCompile Include="TriangulatedPoly.cpp" />
+    <ClCompile Include="AbstractCollisionShape.cpp" />
+    <ClCompile Include="AbstractTriangulatedPoly.cpp" />
+    <ClCompile Include="SimplePartition.cpp" />
+    <ClCompile Include="SimplePartitioner.cpp" />
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp" />
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp" />
   </ItemGroup>

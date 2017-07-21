@@ -1,7 +1,7 @@
-#ifndef SZM_TRIANGULATED_POLY
-#define SZM_TRIANGULATED_POLY
+#ifndef SZM_ABSTRACT_TRIANGULATED_POLY
+#define SZM_ABSTRACT_TRIANGULATED_POLY
 
-#include "CollisionShape.hpp"
+#include "AbstractCollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
 
 #include <vector>
@@ -11,15 +11,15 @@
 namespace entity
 {
 
-	class TriangulatedPoly: public CollisionShape
+	class AbstractTriangulatedPoly: public AbstractCollisionShape
 	{
 	public:
 
-		TriangulatedPoly();
-		TriangulatedPoly(std::string); //TODO: figure out why I declared this.
-		virtual ~TriangulatedPoly() override;
-		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, CollisionShape&) override;
-		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, TriangulatedPoly&) override;
+		AbstractTriangulatedPoly();
+		AbstractTriangulatedPoly(std::string); //TODO: figure out why I declared this.
+		virtual ~AbstractTriangulatedPoly() override;
+		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
+		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
 		virtual void SetOrientation(double radian) = 0;
 					

@@ -16,12 +16,12 @@ namespace entity
 	{
 	}
 
-	bool Circle::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, CollisionShape& that)
+	bool Circle::InviteForCollision(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractCollisionShape& that)
 	{
 		return that.CollideInto(otherframe, myframe, *this); //Notice how we switched myframe and otherframe here.
 	}
 
-	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, TriangulatedPoly& that)
+	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& that)
 	{
 		return false;
 		//TODO: implement this.
