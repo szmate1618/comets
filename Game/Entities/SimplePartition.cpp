@@ -28,12 +28,12 @@ namespace entity
 
 	Iterator<StaticEntity> SimplePartition::begin()
 	{
-		return Iterator<StaticEntity>(*elements[0]);
+		return MyIterator<StaticEntity>(*elements[0], *this);
 	}
 
     Iterator<StaticEntity> SimplePartition::end()
 	{
-		return Iterator<StaticEntity>(*elements[count]);
+		return MyIterator<StaticEntity>(*elements[count], *this);
 	}
 
 	long SimplePartition::getCapacity()

@@ -12,22 +12,7 @@ namespace entity
 
 	class SimplePartition: public AbstractPartition
 	{
-
-		template <typename T> //TODO: Apparently I can't specialize this class, because of the return type of operator++(int)
-		class MyIterator: public Iterator<T>
-		{
-		public:
-
-			MyIterator<T>(T& element, const SimplePartition& partition): Iterator(element), partition(partition), position(0) {}
-			virtual ~MyIterator<T>() {}
-			virtual MyIterator<T>& operator++() {++position; return partition.*elements[position];}
-			virtual MyIterator<T> operator++(int) {++position; return partition.*elements[position];}
-
-		private:
-
-			const long position;
-			const SimplePartition& partition;
-		};
+		friend class MyIterator;
 
 	public:
 
@@ -44,7 +29,22 @@ namespace entity
 		static const long capacity = 1000;
 		long count;
 		StaticEntity* elements[capacity];
+		
+		template <typename T> //TODO: Apparently I can't specialize this class, because of the return type of operator++(int)
+		class MyIterator: public Iterator<T>
+		{
+		public:
 
+			MyIterator<T>(T& element, const SimplePartition& partition): Iterator(element), partition(partition), position(0) {}
+			virtual ~MyIterator<T>() override {}
+			virtual Iterator<T>& operator++() override {++position; element = partition.elements + position; return *this;}
+			virtual Iterator<T> operator++(int) override {++position; element = partition.elements + position; return *this;}
+
+		private:
+
+			long position;
+			const SimplePartition& partition;
+		};
 	};
 
 }
