@@ -6,7 +6,7 @@ namespace geo
 
 	bool equals(point_2d v1, point_2d v2, real tolerance) //Shouldn't we pass _everything_ by reference?
 	{
-		return abs(v1.x - v2.x) <= tolerance && abs(v1.y - v2.y) <= tolerance;
+		return fabs(v1.x - v2.x) <= tolerance && fabs(v1.y - v2.y) <= tolerance;
 	}
 
 	bool equals(point_2d v1, point_2d v2)

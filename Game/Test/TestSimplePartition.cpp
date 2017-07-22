@@ -22,7 +22,8 @@ namespace Test
 			assert(count <= partition.getCapacity());
 			for(long i = 0; i < count; ++i)
 			{
-				partition.Add((pointer)input_array[i]);
+				#pragma warning( suppress : 4312 )
+				partition.Add(reinterpret_cast<pointer>(input_array[i]));
 			}
 		}
 
@@ -44,7 +45,8 @@ namespace Test
 			long j = 1;
 			for (iterator i = partition.begin(); i != partition.end(); i++)
 			{
-				Assert::AreEqual(j, (long)(*i), L"Failed to retrieve an inserted element.");
+				#pragma warning( suppress : 4302 4311 )
+				Assert::AreEqual(j, reinterpret_cast<long>(*i), L"Failed to retrieve an inserted element.");
 				j++;
 			}
 		}
@@ -59,7 +61,8 @@ namespace Test
 			{
 				for(iterator j: partition)
 				{
-					(accumulator *= 100) += 10 * (long)(*i) + (long)(*j);
+					#pragma warning( suppress : 4302 4311 )
+					(accumulator *= 100) += 10 * reinterpret_cast<long>(*i) + reinterpret_cast<long>(*j);
 				}
 			}
 			Assert::AreEqual(11122122L, accumulator, L"Apparently things got tangled up in this nested iteration.");
@@ -73,11 +76,14 @@ namespace Test
 			long accumulator = 0;
 			for(iterator i: partition)
 			{
-				if ((long)(*i) == 1) continue;
+				#pragma warning( suppress : 4302 4311 )
+				if (reinterpret_cast<long>(*i) == 1) continue;
 				for(iterator j: partition)
 				{
-					if ((long)(*j) == 2) continue;
-					(accumulator *= 100) += 10 * (long)(*i) + (long)(*j);
+					#pragma warning( suppress : 4302 4311 )
+					if (reinterpret_cast<long>(*j) == 2) continue;
+					#pragma warning( suppress : 4302 4311 )
+					(accumulator *= 100) += 10 * reinterpret_cast<long>(*i) + reinterpret_cast<long>(*j);
 				}
 			}
 			Assert::AreEqual(21233133L, accumulator, L"Apparently things got tangled up in this continued nested iteration.");
