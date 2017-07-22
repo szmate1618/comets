@@ -98,7 +98,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\Debug\AbstractCollisionShape.obj;..\Entities\Debug\TriangulatedPoly.obj;..\Geometry\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\Debug\AbstractPartitioner.obj;..\Entities\Debug\SimplePartitioner.obj;..\Entities\Debug\AbstractPartition.obj;..\Entities\Debug\SimplePartition.obj;..\Entities\Debug\AbstractCollisionShape.obj;..\Entities\Debug\AbstractTriangulatedPoly.obj;..\Geometry\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

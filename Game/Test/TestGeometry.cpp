@@ -92,9 +92,9 @@ namespace Test
 			srand(666);
 			for (int i = 0; i < 15; i++)
 			{
-				geo::point_2d a = {rand(), rand()};
-				geo::point_2d b = {rand(), rand()};
-				geo::point_2d c = {rand(), rand()};
+				geo::point_2d a = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
+				geo::point_2d b = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
+				geo::point_2d c = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
 				geo::real minx = __min(a.x, __min(b.x, c.x));
 				geo::real maxx = __max(a.x, __max(b.x, c.x));
 				geo::real miny = __min(a.y, __min(b.y, c.y));
@@ -125,7 +125,7 @@ namespace Test
 
             for (int i = 0; i < 20; i++)
             {
-				geo::point_2d p = {rand(), rand()};
+				geo::point_2d p = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
 				Assert::AreEqual(p.x + p.y <= 1, geo::is_inside(t, p), L"Error with point inside or outside of triangle. Fuck C strings.");
             }
         }
@@ -138,12 +138,12 @@ namespace Test
 
             for (int i = 0; i < 10; i++)
             {
-				geo::point_2d p = {rand() % 11, rand() % 11};
+				geo::point_2d p = { static_cast<geo::real>(rand() % 11), static_cast<geo::real>(rand() % 11) };
 				Assert::IsTrue(geo::is_inside(f, p), L"Error with point inside of frame. Fuck C strings.");
             }
             for (int i = 0; i < 10; i++)
             {
-				geo::point_2d p = {10.001 + rand() % 11, 10.001 + rand() % 11};
+				geo::point_2d p = {10.001 + static_cast<geo::real>(rand() % 11), 10.001 + static_cast<geo::real>(rand() % 11) };
 				Assert::IsFalse(geo::is_inside(f, p), L"Error with point outside of frame. Fuck C strings.");
             }
         }
@@ -200,7 +200,7 @@ find_convex_hexa:
 				geo::point_2d convex_hexagon_attempt[6];
 				for (int j = 0; j < 6; rotate_point_2d(r, Pi / 3), j++)
 				{
-					geo::real length = rand();
+					geo::real length = static_cast<geo::real>(rand());
 					convex_hexagon_attempt[j] = geo::mul(r, length);
 				}
 
@@ -224,7 +224,7 @@ find_convex_hexa:
 				geo::point_2d* hexa = convex_hexagon_attempt; // Hah! It's not just an attempt anymore!
 				for (int j = 0; j < 1000; j++)
 				{
-					geo::point_2d p = {rand(), rand()};
+					geo::point_2d p = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
 					bool in_a_triangle =
 						geo::is_inside(hexa[0], hexa[1], hexa[2], p) || //Outcommenting this line doesn't do anything; this is strange.
 						geo::is_inside(hexa[0], hexa[2], hexa[3], p) ||
