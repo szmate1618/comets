@@ -19,7 +19,7 @@ namespace entity
 
 	Iterator<AbstractPartition* const> SimplePartitioner::begin()
 	{
-		return Iterator<AbstractPartition* const>(&the_partition); //Wait? I'm passing an rvalue reference here?! C++11 FTW!
+		return Iterator<AbstractPartition* const>(&the_partition);
 	}
 
 	Iterator<AbstractPartition* const> SimplePartitioner::end()

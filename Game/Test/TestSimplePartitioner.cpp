@@ -18,15 +18,13 @@ namespace Test
 		typedef geo::Frame<entity::StaticEntity>& reference;
 		typedef entity::Iterator<entity::AbstractPartition* const> iterator;
 
-		entity::SimplePartitioner InitPartitioner(long input_array[], long count)
+		void InitPartitioner(entity::SimplePartitioner& partitioner, const long input_array[], const long count)
 		{
-			entity::SimplePartitioner partitioner;
-			//assert(count <= (*(partitioner.begin())).getCapacity());
+			assert(count <= ((entity::SimplePartition*)*partitioner.begin())->getCapacity()); //This is funky.
 			for(long i = 0; i < count; ++i)
 			{
 				partitioner.Insert((reference)input_array[i]);
 			}
-			return partitioner;
 		}
 
 	public:
@@ -35,7 +33,23 @@ namespace Test
 		{
 			entity::SimplePartitioner partitioner;
 
-			geo::EmptyFrame frame1 = {0, 1, 0, 1};
+			geo::Frame<entity::StaticEntity> frame;
+			frame.minx = 0;
+			frame.maxx = 1;
+			frame.miny = 0;
+			frame.maxy = 1;
+			frame.entity = (entity::StaticEntity*)1;
+
+			partitioner.Insert(frame);
+
+			int count = 0;
+			for(iterator i: partitioner)
+			{
+				for(auto j: (**i))
+				{
+					Assert::AreEqual(1, (int)j, L"Failed to retrieve correct entity pointer.");
+				}
+			}
 		}
 
 	};
