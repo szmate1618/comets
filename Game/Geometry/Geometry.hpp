@@ -10,11 +10,11 @@ namespace geo
 	typedef double real;
 	const real epsilon = 0.0005;
 
-	struct point_2d{real x; real y;};
+	struct point_2d { real x; real y; };
 
 	typedef point_2d vector_2d;
 
-	struct triangle{point_2d a; point_2d b; point_2d c;};
+	struct triangle { point_2d a; point_2d b; point_2d c; };
 	
 	struct EmptyFrame
 	{
