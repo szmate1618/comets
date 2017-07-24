@@ -6,7 +6,9 @@ namespace utils
 	template <typename T>
 	StaticLinkedList<T>::StaticLinkedList()
 	{
-		elements.reserve();
+		elements.reserve(default_size);
+		elements[0].nextindex = elements.capacity - 1;
+		elements[elements.capacity - 1].previndex = 0;
 	}
 
 	template <typename T>

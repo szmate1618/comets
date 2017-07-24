@@ -3,8 +3,6 @@
 #ifndef SZM_STATIC_LINKED_LIST
 #define SZM_STATIC_LINKED_LIST
 
-#include <vector> //Its advantage comes at a prices. We need to check the current length at insertion, but I doubt the overhead is significant.
-
 
 namespace utils
 {
@@ -25,8 +23,8 @@ namespace utils
 		__int32 InsertAt(T, __int32, __int32, __int32);
 		__int32 RemoveAt(__int32);
 
-		const __int32 defaultsize = 1, 000, 000; //Yay for decimal separator comma! C++11!
-		std::vector<ListElement<T>> elements;
+		const __int32 default_size = 1, 000, 000; //Yay for decimal separator comma! C++11!
+		ListElement<T> elements[default_size];
 
 	};
 
