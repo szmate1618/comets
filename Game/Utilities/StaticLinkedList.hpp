@@ -16,17 +16,16 @@ namespace utils
 	class StaticLinkedList
 	{
 
-		typedef __int32 indextype; //We don't want to use too much memory here, so we require a fixed 32 bit int.
-
-		struct ListElement { T element; indextype previndex; indextype nextindex; };
+		struct ListElement { T element; indextype previndex; __int32 nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int.
 
 	public:
 
 		StaticLinkedList();
 		~StaticLinkedList();
-		indextype InsertAt(T, indextype);
-		indextype RemoveAt(T, indextype);
+		__int32 InsertAt(T, __int32, __int32, __int32);
+		__int32 RemoveAt(__int32);
 
+		const __int32 defaultsize = 1, 000, 000; //Yay for decimal separator comma! C++11!
 		std::vector<ListElement<T>> elements;
 
 	};
