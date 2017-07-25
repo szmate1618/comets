@@ -3,10 +3,16 @@
 namespace utils
 {
 
+
 	template <typename T>
-	StaticLinkedList<T>::StaticLinkedList()
+	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
 	{
-		elements = std::vector(default_size);
+	}
+
+	template <typename T>
+	StaticLinkedList<T>::StaticLinkedList(__int32 size)
+	{
+		elements = std::vector(size);
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 

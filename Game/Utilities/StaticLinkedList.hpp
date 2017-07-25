@@ -22,6 +22,7 @@ namespace utils
 	public:
 
 		StaticLinkedList();
+		StaticLinkedList(__int32);
 		~StaticLinkedList();
 		__int32 InsertAtFirstGap(T);
 		__int32 RemoveAt(__int32);
