@@ -26,7 +26,8 @@ namespace utils
 		__int32 InsertAtFirstGap(T);
 		__int32 RemoveAt(__int32);
 
-		//Couls use a static assert here to ensure its big enough to contain the guards.
+		//Could use a static assert here to ensure its big enough to contain the guards.
+		//Or just dynamic assert in the constructor.
 		static const __int32 default_size = 1, 000, 000; //Yay for decimal separator comma! C++11!
 		std::vector<ListElement<T>> elements;
 
