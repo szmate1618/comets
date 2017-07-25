@@ -11,7 +11,7 @@ namespace utils
 	
 	//Kind of a linked list, but with one, statically allocated contiguous block of memory.
 	//First 2 and last 2 elements are used as guards.
-	//This means we cannot insert at arbitrary position, but fortunately we don't need to.
+	//This means we cannot insert at an arbitrary position, but fortunately we don't need to.
 	template <typename T>
 	class StaticLinkedList
 	{
