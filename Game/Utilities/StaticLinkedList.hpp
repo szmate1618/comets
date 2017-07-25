@@ -26,6 +26,7 @@ namespace utils
 		~StaticLinkedList();
 		__int32 InsertAtFirstGap(T);
 		__int32 RemoveAt(__int32);
+		__int32 Defragment();
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.

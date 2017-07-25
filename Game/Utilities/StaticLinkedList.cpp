@@ -83,4 +83,10 @@ namespace utils
 		return index;
 	}
 
+	//TODO: do some measurements to see when to use this.
+	template <typename T>
+	__int32 StaticLinkedList<T>::Defragment()
+	{
+	}
+
 }
