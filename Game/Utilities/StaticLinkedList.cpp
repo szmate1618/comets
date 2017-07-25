@@ -59,8 +59,21 @@ namespace utils
 	template <typename T>
 	__int32 StaticLinkedList<T>::RemoveAt(__int32 index)
 	{
+		//Remove from inlist, that's the easy part.
 		elements[elements[index].previndex].nextindex = elements[index].nextindex;
 		elements[elements[index].nextindex].previndex = elements[index].previndex;
+
+		//Insert into outlist. A bit harder.
+		__int32 borderindex = outstart;
+		while (borderindex < index)
+		{
+			borderindex = elements[borderindex].nextindex;
+		}
+		elements[index].previndex = elements[borderindex].previndex;
+		elements[index].nextindex = borderindex;
+		elements[elements[borderindex].nextindex].nextindex = index;
+		elements[borderindex].previndex = index;
+
 		return index;
 	}
 
