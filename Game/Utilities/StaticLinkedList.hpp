@@ -30,7 +30,7 @@ namespace utils
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.
-		static const __int32 default_size = 1, 000, 000; //Yay for decimal separator comma! C++11!
+		static const __int32 default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
 		std::vector<ListElement<T>> elements;
 
 	private:
