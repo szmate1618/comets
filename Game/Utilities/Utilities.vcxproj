@@ -115,6 +115,7 @@
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
