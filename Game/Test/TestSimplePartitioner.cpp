@@ -3,7 +3,7 @@
 
 #include "..\Entities\SimplePartitioner.hpp"
 
-#include <assert.h>
+#include <cassert>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -54,4 +54,5 @@ namespace Test
 		}
 
 	};
+
 }

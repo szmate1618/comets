@@ -3,7 +3,7 @@
 
 #include "..\Entities\SimplePartition.hpp"
 
-#include <assert.h>
+#include <cassert>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -88,5 +88,7 @@ namespace Test
 			}
 			Assert::AreEqual(21233133L, accumulator, L"Apparently things got tangled up in this continued nested iteration.");
 		}
+
 	};
+
 }

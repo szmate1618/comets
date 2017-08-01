@@ -1,6 +1,6 @@
 #include "SimplePartition.hpp"
 
-#include <assert.h>
+#include <cassert>
 
 namespace entity 
 {

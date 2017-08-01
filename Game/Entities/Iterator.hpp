@@ -32,6 +32,7 @@ namespace entity
 	private:
 
 		T* element;
+
     };
 
 }
