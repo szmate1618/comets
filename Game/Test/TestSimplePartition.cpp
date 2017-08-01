@@ -88,5 +88,7 @@ namespace Test
 			}
 			Assert::AreEqual(21233133L, accumulator, L"Apparently things got tangled up in this continued nested iteration.");
 		}
+
 	};
+
 }
