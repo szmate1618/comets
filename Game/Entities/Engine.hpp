@@ -1,5 +1,4 @@
-#ifndef SZM_ENGINE
-#define SZM_ENGINE
+#pragma once
 
 #include "..\Geometry\Geometry.hpp"
 
@@ -48,5 +47,3 @@ namespace entity
 	};
 
 }
-
-#endif

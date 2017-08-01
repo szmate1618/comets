@@ -1,5 +1,4 @@
-#ifndef SZM_ABSTRACT_SERVER
-#define SZM_ABSTRACT_SERVER
+#pragma once
 
 namespace server
 {
@@ -18,5 +17,3 @@ namespace server
 	};
 
 }
-
-#endif

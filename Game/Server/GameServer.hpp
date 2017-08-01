@@ -1,5 +1,4 @@
-#ifndef SZM_GAME_SERVER
-#define SZM_GAME_SERVER
+#pragma once
 
 #include "AbstractServer.hpp"
 
@@ -28,5 +27,3 @@ namespace server
 	};
 
 }
-
-#endif

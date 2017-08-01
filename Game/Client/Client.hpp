@@ -1,5 +1,4 @@
-#ifndef SZM_CLIENT
-#define SZM_CLIENT
+#pragma once
 
 class Client
 {
@@ -16,5 +15,3 @@ private:
 	void ReadUserInput();
 	void SendPackets();
 };
-
-#endif

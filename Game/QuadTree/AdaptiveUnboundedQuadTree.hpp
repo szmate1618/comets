@@ -1,8 +1,7 @@
-#ifndef SZM_ADAPTIVE_UNBOUNDED_QUAD_TREE
-#define SZM_ADAPTIVE_UNBOUNDED_QUAD_TREE
+#pragma once
 
 #include "QuadTree.hpp"
-#include "Geometry.hpp"
+#include "..\Geometry\Geometry.hpp"
 
 #include <iostream>
 
@@ -103,6 +102,3 @@ class AdaptiveUnboundedQuadTree: QuadTree<S, T>
 			delete lr;
 		}
 };
-
-
-#endif

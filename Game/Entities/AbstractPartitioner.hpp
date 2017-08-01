@@ -1,5 +1,4 @@
-#ifndef SZM_ABSTRACT_PARTITIONER
-#define SZM_ABSTRACT_PARTITIONER
+#pragma once
 
 #include "Entities.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -24,5 +23,3 @@ namespace entity
 	};
 
 }
-
-#endif

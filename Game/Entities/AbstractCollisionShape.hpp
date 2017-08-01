@@ -1,5 +1,4 @@
-#ifndef SZM_ABSTRACT_COLLISION_SHAPE
-#define SZM_ABSTRACT_COLLISION_SHAPE
+#pragma once
 
 #include "..\Geometry\Geometry.hpp"
 
@@ -29,5 +28,3 @@ namespace entity
 	};
 
 }
-
-#endif

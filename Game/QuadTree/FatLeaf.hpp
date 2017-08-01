@@ -1,8 +1,7 @@
-#ifndef SZM_FAT_LEAF
-#define SZM_FAT_LEAF
+#pragma once
 
 #include "QuadTree.hpp"
-#include "Geometry.hpp"
+#include "..\Geometry\Geometry.hpp"
 
 #include <stdlib.h>
 #include <vector>
@@ -32,5 +31,3 @@ class FatLeaf: QuadTree<S, T>
 			frames.push_back(frame);
 		}
 };
-
-#endif

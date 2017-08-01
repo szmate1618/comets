@@ -1,5 +1,4 @@
-#ifndef SZM_ITERATOR
-#define SZM_ITERATOR
+#pragma once
 
 #include "Entities.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -36,5 +35,3 @@ namespace entity
     };
 
 }
-
-#endif
