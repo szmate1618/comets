@@ -1,5 +1,4 @@
-#ifndef SZM_ABSTRACT_TRIANGULATED_POLY
-#define SZM_ABSTRACT_TRIANGULATED_POLY
+#pragma once
 
 #include "AbstractCollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -45,5 +44,3 @@ namespace entity
 	};
 
 }
-
-#endif

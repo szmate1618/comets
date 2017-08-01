@@ -1,5 +1,4 @@
-#ifndef SZM_NAIVE_UNBOUNDED_QUAD_TREE
-#define SZM_NAIVE_UNBOUNDED_QUAD_TREE
+#pragma once
 
 #include "QuadTree.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -94,6 +93,3 @@ class NaiveUnboundedQuadTree: QuadTree<S, T>
 			delete lr;
 		}
 };
-
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SZM_SIMPLE_PARTITION
-#define SZM_SIMPLE_PARTITION
+#pragma once
 
 #include "AbstractPartition.hpp"
 #include "Entities.hpp"
@@ -31,5 +30,3 @@ namespace entity
 	};
 
 }
-
-#endif

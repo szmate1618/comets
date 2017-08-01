@@ -1,5 +1,4 @@
-#ifndef SZM_CIRCLE
-#define SZM_CIRCLE
+#pragma once
 
 #include "AbstractCollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -29,5 +28,3 @@ namespace entity
 	};
 
 }
-
-#endif

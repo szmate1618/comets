@@ -1,5 +1,4 @@
-#ifndef SZM_ABSTRACT_PARTITION
-#define SZM_ABSTRACT_PARTITION
+#pragma once
 
 #include "Entities.hpp"
 #include "Iterator.hpp"
@@ -23,5 +22,3 @@ namespace entity
 	};
 
 }
-
-#endif

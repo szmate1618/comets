@@ -1,7 +1,4 @@
 #pragma once
-//TODO: Figure out what #pragma once is.
-#ifndef SZM_STATIC_LINKED_LIST
-#define SZM_STATIC_LINKED_LIST
 
 #include <vector>
 
@@ -41,5 +38,3 @@ namespace utils
 	};
 
 }
-
-#endif

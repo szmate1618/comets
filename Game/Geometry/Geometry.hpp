@@ -1,5 +1,4 @@
-#ifndef SZM_GEOMETRY
-#define SZM_GEOMETRY
+#pragma once
 
 #include <math.h>
 
@@ -66,5 +65,3 @@ namespace geo
 	EmptyFrame tri_as_frame(triangle);
 
 }
-
-#endif

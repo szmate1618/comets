@@ -1,5 +1,4 @@
-#ifndef SZM_TRIANGULATED_POLY_PRECOMPUTED_ROTATION
-#define SZM_TRIANGULATED_POLY_PRECOMPUTED_ROTATION
+#pragma once
 
 #include "AbstractTriangulatedPoly.hpp"
 #include "..\Geometry\Geometry.hpp"
@@ -28,5 +27,3 @@ namespace entity
 	};
 
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SZM_QUAD_TREE
-#define SZM_QUAD_TREE
+#pragma once
 
 static const double epsilon = 0.00000001;
 
@@ -9,5 +8,3 @@ class QuadTree
 	public:
 		void Insert(S, S, S, S, T*){};
 };
-
-#endif
