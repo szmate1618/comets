@@ -3,7 +3,7 @@
 
 #include "..\Utilities\StaticLinkedList.hpp"
 
-#include <assert.h>
+#include <cassert>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
