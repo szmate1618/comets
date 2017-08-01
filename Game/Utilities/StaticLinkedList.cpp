@@ -87,6 +87,7 @@ namespace utils
 	template <typename T>
 	__int32 StaticLinkedList<T>::Defragment()
 	{
+		//TODO: Implement this.
 	}
 
 }
