@@ -74,6 +74,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -81,6 +83,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -98,7 +102,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\Debug\AbstractPartitioner.obj;..\Entities\Debug\SimplePartitioner.obj;..\Entities\Debug\AbstractPartition.obj;..\Entities\Debug\SimplePartition.obj;..\Entities\Debug\AbstractCollisionShape.obj;..\Entities\Debug\AbstractTriangulatedPoly.obj;..\Geometry\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\$(Platform)\$(Configuration)\AbstractPartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\AbstractPartition.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -114,7 +118,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\x64\Debug\AbstractPartitioner.obj;..\Entities\x64\Debug\SimplePartitioner.obj;..\Entities\x64\Debug\AbstractPartition.obj;..\Entities\x64\Debug\SimplePartition.obj;..\Entities\x64\Debug\AbstractCollisionShape.obj;..\Entities\x64\Debug\AbstractTriangulatedPoly.obj;..\Geometry\x64\Debug\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\$(Platform)\$(Configuration)\AbstractPartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\AbstractPartition.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,7 +138,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\Release\TessellatedObject.obj;..\Geometry\Release\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\$(Platform)\$(Configuration)\AbstractPartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\AbstractPartition.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +158,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>..\Entities\x64\Release\AbstractCollisionShape.obj;..\Entities\x64\Release\TriangulatedPoly.obj;..\Geometry\x64\Release\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Entities\$(Platform)\$(Configuration)\AbstractPartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\AbstractPartition.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
