@@ -2,7 +2,7 @@
 #define SZM_FAT_LEAF
 
 #include "QuadTree.hpp"
-#include "Geometry.hpp"
+#include "..\Geometry\Geometry.hpp"
 
 #include <stdlib.h>
 #include <vector>

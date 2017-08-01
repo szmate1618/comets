@@ -2,7 +2,7 @@
 #define SZM_NAIVE_UNBOUNDED_QUAD_TREE
 
 #include "QuadTree.hpp"
-#include "Geometry.hpp"
+#include "..\Geometry\Geometry.hpp"
 
 #include <iostream>
 
