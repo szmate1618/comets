@@ -21,7 +21,7 @@ namespace utils
 		StaticLinkedList();
 		StaticLinkedList(__int32);
 		~StaticLinkedList();
-		__int32 InsertAtFirstGap(T);
+		__int32 InsertAtFirstGap(T); //TODO: add methods for compile-time polymorphism with STL LinkedList.
 		__int32 RemoveAt(__int32);
 		__int32 Defragment();
 
