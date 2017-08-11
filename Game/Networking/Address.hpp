@@ -10,10 +10,10 @@ namespace net
 
 		Address() = delete;
 
-		Address(unsigned char,
-			unsigned char,
-			unsigned char,
-			unsigned char,
+		Address(unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int,
 			unsigned short);
 		
 		Address(unsigned int, unsigned short);
