@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "Utilities\Utilities.vcxproj", "{D514D115-835C-488B-BE29-970C2CC0F2E0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Networking", "Networking\Networking.vcxproj", "{4E5D9065-F9DE-441C-9590-41ECD764479F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -81,6 +83,14 @@ Global
 		{D514D115-835C-488B-BE29-970C2CC0F2E0}.Release|Win32.Build.0 = Release|Win32
 		{D514D115-835C-488B-BE29-970C2CC0F2E0}.Release|x64.ActiveCfg = Release|x64
 		{D514D115-835C-488B-BE29-970C2CC0F2E0}.Release|x64.Build.0 = Release|x64
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Debug|Win32.Build.0 = Debug|Win32
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Debug|x64.ActiveCfg = Debug|x64
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Debug|x64.Build.0 = Debug|x64
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Release|Win32.ActiveCfg = Release|Win32
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Release|Win32.Build.0 = Release|Win32
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Release|x64.ActiveCfg = Release|x64
+		{4E5D9065-F9DE-441C-9590-41ECD764479F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
