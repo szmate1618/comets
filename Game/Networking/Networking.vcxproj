@@ -112,9 +112,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Address.hpp" />
+    <ClInclude Include="Socket.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Socket.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
