@@ -102,13 +102,15 @@ int main()
 	sender.Send(a2, data, 12);*/
 	const int port = 30000;
 	Socket receiver;
-	receiver.Open(6401);
+	receiver.Open(6407);
 	Socket socket;
 	socket.Open(0);
 	const char data2[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	socket.Send( Address(127,0,0,1,6401), data2, sizeof(data2) );
 	const char data[] = "hello world!";
 	socket.Send( Address(127,0,0,1,6401), data, sizeof(data) );
+	const char data3[] = "..........................................................123456789";
+	socket.Send(Address(127, 0, 0, 1, 6401), data3, sizeof(data3));
 
 
 	while ( true )
@@ -122,9 +124,10 @@ int main()
 			receiver.Receive(sender, 
 							buffer, 
 							sizeof(buffer));
-		if (!bytes_read)
+		if (bytes_read <= 0)
 			break;
 
+		std::cout << bytes_read;
 		std::cout << buffer << std::endl;
 		getchar();
 	}
