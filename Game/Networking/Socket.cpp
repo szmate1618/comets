@@ -38,8 +38,15 @@ namespace net
 	{
 		MaybeInitializeSockets();
 		handle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+		#if PLATFORM == PLATFORM_MAC || PLATFORM == PLATFORM_UNIX
+		int nonBlocking = 1;
+		bool blocking = (fcntl(handle, F_SETFL, O_NONBLOCK, nonBlocking) == -1)
+		#elif PLATFORM == PLATFORM_WINDOWS
 		DWORD nonBlocking = 1;
-		ioctlsocket(handle, FIONBIO, &nonBlocking);
+		bool blocking = ioctlsocket(handle, FIONBIO, &nonBlocking);
+		#endif
+		assert(!blocking, "Faied to set non-blocking mode.");
 	}
 
 	Socket::~Socket()
