@@ -71,7 +71,15 @@ namespace net
 		return true;
 	}
 
-	void Socket::Close() { closesocket(handle); is_open = false; }
+	void Socket::Close()
+	{
+        #if PLATFORM == PLATFORM_MAC || PLATFORM == PLATFORM_UNIX
+		close(handle);
+        #elif PLATFORM == PLATFORM_WINDOWS
+		closesocket(handle);
+        #endif
+		is_open = false;
+	}
 
 	bool Socket::IsOpen() const { return is_open; }
 
