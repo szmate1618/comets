@@ -18,6 +18,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 
 #if PLATFORM == PLATFORM_WINDOWS
 	#include <winsock2.h>
+	#pragma comment( lib, "wsock32.lib" )
 #elif PLATFORM == PLATFORM_MAC || PLATFORM == PLATFORM_UNIX
 	#include <sys/socket.h>
 	#include <netinet/in.h>
