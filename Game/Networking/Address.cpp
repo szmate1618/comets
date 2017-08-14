@@ -5,12 +5,12 @@ namespace net {
 
 	Address::Address
 	(
-		unsigned int a,
+		unsigned int a, //TODO: look into IPv6.
 		unsigned int b,
 		unsigned int c,
 		unsigned int d,
 		unsigned short port
-	) : address{ (a << 24) | (b << 16) | (c << 8) | d }, port{ port } {} //TODO: Consistent spaceing before and after : operators.
+	) : address{ (a << 24) | (b << 16) | (c << 8) | d }, port{ port } {} //TODO: Consistent spacing before and after : operators.
 
 	Address::Address(unsigned int address, unsigned short port) : address{ address }, port{ port } {}
 
