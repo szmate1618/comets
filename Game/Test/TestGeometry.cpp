@@ -231,7 +231,7 @@ find_convex_hexa:
 						geo::is_inside(hexa[0], hexa[3], hexa[4], p) ||
 						geo::is_inside(hexa[0], hexa[4], hexa[5], p);
 					bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
-					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry");
+					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry.");
 				}
 			}
 		}
