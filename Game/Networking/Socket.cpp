@@ -83,7 +83,7 @@ namespace net
 
 	bool Socket::IsOpen() const { return is_open; }
 
-	bool Socket::Send(const Address & destination, const void * packet_data, int packet_size) const
+	bool Socket::Send(const Address& destination, const void* packet_data, int packet_size) const
 	{
 		sockaddr_in address;
 		address.sin_family = AF_INET;
