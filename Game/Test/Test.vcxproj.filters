@@ -41,5 +41,8 @@
     <ClCompile Include="TestStaticLinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestAddress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
