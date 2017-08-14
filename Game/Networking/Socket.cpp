@@ -129,7 +129,7 @@ namespace net
 
 	void Socket::MaybeInitializeSockets()
 	{
-		assert(sockets_in_scope >= 0, "Number of scope objects is less than 0. A concurreny error, maybe?");
+		assert(sockets_in_scope >= 0, "Number of socket objects is less than 0. A concurreny error, maybe?");
 		if (sockets_in_scope++ != 0) return;
 
 		#if PLATFORM == PLATFORM_WINDOWS
