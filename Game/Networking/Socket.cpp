@@ -105,14 +105,14 @@ namespace net
 		return true;
 	}
 
-	int Socket::Receive(Address& sender, void* packet_data, int packet_size) const
+	int Socket::Receive(Address& sender, void* buffer, int buffer_size) const
 	{
 		sockaddr_in from;
 		socklen_t fromLength = sizeof(from);
 
 		int bytes = recvfrom(handle,
-						(char*)packet_data,
-						max_packet_size,
+						(char*)buffer,
+						buffer_size,
 						0,
 						(sockaddr*)&from,
 						&fromLength);
@@ -120,6 +120,11 @@ namespace net
 		unsigned int from_address = ntohl(from.sin_addr.s_addr);
 		unsigned int from_port = ntohs(from.sin_port);
 		return bytes;
+	}
+
+	int Socket::Receive(Address& sender) const
+	{
+		return Receive(sender, (void*)recv_buffer, max_packet_size); //TODO: Use static cast?
 	}
 
 	void Socket::MaybeInitializeSockets()

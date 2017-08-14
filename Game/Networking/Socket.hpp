@@ -10,7 +10,7 @@ namespace net
 	typedef int socklen_t;
 	#endif
 
-	constexpr int max_packet_size = 1000; //TODO: check recommended max MTU.
+	constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 	class Socket
 	{
@@ -23,6 +23,9 @@ namespace net
 		bool IsOpen() const;
 		bool Send(const Address&, const void*, int) const;
 		int Receive(Address&, void*, int) const;
+		int Receive(Address&) const;
+
+		char recv_buffer[max_packet_size];
 
 	private:
 
