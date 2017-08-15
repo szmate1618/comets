@@ -100,18 +100,27 @@ int main()
 	receiver.Open(a2.GetPort());
 	char data[]  = "mofomofomofo";
 	sender.Send(a2, data, 12);*/
+
 	const int port = 30000;
 	Socket receiver;
 	receiver.Open(6407);
 	Socket socket;
 	socket.Open(0);
 	const char data2[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-	socket.Send( Address(127,0,0,1,6401), data2, sizeof(data2) );
+	socket.Send( Address(127,0,0,1,6407), data2, sizeof(data2) );
 	const char data[] = "hello world!";
-	socket.Send( Address(127,0,0,1,6401), data, sizeof(data) );
+	socket.Send( Address(127,0,0,1,6407), data, sizeof(data) );
 	const char data3[] = "..........................................................123456789";
-	socket.Send(Address(127, 0, 0, 1, 6401), data3, sizeof(data3));
+	socket.Send(Address(127, 0, 0, 1, 6407), data3, sizeof(data3));
 
+	getchar();
+
+	//delay
+	for (size_t i = 0; i < 1000; i++)
+	{
+		std::cout << '.';
+	}
+	std::cout << std::endl;
 
 	while ( true )
 	{
