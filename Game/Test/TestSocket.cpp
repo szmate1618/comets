@@ -13,7 +13,7 @@ namespace Test
 	{
 	public:
 
-		TEST_METHOD(TestSendAndReceive)
+		TEST_METHOD(SendAndReceive)
 		{
 			net::Address a1{ 127, 0, 0, 1, 11111 }, a2{ 127, 0, 0, 1, 22222 };
 			net::Socket sender, receiver;
@@ -36,7 +36,7 @@ namespace Test
 			}
 		}
 
-		TEST_METHOD(TestGetAddress)
+		TEST_METHOD(GetAddress)
 		{
 			net::Address a1{ 127, 0, 0, 1, 11111 }, a2{ 127, 0, 0, 1, 22222 };
 			net::Socket sender, receiver;
@@ -55,7 +55,7 @@ namespace Test
 			Assert::AreEqual(static_cast<int>(a1.GetPort()), static_cast<int>(from.GetPort()), L"Ports do not match."); //Why on Earth do I need this cast here?!
 		}
 
-		TEST_METHOD(TestUnspecifiedPort)
+		TEST_METHOD(UnspecifiedPort)
 		{
 			net::Address a2{ 127, 0, 0, 1, 11111 };
 			net::Socket sender, receiver;

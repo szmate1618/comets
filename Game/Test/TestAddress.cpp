@@ -13,7 +13,7 @@ namespace Test
 	{
 	public:
 
-		TEST_METHOD(TestConstructor01)
+		TEST_METHOD(Constructor01)
 		{
 			net::Address address{ 0xAA, 0xBB, 0xCC, 0xDD, 11213 };
 			Assert::AreEqual(0xAABBCCDD, address.GetAddress(), L"Icorrect address.");
@@ -24,7 +24,7 @@ namespace Test
 			Assert::AreEqual(11213, static_cast<int>(address.GetPort()), L"Incorrect port.");
 		}		
 
-		TEST_METHOD(TestConstructor02)
+		TEST_METHOD(Constructor02)
 		{
 			net::Address address{ 0xAABBCCDD, 44444 };
 			Assert::AreEqual(0xAABBCCDD, address.GetAddress(), L"Icorrect address.");

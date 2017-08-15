@@ -16,7 +16,7 @@ namespace Test
 
 	public:
 
-		TEST_METHOD(TestAdd)
+		TEST_METHOD(Add)
 		{
 			//TODO: Implement this.
 		}

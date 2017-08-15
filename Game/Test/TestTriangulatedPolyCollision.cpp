@@ -12,7 +12,7 @@ namespace Test
 	{
 	public:
 		
-		TEST_METHOD(TestScenario01)
+		TEST_METHOD(Scenario01)
 		{
 			Assert::Fail();
 		}
