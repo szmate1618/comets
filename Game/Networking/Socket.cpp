@@ -46,7 +46,7 @@ namespace net
 		DWORD nonBlocking = 1;
 		bool blocking = ioctlsocket(handle, FIONBIO, &nonBlocking);
 		#endif
-		assert(!blocking, "Faied to set non-blocking mode.");
+		assert(!blocking && "Faied to set non-blocking mode.");
 	}
 
 	Socket::~Socket()
@@ -131,7 +131,7 @@ namespace net
 
 	void Socket::MaybeInitializeSockets()
 	{
-		assert(sockets_in_scope >= 0, "Number of socket objects is less than 0. A concurreny error, maybe?");
+		assert(sockets_in_scope >= 0 && "Number of socket objects is less than 0. A concurreny error, maybe?");
 		if (sockets_in_scope++ != 0) return;
 
 		#if PLATFORM == PLATFORM_WINDOWS
