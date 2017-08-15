@@ -15,7 +15,7 @@ namespace Test
 
 		TEST_METHOD(TestConstructor01)
 		{
-			net::Address address(0xAA, 0xBB, 0xCC, 0xDD, 11213);
+			net::Address address{ 0xAA, 0xBB, 0xCC, 0xDD, 11213 };
 			Assert::AreEqual(0xAABBCCDD, address.GetAddress(), L"Icorrect address.");
 			Assert::AreEqual(0xAA, static_cast<int>(address.GetA()), L"Incorrect A value.");
 			Assert::AreEqual(0xBB, static_cast<int>(address.GetB()), L"Incorrect B value.");
@@ -26,7 +26,7 @@ namespace Test
 
 		TEST_METHOD(TestConstructor02)
 		{
-			net::Address address(0xAABBCCDD, 44444);
+			net::Address address{ 0xAABBCCDD, 44444 };
 			Assert::AreEqual(0xAABBCCDD, address.GetAddress(), L"Icorrect address.");
 			Assert::AreEqual(0xAA, static_cast<int>(address.GetA()), L"Incorrect A value.");
 			Assert::AreEqual(0xBB, static_cast<int>(address.GetB()), L"Incorrect B value.");
