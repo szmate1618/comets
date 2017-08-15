@@ -8,7 +8,7 @@ namespace net
 	{
 	public:
 
-		Address() = delete;
+		Address();
 		Address
 		(
 			unsigned int,

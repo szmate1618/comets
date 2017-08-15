@@ -3,6 +3,8 @@
 
 namespace net {
 
+	Address::Address() {}
+
 	Address::Address
 	(
 		unsigned int a, //TODO: look into IPv6.
