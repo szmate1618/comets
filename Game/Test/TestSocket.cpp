@@ -3,8 +3,13 @@
 
 #include "..\Networking\Socket.hpp"
 
+#include <chrono>
+#include <thread>
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+using namespace std::chrono_literals;
 
 namespace Test
 {
@@ -25,11 +30,12 @@ namespace Test
 
 			sender.Send(a2, hello, sizeof(hello));
 
-			// TODO: Add delay here.
+			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			int bytes_read;
-			while ((bytes_read = receiver.Receive(from)) <= 0) {} 
-			Assert::AreEqual(sizeof(hello), static_cast<unsigned long long>(bytes_read), L"Sent and recevied size do not match.");
+			int bytes_read = receiver.Receive(from);
+			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
+			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
+			Assert::AreEqual(sizeof(hello), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(hello[i], receiver.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
@@ -47,10 +53,9 @@ namespace Test
 
 			sender.Send(a2, hello, sizeof(hello));
 
-			// TODO: Add delay here.
+			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			int bytes_read;
-			while ((bytes_read = receiver.Receive(from)) <= 0) {}
+			int bytes_read = receiver.Receive(from);
 			Assert::AreEqual(a1.GetAddress(), from.GetAddress(), L"Addresses do not match.");
 			Assert::AreEqual(static_cast<int>(a1.GetPort()), static_cast<int>(from.GetPort()), L"Ports do not match."); //Why on Earth do I need this cast here?!
 		}
@@ -66,10 +71,9 @@ namespace Test
 
 			sender.Send(a2, hello, sizeof(hello));
 
-			// TODO: Add delay here.
+			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			int bytes_read;
-			while ((bytes_read = receiver.Receive(from)) <= 0) {}
+			int bytes_read = receiver.Receive(from);
 			Assert::AreNotEqual(0, static_cast<int>(from.GetPort()), L"Ports do not match.");
 		}
 
