@@ -102,7 +102,7 @@ namespace Test
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			char buffer[100];
+			char buffer[sizeof(message)];
 			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
@@ -111,6 +111,24 @@ namespace Test
 			{
 				Assert::AreEqual(message[i], buffer[i], L"This character does not much, which quite likely means that none of them does.");
 			}
+		}
+
+		TEST_METHOD(TooSmallExternalBuffer)
+		{
+			net::Address address1{ 127, 0, 0, 1, 11111 }, address2{ 127, 0, 0, 1, 22222 };
+			net::Socket sender, responder;
+			const char message[] = "Mortal Wombat III";
+
+			sender.Open(address1.GetPort());
+			responder.Open(address2.GetPort());
+
+			sender.Send(address2, message, sizeof(message));
+
+			std::this_thread::sleep_for(10ms);
+			net::Address from;
+			char buffer[sizeof(message) - 1];
+			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			Assert::AreEqual(-1, bytes_read, L"Error: failed to fail.");
 		}
 
 	};
