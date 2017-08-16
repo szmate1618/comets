@@ -129,6 +129,12 @@ namespace Test
 			char buffer[sizeof(message) - 1];
 			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
 			Assert::AreEqual(-1, bytes_read, L"Error: failed to fail.");
+
+			sender.Send(address2, message, sizeof(message) - 1);
+
+			std::this_thread::sleep_for(10ms);
+			bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			Assert::AreNotEqual(-1, bytes_read, L"Error: failed to succeed.");
 		}
 
 	};
