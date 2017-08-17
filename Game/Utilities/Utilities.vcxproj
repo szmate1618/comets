@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Logger.hpp" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
