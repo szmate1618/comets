@@ -40,6 +40,8 @@ namespace net
 
 	bool Socket::Open(unsigned short port)
 	{
+		if (is_open) { Close(); }
+
 		sockaddr_in address;
 		address.sin_family = AF_INET;
 		address.sin_addr.s_addr = INADDR_ANY;
