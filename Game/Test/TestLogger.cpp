@@ -17,6 +17,7 @@ namespace Test
 
 		std::stringstream buffer; //We redirect cout into this buffer.
 		std::streambuf * old; //The original state is saved into and restored from this buffer.
+		std::regex timestamp_format{ "[0-9]{10}" };
 
 		TEST_METHOD_INITIALIZE(InitializerLoggerTests)
 		{
@@ -28,7 +29,11 @@ namespace Test
 			std::cout.rdbuf(old);
 		}
 
-		std::regex timestamp_format{ "[0-9]{10}" };
+		void ClearBuffer()
+		{
+			buffer.str(""); //Apparently this is how you empty a stringstream.
+			buffer.clear(); //And then we clear the potential error state, whatever it means.
+		}
 
 		std::string GetTimeStampFromEntry(std::string entry)
 		{
@@ -59,13 +64,46 @@ namespace Test
 				Assert::IsTrue(std::regex_match(GetTimeStampFromEntry(buffer.str()), timestamp_format), L"Incorrect construction entry timestamp format.");
 				Assert::AreEqual(severity, GetSeverityFromEntry(buffer.str()), L"Incorrect construction entry severity level.");
 				Assert::AreEqual(construction_message, GetMessageFromEntry(buffer.str()), L"Incorrect construction entry message.");
-				buffer.str(""); //Apparently this is how you empty a stringstream.
-				buffer.clear(); //And then we clear the potential error state, whatever it means.
+				ClearBuffer();
 			}
 
 			Assert::IsTrue(std::regex_match(GetTimeStampFromEntry(buffer.str()), timestamp_format), L"Incorrect cdestruction entry timestamp format.");
 			Assert::AreEqual(severity, GetSeverityFromEntry(buffer.str()), L"Incorrect destruction entry severity level.");
 			Assert::AreEqual(destruction_message, GetMessageFromEntry(buffer.str()), L"Incorrect destruction entry message.");
+		}
+
+		TEST_METHOD(LoggerSeverityLevels)
+		{
+			const char* various_characters = "Ab_.,?!%/5 \t\v {} \n &><'~กก";
+			util::Log(util::trace, various_characters);
+			Assert::AreEqual(std::string("trace"), GetSeverityFromEntry(buffer.str()), L"Incorrect trace severity level.");
+			Assert::AreEqual(std::string(various_characters) + std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect trace message.");
+			ClearBuffer();
+
+			util::Log(util::debug, "");
+			Assert::AreEqual(std::string("debug"), GetSeverityFromEntry(buffer.str()), L"Incorrect debug severity level.");
+			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect debug message.");
+			ClearBuffer();
+
+			util::Log(util::info, "");
+			Assert::AreEqual(std::string("info_"), GetSeverityFromEntry(buffer.str()), L"Incorrect info severity level.");
+			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect info message.");
+			ClearBuffer();
+
+			util::Log(util::warn, "");
+			Assert::AreEqual(std::string("warn_"), GetSeverityFromEntry(buffer.str()), L"Incorrect warn severity level.");
+			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect warn message.");
+			ClearBuffer();
+
+			util::Log(util::error, "");
+			Assert::AreEqual(std::string("error"), GetSeverityFromEntry(buffer.str()), L"Incorrect error severity level.");
+			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect error message.");
+			ClearBuffer();
+
+			util::Log(util::fatal, "");
+			Assert::AreEqual(std::string("fatal"), GetSeverityFromEntry(buffer.str()), L"Incorrect fatal severity level.");
+			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect fatal message.");
+			ClearBuffer();
 		}
 
 	};
