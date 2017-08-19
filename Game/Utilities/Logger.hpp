@@ -27,7 +27,7 @@ namespace util
 			(*this)(info, "Logger destructed.");
 		}
 
-		void operator()(const severity_level severity, std::string message) const
+		void operator()(const severity_level severity, std::string message) const //TODO: This should be mutexed, I guess.
 		{
 			const char * severity_text;
 			switch (severity)
