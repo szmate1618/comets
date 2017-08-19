@@ -17,14 +17,13 @@ namespace util
 
 		Logger()
 		{
-			std::ios_base::Init initialize_stream;
 			std::ios_base::sync_with_stdio(false);
-			(*this)(info, "Logger initialized with sync_with_stdio(false).");
+			(*this)(info, "Logger instance initialized with sync_with_stdio(false).");
 		}
 
 		~Logger()
 		{
-			(*this)(info, "Logger destructed.");
+			(*this)(info, "Logger instance destructed.");
 		}
 
 		void operator()(const severity_level severity, std::string message) const //TODO: This should be mutexed, I guess.
@@ -45,8 +44,13 @@ namespace util
 				break;
 			}
 			}
-			std::cout << std::time(nullptr) << "\t" << severity_text << "\t" << message << std::endl;
+			std::cout << std::time(nullptr) << "\t" << severity_text << "\t" << message << "\n";
 			std::cout.flush();
+		}
+
+		void operator()(const severity_level severity, const char* message) const
+		{
+			(*this)(severity, std::string(message));
 		}
 
 	};
