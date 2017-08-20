@@ -146,7 +146,7 @@ namespace Test
 			socket.Open(0);
 			Assert::IsTrue(socket.IsOpen(), L"Socket is closed after opening again.");
 			socket.Close();
-			Assert::IsTrue(socket.IsOpen(), L"Socket is open after closing.");
+			Assert::IsFalse(socket.IsOpen(), L"Socket is open after closing.");
 		}
 	};
 
