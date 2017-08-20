@@ -4,6 +4,8 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 */
 #include "Socket.hpp"
 
+#include "../Utilities/Logger.hpp"
+
 #if PLATFORM == PLATFORM_WINDOWS
 #pragma comment( lib, "wsock32.lib" )
 #endif
@@ -40,16 +42,32 @@ namespace net
 
 	bool Socket::Open(unsigned short port)
 	{
-		if (is_open) { Close(); }
-
 		sockaddr_in address;
 		address.sin_family = AF_INET;
 		address.sin_addr.s_addr = INADDR_ANY;
 		address.sin_port = htons(port);
 
-		if (bind(handle, (const sockaddr*)&address, sizeof(sockaddr_in)) < 0)
+		int bind_return = bind(handle, (const sockaddr*)&address, sizeof(sockaddr_in));
+		if (bind_return != 0)
 		{
 			std::cerr << ("Failed to bind socket.\n"); //TODO: Logging?
+			#if PLATFORM == PLATFORM_WINDOWS
+			int errorcode = WSAGetLastError();
+			switch (errorcode)
+			{
+			case WSANOTINITIALISED: { break; }
+			case WSAENETDOWN: { break; }
+			case WSAEACCES: { break; }
+			case WSAEADDRINUSE: { break; }
+			case WSAEADDRNOTAVAIL: { break; }
+			case WSAEFAULT: { break; }
+			case WSAEINPROGRESS: { break; }
+			case WSAEINVAL: { break; }
+			case WSAENOBUFS: { break; }
+			case WSAENOTSOCK: { break; }
+			default: { break; }
+			}
+			#endif
 			return false;
 		}
 		is_open = true;
