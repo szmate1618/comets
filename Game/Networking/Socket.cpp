@@ -4,7 +4,6 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 */
 #include "Socket.hpp"
 
-#include "LogMessages.hpp"
 #include "../Utilities/Logger.hpp"
 
 #if PLATFORM == PLATFORM_WINDOWS
@@ -51,23 +50,8 @@ namespace net
 		int bind_return = bind(handle, (const sockaddr*)&address, sizeof(sockaddr_in));
 		if (bind_return != 0)
 		{
-			util::Log(util::error, socket_bind_fail);
 			#if PLATFORM == PLATFORM_WINDOWS //TODO: Also add Linux error logging/handling.
-			int errorcode = WSAGetLastError();
-			switch (errorcode)
-			{
-			case WSANOTINITIALISED: { util::Log(util::error, WSANOTINITIALISED_text); break; }
-			case WSAENETDOWN: { util::Log(util::fatal, WSAENETDOWN_text); break; }
-			case WSAEACCES: { util::Log(util::error, WSAEACCES_text); break; }
-			case WSAEADDRINUSE: { util::Log(util::error, WSAEADDRINUSE_text); break; }
-			case WSAEADDRNOTAVAIL: { util::Log(util::error, WSAEADDRNOTAVAIL_text); break; }
-			case WSAEFAULT: { util::Log(util::error, WSAEFAULT_text); break; }
-			case WSAEINPROGRESS: { util::Log(util::error, WSAEINPROGRESS_text); break; }
-			case WSAEINVAL: { util::Log(util::error, WSAEINVAL_text); break; }
-			case WSAENOBUFS: { util::Log(util::error, WSAENOBUFS_text); break; }
-			case WSAENOTSOCK: { util::Log(util::error, WSAENOTSOCK_text); break; }
-			default: { util::Log(util::error, unknown_error + std::to_string(errorcode) + "."); break; }
-			}
+			LogBindErrors(WSAGetLastError());
 			#endif
 			return false;
 		}
@@ -131,6 +115,25 @@ namespace net
 	int Socket::Receive(Address& sender) const
 	{
 		return Receive(sender, (void*)recv_buffer, max_packet_size); //TODO: Use static cast?
+	}
+
+	void Socket::LogBindErrors(int errorcode)
+	{
+		util::Log(util::error, socket_bind_fail);
+		switch (errorcode)
+		{
+		case WSANOTINITIALISED: { util::Log(util::error, WSANOTINITIALISED_text); break; }
+		case WSAENETDOWN: { util::Log(util::fatal, WSAENETDOWN_text); break; }
+		case WSAEACCES: { util::Log(util::error, WSAEACCES_text); break; }
+		case WSAEADDRINUSE: { util::Log(util::error, WSAEADDRINUSE_text); break; }
+		case WSAEADDRNOTAVAIL: { util::Log(util::error, WSAEADDRNOTAVAIL_text); break; }
+		case WSAEFAULT: { util::Log(util::error, WSAEFAULT_text); break; }
+		case WSAEINPROGRESS: { util::Log(util::error, WSAEINPROGRESS_text); break; }
+		case WSAEINVAL: { util::Log(util::error, WSAEINVAL_text); break; }
+		case WSAENOBUFS: { util::Log(util::error, WSAENOBUFS_text); break; }
+		case WSAENOTSOCK: { util::Log(util::error, WSAENOTSOCK_text); break; }
+		default: { util::Log(util::error, unknown_error + std::to_string(errorcode) + "."); break; }
+		}
 	}
 
 	void Socket::MaybeInitializeSockets()

@@ -21,6 +21,7 @@
 #endif
 
 #include "Address.hpp"
+#include "LogMessages.hpp"
 
 
 namespace net
@@ -52,6 +53,7 @@ namespace net
 		SOCKET handle;
 		bool is_open;
 
+		void LogBindErrors(int);
 		static void MaybeInitializeSockets(); //Only call this from constructors.
 		static void MaybeCleanupSockets(); //Only call this from destructors.
 		static int sockets_in_scope;
