@@ -53,7 +53,7 @@ namespace net
 		SOCKET handle;
 		bool is_open;
 
-		void LogBindErrors(int);
+		void LogBindErrors(int) const;
 		static void MaybeInitializeSockets(); //Only call this from constructors.
 		static void MaybeCleanupSockets(); //Only call this from destructors.
 		static int sockets_in_scope;

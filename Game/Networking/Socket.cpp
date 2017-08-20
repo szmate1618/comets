@@ -117,7 +117,7 @@ namespace net
 		return Receive(sender, (void*)recv_buffer, max_packet_size); //TODO: Use static cast?
 	}
 
-	void Socket::LogBindErrors(int errorcode)
+	void Socket::LogBindErrors(int errorcode) const
 	{
 		util::Log(util::error, socket_bind_fail);
 		switch (errorcode)
