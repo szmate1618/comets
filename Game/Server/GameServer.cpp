@@ -4,7 +4,7 @@
 namespace server
 {
 
-	GameServer::GameServer(): running(true)
+	GameServer::GameServer() : running{ true }
 	{
 	}
 
