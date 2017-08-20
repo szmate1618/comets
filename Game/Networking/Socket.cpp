@@ -4,6 +4,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 */
 #include "Socket.hpp"
 
+#include "LogMessages.hpp"
 #include "../Utilities/Logger.hpp"
 
 #if PLATFORM == PLATFORM_WINDOWS
@@ -50,22 +51,22 @@ namespace net
 		int bind_return = bind(handle, (const sockaddr*)&address, sizeof(sockaddr_in));
 		if (bind_return != 0)
 		{
-			util::Log(util::error, "Failed to bind socket. See the details below then consult the manual of your socket library.");
+			util::Log(util::error, socket_bind_fail);
 			#if PLATFORM == PLATFORM_WINDOWS //TODO: Also add Linux error logging/handling.
 			int errorcode = WSAGetLastError();
 			switch (errorcode)
 			{
-			case WSANOTINITIALISED: { util::Log(util::error, "WSANOTINITIALISED: A successful WSAStartup call must occur before using this function."); break; }
-			case WSAENETDOWN: { util::Log(util::fatal, "WSAENETDOWN: The network subsystem has failed."); break; }
-			case WSAEACCES: { util::Log(util::error, " WSAEACCES: An attempt was made to access a socket in a way forbidden by its access permissions."); break; }
-			case WSAEADDRINUSE: { util::Log(util::error, "WSAEADDRINUSE: Only one usage of each socket address (protocol/network address/port) is normally permitted."); break; }
-			case WSAEADDRNOTAVAIL: { util::Log(util::error, "WSAEADDRNOTAVAIL: The requested address is not valid in its context."); break; }
-			case WSAEFAULT: { util::Log(util::error, "WSAEFAULT: The system detected an invalid pointer address in attempting to use a pointer argument in a call."); break; }
-			case WSAEINPROGRESS: { util::Log(util::error, "WSAEINPROGRESS: A blocking Windows Sockets 1.1 call is in progress, or the service provider is still processing a callback function."); break; }
-			case WSAEINVAL: { util::Log(util::error, "WSAEINVAL: An invalid argument was supplied. This error is returned of the socket s is already bound to an address."); break; }
-			case WSAENOBUFS: { util::Log(util::error, "WSAENOBUFS: An operation on a socket could not be performed because the system lacked sufficient buffer space or because a queue was full."); break; }
-			case WSAENOTSOCK: { util::Log(util::error, "WSAENOTSOCK: An operation was attempted on something that is not a socket. Did you try to bind a closed one?"); break; }
-			default: { util::Log(util::error, "Sorry, this errorcode is totally unknown. Its numerical value is " + std::to_string(errorcode) + "."); break; }
+			case WSANOTINITIALISED: { util::Log(util::error, WSANOTINITIALISED_text); break; }
+			case WSAENETDOWN: { util::Log(util::fatal, WSAENETDOWN_text); break; }
+			case WSAEACCES: { util::Log(util::error, WSAEACCES_text); break; }
+			case WSAEADDRINUSE: { util::Log(util::error, WSAEADDRINUSE_text); break; }
+			case WSAEADDRNOTAVAIL: { util::Log(util::error, WSAEADDRNOTAVAIL_text); break; }
+			case WSAEFAULT: { util::Log(util::error, WSAEFAULT_text); break; }
+			case WSAEINPROGRESS: { util::Log(util::error, WSAEINPROGRESS_text); break; }
+			case WSAEINVAL: { util::Log(util::error, WSAEINVAL_text); break; }
+			case WSAENOBUFS: { util::Log(util::error, WSAENOBUFS_text); break; }
+			case WSAENOTSOCK: { util::Log(util::error, WSAENOTSOCK_text); break; }
+			default: { util::Log(util::error, unknown_error + std::to_string(errorcode) + "."); break; }
 			}
 			#endif
 			return false;
