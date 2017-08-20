@@ -123,6 +123,7 @@
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />
   </ItemGroup>
