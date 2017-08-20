@@ -31,12 +31,12 @@ namespace util
 			const char * severity_text;
 			switch (severity)
 			{
-			case trace: {severity_text = "trace"; break; }
-			case debug: {severity_text = "debug"; break; }
-			case info: {severity_text = "info_"; break; }
-			case warn: {severity_text = "warn_"; break; }
-			case error: {severity_text = "error"; break; }
-			case fatal: {severity_text = "fatal"; break; }
+			case trace: { severity_text = "trace"; break; }
+			case debug: { severity_text = "debug"; break; }
+			case info: { severity_text = "info_"; break; }
+			case warn: { severity_text = "warn_"; break; }
+			case error: { severity_text = "error"; break; }
+			case fatal: { severity_text = "fatal"; break; }
 			default:
 			{
 				severity_text = "?????";
