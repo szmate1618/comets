@@ -48,12 +48,15 @@ namespace net
 
 		char recv_buffer[max_packet_size];
 
+	protected:
+
+		void LogBindErrors(int) const;
+
 	private:
 
 		SOCKET handle;
 		bool is_open;
 
-		void LogBindErrors(int) const;
 		static void MaybeInitializeSockets(); //Only call this from constructors.
 		static void MaybeCleanupSockets(); //Only call this from destructors.
 		static int sockets_in_scope;

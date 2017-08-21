@@ -5,13 +5,14 @@
 
 #include <string>
 #include <regex>
+#include <thread>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Test
 {
-
+	
 	TEST_CLASS(Socket)
 	{
 
@@ -104,6 +105,27 @@ namespace Test
 			Assert::AreEqual(std::string("fatal"), GetSeverityFromEntry(buffer.str()), L"Incorrect fatal severity level.");
 			Assert::AreEqual(std::string("\n"), GetMessageFromEntry(buffer.str()), L"Incorrect fatal message.");
 			ClearBuffer();
+		}
+
+		TEST_METHOD(MultiThreadedLogging)
+		{
+			auto lambda = [](util::severity_level s, std::string m)  { util::Log(s, m); };
+			std::thread threads[10];
+			std::string messages[10];
+			for (int i = 0; i < 10; ++i)
+			{
+				std::string message = std::to_string(i) + std::to_string(i) + std::to_string(i) + std::to_string(i) + std::to_string(i) + std::to_string(i);
+				messages[i] = message;
+				threads[i] = std::thread{ lambda, util::debug, message };
+			}
+			for (int i = 0; i < 10; ++i)
+			{
+				threads[i].join();
+			}
+			for (int i = 0; i < 10; ++i)
+			{
+				Assert::AreEqual(messages[i], buffer.str().substr(17 + i * 24, 6));
+			}
 		}
 
 	};

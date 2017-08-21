@@ -5,6 +5,8 @@
 
 #include <chrono>
 #include <thread>
+#include <map>
+#include <iostream>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -147,6 +149,34 @@ namespace Test
 			Assert::IsTrue(socket.IsOpen(), L"Socket is closed after opening again.");
 			socket.Close();
 			Assert::IsFalse(socket.IsOpen(), L"Socket is open after closing.");
+		}
+
+		TEST_METHOD(BindErrors)
+		{
+			class MySocket: net::Socket { public: void MyLogBindErrors(int e) { LogBindErrors(e); } } s;
+			std::map<int, const char*> errortexts = 
+			{
+				{WSANOTINITIALISED, "WSANOTINITIALISED"},
+				{WSAENETDOWN, "WSAENETDOWN"},
+				{WSAEACCES, "WSAEACCES"},
+				{WSAEADDRINUSE, "WSAEADDRINUSE"},
+				{WSAEADDRNOTAVAIL, "WSAEADDRNOTAVAIL"},
+				{WSAEFAULT, "WSAEFAULT"},
+				{WSAEINPROGRESS, "WSAEINPROGRESS"},
+				{WSAEINVAL, "WSAEINVAL"},
+				{WSAENOBUFS, "WSAENOBUFS" },
+				{WSAENOTSOCK, "WSAENOTSOCK"}
+			};
+			std::stringstream buffer; //We redirect cout into this buffer.
+			std::streambuf * old = std::cout.rdbuf(buffer.rdbuf());
+			for (auto entry : errortexts)
+			{
+				s.MyLogBindErrors(entry.first);
+				Assert::AreEqual({ entry.second }, buffer.str().substr(buffer.str().find('\n') + 18, std::strlen(entry.second)));
+				buffer.str("");
+				buffer.clear();
+			}
+			std::cout.rdbuf(old); //Restore original stdout target.
 		}
 	};
 

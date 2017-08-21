@@ -11,7 +11,7 @@ namespace net
 
 	static const char* const WSANOTINITIALISED_text = "WSANOTINITIALISED: A successful WSAStartup call must occur before using this function.";
 	static const char* const WSAENETDOWN_text = "WSAENETDOWN: The network subsystem has failed.";
-	static const char* const WSAEACCES_text = " WSAEACCES: An attempt was made to access a socket in a way forbidden by its access permissions.";
+	static const char* const WSAEACCES_text = "WSAEACCES: An attempt was made to access a socket in a way forbidden by its access permissions.";
 	static const char* const WSAEADDRINUSE_text = "WSAEADDRINUSE: Only one usage of each socket address (protocol/network address/port) is normally permitted.";
 	static const char* const WSAEADDRNOTAVAIL_text = "WSAEADDRNOTAVAIL: The requested address is not valid in its context.";
 	static const char* const WSAEFAULT_text = "WSAEFAULT: The system detected an invalid pointer address in attempting to use a pointer argument in a call.";

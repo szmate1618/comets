@@ -132,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
-    <ClCompile Include="LogMessages.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Socket.cpp" />
   </ItemGroup>
