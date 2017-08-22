@@ -23,6 +23,7 @@ namespace net
 	{
 		MaybeInitializeSockets();
 		handle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+		AssertAndLog(handle > 0);
 
 		#if PLATFORM == PLATFORM_MAC || PLATFORM == PLATFORM_UNIX
 		int nonBlocking = 1;
@@ -31,7 +32,7 @@ namespace net
 		DWORD nonBlocking = 1;
 		bool blocking = ioctlsocket(handle, FIONBIO, &nonBlocking);
 		#endif
-		assert(!blocking && "Faied to set non-blocking mode.");
+		AssertAndLog(!blocking);
 	}
 
 	Socket::~Socket()
@@ -40,7 +41,7 @@ namespace net
 		MaybeCleanupSockets();
 	}
 
-	bool Socket::Open(unsigned short port)
+	void Socket::Open(unsigned short port)
 	{
 		sockaddr_in address;
 		address.sin_family = AF_INET;
@@ -48,15 +49,8 @@ namespace net
 		address.sin_port = htons(port);
 
 		int bind_return = bind(handle, (const sockaddr*)&address, sizeof(sockaddr_in));
-		if (bind_return != 0)
-		{
-			#if PLATFORM == PLATFORM_WINDOWS //TODO: Also add Linux error logging/handling.
-			LogBindErrors(WSAGetLastError());
-			#endif
-			return false;
-		}
+		AssertAndLog(bind_return == 0);
 		is_open = true;
-		return true;
 	}
 
 	void Socket::Close()
@@ -87,7 +81,7 @@ namespace net
 
 		if (sent_bytes != packet_size)
 		{
-			std::cerr << ("Failed to send packet.\n"); //TODO: Logging?
+			util::Log(util::error, packet_send_fail);
 			return false;
 		}
 		return true;
@@ -117,7 +111,7 @@ namespace net
 		return Receive(sender, (void*)recv_buffer, max_packet_size); //TODO: Use static cast?
 	}
 
-	void Socket::LogBindErrors(int errorcode) const
+	void Socket::LogNetworkErrors(int errorcode) const
 	{
 		util::Log(util::error, socket_bind_fail);
 		switch (errorcode)
@@ -132,7 +126,22 @@ namespace net
 		case WSAEINVAL: { util::Log(util::error, WSAEINVAL_text); break; }
 		case WSAENOBUFS: { util::Log(util::error, WSAENOBUFS_text); break; }
 		case WSAENOTSOCK: { util::Log(util::error, WSAENOTSOCK_text); break; }
-		default: { util::Log(util::error, unknown_error + std::to_string(errorcode) + "."); break; }
+		default: { util::Log(util::error, unregistered_error + std::to_string(errorcode) + "."); break; }
+		}
+	}
+
+
+	void Socket::AssertAndLog(bool success) const
+	{
+		if (!success)
+		{
+			#if PLATFORM == PLATFORM_MAC || PLATFORM == PLATFORM_UNIX
+			int errorcode = errno; //TODO: errno.h is not included.
+			#elif PLATFORM == PLATFORM_WINDOWS
+			int errorcode = WSAGetLastError();
+			#endif
+			LogNetworkErrors(errorcode);
+			assert(false);
 		}
 	}
 

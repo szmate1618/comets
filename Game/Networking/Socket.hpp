@@ -39,7 +39,7 @@ namespace net
 
 		Socket();
 		~Socket();
-		bool Open(unsigned short);
+		void Open(unsigned short);
 		void Close();
 		bool IsOpen() const;
 		bool Send(const Address&, const void*, int) const;
@@ -48,11 +48,13 @@ namespace net
 
 		char recv_buffer[max_packet_size];
 
-	protected:
+	protected: //TODO: Maybe making the test class its friend would be a better solution.
 
-		void LogBindErrors(int) const;
+		void LogNetworkErrors(int) const;
 
 	private:
+
+		void AssertAndLog(bool failure) const;
 
 		SOCKET handle;
 		bool is_open;
