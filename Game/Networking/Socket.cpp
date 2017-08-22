@@ -35,6 +35,11 @@ namespace net
 		AssertAndLog(!blocking);
 	}
 
+	Socket::Socket(unsigned short port) : Socket{}
+	{
+		Open(port);
+	}
+
 	Socket::~Socket()
 	{
 		Close();
@@ -111,7 +116,7 @@ namespace net
 		return Receive(sender, (void*)recv_buffer, max_packet_size); //TODO: Use static cast?
 	}
 
-	void Socket::LogNetworkErrors(int errorcode) const
+	void Socket::LogNetworkErrors(int errorcode)
 	{
 		util::Log(util::error, socket_bind_fail);
 		switch (errorcode)
@@ -131,7 +136,7 @@ namespace net
 	}
 
 
-	void Socket::AssertAndLog(bool success) const
+	void Socket::AssertAndLog(bool success)
 	{
 		if (!success)
 		{
@@ -145,9 +150,20 @@ namespace net
 		}
 	}
 
+
+
+	void Socket::AssertAndLog(bool success, const char* logmessage)
+	{
+		if (!success)
+		{
+			util::Log(util::fatal, logmessage);
+			assert(false);
+		}
+	}
+
 	void Socket::MaybeInitializeSockets()
 	{
-		assert(sockets_in_scope >= 0 && "Number of socket objects is less than 0. A concurreny error, maybe?");
+		AssertAndLog(sockets_in_scope >= 0, socket_count_error);
 		if (sockets_in_scope++ != 0) return;
 
 		#if PLATFORM == PLATFORM_WINDOWS

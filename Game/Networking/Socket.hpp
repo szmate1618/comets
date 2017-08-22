@@ -38,6 +38,7 @@ namespace net
 	public:
 
 		Socket();
+		Socket(unsigned short);
 		~Socket();
 		void Open(unsigned short);
 		void Close();
@@ -50,15 +51,15 @@ namespace net
 
 	protected: //TODO: Maybe making the test class its friend would be a better solution.
 
-		void LogNetworkErrors(int) const;
+		static void LogNetworkErrors(int);
 
 	private:
-
-		void AssertAndLog(bool failure) const;
 
 		SOCKET handle;
 		bool is_open;
 
+		static void AssertAndLog(bool);
+		static void AssertAndLog(bool, const char*);
 		static void MaybeInitializeSockets(); //Only call this from constructors.
 		static void MaybeCleanupSockets(); //Only call this from destructors.
 		static int sockets_in_scope;
