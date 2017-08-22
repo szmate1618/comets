@@ -139,7 +139,9 @@ namespace Test
 			Assert::AreNotEqual(-1, bytes_read, L"Error: failed to succeed.");
 		}
 
-		TEST_METHOD(OpenClose)
+		//Apparently what I was trying here is simply not possible:
+		//https://stackoverflow.com/questions/12714922/how-to-re-bind-a-udp-socket-in-linux
+		/*TEST_METHOD(OpenClose)
 		{
 			net::Socket socket;
 			Assert::IsFalse(socket.IsOpen(), L"Socket is open before opening.");
@@ -149,11 +151,11 @@ namespace Test
 			Assert::IsTrue(socket.IsOpen(), L"Socket is closed after opening again.");
 			socket.Close();
 			Assert::IsFalse(socket.IsOpen(), L"Socket is open after closing.");
-		}
+		}*/
 
-		TEST_METHOD(BindErrors)
+		TEST_METHOD(LogErrors)
 		{
-			class MySocket: net::Socket { public: void MyLogBindErrors(int e) { LogBindErrors(e); } } s;
+			class MySocket: net::Socket { public: void MyLogBindErrors(int e) { LogNetworkErrors(e); } } s;
 			std::map<int, const char*> errortexts = 
 			{
 				{WSANOTINITIALISED, "WSANOTINITIALISED"},
