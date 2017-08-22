@@ -18,6 +18,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "Utilities\Utilities.vcxproj", "{D514D115-835C-488B-BE29-970C2CC0F2E0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Networking", "Networking\Networking.vcxproj", "{4E5D9065-F9DE-441C-9590-41ECD764479F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D514D115-835C-488B-BE29-970C2CC0F2E0} = {D514D115-835C-488B-BE29-970C2CC0F2E0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
