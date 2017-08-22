@@ -29,7 +29,7 @@ namespace Test
 
 	public:
 		
-		TEST_METHOD(TestInsertAndRetrieve)
+		TEST_METHOD(InsertAndRetrieve)
 		{
 			entity::SimplePartitioner partitioner;
 

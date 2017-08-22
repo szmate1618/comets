@@ -15,7 +15,7 @@ namespace Test
 	{
 	public:
 		
-		TEST_METHOD(TestAdditionSubtraction)
+		TEST_METHOD(AdditionSubtraction)
 		{
 			geo::point_2d O = {0, 0};
 			geo::point_2d p1 = {1.23456789, 1.23456789};
@@ -27,7 +27,7 @@ namespace Test
 			Assert::IsTrue(geo::equals(p1, geo::sub(geo::add(p1, p3), p3)), L"Addition and subtractions should be the inverses of each other.");
 		}
 				
-		TEST_METHOD(TestMul)
+		TEST_METHOD(Mul)
 		{
 			geo::point_2d O = {0, 0};
 			geo::point_2d p1 = {1.23456789, 1.23456789};
@@ -36,7 +36,7 @@ namespace Test
 			Assert::IsTrue(geo::equals(O, geo::add(p1, geo::mul(p1, -1))), L"Inverting failed.");
 		}
 			
-		TEST_METHOD(TestRotation)
+		TEST_METHOD(Rotation)
 		{
 			geo::point_2d O = {0, 0};
 			geo::point_2d _1 = {1, 0};
@@ -53,7 +53,7 @@ namespace Test
 			Assert::IsTrue(geo::equals(rotated_p1, p1), L"Mutable and immutable rotations provide different results.");
 		}
 			
-		TEST_METHOD(TestTriangleBounds)
+		TEST_METHOD(TriangleBounds)
 		{
 			geo::point_2d a = {0, 0};
 			geo::point_2d b = {2, -1};
@@ -71,7 +71,7 @@ namespace Test
 			Assert::AreEqual(1.0, f.maxy, L"Failed to find maximal y coordinate of frame.");
 		}
 			
-		TEST_METHOD(TestInfinitesimalTriangleBounds)
+		TEST_METHOD(InfinitesimalTriangleBounds)
 		{
 			geo::point_2d a = {0, 0};
 			geo::triangle t = {a, a, a};
@@ -87,7 +87,7 @@ namespace Test
 			Assert::AreEqual(0.0, f.maxy, L"Failed to find maximal y coordinate of infinitesimal frame.");
 		}
 
-		TEST_METHOD(TestTriangleBoundsRandom)
+		TEST_METHOD(TriangleBoundsRandom)
 		{
 			srand(666);
 			for (int i = 0; i < 15; i++)
@@ -114,7 +114,7 @@ namespace Test
 			}
 		}
 		
-        TEST_METHOD(TestInTriangleRandom)
+        TEST_METHOD(InTriangleRandom)
         {
             srand(1337);
 
@@ -130,7 +130,7 @@ namespace Test
             }
         }
 		
-        TEST_METHOD(TestInFrameRandom)
+        TEST_METHOD(InFrameRandom)
         {
             srand(1337);
 
@@ -148,7 +148,7 @@ namespace Test
             }
         }
 
-        TEST_METHOD(TestVectorProducts)
+        TEST_METHOD(VectorProducts)
         {
 			//vector_2d is just and alias for point_2d
 			geo::vector_2d v1 = {1, 0};
@@ -165,7 +165,7 @@ namespace Test
 			Assert::AreEqual(0.0, geo::length_cross(v5, v6), L"Cross product of parallel vectors should be 0.");
 		}
 		
-		TEST_METHOD(TestInHexagon)
+		TEST_METHOD(InHexagon)
 		{
 			geo::point_2d hexa[] = {{1, 0}, {0.5, 0.866}, {-0.5, 0.866}, {-1, 0}, {-0.5, -0.866}, {0.5, -0.866}};
 
@@ -190,7 +190,7 @@ namespace Test
 			Assert::IsTrue(in_convex_hexagon, L"Problem with detecting point inside of 4th triangle slice.");
 		}
 
-		TEST_METHOD(TestInHexagonRandom)
+		TEST_METHOD(InHexagonRandom)
 		{
 			srand(6);
 			for (int i = 0; i < 20; i++)
@@ -231,7 +231,7 @@ find_convex_hexa:
 						geo::is_inside(hexa[0], hexa[3], hexa[4], p) ||
 						geo::is_inside(hexa[0], hexa[4], hexa[5], p);
 					bool in_convex_hexagon = geo::is_inside_convex(hexa[0], hexa[1], hexa[2], hexa[3], hexa[4], hexa[5], p);
-					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry");
+					Assert::AreEqual(in_a_triangle, in_convex_hexagon, L"There's something wrong here, sorry.");
 				}
 			}
 		}

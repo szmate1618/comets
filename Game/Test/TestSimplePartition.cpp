@@ -29,7 +29,7 @@ namespace Test
 
 	public:
 
-		TEST_METHOD(TestFill)
+		TEST_METHOD(Fill)
 		{
 			const long n = 10000;
 			assert(n >= entity::SimplePartition::getCapacity()); //Make sure we generate enough elements to fill the full capacity.
@@ -51,7 +51,7 @@ namespace Test
 			}
 		}
 
-		TEST_METHOD(TestNestedLoops)
+		TEST_METHOD(NestedLoops)
 		{
 			long numbers[] = {1, 2};
 			entity::SimplePartition partition;
@@ -68,7 +68,7 @@ namespace Test
 			Assert::AreEqual(11122122L, accumulator, L"Apparently things got tangled up in this nested iteration.");
 		}
 
-		TEST_METHOD(TestNestedLoopsWithContinue)
+		TEST_METHOD(NestedLoopsWithContinue)
 		{
 			long numbers[] = {1, 2, 3};
 			entity::SimplePartition partition;
