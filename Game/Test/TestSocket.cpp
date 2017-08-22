@@ -180,6 +180,7 @@ namespace Test
 			}
 			std::cout.rdbuf(old); //Restore original stdout target.
 		}
+
 	};
 
 }
