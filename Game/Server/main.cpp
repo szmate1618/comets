@@ -4,7 +4,7 @@
 
 int main()
 {
-	server::AbstractServer* gameserver = &server::GameServer();
+	server::AbstractServer* gameserver = &server::GameServer{};
 	
 	volatile bool running = true;
 
