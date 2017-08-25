@@ -10,7 +10,7 @@ namespace server
 
 	using tick = std::chrono::duration<double, std::ratio<1, 90>>;
 
-	class GameServer: public AbstractServer
+	class GameServer : public AbstractServer
 	{
 	public:
 
