@@ -8,7 +8,7 @@
 namespace server
 {
 
-
+	using tick = std::chrono::duration<double, std::ratio<1, 90>>;
 
 	class GameServer: public AbstractServer
 	{
@@ -16,7 +16,7 @@ namespace server
 
 		GameServer();
 		virtual ~GameServer() override;
-		virtual void MainLoop() override;
+		virtual void Tick(std::chrono::duration<double>) override;
 		virtual bool Running() override;
 
 	private:
@@ -26,7 +26,7 @@ namespace server
 		void ReadPackets();
 		void ProcessPackets();
 		void TestCollisions();
-		void UpdateState();
+		void UpdateState(std::chrono::duration<double>);
 		void SendPackets();
 	};
 

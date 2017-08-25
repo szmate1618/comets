@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 namespace server
 {
 
@@ -9,7 +11,7 @@ namespace server
 
 		AbstractServer();
 		virtual ~AbstractServer();
-		virtual void MainLoop() = 0;
+		virtual void Tick(std::chrono::duration<double>) = 0;
 		virtual bool Running() = 0;
 
 	private:

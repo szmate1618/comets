@@ -12,12 +12,12 @@ namespace server
 	{
 	}
 
-	void GameServer::MainLoop()
+	void GameServer::Tick(std::chrono::duration<double> duration)
 	{
 		ReadPackets();
 		ProcessPackets();
 		TestCollisions();
-		UpdateState();
+		UpdateState(duration);
 		SendPackets();
 	}
 
@@ -38,7 +38,7 @@ namespace server
 	{
 	}
 
-	void GameServer::UpdateState()
+	void GameServer::UpdateState(std::chrono::duration<double> duration)
 	{
 	}
 
