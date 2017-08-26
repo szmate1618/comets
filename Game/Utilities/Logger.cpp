@@ -19,6 +19,8 @@ namespace util
 
 	void Logger::operator()(const severity_level severity, std::string message) const //TODO: This should be mutexed, I guess.
 	{
+		std::lock_guard<std::mutex> lock{ static_cout_lock };
+
 		const char * severity_text;
 		switch (severity)
 		{

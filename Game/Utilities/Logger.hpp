@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <mutex>
 
 
 namespace util
@@ -19,6 +20,10 @@ namespace util
 		~Logger();
 		void operator()(const severity_level, std::string) const;
 		void operator()(const severity_level, const char*) const;
+
+	private:
+
+		mutable std::mutex static_cout_lock;
 
 	};
 
