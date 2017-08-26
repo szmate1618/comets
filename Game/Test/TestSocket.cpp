@@ -181,6 +181,16 @@ namespace Test
 			std::cout.rdbuf(old); //Restore original stdout target.
 		}
 
+		TEST_METHOD(NonBlockingMode)
+		{
+			net::Socket socket{ 0 };
+
+			net::Address from;
+			char buffer[10];
+			int bytes_read = socket.Receive(from, buffer, sizeof(buffer));
+			//If this hangs indefinitely, the socket is still in blocking mode.
+		}
+
 	};
 
 }
