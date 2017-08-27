@@ -129,6 +129,7 @@
     <ClInclude Include="Address.hpp" />
     <ClInclude Include="Connection.hpp" />
     <ClInclude Include="LogMessages.hpp" />
+    <ClInclude Include="Packets.hpp" />
     <ClInclude Include="Socket.hpp" />
   </ItemGroup>
   <ItemGroup>
