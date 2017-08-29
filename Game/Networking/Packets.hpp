@@ -5,6 +5,7 @@
 #include <cstdint>
 
 
+//TODO: Refactor this into hpp+cpp.
 namespace net
 {
 
