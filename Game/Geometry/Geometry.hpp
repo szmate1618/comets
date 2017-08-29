@@ -6,8 +6,10 @@
 namespace geo
 {
 
+	constexpr double PI = 3.14159265358979323846;
+
 	typedef double real;
-	const real epsilon = 0.0005;
+	constexpr real epsilon = 0.0005;
 
 	struct point_2d { real x; real y; };
 
