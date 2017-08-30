@@ -23,7 +23,7 @@ namespace util
 
 	private:
 
-		mutable std::mutex static_cout_lock;
+		mutable std::mutex static_cout_lock; //TODO: Investigate why I can't declare this as static. Allegedly it's a bug in MSVC's constexpr constructor implementation.
 
 	};
 

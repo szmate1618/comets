@@ -17,7 +17,7 @@ namespace util
 		(*this)(info, "Logger instance destructed.");
 	}
 
-	void Logger::operator()(const severity_level severity, std::string message) const //TODO: This should be mutexed, I guess.
+	void Logger::operator()(const severity_level severity, std::string message) const
 	{
 		std::lock_guard<std::mutex> lock{ static_cout_lock };
 
