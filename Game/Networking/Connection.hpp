@@ -15,7 +15,7 @@ namespace net
 
 	public:
 
-		Connection(Address, def::time);
+		Connection(const Address&, def::time);
 		Connection();
 		~Connection();
 		bool Update(def::time);

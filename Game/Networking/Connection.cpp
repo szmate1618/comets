@@ -4,7 +4,7 @@
 namespace net
 {
 
-	Connection::Connection(Address address, def::time duration) : address{ address }, countdown{ duration }
+	Connection::Connection(const Address& address, def::time duration) : address{ address }, countdown{ duration }
 	{
 
 	}
