@@ -129,6 +129,7 @@
     <ClInclude Include="Address.hpp" />
     <ClInclude Include="BinarySerialization.hpp" />
     <ClInclude Include="Connection.hpp" />
+    <ClInclude Include="ConnectionManager.hpp" />
     <ClInclude Include="LogMessages.hpp" />
     <ClInclude Include="Packets.hpp" />
     <ClInclude Include="Protocol.hpp" />

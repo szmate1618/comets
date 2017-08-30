@@ -36,6 +36,9 @@
     <ClInclude Include="Protocol.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConnectionManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp">
