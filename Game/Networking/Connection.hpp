@@ -16,16 +16,15 @@ namespace net
 	public:
 
 		Connection(Address, def::time);
-		Connection() = delete;
+		Connection();
 		~Connection();
 		bool Update(def::time);
-
 
 		const Address address;
 
 	private:
 
-		std::chrono::duration<double> countdown;
+		def::time countdown;
 
 	};
 

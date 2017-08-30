@@ -9,6 +9,11 @@ namespace net
 
 	}
 
+	Connection::Connection()
+	{
+
+	}
+
 	Connection::~Connection()
 	{
 
