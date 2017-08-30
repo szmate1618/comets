@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Address.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <chrono>
 
@@ -14,10 +15,10 @@ namespace net
 
 	public:
 
-		Connection(Address, std::chrono::duration<double>);
+		Connection(Address, def::time);
 		Connection() = delete;
 		~Connection();
-		bool Update(std::chrono::duration<double>);
+		bool Update(def::time);
 
 
 		const Address address;

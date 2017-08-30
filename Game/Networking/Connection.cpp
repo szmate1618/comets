@@ -4,7 +4,7 @@
 namespace net
 {
 
-	Connection::Connection(Address address, std::chrono::duration<double> duration) : address{ address }, countdown{ duration }
+	Connection::Connection(Address address, def::time duration) : address{ address }, countdown{ duration }
 	{
 
 	}
@@ -14,7 +14,7 @@ namespace net
 
 	}
 
-	bool Connection::Update(std::chrono::duration<double> duration)
+	bool Connection::Update(def::time duration)
 	{
 		using namespace std::chrono_literals;
 		countdown -= duration;

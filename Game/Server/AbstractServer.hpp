@@ -1,5 +1,7 @@
 #pragma once
 
+#include "..\Definitions\TimeAndNetwork.hpp"
+
 #include <chrono>
 
 
@@ -12,7 +14,7 @@ namespace server
 
 		AbstractServer();
 		virtual ~AbstractServer();
-		virtual void Tick(std::chrono::duration<double>) = 0;
+		virtual void Tick(def::time) = 0;
 		virtual bool Running() = 0;
 
 	private:

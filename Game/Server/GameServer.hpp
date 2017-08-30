@@ -16,7 +16,7 @@ namespace server
 
 		GameServer();
 		virtual ~GameServer() override;
-		virtual void Tick(std::chrono::duration<double>) override;
+		virtual void Tick(def::time) override;
 		virtual bool Running() override;
 
 	private:
@@ -26,7 +26,7 @@ namespace server
 		void ReadPackets();
 		void ProcessPackets();
 		void TestCollisions();
-		void UpdateState(std::chrono::duration<double>);
+		void UpdateState(def::time);
 		void SendPackets();
 	};
 
