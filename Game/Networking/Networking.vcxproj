@@ -131,6 +131,7 @@
     <ClInclude Include="Connection.hpp" />
     <ClInclude Include="LogMessages.hpp" />
     <ClInclude Include="Packets.hpp" />
+    <ClInclude Include="Protocol.hpp" />
     <ClInclude Include="Socket.hpp" />
   </ItemGroup>
   <ItemGroup>
