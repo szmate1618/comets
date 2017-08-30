@@ -18,6 +18,7 @@ namespace net
 			unsigned short
 		);
 		Address(unsigned int, unsigned short);
+		bool operator==(const Address& other) const;
 		unsigned int GetAddress() const;
 		unsigned char GetA() const;
 		unsigned char GetB() const;

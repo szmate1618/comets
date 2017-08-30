@@ -16,6 +16,8 @@ namespace net {
 
 	Address::Address(unsigned int address, unsigned short port) : address{ address }, port{ port } {}
 
+	bool Address::operator==(const Address& other) const { return address == other.address; }
+
 	unsigned int Address::GetAddress() const { return address; }
 
 	unsigned char Address::GetA() const { return unsigned char((address & (255 << 24)) >> 24); }
