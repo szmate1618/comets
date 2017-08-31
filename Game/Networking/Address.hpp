@@ -20,6 +20,7 @@ namespace net
 		Address(unsigned int, unsigned short);
 		Address(const Address&) = default;
 		bool operator==(const Address&) const;
+		Address& operator=(const Address&) = default;
 		unsigned int GetAddress() const;
 		unsigned char GetA() const;
 		unsigned char GetB() const;
