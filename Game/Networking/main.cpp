@@ -13,7 +13,7 @@ int main()
 	uint32_t h = 7;
 	net::hton(h);
 	using namespace net;
-	auto hjk = 10ms;
+//	auto hjk = 10ms;
 
 	std::getchar();
 }

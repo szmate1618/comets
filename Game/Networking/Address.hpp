@@ -8,7 +8,7 @@ namespace net
 	{
 	public:
 
-		Address();
+		Address() = default;
 		Address
 		(
 			unsigned int,
@@ -18,7 +18,8 @@ namespace net
 			unsigned short
 		);
 		Address(unsigned int, unsigned short);
-		bool operator==(const Address& other) const;
+		Address(const Address&) = default;
+		bool operator==(const Address&) const;
 		unsigned int GetAddress() const;
 		unsigned char GetA() const;
 		unsigned char GetB() const;
