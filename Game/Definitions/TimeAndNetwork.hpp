@@ -15,4 +15,6 @@ namespace def
 	static constexpr time server_rate = server_tick(1);
 	static constexpr time client_rate = server_tick(2);
 
+	using user_id = int;
+
 }

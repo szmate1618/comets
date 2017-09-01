@@ -157,7 +157,7 @@ namespace net
 		virtual ~AbstractExportStrategy() {};
 
 		virtual void Export(ServerStatePacket) = 0;
-		virtual void Export(UserInputPacket) = 0;
+		virtual void Export(def::user_id, UserInputPacket) = 0;
 	};
 
 }
