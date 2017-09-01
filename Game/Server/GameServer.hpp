@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractServer.hpp"
+#include "..\Networking\Protocol.hpp"
 
 #include <chrono>
 
