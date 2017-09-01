@@ -149,4 +149,15 @@ namespace net
 		}
 	};
 
+	class AbstractExportStrategy
+	{
+	public:
+
+		AbstractExportStrategy() {};
+		virtual ~AbstractExportStrategy() {};
+
+		virtual void Export(ServerStatePacket) = 0;
+		virtual void Export(UserInputPacket) = 0;
+	};
+
 }
