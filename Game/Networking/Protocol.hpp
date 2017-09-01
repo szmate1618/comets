@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Packets.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
+
 #include <chrono>
 
 
@@ -14,8 +17,12 @@ namespace net
 
 	public:
 
-		ClientsideProtocol();
+		ClientsideProtocol(AbstractExportStrategy);
+		ClientsideProtocol() = delete;
 		~ClientsideProtocol();
+
+		void ReadAndExportPackets();
+		void UpdateState(def::time);
 
 	};
 
@@ -23,8 +30,12 @@ namespace net
 	{
 	public:
 
-		ServersideProtocol();
+		ServersideProtocol(AbstractExportStrategy);
+		ServersideProtocol() = delete;
 		~ServersideProtocol();
+
+		void ReadAndExportPackets();
+		void UpdateState(def::time);
 
 	};
 
