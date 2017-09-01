@@ -14,7 +14,7 @@ namespace server
 
 	void GameServer::Tick(def::time duration)
 	{
-		ReadPackets();
+		ReadPackets(); //TODO: This should run a in a separate thread.
 		ProcessPackets();
 		TestCollisions();
 		UpdateState(duration);
