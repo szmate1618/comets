@@ -28,6 +28,8 @@ namespace server
 
 	void GameServer::ReadPackets()
 	{
+		using namespace std::chrono_literals;
+		def::time backoff = 0s;
 	}
 
 	void GameServer::ProcessPackets()
