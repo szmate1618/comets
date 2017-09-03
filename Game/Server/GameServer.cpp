@@ -4,7 +4,7 @@
 namespace server
 {
 
-	GameServer::GameServer() : running{ true }, input_thread{ [=] { ProcessPackets(); } }
+	GameServer::GameServer() : running{ true }, input_thread{ [=] { ReadPackets(); } }
 	{
 	}
 
@@ -15,7 +15,6 @@ namespace server
 
 	void GameServer::Tick(def::time duration)
 	{
-		ReadPackets(); //TODO: This should run in a separate thread.
 		ProcessPackets();
 		TestCollisions();
 		UpdateState(duration);
