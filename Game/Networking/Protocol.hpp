@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Packets.hpp"
+#include "Socket.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <chrono>
@@ -10,32 +11,45 @@
 namespace net
 {
 
-	class ClientsideProtocol
+	class AbstractProtocol
+	{
+	public:
+
+		AbstractProtocol(unsigned int, AbstractExportStrategy&);
+		virtual ~AbstractProtocol();
+		virtual void Tick(def::time) = 0;
+
+	private:
+
+		Socket socket;
+		AbstractExportStrategy& exportstrategy;
+
+	};
+
+	class ClientsideProtocol: public AbstractProtocol
 	{
 
 		enum states { unconnected, connecting, connected };
 
 	public:
 
+		ClientsideProtocol(unsigned int, AbstractExportStrategy&);
 		ClientsideProtocol(AbstractExportStrategy&);
 		ClientsideProtocol() = delete;
-		~ClientsideProtocol();
-
-		void ReadAndExportPackets();
-		void UpdateState(def::time);
+		virtual ~ClientsideProtocol();
+		virtual void Tick(def::time) override;
 
 	};
 
-	class ServersideProtocol
+	class ServersideProtocol : public AbstractProtocol
 	{
 	public:
 
+		ServersideProtocol(unsigned int, AbstractExportStrategy&);
 		ServersideProtocol(AbstractExportStrategy&);
 		ServersideProtocol() = delete;
-		~ServersideProtocol();
-
-		void ReadAndExportPackets();
-		void UpdateState(def::time);
+		virtual ~ServersideProtocol();
+		virtual void Tick(def::time) override;
 
 	};
 
