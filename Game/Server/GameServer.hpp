@@ -4,6 +4,7 @@
 #include "..\Networking\Protocol.hpp"
 
 #include <chrono>
+#include <thread>
 
 
 namespace server
@@ -23,6 +24,7 @@ namespace server
 	private:
 
 		bool running;
+		std::thread input_thread;
 
 		void ReadPackets();
 		void ProcessPackets();

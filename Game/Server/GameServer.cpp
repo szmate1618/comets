@@ -4,12 +4,13 @@
 namespace server
 {
 
-	GameServer::GameServer() : running{ true }
+	GameServer::GameServer() : running{ true }, input_thread{ ProcessPackets };
 	{
 	}
 
 	GameServer::~GameServer()
 	{
+		input_thread.join();
 	}
 
 	void GameServer::Tick(def::time duration)
@@ -34,6 +35,10 @@ namespace server
 
 	void GameServer::ProcessPackets()
 	{
+		while (Running())
+		{
+
+		}
 	}
 
 	void GameServer::TestCollisions()
