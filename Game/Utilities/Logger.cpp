@@ -4,6 +4,8 @@
 namespace util
 {
 
+	std::mutex Logger::static_cout_lock;
+
 	Logger Log;
 
 	Logger::Logger()
