@@ -59,17 +59,16 @@ namespace net
 		}
 	};
 
-	class UserInputPacket
+	class UserInputPayload
 	{
 	public:
 
-		Header common_header;
 		uint8_t count;
 		uint8_t* inputs;
 
-		bool operator==(const UserInputPacket& other) const
+		bool operator==(const UserInputPayload& other) const
 		{
-			if (!(common_header == other.common_header) || !(count == other.count)) return false;
+			if (!(count == other.count)) return false;
 			for (int i = 0; i < count; ++i)
 			{
 				if (inputs[i] != other.inputs[i]) return false;
@@ -81,7 +80,6 @@ namespace net
 		size_t IO(uint8_t* packet_data_start) const
 		{
 			uint8_t* packet_data_current = packet_data_start;
-			packet_data_current += common_header.IO<io_mode>(packet_data_current);
 			packet_data_current += io_mode.Process(packet_data_current, count);
 			for (uint8_t* i = inputs; i - inputs < count; ++i)
 			{
@@ -118,17 +116,16 @@ namespace net
 
 	};
 
-	class ServerStatePacket
+	class ServerStatePayload
 	{
 	public:
 
-		Header server_header;
 		uint8_t count;
 		ServerObject* objects;
 
-		bool operator==(const ServerStatePacket& other) const
+		bool operator==(const ServerStatePayload& other) const
 		{
-			if (!(server_header == other.server_header) || !(count == other.count)) return false;
+			if (!(count == other.count)) return false;
 			for (int i = 0; i < count; ++i)
 			{
 				if (!(objects[i] == other.objects[i])) return false;
@@ -140,7 +137,6 @@ namespace net
 		size_t IO(uint8_t* packet_data_start) const
 		{
 			uint8_t* packet_data_current = packet_data_start;
-			packet_data_current += server_header.IO<io_mode>(packet_data_current);
 			packet_data_current += io_mode.Process(packet_data_current, count);
 			for (ServerObject* i = objects; i - inputs < count; ++i)
 			{
@@ -150,6 +146,31 @@ namespace net
 		}
 	};
 
+	template<typename H, typename P>
+	class Packet
+	{
+		H header;
+		P payload;
+
+		bool operator==(const ServerStatePayload& other) const
+		{
+			return header == other.header && payload == other.payload;
+		}
+
+		template<typename io_mode>
+		size_t IO(uint8_t* packet_data_start) const
+		{
+			uint8_t* packet_data_current = packet_data_start;
+			packet_data_current += header.IO<io_mode>(packet_data_current);
+			packet_data_current += payload.IO<io_mode>(packet_data_current);
+			return packet_data_current - packet_data_start;
+		}
+
+	};
+
+	using UserInputPacket = Packet<Header, UserInputPayload>;
+	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
+
 	class AbstractExportStrategy
 	{
 	public:
@@ -157,8 +178,8 @@ namespace net
 		AbstractExportStrategy() {};
 		virtual ~AbstractExportStrategy() {};
 
-		virtual void Export(ServerStatePacket) = 0;
-		virtual void Export(def::user_id, UserInputPacket) = 0;
+		virtual void Export(ServerStatePayload) = 0;
+		virtual void Export(def::user_id, UserInputPayload) = 0;
 	};
 
 }
