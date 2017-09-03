@@ -4,7 +4,7 @@
 namespace server
 {
 
-	GameServer::GameServer() : running{ true }, input_thread{ ProcessPackets };
+	GameServer::GameServer() : running{ true }, input_thread{ [=] { ProcessPackets(); } }
 	{
 	}
 
