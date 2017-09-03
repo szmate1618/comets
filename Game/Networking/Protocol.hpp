@@ -17,7 +17,7 @@ namespace net
 
 	public:
 
-		ClientsideProtocol(AbstractExportStrategy);
+		ClientsideProtocol(AbstractExportStrategy&);
 		ClientsideProtocol() = delete;
 		~ClientsideProtocol();
 
@@ -30,7 +30,7 @@ namespace net
 	{
 	public:
 
-		ServersideProtocol(AbstractExportStrategy);
+		ServersideProtocol(AbstractExportStrategy&);
 		ServersideProtocol() = delete;
 		~ServersideProtocol();
 

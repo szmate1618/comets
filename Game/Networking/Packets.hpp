@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BinarySerialization.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <cstdint>
 
