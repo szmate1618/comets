@@ -10,7 +10,7 @@ namespace server
 
 	GameServer::~GameServer()
 	{
-		input_thread.join();
+		input_thread.join(); //TODO: Don't forget to stop this thread.
 	}
 
 	void GameServer::Tick(def::time duration)
