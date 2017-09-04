@@ -9,7 +9,7 @@ namespace net
 
 	}
 
-	Connection::Connection()
+	Connection::Connection() : address{}
 	{
 
 	}
@@ -23,6 +23,12 @@ namespace net
 	{
 		using namespace std::chrono_literals;
 		countdown -= duration;
+		return countdown <= 0.0s;
+	}
+
+	bool Connection::TimedOut()
+	{
+		using namespace std::chrono_literals;
 		return countdown <= 0.0s;
 	}
 

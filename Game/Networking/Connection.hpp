@@ -19,6 +19,7 @@ namespace net
 		Connection();
 		~Connection();
 		bool Update(def::time);
+		bool TimedOut();
 
 		const Address address;
 

@@ -26,6 +26,25 @@ namespace net
 
 	void ClientsideProtocol::Tick(def::time duration)
 	{
+		switch (current_state)
+		{
+		case unconnected:
+		{
+			break;
+		}
+		case connecting:
+		{
+			break;
+		}
+		case connected:
+		{
+			connection.Update(duration);
+
+			if (connection.TimedOut) { current_state = unconnected; } //TODO: Warnlog server timeout.
+			break;
+		}
+		default: { break; } //TODO: Errorlog undefined state.
+		}
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : AbstractProtocol{ port, exportstrategy }

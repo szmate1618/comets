@@ -2,6 +2,7 @@
 
 #include "Packets.hpp"
 #include "Socket.hpp"
+#include "Connection.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <chrono>
@@ -29,7 +30,7 @@ namespace net
 	class ClientsideProtocol: public AbstractProtocol
 	{
 
-		enum states { unconnected, connecting, connected };
+		enum state { unconnected, connecting, connected };
 
 	public:
 
@@ -38,6 +39,11 @@ namespace net
 		ClientsideProtocol() = delete;
 		virtual ~ClientsideProtocol();
 		virtual void Tick(def::time) override;
+
+	private:
+
+		state current_state;
+		Connection connection;
 
 	};
 
