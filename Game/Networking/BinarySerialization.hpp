@@ -32,10 +32,10 @@ namespace net
 	template<> inline uint16_t hton<uint16_t>(uint16_t t) { return htons(t); }
 	template<> inline uint32_t hton<uint32_t>(uint32_t t) { return htonl(t); }
 
-	template<typename T>
 	struct Write
 	{
-		inline size_t Process(uint8_t* packet_data, T t)
+		template<typename T>
+		static inline size_t Process(uint8_t* packet_data, T t)
 		{
 			*reinterpret_cast<T*>(packet_data) = hton(t);
 			return sizeof(T);
@@ -49,10 +49,10 @@ namespace net
 	template<> inline uint16_t ntoh<uint16_t>(uint16_t& t) { return ntohs(t); }
 	template<> inline uint32_t ntoh<uint32_t>(uint32_t& t) { return ntohl(t); }
 
-	template<typename T>
 	struct Read
 	{
-		inline size_t Process(uint8_t* packet_data, T t)
+		template<typename T>
+		static inline size_t Process(uint8_t* packet_data, T t)
 		{
 			t = ntoh(*reinterpret_cast<T*>(packet_data));
 			return sizeof(T);

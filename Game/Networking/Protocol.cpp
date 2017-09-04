@@ -40,7 +40,7 @@ namespace net
 		{
 			connection.Update(duration);
 
-			if (connection.TimedOut) { current_state = unconnected; } //TODO: Warnlog server timeout.
+			if (connection.TimedOut()) { current_state = unconnected; } //TODO: Warnlog server timeout.
 			break;
 		}
 		default: { break; } //TODO: Errorlog undefined state.

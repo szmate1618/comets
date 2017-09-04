@@ -143,6 +143,7 @@
     <ClCompile Include="Address.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Packets.cpp" />
     <ClCompile Include="Protocol.cpp" />
     <ClCompile Include="Socket.cpp" />
   </ItemGroup>
