@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <cstdint>
 
 
 namespace def
@@ -16,5 +17,6 @@ namespace def
 	static constexpr time client_rate = server_tick(2);
 
 	using user_id = int;
+	static constexpr uint8_t protocol_id = 77;
 
 }
