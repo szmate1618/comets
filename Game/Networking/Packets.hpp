@@ -20,6 +20,12 @@ namespace net
 		uint32_t sequence_number;
 		uint8_t packet_type;
 
+		Header() = default;
+
+		Header(const Header& other) = default;
+
+		Header& operator=(const Header& other) = default;
+
 		bool operator==(const Header& other) const
 		{
 			return protocol_id == other.protocol_id && sequence_number == other.sequence_number && packet_type == other.packet_type;
@@ -43,6 +49,12 @@ namespace net
 		uint32_t ack;
 		uint32_t ack_bitfield;
 
+		ServerHeader() = default;
+
+		ServerHeader(const ServerHeader& other) = default;
+
+		ServerHeader& operator=(const ServerHeader& other) = default;
+
 		bool operator==(const ServerHeader& other) const
 		{
 			return common_header == other.common_header && ack == other.ack && ack_bitfield == other.ack_bitfield;
@@ -65,6 +77,12 @@ namespace net
 
 		uint8_t count;
 		uint8_t* inputs;
+
+		UserInputPayload() = default;
+
+		UserInputPayload(const UserInputPayload& other) = default;
+
+		UserInputPayload& operator=(const UserInputPayload& other) = default;
 
 		bool operator==(const UserInputPayload& other) const
 		{
@@ -98,6 +116,12 @@ namespace net
 		double x;
 		double y;
 
+		ServerObject() = default;
+
+		ServerObject(const ServerObject& other) = default;
+
+		ServerObject& operator=(const ServerObject& other) = default;
+
 		bool operator==(const ServerObject& other) const
 		{
 			return type == other.type && radian == other.radian && x == other.x && y == other.y;
@@ -122,6 +146,12 @@ namespace net
 
 		uint8_t count;
 		ServerObject* objects;
+
+		ServerStatePayload() = default;
+
+		ServerStatePayload(const ServerStatePayload& other) = default;
+
+		ServerStatePayload& operator=(const ServerStatePayload& other) = default;
 
 		bool operator==(const ServerStatePayload& other) const
 		{
@@ -152,7 +182,13 @@ namespace net
 		H header;
 		P payload;
 
-		bool operator==(const ServerStatePayload& other) const
+		Packet() = default;
+
+		Packet(const Packet<H, P>& other) = default;
+
+		Packet<H, P>& operator=(const Packet<H, P>& other) = default;
+
+		bool operator==(const Packet<H, P>& other) const
 		{
 			return header == other.header && payload == other.payload;
 		}
