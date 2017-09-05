@@ -31,8 +31,6 @@ namespace net
 	typedef int socklen_t;
 	#endif
 
-	constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
-
 	class Socket
 	{
 	public:

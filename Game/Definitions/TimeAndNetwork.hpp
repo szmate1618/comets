@@ -16,6 +16,8 @@ namespace def
 	static constexpr time server_rate = server_tick(1);
 	static constexpr time client_rate = server_tick(2);
 
+	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
+
 	using user_id = int;
 	static constexpr uint8_t protocol_id = 77;
 
