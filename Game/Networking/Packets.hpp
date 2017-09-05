@@ -23,7 +23,7 @@ namespace net
 		Header(const Header& other) = default;
 		Header& operator=(const Header& other) = default;
 		bool operator==(const Header& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
 
@@ -39,7 +39,7 @@ namespace net
 		ServerHeader(const ServerHeader& other) = default;
 		ServerHeader& operator=(const ServerHeader& other) = default;
 		bool operator==(const ServerHeader& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
 
@@ -54,7 +54,7 @@ namespace net
 		UserInputPayload(const UserInputPayload& other) = default;
 		UserInputPayload& operator=(const UserInputPayload& other) = default;
 		bool operator==(const UserInputPayload& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
 
@@ -71,7 +71,7 @@ namespace net
 		ServerObject(const ServerObject& other) = default;
 		ServerObject& operator=(const ServerObject& other) = default;
 		bool operator==(const ServerObject& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
 
 	};
 
@@ -86,7 +86,7 @@ namespace net
 		ServerStatePayload(const ServerStatePayload& other) = default;
 		ServerStatePayload& operator=(const ServerStatePayload& other) = default;
 		bool operator==(const ServerStatePayload& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
 
 	};
 
@@ -102,7 +102,7 @@ namespace net
 		Packet(const Packet<H, P>& other) = default;
 		Packet<H, P>& operator=(const Packet<H, P>& other) = default;
 		bool operator==(const Packet<H, P>& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start) const;
+		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
 
 	};
 

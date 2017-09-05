@@ -11,7 +11,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t Header::IO(uint8_t* packet_data_start) const
+	size_t Header::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, protocol_id);
@@ -25,7 +25,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t ServerHeader::IO(uint8_t* packet_data_start) const
+	size_t ServerHeader::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += common_header.IO<io_mode>(packet_data_current);
@@ -45,7 +45,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t UserInputPayload::IO(uint8_t* packet_data_start) const
+	size_t UserInputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, count);
@@ -62,7 +62,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t ServerObject::IO(uint8_t* packet_data_start) const
+	size_t ServerObject::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, type);
@@ -83,7 +83,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t ServerStatePayload::IO(uint8_t* packet_data_start) const
+	size_t ServerStatePayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, count);
@@ -102,7 +102,7 @@ namespace net
 
 	template<typename H, typename P>
 	template<typename io_mode>
-	size_t Packet<H, P>::IO(uint8_t* packet_data_start) const
+	size_t Packet<H, P>::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += header.IO<io_mode>(packet_data_current);
@@ -115,21 +115,21 @@ namespace net
 	AbstractExportStrategy::~AbstractExportStrategy() {};
 
 	//Explicit instantiations.
-	template size_t Header::IO<Read>(uint8_t*) const;
-	template size_t Header::IO<Write>(uint8_t*) const;
-	template size_t ServerHeader::IO<Read>(uint8_t*) const;
-	template size_t ServerHeader::IO<Write>(uint8_t*) const;
-	template size_t UserInputPayload::IO<Read>(uint8_t*) const;
-	template size_t UserInputPayload::IO<Write>(uint8_t*) const;
-	template size_t ServerObject::IO<Read>(uint8_t*) const;
-	template size_t ServerObject::IO<Write>(uint8_t*) const;
-	template size_t ServerStatePayload::IO<Read>(uint8_t*) const;
-	template size_t ServerStatePayload::IO<Write>(uint8_t*) const;
+	template size_t Header::IO<Read>(uint8_t*);
+	template size_t Header::IO<Write>(uint8_t*);
+	template size_t ServerHeader::IO<Read>(uint8_t*);
+	template size_t ServerHeader::IO<Write>(uint8_t*);
+	template size_t UserInputPayload::IO<Read>(uint8_t*);
+	template size_t UserInputPayload::IO<Write>(uint8_t*);
+	template size_t ServerObject::IO<Read>(uint8_t*);
+	template size_t ServerObject::IO<Write>(uint8_t*);
+	template size_t ServerStatePayload::IO<Read>(uint8_t*);
+	template size_t ServerStatePayload::IO<Write>(uint8_t*);
 	template class Packet<Header, UserInputPacket>;
-	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*) const;
-	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*) const;
+	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePacket>;
-	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*) const;
-	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*) const;
+	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
 
 }

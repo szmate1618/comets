@@ -52,7 +52,7 @@ namespace net
 	struct Read
 	{
 		template<typename T>
-		static inline size_t Process(uint8_t* packet_data, T t)
+		static inline size_t Process(uint8_t* packet_data, T& t)
 		{
 			t = ntoh(*reinterpret_cast<T*>(packet_data));
 			return sizeof(T);
