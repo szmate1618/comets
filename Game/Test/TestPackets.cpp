@@ -7,6 +7,10 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+//TODO: Maybe move these to Definitions\UnitTestUtility.hpp, and look up namespace aliases.
+template<> inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<uint16_t>(const uint16_t& t) { RETURN_WIDE_STRING(t); }
+template<> inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<net::UserInputPacket>(const net::UserInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+
 namespace Test
 {
 
@@ -70,9 +74,9 @@ namespace Test
 			Assert::AreEqual(dummy_with_data.F, dummy_empty.F, L"Failed to write and/or to read back float.");
 			Assert::AreEqual(dummy_with_data.D, dummy_empty.D, L"Failed to write and/or to read back double.");
 			Assert::AreEqual(dummy_with_data.UI8, dummy_empty.UI8, L"Failed to write and/or to read back uint8_t.");
-			Assert::AreEqual(long{ dummy_with_data.UI16 }, long{ dummy_empty.UI16 }, L"Failed to write and/or to read back uint16_t.");
+			Assert::AreEqual(dummy_with_data.UI16, dummy_empty.UI16, L"Failed to write and/or to read back uint16_t.");
 			Assert::AreEqual(dummy_with_data.UI32, dummy_empty.UI32, L"Failed to write and/or to read back uint32_t.");
-			Assert::AreEqual(long{ dummy_with_data.count }, long{ dummy_empty.count }, L"Failed to write and/or to read back count.");
+			Assert::AreEqual(dummy_with_data.count, dummy_empty.count, L"Failed to write and/or to read back count.");
 			Assert::AreEqual(dummy_with_data.elements[0], dummy_empty.elements[0], L"Failed to write and/or to read back elements[0].");
 			Assert::AreEqual(dummy_with_data.elements[1], dummy_empty.elements[1], L"Failed to write and/or to read back elements[1].");
 			Assert::AreEqual(dummy_with_data.elements[2], dummy_empty.elements[2], L"Failed to write and/or to read back elements[2].");
@@ -87,7 +91,14 @@ namespace Test
 
 		TEST_METHOD(UserInputPacket)
 		{
-			net::UserInputPacket uip;
+			net::UserInputPacket userinput_empty;
+			net::UserInputPacket userinput_with_data{ true };
+			uint8_t buffer[def::max_packet_size];
+
+			userinput_with_data.IO<net::Write>(buffer);
+			userinput_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPacket.");
 		}
 
 	};
