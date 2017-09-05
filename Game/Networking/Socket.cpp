@@ -5,7 +5,6 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 #include "Socket.hpp"
 
 #include "..\Utilities\Logger.hpp"
-#include "..\Definitions\TimeAndNetwork.hpp"
 
 #if PLATFORM == PLATFORM_WINDOWS
 #pragma comment( lib, "wsock32.lib" )

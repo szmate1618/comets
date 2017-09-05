@@ -47,7 +47,7 @@ namespace net
 	{
 	public:
 
-		uint8_t count;
+		uint16_t count;
 		uint8_t* inputs;
 
 		UserInputPayload() = default;
@@ -79,7 +79,7 @@ namespace net
 	{
 	public:
 
-		uint8_t count;
+		uint16_t count;
 		ServerObject* objects;
 
 		ServerStatePayload() = default;
