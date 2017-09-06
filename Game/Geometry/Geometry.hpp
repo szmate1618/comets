@@ -3,11 +3,19 @@
 #include <math.h>
 
 
+constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; }
+
+constexpr long double operator"" _deg(long double deg) { return deg / 180 * 3.14159265358979323846; }
+
+constexpr long double operator"" _rad(long double rad) { return rad; }
+
 namespace geo
 {
 
+	static constexpr double PI = 3.14159265358979323846;
+
 	typedef double real;
-	const real epsilon = 0.0005;
+	constexpr real epsilon = 0.0005;
 
 	struct point_2d { real x; real y; };
 

@@ -22,6 +22,7 @@
 
 #include "Address.hpp"
 #include "LogMessages.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 
 namespace net
@@ -30,8 +31,6 @@ namespace net
 	#if PLATFORM == PLATFORM_WINDOWS
 	typedef int socklen_t;
 	#endif
-
-	constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 	class Socket
 	{
@@ -47,7 +46,7 @@ namespace net
 		int Receive(Address&, void*, int) const;
 		int Receive(Address&) const;
 
-		char recv_buffer[max_packet_size];
+		char recv_buffer[def::max_packet_size];
 
 	protected: //TODO: Maybe making the test class its friend would be a better solution.
 

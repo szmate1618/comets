@@ -82,6 +82,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
@@ -92,6 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
@@ -104,6 +106,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -118,6 +121,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -127,12 +131,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Address.hpp" />
+    <ClInclude Include="BinarySerialization.hpp" />
+    <ClInclude Include="Connection.hpp" />
+    <ClInclude Include="ConnectionManager.hpp" />
     <ClInclude Include="LogMessages.hpp" />
+    <ClInclude Include="Packets.hpp" />
+    <ClInclude Include="Protocol.hpp" />
     <ClInclude Include="Socket.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Connection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Packets.cpp" />
+    <ClCompile Include="Protocol.cpp" />
     <ClCompile Include="Socket.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

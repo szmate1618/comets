@@ -9,12 +9,34 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {		
 
-	const double Pi = 3.14159265358979323846;
-
 	TEST_CLASS(TestGeometry)
 	{
 	public:
-		
+
+		TEST_METHOD(AngleLiterals)
+		{
+			Assert::AreEqual(-1, -1.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(-0.5, -0.5_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(-0, -0.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(1, 1.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(2, 2.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(3, 3.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(4, 4.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(7, 7.0_rad, 0.0, L"Radian literal error");
+
+			Assert::AreEqual(0, 0.0_deg, 0.0, L"Degree literal error");
+			Assert::AreEqual(2 * geo::PI, 360.0_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI, 180.0_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI / 2, 90.0_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI / 4, 45.0_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(-3 * geo::PI / 4, -135.0_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(2 * geo::PI, 360_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI, 180_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI / 2, 90_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(geo::PI / 4, 45_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(-3 * geo::PI / 4, -135_deg, geo::epsilon, L"Degree literal error");
+		}
+
 		TEST_METHOD(AdditionSubtraction)
 		{
 			geo::point_2d O = {0, 0};
@@ -42,12 +64,12 @@ namespace Test
 			geo::point_2d _1 = {1, 0};
 			geo::point_2d i = {0, 1};
 			geo::point_2d p1 = {1.23456789, 1.23456789};
-			Assert::IsTrue(geo::equals(p1, geo::point_2d_rotated(p1, Pi * 2)), L"Identity transformation failed.");
-			Assert::IsTrue(geo::equals(O, geo::add(p1, geo::point_2d_rotated(p1, Pi))), L"Inverting failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, Pi / 2)), geo::epsilon, L"90° rotation of origo failed.");
-			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - Pi / 2)), geo::epsilon, L"-90° rotation of origo failed.");
-			Assert::IsTrue(geo::equals(i, geo::point_2d_rotated(_1, Pi / 2)), L"90° rotation failed.");
-			Assert::IsTrue(geo::equals(_1, geo::point_2d_rotated(i, -Pi / 2)), L"-90° rotation failed.");
+			Assert::IsTrue(geo::equals(p1, geo::point_2d_rotated(p1, geo::PI * 2)), L"Identity transformation failed.");
+			Assert::IsTrue(geo::equals(O, geo::add(p1, geo::point_2d_rotated(p1, geo::PI))), L"Inverting failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, geo::PI / 2)), geo::epsilon, L"90° rotation of origo failed.");
+			Assert::AreEqual(0.0, geo::dot_product(p1, geo::point_2d_rotated(p1, - geo::PI / 2)), geo::epsilon, L"-90° rotation of origo failed.");
+			Assert::IsTrue(geo::equals(i, geo::point_2d_rotated(_1, geo::PI / 2)), L"90° rotation failed.");
+			Assert::IsTrue(geo::equals(_1, geo::point_2d_rotated(i, -geo::PI / 2)), L"-90° rotation failed.");
 			geo::point_2d rotated_p1 = geo::point_2d_rotated(p1, 123);
 			geo::rotate_point_2d(p1, 123);
 			Assert::IsTrue(geo::equals(rotated_p1, p1), L"Mutable and immutable rotations provide different results.");
@@ -198,7 +220,7 @@ namespace Test
 find_convex_hexa:
 				geo::point_2d r = {1, 0};
 				geo::point_2d convex_hexagon_attempt[6];
-				for (int j = 0; j < 6; rotate_point_2d(r, Pi / 3), j++)
+				for (int j = 0; j < 6; rotate_point_2d(r, geo::PI / 3), j++)
 				{
 					geo::real length = static_cast<geo::real>(rand());
 					convex_hexagon_attempt[j] = geo::mul(r, length);

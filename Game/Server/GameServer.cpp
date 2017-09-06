@@ -4,20 +4,20 @@
 namespace server
 {
 
-	GameServer::GameServer() : running{ true }
+	GameServer::GameServer() : running{ true }, input_thread{ [=] { ReadPackets(); } }
 	{
 	}
 
 	GameServer::~GameServer()
 	{
+		input_thread.join(); //TODO: Don't forget to stop this thread.
 	}
 
-	void GameServer::MainLoop()
+	void GameServer::Tick(def::time duration)
 	{
-		ReadPackets();
 		ProcessPackets();
 		TestCollisions();
-		UpdateState();
+		UpdateState(duration);
 		SendPackets();
 	}
 
@@ -28,17 +28,23 @@ namespace server
 
 	void GameServer::ReadPackets()
 	{
+		using namespace std::chrono_literals;
+		def::time backoff = 0s;
 	}
 
 	void GameServer::ProcessPackets()
 	{
+		while (Running())
+		{
+
+		}
 	}
 
 	void GameServer::TestCollisions()
 	{
 	}
 
-	void GameServer::UpdateState()
+	void GameServer::UpdateState(def::time duration)
 	{
 	}
 

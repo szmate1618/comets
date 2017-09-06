@@ -1,16 +1,22 @@
 #include "AbstractServer.hpp"
 #include "GameServer.hpp"
 
+#include <thread>
+#include <chrono>
+
 
 int main()
 {
-	server::AbstractServer* gameserver = &server::GameServer();
+	server::AbstractServer* gameserver = &server::GameServer{};
 	
 	volatile bool running = true;
 
 	while (running && gameserver->Running())
 	{
-		gameserver->MainLoop();
+		auto start = std::chrono::steady_clock::now();
+		std::this_thread::sleep_for(server::tick{ 1 });
+		auto end = std::chrono::steady_clock::now();
+		gameserver->Tick(end - start);
 	}
 
 	return 0;

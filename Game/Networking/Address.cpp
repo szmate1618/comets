@@ -3,8 +3,6 @@
 
 namespace net {
 
-	Address::Address() {}
-
 	Address::Address
 	(
 		unsigned int a, //TODO: look into IPv6.
@@ -15,6 +13,8 @@ namespace net {
 	) : address{ (a << 24) | (b << 16) | (c << 8) | d }, port{ port } {} //TODO: Consistent spacing before and after : operators.
 
 	Address::Address(unsigned int address, unsigned short port) : address{ address }, port{ port } {}
+
+	bool Address::operator==(const Address& other) const { return address == other.address && port == other.port; }
 
 	unsigned int Address::GetAddress() const { return address; }
 
