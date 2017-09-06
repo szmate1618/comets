@@ -90,6 +90,18 @@ namespace Test
 			Assert::AreEqual(original_tail[4], dummy_empty.elements[9], L"Accidentally overwrote elements[9].");
 		}
 
+		TEST_METHOD(UserInputPacketWithoutArray)
+		{
+			net::UserInputPacket userinput_empty{};
+			net::UserInputPacket userinput_with_data{ 1, 2, 3, 0, nullptr };
+			uint8_t buffer[def::max_packet_size];
+
+			userinput_with_data.IO<net::Write>(buffer);
+			userinput_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPacket without array.");
+		}
+
 		TEST_METHOD(UserInputPacket)
 		{
 			uint8_t empty_input_buffer[10];
@@ -103,6 +115,33 @@ namespace Test
 			userinput_empty.IO<net::Read>(buffer);
 
 			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPacket.");
+		}
+
+		TEST_METHOD(ServerStatePacketWithoutArray)
+		{
+			net::ServerStatePacket serverstate_empty{};
+			net::ServerStatePacket serverstate_with_data{ 1, 2, 3, 4, 5, 0, nullptr };
+			uint8_t buffer[def::max_packet_size];
+
+			serverstate_with_data.IO<net::Write>(buffer);
+			serverstate_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(serverstate_with_data, serverstate_empty, L"Failed to write and/or read back ServerStatePacket without array.");
+		}
+
+		TEST_METHOD(ServerStatePacket)
+		{
+			net::ServerObject empty_input_buffer[10];
+			net::ServerStatePacket serverstate_empty{};
+			serverstate_empty.payload.objects = empty_input_buffer;
+			net::ServerObject objects[6] = { {5, 5.0, 5.1, 5.2}, {6, 6.1, 6.2, 6.3}, {7, 7.1, 7.2, 7.3}, {8, 8.1, 8.2, 8.3}, { 9, 9.1, 9.2, 9.3 }, { 10, 10.1, 10.2, 10.3 } };
+			net::ServerStatePacket serverstate_with_data{ 1, 2, 3, 4, 5, 6, objects };
+			uint8_t buffer[def::max_packet_size];
+
+			serverstate_with_data.IO<net::Write>(buffer);
+			serverstate_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(serverstate_with_data, serverstate_empty, L"Failed to write and/or read back ServerStatePacket.");
 		}
 
 	};
