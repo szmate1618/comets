@@ -130,7 +130,7 @@ namespace net
 	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
 	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePacket>;
-	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
-	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
+	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
 
 }
