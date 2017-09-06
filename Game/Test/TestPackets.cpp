@@ -7,9 +7,10 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-//TODO: Maybe move these to Definitions\UnitTestUtility.hpp, and look up namespace aliases.
-template<> inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<uint16_t>(const uint16_t& t) { RETURN_WIDE_STRING(t); }
-template<> inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<net::UserInputPacket>(const net::UserInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+namespace unittest = Microsoft::VisualStudio::CppUnitTestFramework;
+template<> inline std::wstring unittest::ToString<uint16_t>(const uint16_t& t) { RETURN_WIDE_STRING(t); }
+template<> inline std::wstring unittest::ToString<net::UserInputPacket>(const net::UserInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ServerStatePacket>(const net::ServerStatePacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 
 namespace Test
 {
@@ -91,8 +92,11 @@ namespace Test
 
 		TEST_METHOD(UserInputPacket)
 		{
-			net::UserInputPacket userinput_empty;
-			net::UserInputPacket userinput_with_data{ true };
+			uint8_t empty_input_buffer[10];
+			net::UserInputPacket userinput_empty{};
+			userinput_empty.payload.inputs = empty_input_buffer;
+			uint8_t inputs[4] = { 5, 6, 7, 8 };
+			net::UserInputPacket userinput_with_data{ 1, 2, 3, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
 			userinput_with_data.IO<net::Write>(buffer);
