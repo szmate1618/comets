@@ -16,6 +16,7 @@ namespace net
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, protocol_id);
 		packet_data_current += io_mode::Process(packet_data_current, sequence_number);
+		packet_data_current += io_mode::Process(packet_data_current, packet_type);
 		return packet_data_current - packet_data_start;
 	}
 
