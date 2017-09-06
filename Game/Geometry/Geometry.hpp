@@ -8,6 +8,10 @@ namespace geo
 
 	constexpr double PI = 3.14159265358979323846;
 
+	constexpr long double operator"" _deg(long double deg) { return deg / PI * 2; } //TODO: Add test.
+
+	constexpr long double operator"" _rad(long double rad) { return rad; }
+
 	typedef double real;
 	constexpr real epsilon = 0.0005;
 
