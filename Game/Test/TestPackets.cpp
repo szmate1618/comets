@@ -9,6 +9,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace unittest = Microsoft::VisualStudio::CppUnitTestFramework;
 template<> inline std::wstring unittest::ToString<uint16_t>(const uint16_t& t) { RETURN_WIDE_STRING(t); }
+template<> inline std::wstring unittest::ToString<net::Header>(const net::Header& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ServerHeader>(const net::ServerHeader& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ServerObject>(const net::ServerObject& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::UserInputPayload>(const net::UserInputPayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ServerStatePayload>(const net::ServerStatePayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::UserInputPacket>(const net::UserInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerStatePacket>(const net::ServerStatePacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 
@@ -88,6 +93,72 @@ namespace Test
 			Assert::AreEqual(original_tail[2], dummy_empty.elements[7], L"Accidentally overwrote elements[7].");
 			Assert::AreEqual(original_tail[3], dummy_empty.elements[8], L"Accidentally overwrote elements[8].");
 			Assert::AreEqual(original_tail[4], dummy_empty.elements[9], L"Accidentally overwrote elements[9].");
+		}
+
+		TEST_METHOD(Header)
+		{
+			net::Header header_empty{};
+			net::Header header_with_data{ 1, 2, 3 };
+			uint8_t buffer[def::max_packet_size];
+
+			header_with_data.IO<net::Write>(buffer);
+			header_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(header_with_data, header_empty, L"Failed to write and/or read back Header.");
+		}
+
+		TEST_METHOD(ServerHeader)
+		{
+			net::ServerHeader header_empty{};
+			net::ServerHeader header_with_data{ 1, 2, 3 };
+			uint8_t buffer[def::max_packet_size];
+
+			header_with_data.IO<net::Write>(buffer);
+			header_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(header_with_data, header_empty, L"Failed to write and/or read back ServerHeader.");
+		}
+
+		TEST_METHOD(ServerObject)
+		{
+			net::ServerObject serverobject_empty{};
+			net::ServerObject serverobject_with_data{ 1, 2, 3 };
+			uint8_t buffer[def::max_packet_size];
+
+			serverobject_with_data.IO<net::Write>(buffer);
+			serverobject_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(serverobject_with_data, serverobject_empty, L"Failed to write and/or read back ServerObject.");
+		}
+
+		TEST_METHOD(UserInputPayload)
+		{
+			uint8_t empty_input_buffer[10];
+			net::UserInputPayload userinput_empty{};
+			userinput_empty.inputs = empty_input_buffer;
+			uint8_t inputs[4] = { 5, 6, 7, 8 };
+			net::UserInputPayload userinput_with_data{ 4, inputs };
+			uint8_t buffer[def::max_packet_size];
+
+			userinput_with_data.IO<net::Write>(buffer);
+			userinput_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPayload.");
+		}
+
+		TEST_METHOD(ServerStatePayload)
+		{
+			net::ServerObject empty_input_buffer[10];
+			net::ServerStatePayload serverstate_empty{};
+			serverstate_empty.objects = empty_input_buffer;
+			net::ServerObject objects[6] = { { 5, 5.0, 5.1, 5.2 },{ 6, 6.1, 6.2, 6.3 },{ 7, 7.1, 7.2, 7.3 },{ 8, 8.1, 8.2, 8.3 },{ 9, 9.1, 9.2, 9.3 },{ 10, 10.1, 10.2, 10.3 } };
+			net::ServerStatePayload serverstate_with_data{ 6, objects };
+			uint8_t buffer[def::max_packet_size];
+
+			serverstate_with_data.IO<net::Write>(buffer);
+			serverstate_empty.IO<net::Read>(buffer);
+
+			Assert::AreEqual(serverstate_with_data, serverstate_empty, L"Failed to write and/or read back ServerStatePayload.");
 		}
 
 		TEST_METHOD(UserInputPacketWithoutArray)
