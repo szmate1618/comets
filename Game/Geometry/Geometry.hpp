@@ -12,7 +12,7 @@ constexpr long double operator"" _rad(long double rad) { return rad; }
 namespace geo
 {
 
-	constexpr double PI = 3.14159265358979323846;
+	static constexpr double PI = 3.14159265358979323846;
 
 	typedef double real;
 	constexpr real epsilon = 0.0005;
