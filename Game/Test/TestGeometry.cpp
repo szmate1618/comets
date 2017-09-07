@@ -17,26 +17,26 @@ namespace Test
 		{
 			using namespace geo_literals;
 
-			Assert::AreEqual(-1, -1.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(-0.5, -0.5_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(-1, -1.0_rad, 0.0, L"Radian literal error.");
+			Assert::AreEqual(-0.5, -0.5_rad, 0.0, L"Radian literal error.");
 			Assert::AreEqual(-0, -0.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(1, 1.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(2, 2.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(3, 3.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(4, 4.0_rad, 0.0, L"Radian literal error");
-			Assert::AreEqual(7, 7.0_rad, 0.0, L"Radian literal error");
+			Assert::AreEqual(1, 1.0_rad, 0.0, L"Radian literal error.");
+			Assert::AreEqual(2, 2.0_rad, 0.0, L"Radian literal error.");
+			Assert::AreEqual(3, 3.0_rad, 0.0, L"Radian literal error.");
+			Assert::AreEqual(4, 4.0_rad, 0.0, L"Radian literal error.");
+			Assert::AreEqual(7, 7.0_rad, 0.0, L"Radian literal error.");
 
-			Assert::AreEqual(0, 0.0_deg, 0.0, L"Degree literal error");
-			Assert::AreEqual(2 * geo::PI, 360.0_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI, 180.0_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI / 2, 90.0_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI / 4, 45.0_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(-3 * geo::PI / 4, -135.0_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(2 * geo::PI, 360_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI, 180_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI / 2, 90_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(geo::PI / 4, 45_deg, geo::epsilon, L"Degree literal error");
-			Assert::AreEqual(-3 * geo::PI / 4, -135_deg, geo::epsilon, L"Degree literal error");
+			Assert::AreEqual(0, 0.0_deg, 0.0, L"Degree literal error.");
+			Assert::AreEqual(2 * geo::PI, 360.0_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI, 180.0_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI / 2, 90.0_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI / 4, 45.0_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(-3 * geo::PI / 4, -135.0_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(2 * geo::PI, 360_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI, 180_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI / 2, 90_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(geo::PI / 4, 45_deg, geo::epsilon, L"Degree literal error.");
+			Assert::AreEqual(-3 * geo::PI / 4, -135_deg, geo::epsilon, L"Degree literal error.");
 		}
 
 		TEST_METHOD(AdditionSubtraction)
