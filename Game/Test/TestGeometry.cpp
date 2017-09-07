@@ -15,6 +15,8 @@ namespace Test
 
 		TEST_METHOD(AngleLiterals)
 		{
+			using namespace geo_literals;
+
 			Assert::AreEqual(-1, -1.0_rad, 0.0, L"Radian literal error");
 			Assert::AreEqual(-0.5, -0.5_rad, 0.0, L"Radian literal error");
 			Assert::AreEqual(-0, -0.0_rad, 0.0, L"Radian literal error");

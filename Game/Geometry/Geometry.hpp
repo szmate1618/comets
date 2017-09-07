@@ -3,11 +3,14 @@
 #include <math.h>
 
 
-constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; }
+namespace geo_literals
+{
+	constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; }
 
-constexpr long double operator"" _deg(long double deg) { return deg / 180 * 3.14159265358979323846; }
+	constexpr long double operator"" _deg(long double deg) { return deg / 180 * 3.14159265358979323846; }
 
-constexpr long double operator"" _rad(long double rad) { return rad; }
+	constexpr long double operator"" _rad(long double rad) { return rad; }
+}
 
 namespace geo
 {
