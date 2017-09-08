@@ -16,7 +16,7 @@ namespace net
 	{
 	public:
 
-		AbstractProtocol(unsigned int, AbstractExportStrategy&);
+		AbstractProtocol(unsigned int, AbstractExportStrategy&, AbstractImportStrategy&);
 		virtual ~AbstractProtocol();
 		virtual void Tick(def::time) = 0;
 
@@ -24,6 +24,7 @@ namespace net
 
 		Socket socket;
 		AbstractExportStrategy& exportstrategy;
+		AbstractImportStrategy& importstrategy;
 
 	};
 
@@ -34,8 +35,8 @@ namespace net
 
 	public:
 
-		ClientsideProtocol(unsigned int, AbstractExportStrategy&);
-		ClientsideProtocol(AbstractExportStrategy&);
+		ClientsideProtocol(unsigned int, AbstractExportStrategy&, AbstractImportStrategy&);
+		ClientsideProtocol(AbstractExportStrategy&, AbstractImportStrategy&);
 		ClientsideProtocol() = delete;
 		virtual ~ClientsideProtocol();
 		virtual void Tick(def::time) override;
@@ -51,8 +52,8 @@ namespace net
 	{
 	public:
 
-		ServersideProtocol(unsigned int, AbstractExportStrategy&);
-		ServersideProtocol(AbstractExportStrategy&);
+		ServersideProtocol(unsigned int, AbstractExportStrategy&, AbstractImportStrategy&);
+		ServersideProtocol(AbstractExportStrategy&, AbstractImportStrategy&);
 		ServersideProtocol() = delete;
 		virtual ~ServersideProtocol();
 		virtual void Tick(def::time) override;

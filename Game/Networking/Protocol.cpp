@@ -4,7 +4,8 @@
 namespace net
 {
 
-	AbstractProtocol::AbstractProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : socket{ port }, exportstrategy{ exportstrategy }
+	AbstractProtocol::AbstractProtocol(unsigned int port, AbstractExportStrategy& exportstrategy, AbstractImportStrategy&)
+		: socket{ port }, exportstrategy{ exportstrategy }, importstrategy{ importstrategy }
 	{
 	}
 
@@ -12,11 +13,13 @@ namespace net
 	{
 	}
 
-	ClientsideProtocol::ClientsideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : AbstractProtocol{ port, exportstrategy }
+	ClientsideProtocol::ClientsideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy, AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
 
-	ClientsideProtocol::ClientsideProtocol(AbstractExportStrategy& exportstrategy) : ClientsideProtocol{ 0, exportstrategy }
+	ClientsideProtocol::ClientsideProtocol(AbstractExportStrategy& exportstrategy, AbstractImportStrategy& importstrategy)
+		: ClientsideProtocol{ 0, exportstrategy, importstrategy}
 	{
 	}
 
@@ -47,11 +50,13 @@ namespace net
 		}
 	}
 
-	ServersideProtocol::ServersideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : AbstractProtocol{ port, exportstrategy }
+	ServersideProtocol::ServersideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy, AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
 
-	ServersideProtocol::ServersideProtocol(AbstractExportStrategy& exportstrategy) : AbstractProtocol{ 0, exportstrategy }
+	ServersideProtocol::ServersideProtocol(AbstractExportStrategy& exportstrategy, AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }
 	{
 	}
 
