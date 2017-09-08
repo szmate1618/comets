@@ -37,7 +37,8 @@ namespace net
 
 	bool UserInputPayload::operator==(const UserInputPayload& other) const
 	{
-		if (!(count == other.count)) return false;
+		if (duration != other.duration) return false;
+		if (count != other.count) return false;
 		for (int i = 0; i < count; ++i)
 		{
 			if (inputs[i] != other.inputs[i]) return false;
@@ -49,6 +50,7 @@ namespace net
 	size_t UserInputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, duration);
 		packet_data_current += io_mode::Process(packet_data_current, count);
 		for (uint8_t* i = inputs; i - inputs < count; ++i)
 		{
@@ -114,6 +116,10 @@ namespace net
 	AbstractExportStrategy::AbstractExportStrategy() {};
 
 	AbstractExportStrategy::~AbstractExportStrategy() {};
+
+	AbstractImportStrategy::AbstractImportStrategy() {};
+
+	AbstractImportStrategy::~AbstractImportStrategy() {};
 
 	//Explicit instantiations.
 	template size_t Header::IO<Read>(uint8_t*);

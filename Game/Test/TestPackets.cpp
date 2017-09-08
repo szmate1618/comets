@@ -137,7 +137,7 @@ namespace Test
 			net::UserInputPayload userinput_empty{};
 			userinput_empty.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::UserInputPayload userinput_with_data{ 4, inputs };
+			net::UserInputPayload userinput_with_data{ 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
 			userinput_with_data.IO<net::Write>(buffer);
@@ -164,7 +164,7 @@ namespace Test
 		TEST_METHOD(UserInputPacketWithoutArray)
 		{
 			net::UserInputPacket userinput_empty{};
-			net::UserInputPacket userinput_with_data{ 1, 2, 3, 0, nullptr };
+			net::UserInputPacket userinput_with_data{ 1, 2, 3, 34, 0, nullptr };
 			uint8_t buffer[def::max_packet_size];
 
 			userinput_with_data.IO<net::Write>(buffer);
@@ -179,7 +179,7 @@ namespace Test
 			net::UserInputPacket userinput_empty{};
 			userinput_empty.payload.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::UserInputPacket userinput_with_data{ 1, 2, 3, 4, inputs };
+			net::UserInputPacket userinput_with_data{ 1, 2, 3, 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
 			userinput_with_data.IO<net::Write>(buffer);

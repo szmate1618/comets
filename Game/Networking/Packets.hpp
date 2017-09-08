@@ -4,6 +4,7 @@
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <cstdint>
+#include <tuple>
 
 
 namespace net
@@ -47,6 +48,7 @@ namespace net
 	{
 	public:
 
+		uint8_t duration;
 		uint16_t count;
 		uint8_t* inputs;
 
@@ -117,6 +119,17 @@ namespace net
 		virtual ~AbstractExportStrategy();
 		virtual void Export(ServerStatePayload) = 0;
 		virtual void Export(def::user_id, UserInputPayload) = 0;
+
+	};
+
+	class AbstractImportStrategy
+	{
+	public:
+
+		AbstractImportStrategy();
+		virtual ~AbstractImportStrategy();
+		virtual std::tuple<size_t, def::user_id, ServerStatePayload*> ImportServerState() = 0;
+		virtual std::tuple<size_t, UserInputPayload*> ImportUserInput() = 0;
 
 	};
 
