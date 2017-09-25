@@ -2,6 +2,7 @@
 
 #include "AbstractServer.hpp"
 #include "..\Networking\Protocol.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <chrono>
 #include <thread>
@@ -10,7 +11,7 @@
 namespace server
 {
 
-	using tick = std::chrono::duration<double, std::ratio<1, 90>>;
+	using tick = def::server_tick;
 
 	class GameServer : public AbstractServer
 	{
