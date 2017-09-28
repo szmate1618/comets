@@ -50,6 +50,10 @@ namespace net
 		}
 	}
 
+	void ClientsideProtocol::Broadcast()
+	{
+	}
+
 	ServersideProtocol::ServersideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy, AbstractImportStrategy& importstrategy)
 		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
@@ -65,6 +69,10 @@ namespace net
 	}
 
 	void ServersideProtocol::Tick(def::time duration)
+	{
+	}
+
+	void ServersideProtocol::Broadcast()
 	{
 	}
 
