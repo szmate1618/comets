@@ -117,8 +117,8 @@ namespace net
 
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
-		virtual void Export(ServerStatePayload) = 0;
-		virtual void Export(def::user_id, UserInputPayload) = 0;
+		virtual void Export(ServerStatePayload&) = 0;
+		virtual void Export(def::user_id, UserInputPayload&) = 0;
 
 	};
 
