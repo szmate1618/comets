@@ -90,7 +90,7 @@ namespace net
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, count);
-		for (ServerObject* i = objects; i - objects < count; ++i)
+		for (ServerObject* i = objects; i - objects < count; ++i) //TODO: Somehow handle overindexing.
 		{
 			packet_data_current += i->IO<io_mode>(packet_data_current);
 		}
