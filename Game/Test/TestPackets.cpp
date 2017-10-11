@@ -31,7 +31,7 @@ namespace Test
 			uint8_t UI8;
 			uint16_t UI16;
 			uint32_t UI32;
-			uint16_t count; //This is intentionally less than the actual length of the array, for testing.
+			uint16_t count;
 			uint32_t elements[10];
 			DummyPacket() = default;
 			DummyPacket(bool)
