@@ -110,7 +110,7 @@ namespace Test
 		TEST_METHOD(ServerHeader)
 		{
 			net::ServerHeader header_empty{};
-			net::ServerHeader header_with_data{ 1, 2, 3 };
+			net::ServerHeader header_with_data{ 1, 2, 3, 4, 5 };
 			uint8_t buffer[def::max_packet_size];
 
 			header_with_data.IO<net::Write>(buffer);
@@ -122,7 +122,7 @@ namespace Test
 		TEST_METHOD(ServerObject)
 		{
 			net::ServerObject serverobject_empty{};
-			net::ServerObject serverobject_with_data{ 1, 2, 3 };
+			net::ServerObject serverobject_with_data{ 1, 2, 3, 4 };
 			uint8_t buffer[def::max_packet_size];
 
 			serverobject_with_data.IO<net::Write>(buffer);
