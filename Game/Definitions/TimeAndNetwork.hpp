@@ -18,7 +18,7 @@ namespace def
 
 	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
-	using user_id = int;
+	using entity_id = long;
 	static constexpr uint8_t protocol_id = 77;
 
 }
