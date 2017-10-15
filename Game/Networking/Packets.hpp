@@ -128,7 +128,7 @@ namespace net
 
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
-		virtual std::tuple<size_t, def::entity_id, ServerStatePayload*> ImportServerState() = 0;
+		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() = 0;
 		virtual std::tuple<size_t, ClientIntputPayload*> ImportClientIntput() = 0;
 
 	};
