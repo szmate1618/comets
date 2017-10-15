@@ -35,7 +35,7 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
-	bool UserInputPayload::operator==(const UserInputPayload& other) const
+	bool ClientIntputPayload::operator==(const ClientIntputPayload& other) const
 	{
 		if (duration != other.duration) return false;
 		if (count != other.count) return false;
@@ -47,7 +47,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t UserInputPayload::IO(uint8_t* packet_data_start)
+	size_t ClientIntputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, duration);
@@ -126,15 +126,15 @@ namespace net
 	template size_t Header::IO<Write>(uint8_t*);
 	template size_t ServerHeader::IO<Read>(uint8_t*);
 	template size_t ServerHeader::IO<Write>(uint8_t*);
-	template size_t UserInputPayload::IO<Read>(uint8_t*);
-	template size_t UserInputPayload::IO<Write>(uint8_t*);
+	template size_t ClientIntputPayload::IO<Read>(uint8_t*);
+	template size_t ClientIntputPayload::IO<Write>(uint8_t*);
 	template size_t ServerObject::IO<Read>(uint8_t*);
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
-	template class Packet<Header, UserInputPacket>;
-	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
-	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
+	template class Packet<Header, ClientIntputPacket>;
+	template size_t Packet<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePacket>;
 	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);

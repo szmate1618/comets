@@ -12,9 +12,9 @@ template<> inline std::wstring unittest::ToString<uint16_t>(const uint16_t& t) {
 template<> inline std::wstring unittest::ToString<net::Header>(const net::Header& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerHeader>(const net::ServerHeader& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerObject>(const net::ServerObject& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
-template<> inline std::wstring unittest::ToString<net::UserInputPayload>(const net::UserInputPayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ClientIntputPayload>(const net::ClientIntputPayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerStatePayload>(const net::ServerStatePayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
-template<> inline std::wstring unittest::ToString<net::UserInputPacket>(const net::UserInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
+template<> inline std::wstring unittest::ToString<net::ClientIntputPacket>(const net::ClientIntputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerStatePacket>(const net::ServerStatePacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 
 namespace Test
@@ -131,19 +131,19 @@ namespace Test
 			Assert::AreEqual(serverobject_with_data, serverobject_empty, L"Failed to write and/or read back ServerObject.");
 		}
 
-		TEST_METHOD(UserInputPayload)
+		TEST_METHOD(ClientIntputPayload)
 		{
 			uint8_t empty_input_buffer[10];
-			net::UserInputPayload userinput_empty{};
-			userinput_empty.inputs = empty_input_buffer;
+			net::ClientIntputPayload ClientIntput_empty{};
+			ClientIntput_empty.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::UserInputPayload userinput_with_data{ 34, 4, inputs };
+			net::ClientIntputPayload ClientIntput_with_data{ 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
-			userinput_with_data.IO<net::Write>(buffer);
-			userinput_empty.IO<net::Read>(buffer);
+			ClientIntput_with_data.IO<net::Write>(buffer);
+			ClientIntput_empty.IO<net::Read>(buffer);
 
-			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPayload.");
+			Assert::AreEqual(ClientIntput_with_data, ClientIntput_empty, L"Failed to write and/or read back ClientIntputPayload.");
 		}
 
 		TEST_METHOD(ServerStatePayload)
@@ -161,31 +161,31 @@ namespace Test
 			Assert::AreEqual(serverstate_with_data, serverstate_empty, L"Failed to write and/or read back ServerStatePayload.");
 		}
 
-		TEST_METHOD(UserInputPacketWithoutArray)
+		TEST_METHOD(ClientIntputPacketWithoutArray)
 		{
-			net::UserInputPacket userinput_empty{};
-			net::UserInputPacket userinput_with_data{ 1, 2, 3, 34, 0, nullptr };
+			net::ClientIntputPacket ClientIntput_empty{};
+			net::ClientIntputPacket ClientIntput_with_data{ 1, 2, 3, 34, 0, nullptr };
 			uint8_t buffer[def::max_packet_size];
 
-			userinput_with_data.IO<net::Write>(buffer);
-			userinput_empty.IO<net::Read>(buffer);
+			ClientIntput_with_data.IO<net::Write>(buffer);
+			ClientIntput_empty.IO<net::Read>(buffer);
 
-			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPacket without array.");
+			Assert::AreEqual(ClientIntput_with_data, ClientIntput_empty, L"Failed to write and/or read back ClientIntputPacket without array.");
 		}
 
-		TEST_METHOD(UserInputPacket)
+		TEST_METHOD(ClientIntputPacket)
 		{
 			uint8_t empty_input_buffer[10];
-			net::UserInputPacket userinput_empty{};
-			userinput_empty.payload.inputs = empty_input_buffer;
+			net::ClientIntputPacket ClientIntput_empty{};
+			ClientIntput_empty.payload.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::UserInputPacket userinput_with_data{ 1, 2, 3, 34, 4, inputs };
+			net::ClientIntputPacket ClientIntput_with_data{ 1, 2, 3, 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
-			userinput_with_data.IO<net::Write>(buffer);
-			userinput_empty.IO<net::Read>(buffer);
+			ClientIntput_with_data.IO<net::Write>(buffer);
+			ClientIntput_empty.IO<net::Read>(buffer);
 
-			Assert::AreEqual(userinput_with_data, userinput_empty, L"Failed to write and/or read back UserInputPacket.");
+			Assert::AreEqual(ClientIntput_with_data, ClientIntput_empty, L"Failed to write and/or read back ClientIntputPacket.");
 		}
 
 		TEST_METHOD(ServerStatePacketWithoutArray)

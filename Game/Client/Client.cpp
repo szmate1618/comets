@@ -12,7 +12,7 @@ void Client::MainLoop()
 {
 	ReadPackets();
 	ProcessPackets();
-	ReadUserInput();
+	ReadClientIntput();
 	SendPackets();
 }
 
@@ -24,7 +24,7 @@ void Client::ProcessPackets()
 {
 }
 
-void Client::ReadUserInput()
+void Client::ReadClientIntput()
 {
 }
 

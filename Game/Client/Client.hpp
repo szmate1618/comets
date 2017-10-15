@@ -12,6 +12,6 @@ private:
 
 	void ReadPackets();
 	void ProcessPackets();
-	void ReadUserInput();
+	void ReadClientIntput();
 	void SendPackets();
 };

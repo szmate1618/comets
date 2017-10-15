@@ -10,7 +10,7 @@
 namespace net
 {
 
-	enum packet_types { user_input, server_state };
+	enum packet_types { client_input, server_state };
 
 	class Header
 	{
@@ -44,18 +44,18 @@ namespace net
 
 	};
 
-	class UserInputPayload
+	class ClientIntputPayload
 	{
 	public:
 
 		uint8_t duration;
-		uint16_t count;
+		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
 
-		UserInputPayload() = default;
-		UserInputPayload(const UserInputPayload& other) = default;
-		UserInputPayload& operator=(const UserInputPayload& other) = default;
-		bool operator==(const UserInputPayload& other) const;
+		ClientIntputPayload() = default;
+		ClientIntputPayload(const ClientIntputPayload& other) = default;
+		ClientIntputPayload& operator=(const ClientIntputPayload& other) = default;
+		bool operator==(const ClientIntputPayload& other) const;
 		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
@@ -108,7 +108,7 @@ namespace net
 
 	};
 
-	using UserInputPacket = Packet<Header, UserInputPayload>;
+	using ClientIntputPacket = Packet<Header, ClientIntputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
 
 	class AbstractExportStrategy
@@ -118,7 +118,7 @@ namespace net
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
 		virtual void Export(const ServerStatePayload&) = 0;
-		virtual void Export(def::user_id, const UserInputPayload&) = 0;
+		virtual void Export(def::user_id, const ClientIntputPayload&) = 0;
 
 	};
 
@@ -129,7 +129,7 @@ namespace net
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
 		virtual std::tuple<size_t, def::user_id, ServerStatePayload*> ImportServerState() = 0;
-		virtual std::tuple<size_t, UserInputPayload*> ImportUserInput() = 0;
+		virtual std::tuple<size_t, ClientIntputPayload*> ImportClientIntput() = 0;
 
 	};
 
