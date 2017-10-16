@@ -16,7 +16,7 @@ namespace server
 	void GameServer::Tick(def::time duration)
 	{
 		ProcessPackets();
-		TestCollisions();
+		TestCollisions(); //TODO: Why not UpdateState first?
 		UpdateState(duration);
 		SendPackets();
 	}
