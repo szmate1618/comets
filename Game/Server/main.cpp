@@ -5,7 +5,7 @@
 #include <chrono>
 
 
-int main()
+int main() //TODO: Maybe factor this out into a class for better testability.
 {
 	server::AbstractServer* gameserver = &server::GameServer{};
 	
