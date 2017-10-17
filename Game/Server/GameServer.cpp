@@ -21,7 +21,7 @@ namespace server
 		SendPackets();
 	}
 
-	bool GameServer::Running()
+	bool GameServer::Running() //TODO: This basically returns a constant. Why don't we have a Stop method here?
 	{
 		return running;
 	}
