@@ -29,8 +29,8 @@ namespace server
 
 		void ReadPackets();
 		void ProcessPackets();
-		void TestCollisions();
 		void UpdateState(def::time);
+		void TestCollisions();
 		void SendPackets();
 	};
 

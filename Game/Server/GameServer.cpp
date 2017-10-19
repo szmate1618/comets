@@ -16,8 +16,8 @@ namespace server
 	void GameServer::Tick(def::time duration)
 	{
 		ProcessPackets();
-		TestCollisions(); //TODO: Why not UpdateState first?
 		UpdateState(duration);
+		TestCollisions();
 		SendPackets();
 	}
 
@@ -32,6 +32,7 @@ namespace server
 		def::time backoff = 0s;
 	}
 
+	//Read input, update entity orientation, acceleration, forces, etc.
 	void GameServer::ProcessPackets()
 	{
 		while (Running())
@@ -40,11 +41,11 @@ namespace server
 		}
 	}
 
-	void GameServer::TestCollisions()
+	void GameServer::UpdateState(def::time duration)
 	{
 	}
 
-	void GameServer::UpdateState(def::time duration)
+	void GameServer::TestCollisions()
 	{
 	}
 
