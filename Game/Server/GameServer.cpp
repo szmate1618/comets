@@ -12,7 +12,7 @@ namespace server
 	GameServer::GameServer() :
 		export_strategy{ entity_buffer, client_input_buffer },
 		import_strategy{ server_state_buffer },
-		protocol{ 0, export_strategy, import_strategy },
+		protocol{ def::server_port, export_strategy, import_strategy },
 		running{ true },
 		input_thread{ [=] { ReadPackets(); } }
 	{

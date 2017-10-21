@@ -21,4 +21,6 @@ namespace def
 	using entity_id = long;
 	static constexpr uint8_t protocol_id = 77;
 
+	static constexpr unsigned short server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
+
 }

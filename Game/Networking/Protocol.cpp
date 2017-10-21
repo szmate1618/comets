@@ -4,7 +4,7 @@
 namespace net
 {
 
-	AbstractProtocol::AbstractProtocol(unsigned int port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy&)
+	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy&)
 		: socket{ port }, exportstrategy{ exportstrategy }, importstrategy{ importstrategy }
 	{
 	}
@@ -13,7 +13,7 @@ namespace net
 	{
 	}
 
-	ClientsideProtocol::ClientsideProtocol(unsigned int port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+	ClientsideProtocol::ClientsideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
 		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
@@ -54,7 +54,7 @@ namespace net
 	{
 	}
 
-	ServersideProtocol::ServersideProtocol(unsigned int port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
 		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
