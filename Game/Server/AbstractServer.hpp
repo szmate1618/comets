@@ -15,7 +15,7 @@ namespace server
 		AbstractServer();
 		virtual ~AbstractServer();
 		virtual void Tick(def::time) = 0;
-		virtual bool Running() = 0;
+		virtual bool Running() const = 0;
 
 	private:
 

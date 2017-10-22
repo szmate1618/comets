@@ -1,6 +1,7 @@
 #include "GameServer.hpp"
 
 #include <cassert>
+#include <chrono>
 
 
 namespace server
@@ -31,24 +32,37 @@ namespace server
 		SendPackets();
 	}
 
-	bool GameServer::Running() //TODO: This basically returns a constant. Why don't we have a Stop method here?
+	//This must be thread safe, because it's also called from ReadPackets.
+	bool GameServer::Running() const //TODO: This basically returns a constant. Why don't we have a Stop method here?
 	{
-		return running;
+		return running.load();
 	}
 
-	void GameServer::ReadPackets()
+	void GameServer::ReadPackets() //Uses a totally ad hoc back-off strategy.
 	{
 		using namespace std::chrono_literals;
 		def::time backoff = 0s;
+		auto start = std::chrono::steady_clock::now();
+		while (Running())
+		{
+			if (backoff > 0s)
+			{
+				std::this_thread::sleep_for(backoff);
+				backoff = 0s;
+			}
+			for (int i = 0; i < 10; i++)
+			{
+				auto elapsed_time = std::chrono::steady_clock::now() - start;
+				start = std::chrono::steady_clock::now();
+				if (protocol.Tick(elapsed_time) < 0) backoff += def::max_socket_read_backoff / 10;
+				else backoff -= def::max_socket_read_backoff / 10;
+			}
+		}
 	}
 
 	//Read input, update entity orientation, acceleration, forces, etc.
 	void GameServer::ProcessPackets()
 	{
-		while (Running())
-		{
-
-		}
 	}
 
 	void GameServer::UpdateState(def::time duration)
@@ -61,6 +75,7 @@ namespace server
 
 	void GameServer::SendPackets()
 	{
+		protocol.Broadcast();
 	}
 
 	GameServer::ExportStrategy::ExportStrategy(std::vector<def::entity_id>& eb, std::vector<net::ClientIntputPayload>& cib) {};

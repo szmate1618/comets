@@ -104,6 +104,7 @@ namespace net
 						(sockaddr*)&from,
 						&fromLength);
 
+		//TODO: These lines only make sense if bytes > 0, maybe add a check.
 		unsigned int from_address = ntohl(from.sin_addr.s_addr);
 		unsigned int from_port = ntohs(from.sin_port);
 		sender = Address(from_address, from_port);

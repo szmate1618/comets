@@ -8,6 +8,7 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <atomic>
 
 
 namespace server
@@ -22,7 +23,7 @@ namespace server
 		GameServer();
 		virtual ~GameServer() override;
 		virtual void Tick(def::time) override;
-		virtual bool Running() override;
+		virtual bool Running() const override;
 
 	private:
 
@@ -54,7 +55,7 @@ namespace server
 		ExportStrategy export_strategy;
 		ImportStrategy import_strategy;
 		net::ServersideProtocol protocol;
-		bool running;
+		std::atomic<bool> running;
 		std::thread input_thread;
 
 		void ReadPackets();

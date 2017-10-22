@@ -12,7 +12,8 @@ namespace def
 	using server_tick = std::chrono::duration<double, std::ratio<1, 90>>;
 
 	static constexpr time connection_timeout = 5s;
-	static constexpr time max_sleep = 1s;
+	static constexpr time max_sleep = 1s; //TODO: Clean this up. Do we want to use this? Or we prefer max_socket_read_backoff?
+	static constexpr time max_socket_read_backoff = 10ms;
 	static constexpr time server_rate = server_tick(1);
 	static constexpr time client_rate = server_tick(2);
 

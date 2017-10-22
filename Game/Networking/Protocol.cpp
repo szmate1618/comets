@@ -27,7 +27,7 @@ namespace net
 	{
 	}
 
-	void ClientsideProtocol::Tick(def::time duration)
+	int ClientsideProtocol::Tick(def::time duration)
 	{
 		switch (current_state)
 		{
@@ -48,6 +48,7 @@ namespace net
 		}
 		default: { break; } //TODO: Errorlog undefined state.
 		}
+		return -1; //TODO: Implement this.
 	}
 
 	void ClientsideProtocol::Broadcast()
@@ -68,8 +69,9 @@ namespace net
 	{
 	}
 
-	void ServersideProtocol::Tick(def::time duration)
+	int ServersideProtocol::Tick(def::time duration)
 	{
+		return -1; //TODO: Implement this.
 	}
 
 	void ServersideProtocol::Broadcast()
