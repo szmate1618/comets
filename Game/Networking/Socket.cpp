@@ -17,7 +17,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 namespace net
 {
 
-	int Socket::sockets_in_scope = 0;
+	int Socket::sockets_in_scope = 0; //TODO: Make this atomic.
 
 	Socket::Socket() : is_open{ false }
 	{
