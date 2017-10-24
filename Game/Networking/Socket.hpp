@@ -61,7 +61,7 @@ namespace net
 		static void AssertAndLog(bool, const char*);
 		static void MaybeInitializeSockets(); //Only call this from constructors.
 		static void MaybeCleanupSockets(); //Only call this from destructors.
-		static int sockets_in_scope;
+		static int sockets_in_scope; //TODO: Find a better name, this is misleading, it's not just the ones in scope.
 
 	};
 
