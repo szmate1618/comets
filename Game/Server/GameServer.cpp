@@ -48,8 +48,8 @@ namespace server
 			if (backoff > 0s)
 			{
 				std::this_thread::sleep_for(backoff);
-				backoff = 0s;
 			}
+			backoff = 0s;
 			for (int i = 0; i < 10; i++)
 			{
 				auto elapsed_time = std::chrono::steady_clock::now() - start;
