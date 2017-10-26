@@ -6,7 +6,7 @@ namespace entity
 
 	void Engine::Rotate(double radian)
 	{
-	/*	for(geo::point_2d& p: ship.vertices)
+	/*	for(const geo::point_2d& p: ship.vertices)
 		{
 			p = geo::point_2d_rotated(p, radian);
 		}*/

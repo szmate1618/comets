@@ -57,9 +57,9 @@ namespace Test
 			entity::SimplePartition partition;
 			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
 			long accumulator = 0;
-			for(iterator i: partition)
+			for(const iterator& i: partition)
 			{
-				for(iterator j: partition)
+				for(const iterator& j: partition)
 				{
 					#pragma warning( suppress : 4302 4311 )
 					(accumulator *= 100) += 10 * reinterpret_cast<long>(*i) + reinterpret_cast<long>(*j);
@@ -74,11 +74,11 @@ namespace Test
 			entity::SimplePartition partition;
 			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
 			long accumulator = 0;
-			for(iterator i: partition)
+			for(const iterator& i: partition)
 			{
 				#pragma warning( suppress : 4302 4311 )
 				if (reinterpret_cast<long>(*i) == 1) continue;
-				for(iterator j: partition)
+				for(const iterator& j: partition)
 				{
 					#pragma warning( suppress : 4302 4311 )
 					if (reinterpret_cast<long>(*j) == 2) continue;
