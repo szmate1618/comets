@@ -34,7 +34,7 @@ namespace net
 				registry.end(),
 				[this](auto entry)->bool { return entry.second.timeout_at <= internal_clock; }
 			);
-			if (unused_slot != registry.end()) //TODO: DO some logging here.
+			if (unused_slot != registry.end()) //TODO: Do some logging here.
 			{
 				registry[entity_id].address = address; //Should be unnecessary most of the time.
 				registry[entity_id].timeout_at = internal_clock + def::session_timeout;
