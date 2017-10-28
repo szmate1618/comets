@@ -71,7 +71,10 @@ namespace net
 
 	int ServersideProtocol::Tick(def::time duration)
 	{
-		return -1; //TODO: Implement this.
+		net::Address from;
+		int bytes_read = socket.Receive(from);
+
+		return bytes_read;
 	}
 
 	void ServersideProtocol::Broadcast()

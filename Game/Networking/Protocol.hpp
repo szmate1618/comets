@@ -21,7 +21,7 @@ namespace net
 		virtual int Tick(def::time) = 0; //Handle incoming packets, forward them via the specified exportstrategy.
 		virtual void Broadcast() = 0; //Import packets via the specified importstrategy, broadcast them to the peers (includes congestion avoidance).
 
-	private:
+	protected:
 
 		Socket socket;
 		const AbstractExportStrategy& exportstrategy;

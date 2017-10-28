@@ -13,7 +13,7 @@ namespace def
 	using server_tick = std::chrono::duration<double, std::ratio<1, 90>>;
 
 	//Time constants
-	static constexpr time connection_timeout = 5s;
+	static constexpr time session_timeout = 5s;
 	static constexpr time max_sleep = 1s; //TODO: Clean this up. Do we want to use this? Or we prefer max_socket_read_backoff?
 	static constexpr time max_socket_read_backoff = 10ms;
 	static constexpr time server_rate = server_tick(1);
@@ -28,6 +28,6 @@ namespace def
 
 	//Server configuration
 	static constexpr unsigned short server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
-	static constexpr int max_clients = 1000; //Yeah, this one, too. //TODO: Benchmark how many we can actually serve.
+	static constexpr int max_sessions = 1000; //Yeah, this one, too. //TODO: Benchmark how many we can actually serve.
 
 }
