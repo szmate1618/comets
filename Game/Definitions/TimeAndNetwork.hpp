@@ -28,6 +28,6 @@ namespace def
 
 	//Server configuration
 	static constexpr unsigned short server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
-	static constexpr int max_sessions = 1000; //Yeah, this one, too. //TODO: Benchmark how many we can actually serve.
+	static constexpr int max_sessions = 1000; //Yeah, this one, too. //TODO: Benchmark how many we can actually serve. //TODO: Currently this is not enforced.
 
 }
