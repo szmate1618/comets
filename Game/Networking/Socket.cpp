@@ -17,7 +17,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 namespace net
 {
 
-	int Socket::sockets_in_scope = 0; //TODO: Protocol is essentially 2-threaded (Tick vs Broadcast), make this atomic.
+	int Socket::sockets_in_scope = 0; //TODO: Protocol is essentially 2-threaded (Tick vs Respond), make this atomic.
 
 	Socket::Socket() : is_open{ false }
 	{

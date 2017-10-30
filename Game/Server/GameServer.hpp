@@ -33,8 +33,8 @@ namespace server
 
 			ExportStrategy(std::vector<def::entity_id>&, std::vector<net::ClientIntputPayload>&);
 			virtual ~ExportStrategy() override;
-			virtual void Export(const net::ServerStatePayload&) override;
-			virtual void Export(def::entity_id, const net::ClientIntputPayload&) override;
+			virtual void Export(const net::ServerStatePayload&) const override;
+			virtual void Export(def::entity_id, const net::ClientIntputPayload&) const override;
 
 		};
 
@@ -44,8 +44,8 @@ namespace server
 
 			ImportStrategy(std::vector<net::ServerStatePayload>&);
 			virtual ~ImportStrategy() override;
-			virtual std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() override;
-			virtual std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() override;
+			virtual std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() const override;
+			virtual std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const override;
 
 		};
 

@@ -75,22 +75,22 @@ namespace server
 
 	void GameServer::SendPackets()
 	{
-		protocol.Broadcast();
+		protocol.Respond();
 	}
 
 	GameServer::ExportStrategy::ExportStrategy(std::vector<def::entity_id>& eb, std::vector<net::ClientIntputPayload>& cib) {};
 	GameServer::ExportStrategy::~ExportStrategy() {};
-	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) { assert(false && "Not actually implemented, not supposed to be called."); };
-	void GameServer::ExportStrategy::Export(def::entity_id, const net::ClientIntputPayload&) {}; //TODO: Actually implement this.
+	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); };
+	void GameServer::ExportStrategy::Export(def::entity_id, const net::ClientIntputPayload&) const {}; //TODO: Actually implement this.
 
 	GameServer::ImportStrategy::ImportStrategy(std::vector<net::ServerStatePayload>& ssb) {};
 	GameServer::ImportStrategy::~ImportStrategy() {};
-	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState()
+	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
 	{
 		std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> dummy_return;
 		return dummy_return;
 	}; //TODO: Actually implement this.
-	std::tuple<size_t, net::ClientIntputPayload*> GameServer::ImportStrategy::ImportClientIntput() 
+	std::tuple<size_t, net::ClientIntputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
 	{
 		assert(false && "Not actually implemented, not supposed to be called.");
 		std::tuple<size_t, net::ClientIntputPayload*> dummy_return;

@@ -19,7 +19,7 @@ namespace net
 		AbstractProtocol(unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		virtual ~AbstractProtocol();
 		virtual int Tick(def::time) = 0; //Handle incoming packets, forward them via the specified exportstrategy.
-		virtual void Broadcast() = 0; //Import packets via the specified importstrategy, broadcast them to the peers (includes congestion avoidance).
+		virtual void Respond() = 0; //Import packets via the specified importstrategy, Respond them to the peers (includes congestion avoidance).
 
 	protected:
 
@@ -41,7 +41,7 @@ namespace net
 		ClientsideProtocol() = delete;
 		virtual ~ClientsideProtocol() override;
 		virtual int Tick(def::time) override;
-		virtual void Broadcast() override;
+		virtual void Respond() override;
 
 	private:
 
@@ -54,13 +54,18 @@ namespace net
 	{
 	public:
 
+		ServersideProtocol(unsigned short, unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol(unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol(const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol() = delete;
 		virtual ~ServersideProtocol() override;
 		virtual int Tick(def::time) override;
-		virtual void Broadcast() override;
+		virtual void Respond() override;
 
+	private:
+
+		Socket& in_socket = socket;
+		Socket out_socket;
 	};
 
 }

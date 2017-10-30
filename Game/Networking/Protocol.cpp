@@ -51,17 +51,22 @@ namespace net
 		return -1; //TODO: Implement this.
 	}
 
-	void ClientsideProtocol::Broadcast()
+	void ClientsideProtocol::Respond()
+	{
+	}
+
+	ServersideProtocol::ServersideProtocol(unsigned short in_port, unsigned short out_port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ in_port, exportstrategy, importstrategy }, out_socket{ out_port }
 	{
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }, out_socket{ 0 }
 	{
 	}
 
 	ServersideProtocol::ServersideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ 0, exportstrategy, importstrategy }
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }, out_socket{ 0 }
 	{
 	}
 
@@ -77,8 +82,9 @@ namespace net
 		return bytes_read;
 	}
 
-	void ServersideProtocol::Broadcast()
+	void ServersideProtocol::Respond()
 	{
+		auto[count, entities, payloads] = importstrategy.ImportServerState();
 	}
 
 }
