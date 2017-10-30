@@ -113,6 +113,22 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
+	template<typename H, typename P>
+	bool PointeredPacket<H, P>::operator==(const PointeredPacket<H, P>& other) const
+	{
+		return *header == *(other.header) && *payload == *(other.payload);
+	}
+
+	template<typename H, typename P>
+	template<typename io_mode>
+	size_t PointeredPacket<H, P>::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += header->IO<io_mode>(packet_data_current);
+		packet_data_current += payload->IO<io_mode>(packet_data_current);
+		return packet_data_current - packet_data_start;
+	}
+
 	AbstractExportStrategy::AbstractExportStrategy() {};
 
 	AbstractExportStrategy::~AbstractExportStrategy() {};
@@ -138,5 +154,11 @@ namespace net
 	template class Packet<ServerHeader, ServerStatePacket>;
 	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ClientIntputPacket>;
+	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ServerStatePacket>;
+	template size_t PointeredPacket<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
 
 }

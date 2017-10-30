@@ -108,6 +108,22 @@ namespace net
 
 	};
 
+	template<typename H, typename P>
+	class PointeredPacket //This will help to avoid some unnecessary copies.
+	{
+	public:
+
+		H* header;
+		P* payload;
+
+		PointeredPacket() = default;
+		PointeredPacket(const PointeredPacket<H, P>& other) = default;
+		PointeredPacket<H, P>& operator=(const PointeredPacket<H, P>& other) = default;
+		bool operator==(const PointeredPacket<H, P>& other) const;
+		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+
+	};
+
 	using ClientIntputPacket = Packet<Header, ClientIntputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
 
