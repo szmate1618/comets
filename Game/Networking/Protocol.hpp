@@ -54,7 +54,6 @@ namespace net
 	{
 	public:
 
-		ServersideProtocol(unsigned short, unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol(unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol(const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol() = delete;
@@ -62,10 +61,6 @@ namespace net
 		virtual int Tick(def::time) override;
 		virtual void Respond() override;
 
-	private:
-
-		Socket& in_socket = socket;
-		Socket out_socket;
 	};
 
 }

@@ -55,18 +55,13 @@ namespace net
 	{
 	}
 
-	ServersideProtocol::ServersideProtocol(unsigned short in_port, unsigned short out_port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ in_port, exportstrategy, importstrategy }, out_socket{ out_port }
-	{
-	}
-
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }, out_socket{ 0 }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
 
 	ServersideProtocol::ServersideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ 0, exportstrategy, importstrategy }, out_socket{ 0 }
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }
 	{
 	}
 
