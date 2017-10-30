@@ -163,14 +163,14 @@ namespace Test
 
 		TEST_METHOD(ClientIntputPacketWithoutArray)
 		{
-			net::ClientIntputPacket ClientIntput_empty{};
-			net::ClientIntputPacket ClientIntput_with_data{ 1, 2, 3, 34, 0, nullptr };
+			net::ClientIntputPacket clientintput_empty{};
+			net::ClientIntputPacket clientintput_with_data{ 1, 2, 3, 34, 0, nullptr };
 			uint8_t buffer[def::max_packet_size];
 
-			ClientIntput_with_data.IO<net::Write>(buffer);
-			ClientIntput_empty.IO<net::Read>(buffer);
+			clientintput_with_data.IO<net::Write>(buffer);
+			clientintput_empty.IO<net::Read>(buffer);
 
-			Assert::AreEqual(ClientIntput_with_data, ClientIntput_empty, L"Failed to write and/or read back ClientIntputPacket without array.");
+			Assert::AreEqual(clientintput_with_data, clientintput_empty, L"Failed to write and/or read back ClientIntputPacket without array.");
 		}
 
 		TEST_METHOD(ClientIntputPacket)
