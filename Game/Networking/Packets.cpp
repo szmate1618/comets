@@ -151,14 +151,14 @@ namespace net
 	template class Packet<Header, ClientIntputPacket>;
 	template size_t Packet<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
 	template size_t Packet<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
-	template class Packet<ServerHeader, ServerStatePacket>;
-	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
-	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
+	template class Packet<ServerHeader, ServerStatePayload>;
+	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
 	template class PointeredPacket<Header, ClientIntputPacket>;
 	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
-	template class PointeredPacket<ServerHeader, ServerStatePacket>;
-	template size_t PointeredPacket<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
-	template size_t PointeredPacket<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ServerStatePayload>;
+	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
 
 }

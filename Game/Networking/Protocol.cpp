@@ -56,12 +56,12 @@ namespace net
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }, registry{}, sequence_number{ 0 }
 	{
 	}
 
 	ServersideProtocol::ServersideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ 0, exportstrategy, importstrategy }
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }, registry{}, sequence_number{ 0 }
 	{
 	}
 
@@ -79,7 +79,24 @@ namespace net
 
 	void ServersideProtocol::Respond()
 	{
+		PointeredPacket<ServerHeader, ServerStatePayload> packet;
+		ServerHeader header = { def::protocol_id, sequence_number, server_state, 0, 0 }; //TODO: Implement acking mechanism.
+		packet.header = &header;
 		auto[count, entities, payloads] = importstrategy.ImportServerState();
+		for (auto i = 0; i < count; i++)
+		{
+			packet.payload = &(payloads[i]);
+			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
+			if (registry.Contains(entities[i]))
+			{
+				socket.Send(registry.GetAddress(entities[i]), buffer, bytes_written);
+				sequence_number++;
+			}
+			else
+			{
+				//TODO: Errorlog this.
+			}
+		}
 	}
 
 }

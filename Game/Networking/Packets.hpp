@@ -109,7 +109,7 @@ namespace net
 	};
 
 	template<typename H, typename P>
-	class PointeredPacket //This will help to avoid some unnecessary copies.
+	class PointeredPacket //This will help to avoid some unnecessary copies. //TODO: Write tests for this.
 	{
 	public:
 

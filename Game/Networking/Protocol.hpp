@@ -3,6 +3,7 @@
 #include "Packets.hpp"
 #include "Socket.hpp"
 #include "Connection.hpp"
+#include "ClientRegistry.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <chrono>
@@ -60,6 +61,12 @@ namespace net
 		virtual ~ServersideProtocol() override;
 		virtual int Tick(def::time) override;
 		virtual void Respond() override;
+
+	private:
+
+		ClientRegistry registry;
+		uint32_t sequence_number;
+		uint8_t buffer[def::max_packet_size];
 
 	};
 
