@@ -137,7 +137,7 @@ namespace Test
 			net::ClientIntputPayload ClientIntput_empty{};
 			ClientIntput_empty.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::ClientIntputPayload ClientIntput_with_data{ 34, 4, inputs };
+			net::ClientIntputPayload ClientIntput_with_data{ 334, 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
 			ClientIntput_with_data.IO<net::Write>(buffer);
@@ -164,7 +164,7 @@ namespace Test
 		TEST_METHOD(ClientIntputPacketWithoutArray)
 		{
 			net::ClientIntputPacket clientintput_empty{};
-			net::ClientIntputPacket clientintput_with_data{ 1, 2, 3, 34, 0, nullptr };
+			net::ClientIntputPacket clientintput_with_data{ 1, 2, 3, 334, 34, 0, nullptr };
 			uint8_t buffer[def::max_packet_size];
 
 			clientintput_with_data.IO<net::Write>(buffer);
@@ -179,7 +179,7 @@ namespace Test
 			net::ClientIntputPacket ClientIntput_empty{};
 			ClientIntput_empty.payload.inputs = empty_input_buffer;
 			uint8_t inputs[4] = { 5, 6, 7, 8 };
-			net::ClientIntputPacket ClientIntput_with_data{ 1, 2, 3, 34, 4, inputs };
+			net::ClientIntputPacket ClientIntput_with_data{ 1, 2, 3, 334, 34, 4, inputs };
 			uint8_t buffer[def::max_packet_size];
 
 			ClientIntput_with_data.IO<net::Write>(buffer);

@@ -112,7 +112,7 @@ namespace net
 		return bytes;
 	}
 
-	int Socket::Receive(Address& sender) const
+	int Socket::Receive(Address& sender) const //TODO: This should return a size_t, shouldn't it?
 	{
 		return Receive(sender, (void*)recv_buffer, def::max_packet_size); //TODO: Use static cast?
 	}

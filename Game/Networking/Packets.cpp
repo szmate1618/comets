@@ -37,6 +37,7 @@ namespace net
 
 	bool ClientIntputPayload::operator==(const ClientIntputPayload& other) const
 	{
+		if (entity_id != other.entity_id) return false;
 		if (duration != other.duration) return false;
 		if (count != other.count) return false;
 		for (int i = 0; i < count; ++i)
@@ -50,6 +51,7 @@ namespace net
 	size_t ClientIntputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
 		packet_data_current += io_mode::Process(packet_data_current, duration);
 		packet_data_current += io_mode::Process(packet_data_current, count);
 		for (uint8_t* i = inputs; i - inputs < count; ++i)

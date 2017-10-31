@@ -91,7 +91,7 @@ namespace Test
 			Assert::AreNotEqual(0, static_cast<int>(from.GetPort()), L"Ports do not match.");
 		}
 
-		TEST_METHOD(ExternalBuffer)
+		TEST_METHOD(CharExternalBuffer)
 		{
 			net::Address address1{ 127, 0, 0, 1, 11111 }, address2{ 127, 0, 0, 1, 22222 };
 			net::Socket sender, responder;
@@ -112,6 +112,53 @@ namespace Test
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(message[i], buffer[i], L"This character does not much, which quite likely means that none of them does.");
+			}
+		}
+
+		TEST_METHOD(Uint8_tInput)
+		{
+			net::Address address1{ 127, 0, 0, 1, 11111 }, address2{ 127, 0, 0, 1, 22222 };
+			net::Socket sender, responder;
+			const uint8_t message[] = "Mortal Wombat III";
+
+			sender.Open(address1.GetPort());
+			responder.Open(address2.GetPort());
+
+			sender.Send(address2, message, sizeof(message));
+
+			std::this_thread::sleep_for(10ms);
+			net::Address from;
+			int bytes_read = responder.Receive(from);
+			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
+			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
+			Assert::AreEqual(sizeof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			for (int i = 0; i < bytes_read; i++)
+			{
+				Assert::AreEqual(static_cast<char>(message[i]), responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
+			}
+		}
+
+		TEST_METHOD(Uint8_tExternalBuffer)
+		{
+			net::Address address1{ 127, 0, 0, 1, 11111 }, address2{ 127, 0, 0, 1, 22222 };
+			net::Socket sender, responder;
+			const char message[] = "Mortal Wombat III";
+
+			sender.Open(address1.GetPort());
+			responder.Open(address2.GetPort());
+
+			sender.Send(address2, message, sizeof(message));
+
+			std::this_thread::sleep_for(10ms);
+			net::Address from;
+			uint8_t buffer[sizeof(message)];
+			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
+			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
+			Assert::AreEqual(sizeof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			for (int i = 0; i < bytes_read; i++)
+			{
+				Assert::AreEqual(message[i], static_cast<char>(buffer[i]), L"This character does not much, which quite likely means that none of them does.");
 			}
 		}
 

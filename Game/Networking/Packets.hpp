@@ -48,6 +48,7 @@ namespace net
 	{
 	public:
 
+		uint32_t entity_id;
 		uint8_t duration; //TODO: Also add entity_id.
 		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;

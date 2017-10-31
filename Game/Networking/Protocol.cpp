@@ -69,10 +69,26 @@ namespace net
 	{
 	}
 
-	int ServersideProtocol::Tick(def::time duration)
+	int ServersideProtocol::Tick(def::time duration) //TODO: Error handling.
 	{
 		net::Address from;
 		int bytes_read = socket.Receive(from);
+
+		Header header;
+		size_t header_size = header.IO<net::Read>(buffer);
+
+		switch (header.packet_type)
+		{
+		case client_input:
+			ClientIntputPayload payload;
+			payload.IO<net::Read>(buffer + header_size);
+			exportstrategy.Export(payload.entity_id, payload); //TODO: If entity_id is contained in the payload there's no need for a separate array for it.
+			registry.Touch(payload.entity_id, from);
+			break;
+		default:
+			//TODO: Some kind of errorlogging here.
+			break;
+		}
 
 		return bytes_read;
 	}
@@ -89,7 +105,7 @@ namespace net
 			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
 			if (registry.Contains(entities[i]))
 			{
-				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written));
+				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written)); //TODO: Maybe tracelog sent bytes.
 				sequence_number++;
 			}
 			else
