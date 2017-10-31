@@ -99,7 +99,7 @@ namespace net
 		ServerHeader header = { def::protocol_id, sequence_number, server_state, 0, 0 }; //TODO: Implement acking mechanism.
 		packet.header = &header;
 		auto[count, entities, payloads] = importstrategy.ImportServerState();
-		for (auto i = 0; i < count; i++)
+		for (size_t i = 0; i < count; i++)
 		{
 			packet.payload = &(payloads[i]);
 			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
