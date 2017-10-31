@@ -89,7 +89,7 @@ namespace net
 			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
 			if (registry.Contains(entities[i]))
 			{
-				socket.Send(registry.GetAddress(entities[i]), buffer, bytes_written);
+				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written));
 				sequence_number++;
 			}
 			else
