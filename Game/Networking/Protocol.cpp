@@ -56,12 +56,12 @@ namespace net
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }, registry{}, sequence_number{ 0 }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
 
 	ServersideProtocol::ServersideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ 0, exportstrategy, importstrategy }, registry{}, sequence_number{ 0 }
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }
 	{
 	}
 
