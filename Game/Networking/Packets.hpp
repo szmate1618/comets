@@ -2,6 +2,7 @@
 
 #include "BinarySerialization.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
+#include "..\Utilities\AssertTypeSizes.hpp"
 
 #include <cstdint>
 #include <tuple>
