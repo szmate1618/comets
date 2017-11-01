@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssertTypeSizes.hpp" />
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
