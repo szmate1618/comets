@@ -130,8 +130,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractClientRegistry.hpp" />
     <ClInclude Include="Address.hpp" />
     <ClInclude Include="BinarySerialization.hpp" />
+    <ClInclude Include="ClientRegistry.hpp" />
     <ClInclude Include="Connection.hpp" />
     <ClInclude Include="ConnectionManager.hpp" />
     <ClInclude Include="LogMessages.hpp" />
@@ -141,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
+    <ClCompile Include="ClientRegistry.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Packets.cpp" />

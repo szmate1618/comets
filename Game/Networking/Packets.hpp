@@ -4,12 +4,13 @@
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <cstdint>
+#include <tuple>
 
 
 namespace net
 {
 
-	enum packet_types { user_input, server_state };
+	enum packet_types { client_input, server_state };
 
 	class Header
 	{
@@ -43,17 +44,19 @@ namespace net
 
 	};
 
-	class UserInputPayload
+	class ClientIntputPayload
 	{
 	public:
 
-		uint16_t count;
+		uint32_t entity_id;
+		uint8_t duration; //TODO: Also add entity_id.
+		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
 
-		UserInputPayload() = default;
-		UserInputPayload(const UserInputPayload& other) = default;
-		UserInputPayload& operator=(const UserInputPayload& other) = default;
-		bool operator==(const UserInputPayload& other) const;
+		ClientIntputPayload() = default;
+		ClientIntputPayload(const ClientIntputPayload& other) = default;
+		ClientIntputPayload& operator=(const ClientIntputPayload& other) = default;
+		bool operator==(const ClientIntputPayload& other) const;
 		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
@@ -106,7 +109,23 @@ namespace net
 
 	};
 
-	using UserInputPacket = Packet<Header, UserInputPayload>;
+	template<typename H, typename P>
+	class PointeredPacket //This will help to avoid some unnecessary copies. //TODO: Write tests for this.
+	{
+	public:
+
+		H* header;
+		P* payload;
+
+		PointeredPacket() = default;
+		PointeredPacket(const PointeredPacket<H, P>& other) = default;
+		PointeredPacket<H, P>& operator=(const PointeredPacket<H, P>& other) = default;
+		bool operator==(const PointeredPacket<H, P>& other) const;
+		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+
+	};
+
+	using ClientIntputPacket = Packet<Header, ClientIntputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
 
 	class AbstractExportStrategy
@@ -115,8 +134,19 @@ namespace net
 
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
-		virtual void Export(ServerStatePayload) = 0;
-		virtual void Export(def::user_id, UserInputPayload) = 0;
+		virtual void Export(const ServerStatePayload&) const = 0;
+		virtual void Export(def::entity_id, const ClientIntputPayload&) const = 0;
+
+	};
+
+	class AbstractImportStrategy
+	{
+	public:
+
+		AbstractImportStrategy();
+		virtual ~AbstractImportStrategy();
+		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
+		virtual std::tuple<size_t, ClientIntputPayload*> ImportClientIntput() const = 0;
 
 	};
 

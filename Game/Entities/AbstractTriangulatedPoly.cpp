@@ -26,7 +26,7 @@ namespace entity
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& other)
 	{
 		int arr_counter = 0;
-		for(int& i: hull)
+		for(const int& i: hull)
 		{
 			if (geo::is_inside(myframe, vertices[i]))
 			{
@@ -38,7 +38,7 @@ namespace entity
 		arr_counter++;
 		int other_start = arr_counter;
 		int j = 0;
-		for(trianlge_tile& t: other.faces)
+		for(const trianlge_tile& t: other.faces)
 		{
 			if (geo::is_inside(otherframe, other.vertices[t.a])
 				|| geo::is_inside(otherframe, other.vertices[t.b])

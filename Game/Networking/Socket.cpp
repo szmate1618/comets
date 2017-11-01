@@ -17,7 +17,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 namespace net
 {
 
-	int Socket::sockets_in_scope = 0;
+	int Socket::sockets_in_scope = 0; //TODO: Protocol is essentially 2-threaded (Tick vs Respond), make this atomic.
 
 	Socket::Socket() : is_open{ false }
 	{
@@ -104,6 +104,7 @@ namespace net
 						(sockaddr*)&from,
 						&fromLength);
 
+		//TODO: These lines only make sense if bytes > 0, maybe add a check.
 		unsigned int from_address = ntohl(from.sin_addr.s_addr);
 		unsigned int from_port = ntohs(from.sin_port);
 		sender = Address(from_address, from_port);
@@ -111,7 +112,7 @@ namespace net
 		return bytes;
 	}
 
-	int Socket::Receive(Address& sender) const
+	int Socket::Receive(Address& sender) const //TODO: This should return a size_t, shouldn't it?
 	{
 		return Receive(sender, (void*)recv_buffer, def::max_packet_size); //TODO: Use static cast?
 	}

@@ -4,7 +4,8 @@
 namespace net
 {
 
-	AbstractProtocol::AbstractProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : socket{ port }, exportstrategy{ exportstrategy }
+	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy&)
+		: socket{ port }, exportstrategy{ exportstrategy }, importstrategy{ importstrategy }
 	{
 	}
 
@@ -12,11 +13,13 @@ namespace net
 	{
 	}
 
-	ClientsideProtocol::ClientsideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : AbstractProtocol{ port, exportstrategy }
+	ClientsideProtocol::ClientsideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
 	{
 	}
 
-	ClientsideProtocol::ClientsideProtocol(AbstractExportStrategy& exportstrategy) : ClientsideProtocol{ 0, exportstrategy }
+	ClientsideProtocol::ClientsideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+		: ClientsideProtocol{ 0, exportstrategy, importstrategy}
 	{
 	}
 
@@ -24,7 +27,7 @@ namespace net
 	{
 	}
 
-	void ClientsideProtocol::Tick(def::time duration)
+	int ClientsideProtocol::Tick(def::time duration)
 	{
 		switch (current_state)
 		{
@@ -45,13 +48,20 @@ namespace net
 		}
 		default: { break; } //TODO: Errorlog undefined state.
 		}
+		return -1; //TODO: Implement this.
 	}
 
-	ServersideProtocol::ServersideProtocol(unsigned int port, AbstractExportStrategy& exportstrategy) : AbstractProtocol{ port, exportstrategy }
+	void ClientsideProtocol::Respond()
 	{
 	}
 
-	ServersideProtocol::ServersideProtocol(AbstractExportStrategy& exportstrategy) : AbstractProtocol{ 0, exportstrategy }
+	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ port, exportstrategy, importstrategy }
+	{
+	}
+
+	ServersideProtocol::ServersideProtocol(const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
+		: AbstractProtocol{ 0, exportstrategy, importstrategy }
 	{
 	}
 
@@ -59,8 +69,50 @@ namespace net
 	{
 	}
 
-	void ServersideProtocol::Tick(def::time duration)
+	int ServersideProtocol::Tick(def::time duration) //TODO: Error handling.
 	{
+		net::Address from;
+		int bytes_read = socket.Receive(from);
+
+		Header header;
+		size_t header_size = header.IO<net::Read>(buffer);
+
+		switch (header.packet_type)
+		{
+		case client_input:
+			ClientIntputPayload payload;
+			payload.IO<net::Read>(buffer + header_size);
+			exportstrategy.Export(payload.entity_id, payload); //TODO: If entity_id is contained in the payload there's no need for a separate array for it.
+			registry.Touch(payload.entity_id, from);
+			break;
+		default:
+			//TODO: Some kind of errorlogging here.
+			break;
+		}
+
+		return bytes_read;
+	}
+
+	void ServersideProtocol::Respond()
+	{
+		PointeredPacket<ServerHeader, ServerStatePayload> packet;
+		ServerHeader header = { def::protocol_id, sequence_number, server_state, 0, 0 }; //TODO: Implement acking mechanism.
+		packet.header = &header;
+		auto[count, entities, payloads] = importstrategy.ImportServerState();
+		for (size_t i = 0; i < count; i++)
+		{
+			packet.payload = &(payloads[i]);
+			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
+			if (registry.Contains(entities[i]))
+			{
+				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written)); //TODO: Maybe tracelog sent bytes.
+				sequence_number++;
+			}
+			else
+			{
+				//TODO: Errorlog this.
+			}
+		}
 	}
 
 }

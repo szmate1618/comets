@@ -5,7 +5,7 @@ namespace net
 {
 
 	static const char* const unregistered_error = "Sorry, this errorcode is not registered. Maybe look it up in the manual. Its numerical value is ";
-	static const char* const socket_count_error = "Number of sockets objects is less than 0. A concurreny error, maybe ?";
+	static const char* const socket_count_error = "Number of sockets objects is less than 0. A concurreny error, maybe?";
 
 	static const char* const blocking_mode_fail = "Failed to set non-blocking mode.";
 	static const char* const packet_send_fail = "Failed to send packet.";

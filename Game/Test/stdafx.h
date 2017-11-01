@@ -8,6 +8,6 @@
 #include "targetver.h"
 
 // Headers for CppUnitTest
-#include "CppUnitTest.h"
+#include "CppUnitTest.h" //TODO: Given that it's already referenced here, there's no need to also include it in the unit tests.
 
 // TODO: reference additional headers your program requires here

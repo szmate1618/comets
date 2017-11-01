@@ -43,9 +43,9 @@ namespace Test
 			partitioner.Insert(frame);
 
 			int count = 0;
-			for(iterator i: partitioner)
+			for(const iterator& i: partitioner)
 			{
-				for(auto j: (**i))
+				for(const auto j: (**i))
 				{
 					#pragma warning( disable : 4302 4311 )
 					Assert::AreEqual(1, reinterpret_cast<int>(j), L"Failed to retrieve correct entity pointer.");

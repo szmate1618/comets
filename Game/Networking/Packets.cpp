@@ -35,9 +35,11 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
-	bool UserInputPayload::operator==(const UserInputPayload& other) const
+	bool ClientIntputPayload::operator==(const ClientIntputPayload& other) const
 	{
-		if (!(count == other.count)) return false;
+		if (entity_id != other.entity_id) return false;
+		if (duration != other.duration) return false;
+		if (count != other.count) return false;
 		for (int i = 0; i < count; ++i)
 		{
 			if (inputs[i] != other.inputs[i]) return false;
@@ -46,9 +48,11 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t UserInputPayload::IO(uint8_t* packet_data_start)
+	size_t ClientIntputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		packet_data_current += io_mode::Process(packet_data_current, duration);
 		packet_data_current += io_mode::Process(packet_data_current, count);
 		for (uint8_t* i = inputs; i - inputs < count; ++i)
 		{
@@ -88,7 +92,7 @@ namespace net
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, count);
-		for (ServerObject* i = objects; i - objects < count; ++i)
+		for (ServerObject* i = objects; i - objects < count; ++i) //TODO: Somehow handle overindexing.
 		{
 			packet_data_current += i->IO<io_mode>(packet_data_current);
 		}
@@ -111,26 +115,52 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
+	template<typename H, typename P>
+	bool PointeredPacket<H, P>::operator==(const PointeredPacket<H, P>& other) const
+	{
+		return *header == *(other.header) && *payload == *(other.payload);
+	}
+
+	template<typename H, typename P>
+	template<typename io_mode>
+	size_t PointeredPacket<H, P>::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += header->IO<io_mode>(packet_data_current);
+		packet_data_current += payload->IO<io_mode>(packet_data_current);
+		return packet_data_current - packet_data_start;
+	}
+
 	AbstractExportStrategy::AbstractExportStrategy() {};
 
 	AbstractExportStrategy::~AbstractExportStrategy() {};
+
+	AbstractImportStrategy::AbstractImportStrategy() {};
+
+	AbstractImportStrategy::~AbstractImportStrategy() {};
 
 	//Explicit instantiations.
 	template size_t Header::IO<Read>(uint8_t*);
 	template size_t Header::IO<Write>(uint8_t*);
 	template size_t ServerHeader::IO<Read>(uint8_t*);
 	template size_t ServerHeader::IO<Write>(uint8_t*);
-	template size_t UserInputPayload::IO<Read>(uint8_t*);
-	template size_t UserInputPayload::IO<Write>(uint8_t*);
+	template size_t ClientIntputPayload::IO<Read>(uint8_t*);
+	template size_t ClientIntputPayload::IO<Write>(uint8_t*);
 	template size_t ServerObject::IO<Read>(uint8_t*);
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
-	template class Packet<Header, UserInputPacket>;
-	template size_t Packet<Header, UserInputPacket>::IO<Read>(uint8_t*);
-	template size_t Packet<Header, UserInputPacket>::IO<Write>(uint8_t*);
-	template class Packet<ServerHeader, ServerStatePacket>;
-	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Read>(uint8_t*);
-	template size_t Packet<ServerHeader, ServerStatePacket>::IO<Write>(uint8_t*);
+	template class Packet<Header, ClientIntputPacket>;
+	template size_t Packet<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
+	template class Packet<ServerHeader, ServerStatePayload>;
+	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ClientIntputPacket>;
+	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ServerStatePayload>;
+	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
 
 }
