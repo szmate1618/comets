@@ -38,7 +38,7 @@ namespace entity
 		arr_counter++;
 		int other_start = arr_counter;
 		int j = 0;
-		for(const trianlge_tile& t : other.faces)
+		for(const trianlge_tile& t: other.faces)
 		{
 			if (geo::is_inside(otherframe, other.vertices[t.a])
 				|| geo::is_inside(otherframe, other.vertices[t.b])
