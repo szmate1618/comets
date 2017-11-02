@@ -25,6 +25,14 @@ namespace server
 		virtual void Tick(def::time) override;
 		virtual bool Running() const override;
 
+	protected:
+
+		virtual void ReadPackets();
+		virtual void ProcessPackets();
+		virtual void UpdateState(def::time);
+		virtual void TestCollisions();
+		virtual void SendPackets();
+
 	private:
 
 		class ExportStrategy : public net::AbstractExportStrategy
@@ -57,12 +65,6 @@ namespace server
 		net::ServersideProtocol protocol;
 		std::atomic<bool> running;
 		std::thread input_thread;
-
-		void ReadPackets();
-		void ProcessPackets();
-		void UpdateState(def::time);
-		void TestCollisions();
-		void SendPackets();
 
 	};
 
