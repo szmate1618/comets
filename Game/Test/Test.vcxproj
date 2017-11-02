@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="TestLogger.cpp" />
     <ClCompile Include="TestPackets.cpp" />
+    <ClCompile Include="TestServerSideProtocol.cpp" />
     <ClCompile Include="TestSocket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
