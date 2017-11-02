@@ -38,9 +38,9 @@ namespace Test
 			{
 				F = 1.25;
 				D = 2.03125;
-				UI8 = 3;
-				UI16 = 4;
-				UI32 = 5;
+				UI8 = 250;
+				UI16 = 65'000;
+				UI32 = 4'000'000'000;
 				count = 5; //This is intentionally less than the actual length of the array, for testing.
 				elements[0] = 6;
 				elements[1] = 7;
