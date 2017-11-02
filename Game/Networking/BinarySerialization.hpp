@@ -37,7 +37,8 @@ namespace net
 		template<typename T>
 		static inline size_t Process(uint8_t* packet_data, T t)
 		{
-			*reinterpret_cast<T*>(packet_data) = hton(t);
+			T nt = hton(t);
+			memcpy(packet_data, &nt, sizeof(T)); //This is the recommended way: http://en.cppreference.com/w/cpp/language/reinterpret_cast
 			return sizeof(T);
 		}
 	};
@@ -54,7 +55,9 @@ namespace net
 		template<typename T>
 		static inline size_t Process(uint8_t* packet_data, T& t)
 		{
-			t = ntoh(*reinterpret_cast<T*>(packet_data));
+			T ht;
+			memcpy(&ht, packet_data, sizeof(T)); //This is the recommended way: http://en.cppreference.com/w/cpp/language/reinterpret_cast
+			t = ntoh(ht);
 			return sizeof(T);
 		}
 	};
