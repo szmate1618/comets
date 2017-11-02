@@ -136,7 +136,7 @@ namespace net
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
 		virtual void Export(const ServerStatePayload&) const = 0;
-		virtual void Export(def::entity_id, const ClientIntputPayload&) const = 0;
+		virtual void Export(const ClientIntputPayload&) const = 0;
 
 	};
 

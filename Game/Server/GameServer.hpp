@@ -31,10 +31,10 @@ namespace server
 		{
 		public:
 
-			ExportStrategy(std::vector<def::entity_id>&, std::vector<net::ClientIntputPayload>&);
+			ExportStrategy(std::vector<net::ClientIntputPayload>&);
 			virtual ~ExportStrategy() override;
 			virtual void Export(const net::ServerStatePayload&) const override;
-			virtual void Export(def::entity_id, const net::ClientIntputPayload&) const override;
+			virtual void Export(const net::ClientIntputPayload&) const override;
 
 		};
 
@@ -49,7 +49,6 @@ namespace server
 
 		};
 
-		std::vector<def::entity_id> entity_buffer;
 		std::vector<net::ClientIntputPayload> client_input_buffer;
 		std::vector<net::ServerStatePayload> server_state_buffer;
 		ExportStrategy export_strategy;

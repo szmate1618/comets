@@ -82,7 +82,7 @@ namespace net
 		case client_input:
 			ClientIntputPayload payload;
 			payload.IO<net::Read>(buffer + header_size);
-			exportstrategy.Export(payload.entity_id, payload); //TODO: If entity_id is contained in the payload there's no need for a separate array for it.
+			exportstrategy.Export(payload);
 			registry.Touch(payload.entity_id, from);
 			break;
 		default:

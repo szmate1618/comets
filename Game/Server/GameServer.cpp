@@ -11,7 +11,7 @@ namespace server
 	//in the class rather than the order in which the members appear in the initializer list.
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
-		export_strategy{ entity_buffer, client_input_buffer },
+		export_strategy{ client_input_buffer },
 		import_strategy{ server_state_buffer },
 		protocol{ def::server_port, export_strategy, import_strategy },
 		running{ true },
@@ -78,10 +78,10 @@ namespace server
 		protocol.Respond();
 	}
 
-	GameServer::ExportStrategy::ExportStrategy(std::vector<def::entity_id>& eb, std::vector<net::ClientIntputPayload>& cib) {};
+	GameServer::ExportStrategy::ExportStrategy(std::vector<net::ClientIntputPayload>& cib) {};
 	GameServer::ExportStrategy::~ExportStrategy() {};
 	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); };
-	void GameServer::ExportStrategy::Export(def::entity_id, const net::ClientIntputPayload&) const {}; //TODO: Actually implement this.
+	void GameServer::ExportStrategy::Export(const net::ClientIntputPayload&) const {}; //TODO: Actually implement this.
 
 	GameServer::ImportStrategy::ImportStrategy(std::vector<net::ServerStatePayload>& ssb) {};
 	GameServer::ImportStrategy::~ImportStrategy() {};
