@@ -49,6 +49,7 @@ namespace server
 
 		};
 
+		std::vector<def::entity_id> entity_buffer;
 		std::vector<net::ClientIntputPayload> client_input_buffer;
 		std::vector<net::ServerStatePayload> server_state_buffer;
 		ExportStrategy export_strategy;
