@@ -9,12 +9,12 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
+	static std::vector<def::entity_id> entity_buffer;
+	static std::vector<net::ClientIntputPayload> client_input_buffer;
+	static std::vector<net::ServerStatePayload> server_state_buffer;
+
 	TEST_CLASS(ServerSideProtocol)
 	{
-
-		static std::vector<def::entity_id> entity_buffer;
-		static std::vector<net::ClientIntputPayload> client_input_buffer;
-		static std::vector<net::ServerStatePayload> server_state_buffer;
 
 		class DummyExportStrategy 
 		{
