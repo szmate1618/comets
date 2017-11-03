@@ -20,7 +20,7 @@ template<> inline std::wstring unittest::ToString<net::ServerStatePacket>(const 
 namespace Test
 {
 
-	TEST_CLASS(Packets)
+	TEST_CLASS(TestPackets)
 	{
 
 		class DummyPacket

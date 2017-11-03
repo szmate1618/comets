@@ -13,7 +13,7 @@ namespace Test
 	static std::vector<net::ClientIntputPayload> client_input_buffer;
 	static std::vector<net::ServerStatePayload> server_state_buffer;
 
-	TEST_CLASS(ServerSideProtocol)
+	TEST_CLASS(TestServerSideProtocol)
 	{
 
 		class DummyExportStrategy 

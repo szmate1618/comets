@@ -16,7 +16,7 @@ using namespace std::chrono_literals;
 namespace Test
 {
 
-	TEST_CLASS(Socket)
+	TEST_CLASS(TestSocket)
 	{
 	public:
 

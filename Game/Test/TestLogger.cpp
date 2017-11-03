@@ -13,7 +13,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 	
-	TEST_CLASS(Socket)
+	TEST_CLASS(TestLogger)
 	{
 
 		std::stringstream buffer; //We redirect cout into this buffer.
