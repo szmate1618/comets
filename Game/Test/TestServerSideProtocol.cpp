@@ -16,38 +16,61 @@ namespace Test
 	TEST_CLASS(TestServerSideProtocol)
 	{
 
-		class DummyExportStrategy 
+		class DummyExportStrategy : public net::AbstractExportStrategy
 		{
-			DummyExportStrategy(std::vector<net::ClientIntputPayload>& cib) {}
-			~DummyExportStrategy() {}
-			void Export(const net::ServerStatePayload& ss) const { Assert::Fail(L"Not actually implemented, not supposed to be called."); }
-			void Export(const net::ClientIntputPayload& ci) const 
+		public:
+
+			DummyExportStrategy() {}
+			virtual ~DummyExportStrategy() {}
+			virtual void Export(const net::ServerStatePayload& ss) const override { Assert::Fail(L"Not actually implemented, not supposed to be called."); }
+			virtual void Export(const net::ClientIntputPayload& ci) const override
 			{
 				client_input_buffer.emplace_back(ci);
 			}
 
 		};
 
-		class DummyImportStrategy
+		class DummyImportStrategy : public net::AbstractImportStrategy
 		{
-			DummyImportStrategy(std::vector<net::ServerStatePayload>& ssb) {};
-			~DummyImportStrategy() {};
-			std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() const
+		public:
+
+			DummyImportStrategy() {};
+			virtual ~DummyImportStrategy() {};
+			virtual std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() const override
 			{
 				return { entity_buffer.size(), &entity_buffer.front(), &server_state_buffer.front() };
 			};
-			std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const
+			virtual std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const override
 			{
 				Assert::Fail(L"Not actually implemented, not supposed to be called.");
 				return *reinterpret_cast<std::tuple<size_t, net::ClientIntputPayload*>*>(0);
 			}
 		};
 
-		TEST_METHOD_INITIALIZE(InitializerLoggerTests)
+		DummyExportStrategy* export_strategy;
+		DummyImportStrategy* import_strategy;
+		net::ServersideProtocol* protocol;
+
+		TEST_METHOD_INITIALIZE(InitializeServerSideProtocolTests)
 		{
 			entity_buffer.clear();
 			client_input_buffer.clear();
 			server_state_buffer.clear();
+
+			export_strategy = new DummyExportStrategy;
+			import_strategy = new DummyImportStrategy;
+			protocol = new net::ServersideProtocol{ def::server_port, *export_strategy, *import_strategy };
+		}
+
+		TEST_METHOD_CLEANUP(CleanupServerSideProtocolTests)
+		{
+			entity_buffer.clear();
+			client_input_buffer.clear();
+			server_state_buffer.clear();
+
+			delete protocol;
+			delete import_strategy;
+			delete export_strategy;
 		}
 
 	public:
