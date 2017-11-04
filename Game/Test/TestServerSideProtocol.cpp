@@ -39,8 +39,7 @@ namespace Test
 			std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const
 			{
 				Assert::Fail(L"Not actually implemented, not supposed to be called.");
-				std::tuple<size_t, net::ClientIntputPayload*> dummy_return;
-				return dummy_return;
+				return *reinterpret_cast<std::tuple<size_t, net::ClientIntputPayload*>*>(0);
 			}
 		};
 
