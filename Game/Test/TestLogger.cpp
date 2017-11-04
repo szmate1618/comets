@@ -20,7 +20,7 @@ namespace Test
 		std::streambuf * old; //The original state is saved into and restored from this buffer.
 		std::regex timestamp_format{ "[0-9]{10}" };
 
-		TEST_METHOD_INITIALIZE(InitializerLoggerTests)
+		TEST_METHOD_INITIALIZE(InitializeLoggerTests)
 		{
 			old = std::cout.rdbuf(buffer.rdbuf());
 		}
