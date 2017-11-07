@@ -50,10 +50,10 @@ namespace Test
 			bytes_read = sender.Receive(from);
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(world), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			Assert::AreEqual(sizeof(world), static_cast<size_t>(bytes_read), L"Sent and recevied sizes do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
-				Assert::AreEqual(world[i], sender.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
+				Assert::AreEqual(world[i], sender.recv_buffer[i], L"These characters do not match, which quite likely means that none of them does.");
 			}
 		}
 
