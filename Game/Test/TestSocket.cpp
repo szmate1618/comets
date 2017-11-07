@@ -7,6 +7,7 @@
 #include <thread>
 #include <map>
 #include <iostream>
+#include  <atomic>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -230,12 +231,22 @@ namespace Test
 
 		TEST_METHOD(NonBlockingMode)
 		{
-			net::Socket socket{ 0 };
+			std::atomic<bool> non_blocking_mode{ true };
+			std::atomic<bool> fail{ true };
+			using namespace std::chrono_literals;
+			auto lambda = [&non_blocking_mode, &fail] { std::this_thread::sleep_for(5s); if (fail.load()) non_blocking_mode.store(false); };
+			std::thread fail_thread{ lambda };
 
+			net::Socket socket{ 0 };
 			net::Address from;
 			char buffer[10];
-			int bytes_read = socket.Receive(from, buffer, sizeof(buffer));
 			//If this hangs indefinitely, the socket is still in blocking mode.
+			int bytes_read = socket.Receive(from, buffer, sizeof(buffer));
+			fail.store(false);
+
+			fail_thread.join();
+			//A bit convoluted, but necessary, because apparently Assert doesn't work in background threads.
+			Assert::IsTrue(non_blocking_mode.load(), L"Socket read hanging. Maybe it's still in blocking mode?");
 		}
 
 	};
