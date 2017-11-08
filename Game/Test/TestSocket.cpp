@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "..\Networking\Socket.hpp"
+#include "..\Utilities\CountOfArray.hpp"
 
 #include <chrono>
 #include <thread>
@@ -31,26 +32,26 @@ namespace Test
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
 
-			sender.Send(address2, hello, sizeof(hello));
+			sender.Send(address2, hello, util::countof(hello));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
 			int bytes_read = responder.Receive(from);
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(hello), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			Assert::AreEqual(util::countof(hello), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(hello[i], responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
 			}
 
-			responder.Send(address1, world, sizeof(world));
+			responder.Send(address1, world, util::countof(world));
 
 			std::this_thread::sleep_for(10ms);
 			bytes_read = sender.Receive(from);
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(world), static_cast<size_t>(bytes_read), L"Sent and recevied sizes do not match.");
+			Assert::AreEqual(util::countof(world), static_cast<size_t>(bytes_read), L"Sent and recevied sizes do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(world[i], sender.recv_buffer[i], L"These characters do not match, which quite likely means that none of them does.");
@@ -66,7 +67,7 @@ namespace Test
 			sender.Open(address1.GetPort());
 			receiver.Open(address2.GetPort());
 
-			sender.Send(address2, hello, sizeof(hello));
+			sender.Send(address2, hello, util::countof(hello));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
@@ -84,7 +85,7 @@ namespace Test
 			sender.Open(0);
 			receiver.Open(address.GetPort());
 
-			sender.Send(address, hello, sizeof(hello));
+			sender.Send(address, hello, util::countof(hello));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
@@ -101,15 +102,15 @@ namespace Test
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
 
-			sender.Send(address2, message, sizeof(message));
+			sender.Send(address2, message, util::countof(message));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			char buffer[sizeof(message)];
-			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			char buffer[util::countof(message)];
+			int bytes_read = responder.Receive(from, buffer, util::countof(buffer));
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			Assert::AreEqual(util::countof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(message[i], buffer[i], L"This character does not much, which quite likely means that none of them does.");
@@ -125,14 +126,14 @@ namespace Test
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
 
-			sender.Send(address2, message, sizeof(message));
+			sender.Send(address2, message, util::countof(message));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
 			int bytes_read = responder.Receive(from);
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			Assert::AreEqual(util::countof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(static_cast<char>(message[i]), responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
@@ -148,15 +149,15 @@ namespace Test
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
 
-			sender.Send(address2, message, sizeof(message));
+			sender.Send(address2, message, util::countof(message));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			uint8_t buffer[sizeof(message)];
-			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			uint8_t buffer[util::countof(message)];
+			int bytes_read = responder.Receive(from, buffer, util::countof(buffer));
 			Assert::AreNotEqual(0, bytes_read, L"Received zero bytes.");
 			Assert::IsFalse(bytes_read < 0, L"Receive failed.");
-			Assert::AreEqual(sizeof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
+			Assert::AreEqual(util::countof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
 				Assert::AreEqual(message[i], static_cast<char>(buffer[i]), L"This character does not much, which quite likely means that none of them does.");
@@ -172,18 +173,18 @@ namespace Test
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
 
-			sender.Send(address2, message, sizeof(message));
+			sender.Send(address2, message, util::countof(message));
 
 			std::this_thread::sleep_for(10ms);
 			net::Address from;
-			char buffer[sizeof(message) - 1];
-			int bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			char buffer[util::countof(message) - 1];
+			int bytes_read = responder.Receive(from, buffer, util::countof(buffer));
 			Assert::AreEqual(-1, bytes_read, L"Error: failed to fail.");
 
-			sender.Send(address2, message, sizeof(message) - 1);
+			sender.Send(address2, message, util::countof(message) - 1);
 
 			std::this_thread::sleep_for(10ms);
-			bytes_read = responder.Receive(from, buffer, sizeof(buffer));
+			bytes_read = responder.Receive(from, buffer, util::countof(buffer));
 			Assert::AreNotEqual(-1, bytes_read, L"Error: failed to succeed.");
 		}
 
@@ -241,7 +242,7 @@ namespace Test
 			net::Address from;
 			char buffer[10];
 			//If this hangs indefinitely, the socket is still in blocking mode.
-			int bytes_read = socket.Receive(from, buffer, sizeof(buffer));
+			int bytes_read = socket.Receive(from, buffer, util::countof(buffer));
 			fail.store(false);
 
 			fail_thread.join();
