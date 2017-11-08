@@ -9,11 +9,11 @@ namespace utils
 	//Kind of a linked list, but with one, statically allocated contiguous block of memory.
 	//First 2 and last 2 elements are used as guards.
 	//This means we cannot insert at an arbitrary position, but fortunately we don't need to.
-	template <typename T>
+	template<typename T>
 	class StaticLinkedList
 	{
 
-		template <typename T>
+		template<typename T>
 		struct ListElement { T element; __int32 previndex; __int32 nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int.
 
 	public:
