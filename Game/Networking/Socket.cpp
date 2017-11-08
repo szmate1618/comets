@@ -92,6 +92,11 @@ namespace net
 		return true;
 	}
 
+	bool Socket::Send(const Address& destination, int packet_size) const
+	{
+		return Send(destination, (void*)send_buffer, packet_size); //TODO: Use static cast?
+	}
+
 	int Socket::Receive(Address& sender, void* buffer, int buffer_size) const
 	{
 		sockaddr_in from;
@@ -114,7 +119,7 @@ namespace net
 
 	int Socket::Receive(Address& sender) const //TODO: This should return a size_t, shouldn't it?
 	{
-		return Receive(sender, (void*)recv_buffer, def::max_packet_size); //TODO: Use static cast?
+		return Receive(sender, (void*)recv_buffer, sizeof(recv_buffer) / sizeof(recv_buffer[0])); //TODO: Use static cast?
 	}
 
 	void Socket::LogNetworkErrors(int errorcode)
