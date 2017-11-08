@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "..\Entities\SimplePartition.hpp"
+#include "..\Utilities\CountOfArray.hpp"
 
 #include <cassert>
 
@@ -55,7 +56,7 @@ namespace Test
 		{
 			long numbers[] = {1, 2};
 			entity::SimplePartition partition;
-			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
+			InitPartition(partition, numbers, util::countof(numbers));
 			long accumulator = 0;
 			for(const iterator& i: partition)
 			{
@@ -72,7 +73,7 @@ namespace Test
 		{
 			long numbers[] = {1, 2, 3};
 			entity::SimplePartition partition;
-			InitPartition(partition, numbers, sizeof(numbers) / sizeof(long));
+			InitPartition(partition, numbers, util::countof(numbers));
 			long accumulator = 0;
 			for(const iterator& i: partition)
 			{

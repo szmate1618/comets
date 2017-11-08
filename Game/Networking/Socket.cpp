@@ -5,6 +5,7 @@ Particularly this one: https://gafferongames.com/post/sending_and_receiving_pack
 #include "Socket.hpp"
 
 #include "..\Utilities\Logger.hpp"
+#include "..\Utilities\CountOfArray.hpp"
 
 #if PLATFORM == PLATFORM_WINDOWS
 #pragma comment( lib, "wsock32.lib" )
@@ -119,7 +120,7 @@ namespace net
 
 	int Socket::Receive(Address& sender) const //TODO: This should return a size_t, shouldn't it?
 	{
-		return Receive(sender, (void*)recv_buffer, sizeof(recv_buffer) / sizeof(recv_buffer[0])); //TODO: Use static cast?
+		return Receive(sender, (void*)recv_buffer, util::countof(recv_buffer)); //TODO: Use static cast?
 	}
 
 	void Socket::LogNetworkErrors(int errorcode)
