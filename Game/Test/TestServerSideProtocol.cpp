@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "..\Networking\Protocol.hpp"
+#include "..\Networking\Packets.hpp"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -75,8 +76,10 @@ namespace Test
 
 	public:
 
-		TEST_METHOD(Test01)
+		TEST_METHOD(Receive)
 		{
+			net::Socket client_socket;
+			net::ClientIntputPacket packet;
 		}
 
 	};
