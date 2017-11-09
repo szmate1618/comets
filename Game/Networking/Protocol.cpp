@@ -80,7 +80,7 @@ namespace net
 		switch (header.packet_type)
 		{
 		case client_input:
-			ClientIntputPayload payload;
+			ClientInputPayload payload;
 			payload.IO<net::Read>(buffer + header_size);
 			exportstrategy.Export(payload);
 			registry.Touch(payload.entity_id, from);

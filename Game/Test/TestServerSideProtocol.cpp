@@ -11,7 +11,7 @@ namespace Test
 {
 
 	static std::vector<def::entity_id> entity_buffer;
-	static std::vector<net::ClientIntputPayload> client_input_buffer;
+	static std::vector<net::ClientInputPayload> client_input_buffer;
 	static std::vector<net::ServerStatePayload> server_state_buffer;
 
 	TEST_CLASS(TestServerSideProtocol)
@@ -24,7 +24,7 @@ namespace Test
 			DummyExportStrategy() {}
 			virtual ~DummyExportStrategy() {}
 			virtual void Export(const net::ServerStatePayload& ss) const override { Assert::Fail(L"Not actually implemented, not supposed to be called."); }
-			virtual void Export(const net::ClientIntputPayload& ci) const override
+			virtual void Export(const net::ClientInputPayload& ci) const override
 			{
 				client_input_buffer.emplace_back(ci);
 			}
@@ -41,10 +41,10 @@ namespace Test
 			{
 				return { entity_buffer.size(), &entity_buffer.front(), &server_state_buffer.front() };
 			};
-			virtual std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const override
+			virtual std::tuple<size_t, net::ClientInputPayload*> ImportClientIntput() const override
 			{
 				Assert::Fail(L"Not actually implemented, not supposed to be called.");
-				return *reinterpret_cast<std::tuple<size_t, net::ClientIntputPayload*>*>(0);
+				return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
 			}
 		};
 
@@ -79,7 +79,7 @@ namespace Test
 		TEST_METHOD(Receive)
 		{
 			net::Socket client_socket;
-			net::ClientIntputPacket packet;
+			net::ClientInputPacket packet;
 		}
 
 	};

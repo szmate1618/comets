@@ -31,10 +31,10 @@ namespace server
 		{
 		public:
 
-			ExportStrategy(std::vector<net::ClientIntputPayload>&);
+			ExportStrategy(std::vector<net::ClientInputPayload>&);
 			virtual ~ExportStrategy() override;
 			virtual void Export(const net::ServerStatePayload&) const override;
-			virtual void Export(const net::ClientIntputPayload&) const override;
+			virtual void Export(const net::ClientInputPayload&) const override;
 
 		};
 
@@ -45,12 +45,12 @@ namespace server
 			ImportStrategy(std::vector<net::ServerStatePayload>&);
 			virtual ~ImportStrategy() override;
 			virtual std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() const override;
-			virtual std::tuple<size_t, net::ClientIntputPayload*> ImportClientIntput() const override;
+			virtual std::tuple<size_t, net::ClientInputPayload*> ImportClientIntput() const override;
 
 		};
 
 		std::vector<def::entity_id> entity_buffer;
-		std::vector<net::ClientIntputPayload> client_input_buffer;
+		std::vector<net::ClientInputPayload> client_input_buffer;
 		std::vector<net::ServerStatePayload> server_state_buffer;
 		ExportStrategy export_strategy;
 		ImportStrategy import_strategy;

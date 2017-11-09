@@ -45,7 +45,7 @@ namespace net
 
 	};
 
-	class ClientIntputPayload
+	class ClientInputPayload
 	{
 	public:
 
@@ -54,10 +54,10 @@ namespace net
 		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
 
-		ClientIntputPayload() = default;
-		ClientIntputPayload(const ClientIntputPayload& other) = default;
-		ClientIntputPayload& operator=(const ClientIntputPayload& other) = default;
-		bool operator==(const ClientIntputPayload& other) const;
+		ClientInputPayload() = default;
+		ClientInputPayload(const ClientInputPayload& other) = default;
+		ClientInputPayload& operator=(const ClientInputPayload& other) = default;
+		bool operator==(const ClientInputPayload& other) const;
 		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
 	};
@@ -126,7 +126,7 @@ namespace net
 
 	};
 
-	using ClientIntputPacket = Packet<Header, ClientIntputPayload>;
+	using ClientInputPacket = Packet<Header, ClientInputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
 
 	class AbstractExportStrategy
@@ -136,7 +136,7 @@ namespace net
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
 		virtual void Export(const ServerStatePayload&) const = 0;
-		virtual void Export(const ClientIntputPayload&) const = 0;
+		virtual void Export(const ClientInputPayload&) const = 0;
 
 	};
 
@@ -147,7 +147,7 @@ namespace net
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
 		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
-		virtual std::tuple<size_t, ClientIntputPayload*> ImportClientIntput() const = 0;
+		virtual std::tuple<size_t, ClientInputPayload*> ImportClientIntput() const = 0;
 
 	};
 

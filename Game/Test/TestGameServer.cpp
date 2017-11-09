@@ -17,7 +17,7 @@ namespace Test
 		class DummyExportStrategy : public net::AbstractExportStrategy
 		{
 		public:
-			DummyExportStrategy(std::vector<net::ClientIntputPayload>&) {}
+			DummyExportStrategy(std::vector<net::ClientInputPayload>&) {}
 		};
 
 		class DummyImportStrategy : public net::AbstractImportStrategy
@@ -42,7 +42,7 @@ namespace Test
 			void DummyGameServer::ReadPackets()
 			{
 			}
-			std::vector<net::ClientIntputPayload> client_input_buffer;
+			std::vector<net::ClientInputPayload> client_input_buffer;
 			std::vector<net::ServerStatePayload> server_state_buffer;
 			DummyExportStrategy export_strategy;
 			DummyImportStrategy import_strategy;

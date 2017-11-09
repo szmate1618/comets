@@ -78,10 +78,10 @@ namespace server
 		protocol.Respond();
 	}
 
-	GameServer::ExportStrategy::ExportStrategy(std::vector<net::ClientIntputPayload>& cib) {};
+	GameServer::ExportStrategy::ExportStrategy(std::vector<net::ClientInputPayload>& cib) {};
 	GameServer::ExportStrategy::~ExportStrategy() {};
 	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); };
-	void GameServer::ExportStrategy::Export(const net::ClientIntputPayload&) const {}; //TODO: Actually implement this.
+	void GameServer::ExportStrategy::Export(const net::ClientInputPayload&) const {}; //TODO: Actually implement this.
 
 	GameServer::ImportStrategy::ImportStrategy(std::vector<net::ServerStatePayload>& ssb) {};
 	GameServer::ImportStrategy::~ImportStrategy() {};
@@ -90,10 +90,10 @@ namespace server
 		std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> dummy_return;
 		return dummy_return;
 	}; //TODO: Actually implement this.
-	std::tuple<size_t, net::ClientIntputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
+	std::tuple<size_t, net::ClientInputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
 	{
 		assert(false && "Not actually implemented, not supposed to be called.");
-		return *reinterpret_cast<std::tuple<size_t, net::ClientIntputPayload*>*>(0);
+		return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
 	};
 
 }
