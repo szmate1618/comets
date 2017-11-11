@@ -3,6 +3,8 @@
 
 #include "..\Networking\Protocol.hpp"
 #include "..\Networking\Packets.hpp"
+#include "..\Utilities\CountOfArray.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -79,7 +81,11 @@ namespace Test
 		TEST_METHOD(Receive)
 		{
 			net::Socket client_socket;
-			net::ClientInputPacket packet;
+			uint8_t inputs[4] = { 1, 20, 77, 78 };
+			//TODO: Aggregate initialization is convenient, but automatically filling these default params would be cool, too.
+			//Add a packet factory, maybe?
+			net::ClientInputPacket packet{ def::protocol_id, 0, net::client_input, 1337, 2, util::countof(inputs), inputs };
+			packet.IO<net::Write>(client_socket.send_buffer);
 		}
 
 	};
