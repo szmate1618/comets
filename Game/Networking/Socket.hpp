@@ -47,8 +47,8 @@ namespace net
 		int Receive(Address&, void*, int) const;
 		int Receive(Address&) const;
 
-		char send_buffer[def::max_packet_size];
-		char recv_buffer[def::max_packet_size];
+		uint8_t send_buffer[def::max_packet_size];
+		uint8_t recv_buffer[def::max_packet_size];
 
 	protected: //TODO: Maybe making the test class its friend would be a better solution.
 

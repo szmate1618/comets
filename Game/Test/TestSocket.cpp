@@ -26,8 +26,8 @@ namespace Test
 		{
 			net::Address address1{ 127, 0, 0, 1, 11111 }, address2{ 127, 0, 0, 1, 22222 };
 			net::Socket sender, responder;
-			const char hello[] = "heLlo";
-			const char world[] = "woRld";
+			const uint8_t hello[] = "heLlo";
+			const uint8_t world[] = "woRld";
 
 			sender.Open(address1.GetPort());
 			responder.Open(address2.GetPort());
@@ -136,7 +136,7 @@ namespace Test
 			Assert::AreEqual(util::countof(message), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
-				Assert::AreEqual(static_cast<char>(message[i]), responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
+				Assert::AreEqual(message[i], responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
 			}
 		}
 
