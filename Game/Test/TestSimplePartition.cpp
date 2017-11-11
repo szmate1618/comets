@@ -56,7 +56,7 @@ namespace Test
 		{
 			long numbers[] = {1, 2};
 			entity::SimplePartition partition;
-			InitPartition(partition, numbers, util::countof(numbers));
+			InitPartition(partition, numbers, static_cast<long>(util::countof(numbers)));
 			long accumulator = 0;
 			for(const iterator& i: partition)
 			{
@@ -73,7 +73,7 @@ namespace Test
 		{
 			long numbers[] = {1, 2, 3};
 			entity::SimplePartition partition;
-			InitPartition(partition, numbers, util::countof(numbers));
+			InitPartition(partition, numbers, static_cast<long>(util::countof(numbers)));
 			long accumulator = 0;
 			for(const iterator& i: partition)
 			{

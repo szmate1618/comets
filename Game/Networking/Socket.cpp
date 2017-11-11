@@ -71,7 +71,7 @@ namespace net
 
 	bool Socket::IsOpen() const { return is_open; }
 
-	bool Socket::Send(const Address& destination, const void* packet_data, int packet_size) const
+	bool Socket::Send(const Address& destination, const void* packet_data, size_t packet_size) const
 	{
 		sockaddr_in address;
 		address.sin_family = AF_INET;
@@ -79,8 +79,8 @@ namespace net
 		address.sin_port = htons(destination.GetPort());
 
 		int sent_bytes = sendto(handle,
-							(const char*)packet_data,
-							packet_size,
+							(const char*)packet_data, //TODO: Use static_cast.
+							static_cast<int>(packet_size),
 							0,
 							(sockaddr*)&address,
 							sizeof(sockaddr_in));
@@ -93,19 +93,19 @@ namespace net
 		return true;
 	}
 
-	bool Socket::Send(const Address& destination, int packet_size) const
+	bool Socket::Send(const Address& destination, size_t packet_size) const
 	{
 		return Send(destination, (void*)send_buffer, packet_size); //TODO: Use static cast?
 	}
 
-	int Socket::Receive(Address& sender, void* buffer, int buffer_size) const
+	int Socket::Receive(Address& sender, void* buffer, size_t buffer_size) const
 	{
 		sockaddr_in from;
 		socklen_t fromLength = sizeof(from);
 
 		int bytes = recvfrom(handle,
-						(char*)buffer,
-						buffer_size,
+						(char*)buffer, //TODO: Use static_cast.
+						static_cast<int>(buffer_size),
 						0,
 						(sockaddr*)&from,
 						&fromLength);

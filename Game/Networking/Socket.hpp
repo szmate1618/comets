@@ -42,9 +42,9 @@ namespace net
 		void Open(unsigned short);
 		void Close();
 		bool IsOpen() const;
-		bool Send(const Address&, const void*, int) const;
-		bool Send(const Address&, int) const; //TODO: Add test.
-		int Receive(Address&, void*, int) const;
+		bool Send(const Address&, const void*, size_t) const;
+		bool Send(const Address&, size_t) const; //TODO: Add test.
+		int Receive(Address&, void*, size_t) const;
 		int Receive(Address&) const;
 
 		uint8_t send_buffer[def::max_packet_size];
