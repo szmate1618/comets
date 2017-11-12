@@ -19,7 +19,7 @@ namespace net
 
 		AbstractProtocol(unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		virtual ~AbstractProtocol();
-		virtual int Tick(def::time) = 0; //Handle incoming packets, forward them via the specified exportstrategy.
+		virtual int Tick() = 0; //Handle incoming packets, forward them via the specified exportstrategy.
 		virtual void Respond() = 0; //Import packets via the specified importstrategy, Respond them to the peers (includes congestion avoidance).
 
 	protected:
@@ -41,7 +41,7 @@ namespace net
 		ClientsideProtocol(const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ClientsideProtocol() = delete;
 		virtual ~ClientsideProtocol() override;
-		virtual int Tick(def::time) override;
+		virtual int Tick() override;
 		virtual void Respond() override;
 
 	private:
@@ -59,14 +59,14 @@ namespace net
 		ServersideProtocol(const AbstractExportStrategy&, const AbstractImportStrategy&);
 		ServersideProtocol() = delete;
 		virtual ~ServersideProtocol() override;
-		virtual int Tick(def::time) override;
+		virtual int Tick() override;
 		virtual void Respond() override;
 
 	private:
 
 		ClientRegistry registry;
 		uint32_t sequence_number;
-		uint8_t buffer[def::max_packet_size];
+		uint8_t buffer[def::max_packet_size]; //TODO: Is this used anywhere?
 
 	};
 

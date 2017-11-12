@@ -42,7 +42,6 @@ namespace server
 	{
 		using namespace std::chrono_literals;
 		def::time backoff = 0s;
-		auto start = std::chrono::steady_clock::now();
 		while (Running())
 		{
 			if (backoff > 0s)
@@ -52,9 +51,7 @@ namespace server
 			backoff = 0s;
 			for (int i = 0; i < 10; i++)
 			{
-				auto elapsed_time = std::chrono::steady_clock::now() - start;
-				start = std::chrono::steady_clock::now();
-				if (protocol.Tick(elapsed_time) < 0) backoff += def::max_socket_read_backoff / 10;
+				if (protocol.Tick() < 0) backoff += def::max_socket_read_backoff / 10;
 				else backoff -= def::max_socket_read_backoff / 10;
 			}
 		}

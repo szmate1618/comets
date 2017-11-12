@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
+#include "ToStringSpecializations.hpp"
 #include "..\Networking\Protocol.hpp"
 #include "..\Networking\Packets.hpp"
 #include "..\Utilities\CountOfArray.hpp"
@@ -50,6 +51,7 @@ namespace Test
 			}
 		};
 
+		net::Address server_address{ 127,0,0,1,def::server_port };
 		DummyExportStrategy* export_strategy;
 		DummyImportStrategy* import_strategy;
 		net::ServersideProtocol* protocol;
@@ -62,7 +64,7 @@ namespace Test
 
 			export_strategy = new DummyExportStrategy;
 			import_strategy = new DummyImportStrategy;
-			protocol = new net::ServersideProtocol{ def::server_port, *export_strategy, *import_strategy };
+			protocol = new net::ServersideProtocol{ server_address.GetPort(), *export_strategy, *import_strategy };
 		}
 
 		TEST_METHOD_CLEANUP(CleanupServerSideProtocolTests)
@@ -85,7 +87,10 @@ namespace Test
 			//TODO: Aggregate initialization is convenient, but automatically filling these default params would be cool, too.
 			//Add a packet factory, maybe?
 			net::ClientInputPacket packet{ def::protocol_id, 0, net::client_input, 1337, 2, static_cast<uint16_t>(util::countof(inputs)), inputs };
-			packet.IO<net::Write>(client_socket.send_buffer);
+			client_socket.Send(server_address, packet.IO<net::Write>(client_socket.send_buffer)); //Because packet.IO returns the size. How convenient!
+
+			protocol->Tick();
+			Assert::AreEqual(packet.payload, client_input_buffer[0], L"Failed to correctly receive client input payload.");
 		}
 
 	};
