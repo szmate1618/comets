@@ -8,6 +8,7 @@ namespace utils
 
 	//A thin wrapper around a normal vector.
 	//Automatically resizes itself on overindexing to accomodate the indexed element.
+	//TODO: Add tests.
 	template<typename T>
 	class AutoExtendingVector
 	{
