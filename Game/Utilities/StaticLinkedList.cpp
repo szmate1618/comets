@@ -10,9 +10,8 @@ namespace utils
 	}
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(__int32 size)
+	StaticLinkedList<T>::StaticLinkedList(__int32 size): elements(size)
 	{
-		elements = std::vector(size);
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 
