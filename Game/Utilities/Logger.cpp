@@ -4,6 +4,7 @@
 namespace util
 {
 
+	//TODO: Maybe make Logger header-only?
 	std::mutex Logger::static_cout_lock;
 
 	Logger Log;

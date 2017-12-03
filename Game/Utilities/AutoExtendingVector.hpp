@@ -14,10 +14,17 @@ namespace utils
 	{
 	public:
 
-		AutoExtendingVector();
-		AutoExtendingVector(size_t);
-		~AutoExtendingVector();
-		T& operator[](size_t);
+		AutoExtendingVector() : AutoExtendingVector<T>{ default_size } {}
+		AutoExtendingVector(size_t size) : elements(size) {}
+		~AutoExtendingVector() {}
+		T& operator[](size_t index)
+		{
+			if (index >= elements.size())
+			{
+				elements.resize(index * growth_factor);
+			}
+			return elements[index];
+		}
 
 		static constexpr size_t default_size = 100;
 		static constexpr double growth_factor = 1.5;

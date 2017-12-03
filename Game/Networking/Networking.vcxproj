@@ -85,7 +85,7 @@
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\AutoExtendingVector.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -96,7 +96,7 @@
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\AutoExtendingVector.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,7 +111,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\AutoExtendingVector.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,7 +126,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\$(Platform)\$(Configuration)\AutoExtendingVector.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
