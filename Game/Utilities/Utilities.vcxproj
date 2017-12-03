@@ -124,13 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssertTypeSizes.hpp" />
-    <ClInclude Include="AutoExtendingVector.hpp" />
     <ClInclude Include="CountOfArray.hpp" />
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AutoExtendingVector.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />

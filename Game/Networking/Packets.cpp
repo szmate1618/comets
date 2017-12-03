@@ -54,9 +54,9 @@ namespace net
 		packet_data_current += io_mode::Process(packet_data_current, entity_id);
 		packet_data_current += io_mode::Process(packet_data_current, duration);
 		packet_data_current += io_mode::Process(packet_data_current, count);
-		for (size_t i = 0; i < count; ++i)
+		for (uint8_t* i = inputs; i - inputs < count; ++i)
 		{
-			packet_data_current += io_mode::Process(packet_data_current, inputs[i]);
+			packet_data_current += io_mode::Process(packet_data_current, *i);
 		}
 		return packet_data_current - packet_data_start;
 	}

@@ -80,18 +80,15 @@ namespace net
 		switch (header.packet_type)
 		{
 		case client_input:
-		{
 			ClientInputPayload payload;
-			//payload.inputs = buffer; //TODO: Not really good, every packet should have its own buffer.
+			payload.inputs = buffer; //TODO: Not really good, every packet should have its own buffer.
 			payload.IO<net::Read>(socket.recv_buffer + header_size);
 			exportstrategy.Export(payload);
 			registry.Touch(payload.entity_id, from);
 			break;
-		}
 		default:
-		{	//TODO: Some kind of errorlogging here.
+			//TODO: Some kind of errorlogging here.
 			break;
-		}
 		}
 
 		return bytes_read;

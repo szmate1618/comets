@@ -27,9 +27,6 @@
     <ClInclude Include="CountOfArray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutoExtendingVector.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StaticLinkedList.cpp">
@@ -39,9 +36,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AutoExtendingVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

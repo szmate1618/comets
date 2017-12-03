@@ -3,7 +3,6 @@
 #include "BinarySerialization.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 #include "..\Utilities\AssertTypeSizes.hpp"
-#include "..\Utilities\AutoExtendingVector.hpp"
 
 #include <cstdint>
 #include <tuple>
@@ -53,7 +52,7 @@ namespace net
 		uint32_t entity_id;
 		uint8_t duration; //TODO: Also add entity_id.
 		uint16_t count; //count=0 will be used as client heartbeat.
-		mutable utils::AutoExtendingVector<uint8_t> inputs;
+		uint8_t* inputs;
 
 		ClientInputPayload() = default;
 		ClientInputPayload(const ClientInputPayload& other) = default;
