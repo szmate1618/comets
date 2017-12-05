@@ -11,7 +11,7 @@ namespace net
 		registry.reserve(def::max_sessions);
 	}
 
-	bool ClientRegistry::Touch(def::entity_id entity_id, Address& address)
+	bool ClientRegistry::Touch(def::entity_id entity_id, const Address& address)
 	{
 		if (registry.count(entity_id) == 1)
 		{

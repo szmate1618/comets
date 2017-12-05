@@ -14,7 +14,7 @@ namespace net
 
 		AbstractClientRegistry() = default;
 		virtual ~AbstractClientRegistry() = default;
-		virtual bool Touch(def::entity_id, Address&) = 0; //The return value indicates if the operation was successful.
+		virtual bool Touch(def::entity_id, const Address&) = 0; //The return value indicates if the operation was successful.
 		virtual bool Contains(def::entity_id) const = 0;
 		virtual Address GetAddress(def::entity_id) const = 0;
 
