@@ -20,7 +20,7 @@ namespace net
 		AbstractProtocol(unsigned short, const AbstractExportStrategy&, const AbstractImportStrategy&);
 		virtual ~AbstractProtocol();
 		virtual int Tick() = 0; //Handle incoming packets, forward them via the specified exportstrategy.
-		virtual void Respond() = 0; //Import packets via the specified importstrategy, Respond them to the peers (includes congestion avoidance).
+		virtual void Respond() = 0; //Import packets via the specified importstrategy, Respond to the peers (should include congestion avoidance).
 
 	protected:
 
