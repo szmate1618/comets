@@ -4,7 +4,7 @@
 namespace net
 {
 
-	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy&)
+	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
 		: socket{ port }, exportstrategy{ exportstrategy }, importstrategy{ importstrategy }
 	{
 	}
