@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 
 
 namespace geo_literals
@@ -15,7 +15,7 @@ namespace geo_literals
 namespace geo
 {
 
-	static constexpr double PI = 3.14159265358979323846;
+	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
 	typedef double real; //TODO: This could be a template variable, othewise the 'using' syntax is preferred.
 	constexpr real epsilon = 0.0005;

@@ -6,7 +6,7 @@ namespace geo
 
 	bool equals(point_2d v1, point_2d v2, real tolerance) //Shouldn't we pass _everything_ by reference?
 	{
-		return fabs(v1.x - v2.x) <= tolerance && fabs(v1.y - v2.y) <= tolerance;
+		return std::abs(v1.x - v2.x) <= tolerance && std::abs(v1.y - v2.y) <= tolerance;
 	}
 
 	bool equals(point_2d v1, point_2d v2)
@@ -144,16 +144,16 @@ namespace geo
 	point_2d point_2d_rotated(point_2d p, double radian)
 	{
 		point_2d ret;
-		ret.x = cos(radian) * p.x - sin(radian) * p.y;
-		ret.y = sin(radian) * p.x + cos(radian) * p.y;
+		ret.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
+		ret.y = std::sin(radian) * p.x + std::cos(radian) * p.y;
 		return ret;
 	}
 
 	void rotate_point_2d(point_2d& p, double radian)
 	{
 		real original_x = p.x; //Does this optimization actually do anything?
-		p.x = cos(radian) * p.x - sin(radian) * p.y;
-		p.y = sin(radian) * original_x + cos(radian) * p.y;
+		p.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
+		p.y = std::sin(radian) * original_x + std::cos(radian) * p.y;
 	}
 
 	EmptyFrame tri_as_frame(point_2d a, point_2d b, point_2d c)
