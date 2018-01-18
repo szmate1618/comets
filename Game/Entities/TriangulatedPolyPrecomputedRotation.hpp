@@ -23,7 +23,7 @@ namespace entity
 
 		static const int granularity = 3600;
 
-		std::vector<geo::point_2d> rotated_vertices[granularity];
+		std::vector<geo::point_2d> rotated_vertices[granularity]; //TODO: Find out why I am mixing normal arrays with vectors.
 	};
 
 }
