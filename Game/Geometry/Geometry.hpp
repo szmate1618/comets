@@ -17,7 +17,7 @@ namespace geo
 
 	static constexpr double PI = 3.14159265358979323846;
 
-	typedef double real;
+	typedef double real; //TODO: This could be a template variable, othewise the 'using' syntax is preferred.
 	constexpr real epsilon = 0.0005;
 
 	struct point_2d { real x; real y; };
