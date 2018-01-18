@@ -5,9 +5,9 @@
 
 namespace geo_literals
 {
-	constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; }
+	constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; } //TODO: geo::PI should be used here, somehow.
 
-	constexpr long double operator"" _deg(long double deg) { return deg / 180.0 * 3.14159265358979323846; }
+	constexpr long double operator"" _deg(long double deg) { return deg / 180.0 * 3.14159265358979323846; } //TODO: Same as above.
 
 	constexpr long double operator"" _rad(long double rad) { return rad; } //TODO: Add _pi_rad literal.
 }
