@@ -29,7 +29,7 @@ namespace net
 {
 
 	#if PLATFORM == PLATFORM_WINDOWS
-	typedef int socklen_t;
+	using socklen_t = int;
 	#endif
 
 	class Socket
