@@ -4,6 +4,7 @@
 namespace net
 {
 
+	//TODO: Why are these not constexprs?
 	static const char* const unregistered_error = "Sorry, this errorcode is not registered. Maybe look it up in the manual. Its numerical value is ";
 	static const char* const socket_count_error = "Number of socket objects is less than 0. A concurreny error, maybe?";
 
