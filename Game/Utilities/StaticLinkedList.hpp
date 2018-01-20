@@ -7,8 +7,8 @@ namespace utils
 {
 	
 	//Kind of a linked list, but with one, statically allocated contiguous block of memory.
-	//First 2 and last 2 elements are used as guards.
 	//This means we cannot insert at an arbitrary position, but fortunately we don't need to.
+	//First 2 and last 2 elements are used as guards.
 	template<typename T>
 	class StaticLinkedList
 	{
@@ -21,7 +21,7 @@ namespace utils
 		StaticLinkedList();
 		StaticLinkedList(__int32);
 		~StaticLinkedList();
-		__int32 InsertAtFirstGap(T); //TODO: add methods for compile-time polymorphism with STL LinkedList.
+		__int32 InsertAtFirstGap(T); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
 		__int32 RemoveAt(__int32);
 		__int32 Defragment();
 
