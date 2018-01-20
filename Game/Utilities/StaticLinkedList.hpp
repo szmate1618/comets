@@ -32,6 +32,7 @@ namespace utils
 
 	private:
 
+		//TODO: These could be constexprs, too.
 		__int32 instart, inend;
 		__int32 outstart, outend;
 

@@ -1,8 +1,8 @@
 #include "StaticLinkedList.hpp"
 
+
 namespace utils
 {
-
 
 	template<typename T>
 	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
@@ -37,7 +37,7 @@ namespace utils
 
 	}
 
-	//No error checking at all. Its the callers responsibility to insert at previouly unoccupied positions.
+	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
 	template<typename T>
 	__int32 StaticLinkedList<T>::InsertAtFirstGap(T element)
 	{
@@ -60,7 +60,7 @@ namespace utils
 		return firstgap;
 	}
 
-	//No error checking at all. Its the callers responsibility to remove at previouly occupied positions.
+	//No error checking at all. Its the caller's responsibility to remove at previouly occupied positions.
 	template<typename T>
 	__int32 StaticLinkedList<T>::RemoveAt(__int32 index)
 	{
@@ -82,7 +82,7 @@ namespace utils
 		return index;
 	}
 
-	//TODO: do some measurements to see when to use this.
+	//TODO: Do some measurements to see when to use this.
 	template<typename T>
 	__int32 StaticLinkedList<T>::Defragment()
 	{
