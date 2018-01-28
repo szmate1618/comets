@@ -241,12 +241,12 @@ namespace Test
 			net::Socket socket{ 0 };
 			net::Address from;
 			char buffer[10];
-			//If this hangs indefinitely, the socket is still in blocking mode.
+			//If this hangs indefinitely, the socket is still in blocking mode. //TODO: Consequently we never reach the following Assert. Fix this.
 			int bytes_read = socket.Receive(from, buffer, util::countof(buffer));
 			fail.store(false);
 
 			fail_thread.join();
-			//A bit convoluted, but necessary, because apparently Assert doesn't work in background threads.
+			//A bit convoluted, but necessary, because apparently Assert doesn't work in background threads. //TODO: Maybe detach could help here.
 			Assert::IsTrue(non_blocking_mode.load(), L"Socket read hanging. Maybe it's still in blocking mode?");
 		}
 
