@@ -14,5 +14,3 @@ template<> inline std::wstring unittest::ToString<net::ClientInputPayload>(const
 template<> inline std::wstring unittest::ToString<net::ServerStatePayload>(const net::ServerStatePayload& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ClientInputPacket>(const net::ClientInputPacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
 template<> inline std::wstring unittest::ToString<net::ServerStatePacket>(const net::ServerStatePacket& t) { RETURN_WIDE_STRING("N/A - ToString not implemented, sorry."); }
-
-
