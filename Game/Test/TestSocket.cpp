@@ -29,7 +29,7 @@ namespace Test
 			const uint8_t hello[] = "heLlo";
 			const uint8_t world[] = "woRld";
 
-			sender.Open(address1.GetPort());
+			sender.Open(address1.GetPort()); //TODO: These could be passed as constructor parameters.
 			responder.Open(address2.GetPort());
 
 			sender.Send(address2, hello, util::countof(hello));
