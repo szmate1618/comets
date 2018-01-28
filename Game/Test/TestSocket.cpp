@@ -42,7 +42,7 @@ namespace Test
 			Assert::AreEqual(util::countof(hello), static_cast<size_t>(bytes_read), L"Sent and recevied size do not match.");
 			for (int i = 0; i < bytes_read; i++)
 			{
-				Assert::AreEqual(hello[i], responder.recv_buffer[i], L"This character does not much, which quite likely means that none of them does.");
+				Assert::AreEqual(hello[i], responder.recv_buffer[i], L"This character does not match, which quite likely means that none of them does.");
 			}
 
 			responder.Send(address1, world, util::countof(world));
