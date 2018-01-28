@@ -51,7 +51,7 @@ namespace Test
 			}
 		};
 
-		net::Address server_address{ 127,0,0,1,def::server_port };
+		net::Address server_address{ 127, 0, 0, 1, def::server_port };
 		DummyExportStrategy* export_strategy;
 		DummyImportStrategy* import_strategy;
 		net::ServersideProtocol* protocol;
