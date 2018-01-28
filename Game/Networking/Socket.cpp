@@ -142,7 +142,6 @@ namespace net
 		}
 	}
 
-
 	void Socket::AssertAndLog(bool success)
 	{
 		if (!success)
@@ -156,8 +155,6 @@ namespace net
 			assert(false);
 		}
 	}
-
-
 
 	void Socket::AssertAndLog(bool success, const char* logmessage)
 	{
