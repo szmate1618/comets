@@ -69,7 +69,7 @@ namespace net
 	{
 	}
 
-	int ServersideProtocol::Tick() //TODO: Error handling. //TODO: duration is unused at the moment.
+	int ServersideProtocol::Tick() //TODO: Error handling. //TODO: duration is unused at the moment. //TODO: Tick is a bit misleading, it really only consumes one packet.
 	{
 		net::Address from;
 		int bytes_read = socket.Receive(from);
