@@ -93,6 +93,25 @@ namespace Test
 			Assert::AreEqual(packet.payload, client_input_buffer[0], L"Failed to correctly receive client input payload.");
 		}
 
+		TEST_METHOD(Receive2)
+		{
+			net::Socket client_socket;
+			uint8_t inputs1[4] = { 1, 20, 77, 78 };
+			uint8_t inputs2[4] = { 1, 20, 77, 79 };
+			net::ClientInputPacket packet1{ def::protocol_id, 0, net::client_input, 1337, 2, static_cast<uint16_t>(util::countof(inputs1)), inputs1 };
+			client_socket.Send(server_address, packet1.IO<net::Write>(client_socket.send_buffer));
+			net::ClientInputPacket packet2{ def::protocol_id, 0, net::client_input, 1337, 2, static_cast<uint16_t>(util::countof(inputs2)), inputs2 };
+			client_socket.Send(server_address, packet2.IO<net::Write>(client_socket.send_buffer));
+
+			protocol->Tick();
+			Assert::AreEqual(packet1.payload, client_input_buffer[0], L"Failed to correctly receive client input1 payload.");
+
+			protocol->Tick();
+			Assert::AreEqual(packet1.payload, client_input_buffer[0], L"Failed to correctly recall client input1 payload after receiving another packet.");
+			protocol->Tick();
+			Assert::AreEqual(packet2.payload, client_input_buffer[1], L"Failed to correctly receive client input2 payload.");
+		}
+
 	};
 
 }
