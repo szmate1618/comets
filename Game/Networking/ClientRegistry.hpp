@@ -17,7 +17,7 @@ namespace net
 
 		ClientRegistry();
 		virtual ~ClientRegistry() override = default;
-		virtual bool Touch(def::entity_id, Address&) override;
+		virtual bool Touch(def::entity_id, const Address&) override;
 		virtual bool Contains(def::entity_id) const override;
 		virtual Address GetAddress(def::entity_id) const override;
 

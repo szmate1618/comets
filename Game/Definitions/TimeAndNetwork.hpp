@@ -23,7 +23,7 @@ namespace def
 	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 	//Protocol parameters
-	using entity_id = uint32_t; //When changed, also update ClientIntputPayload accordingly.
+	using entity_id = uint32_t; //When changed, also update ClientInputPayload accordingly.
 	static constexpr uint8_t protocol_id = 77;
 
 	//Server configuration

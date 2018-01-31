@@ -4,7 +4,7 @@
 namespace net
 {
 
-	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy&)
+	AbstractProtocol::AbstractProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
 		: socket{ port }, exportstrategy{ exportstrategy }, importstrategy{ importstrategy }
 	{
 	}
@@ -27,7 +27,7 @@ namespace net
 	{
 	}
 
-	int ClientsideProtocol::Tick(def::time duration)
+	int ClientsideProtocol::Tick()
 	{
 		switch (current_state)
 		{
@@ -41,7 +41,7 @@ namespace net
 		}
 		case connected:
 		{
-			connection.Update(duration);
+			//connection.Update(duration); //TODO: Decide if we want to use duration or not.
 
 			if (connection.TimedOut()) { current_state = unconnected; } //TODO: Warnlog server timeout.
 			break;
@@ -69,25 +69,33 @@ namespace net
 	{
 	}
 
-	int ServersideProtocol::Tick(def::time duration) //TODO: Error handling.
+	int ServersideProtocol::Tick() //TODO: Error handling. //TODO: duration is unused at the moment. //TODO: Tick is a bit misleading, it really only consumes one packet.
 	{
 		net::Address from;
 		int bytes_read = socket.Receive(from);
 
 		Header header;
-		size_t header_size = header.IO<net::Read>(buffer);
+		size_t header_size = header.IO<net::Read>(socket.recv_buffer);
 
-		switch (header.packet_type)
+		if (header.protocol_id == def::protocol_id)
 		{
-		case client_input:
-			ClientIntputPayload payload;
-			payload.IO<net::Read>(buffer + header_size);
-			exportstrategy.Export(payload.entity_id, payload); //TODO: If entity_id is contained in the payload there's no need for a separate array for it.
-			registry.Touch(payload.entity_id, from);
-			break;
-		default:
-			//TODO: Some kind of errorlogging here.
-			break;
+			switch (header.packet_type)
+			{
+			case client_input:
+				ClientInputPayload payload;
+				payload.inputs = buffer; //TODO: Not really good, every packet should have its own buffer.
+				payload.IO<net::Read>(socket.recv_buffer + header_size);
+				exportstrategy.Export(payload);
+				registry.Touch(payload.entity_id, from);
+				break;
+			default:
+				//TODO: Some kind of errorlogging here.
+				break;
+			}
+		}
+		else
+		{
+			//TODO: Some kind of warnlogging here.
 		}
 
 		return bytes_read;

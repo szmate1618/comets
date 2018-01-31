@@ -9,7 +9,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
-	TEST_CLASS(Address)
+	TEST_CLASS(TestAddress)
 	{
 	public:
 

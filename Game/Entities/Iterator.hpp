@@ -7,7 +7,7 @@
 namespace entity
 {
 
-	template <typename T>
+	template<typename T>
 	class Iterator: public std::iterator
 	                <
 	                	std::forward_iterator_tag,

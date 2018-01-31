@@ -15,7 +15,7 @@ namespace entity
 		geo::vector_2d position;
 	};
 
-	//A dynamic entity that can move and possibly moved by other entities.
+	//A dynamic entity that can move and possibly be moved by other entities.
 	struct DynamicEntity: public StaticEntity
 	{
 		geo::vector_2d velocity;

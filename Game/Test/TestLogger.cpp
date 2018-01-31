@@ -13,14 +13,14 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 	
-	TEST_CLASS(Socket)
+	TEST_CLASS(TestLogger)
 	{
 
 		std::stringstream buffer; //We redirect cout into this buffer.
 		std::streambuf * old; //The original state is saved into and restored from this buffer.
 		std::regex timestamp_format{ "[0-9]{10}" };
 
-		TEST_METHOD_INITIALIZE(InitializerLoggerTests)
+		TEST_METHOD_INITIALIZE(InitializeLoggerTests)
 		{
 			old = std::cout.rdbuf(buffer.rdbuf());
 		}

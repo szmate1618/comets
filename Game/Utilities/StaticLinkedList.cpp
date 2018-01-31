@@ -1,18 +1,17 @@
 #include "StaticLinkedList.hpp"
 
+
 namespace utils
 {
 
-
-	template <typename T>
+	template<typename T>
 	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
 	{
 	}
 
-	template <typename T>
-	StaticLinkedList<T>::StaticLinkedList(__int32 size)
+	template<typename T>
+	StaticLinkedList<T>::StaticLinkedList(__int32 size): elements(size)
 	{
-		elements = std::vector(size);
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 
@@ -32,14 +31,14 @@ namespace utils
 		elements[outend].previndex = outend - 2;
 	}
 
-	template <typename T>
+	template<typename T>
 	StaticLinkedList<T>::~StaticLinkedList()
 	{
 
 	}
 
-	//No error checking at all. Its the callers responsibility to insert at previouly unoccupied positions.
-	template <typename T>
+	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
+	template<typename T>
 	__int32 StaticLinkedList<T>::InsertAtFirstGap(T element)
 	{
 		__int32 firstgap = elements[outstart].nextindex;
@@ -61,8 +60,8 @@ namespace utils
 		return firstgap;
 	}
 
-	//No error checking at all. Its the callers responsibility to remove at previouly occupied positions.
-	template <typename T>
+	//No error checking at all. Its the caller's responsibility to remove at previouly occupied positions.
+	template<typename T>
 	__int32 StaticLinkedList<T>::RemoveAt(__int32 index)
 	{
 		//Remove from inlist, that's the easy part.
@@ -83,8 +82,8 @@ namespace utils
 		return index;
 	}
 
-	//TODO: do some measurements to see when to use this.
-	template <typename T>
+	//TODO: Do some measurements to see when to use this.
+	template<typename T>
 	__int32 StaticLinkedList<T>::Defragment()
 	{
 		//TODO: Implement this.

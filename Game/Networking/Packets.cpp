@@ -35,7 +35,7 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
-	bool ClientIntputPayload::operator==(const ClientIntputPayload& other) const
+	bool ClientInputPayload::operator==(const ClientInputPayload& other) const
 	{
 		if (entity_id != other.entity_id) return false;
 		if (duration != other.duration) return false;
@@ -48,7 +48,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t ClientIntputPayload::IO(uint8_t* packet_data_start)
+	size_t ClientInputPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, entity_id);
@@ -144,21 +144,21 @@ namespace net
 	template size_t Header::IO<Write>(uint8_t*);
 	template size_t ServerHeader::IO<Read>(uint8_t*);
 	template size_t ServerHeader::IO<Write>(uint8_t*);
-	template size_t ClientIntputPayload::IO<Read>(uint8_t*);
-	template size_t ClientIntputPayload::IO<Write>(uint8_t*);
+	template size_t ClientInputPayload::IO<Read>(uint8_t*);
+	template size_t ClientInputPayload::IO<Write>(uint8_t*);
 	template size_t ServerObject::IO<Read>(uint8_t*);
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
-	template class Packet<Header, ClientIntputPacket>;
-	template size_t Packet<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
-	template size_t Packet<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
+	template class Packet<Header, ClientInputPacket>;
+	template size_t Packet<Header, ClientInputPacket>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePayload>;
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
-	template class PointeredPacket<Header, ClientIntputPacket>;
-	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Read>(uint8_t*);
-	template size_t PointeredPacket<Header, ClientIntputPacket>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ClientInputPacket>;
+	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class PointeredPacket<ServerHeader, ServerStatePayload>;
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);

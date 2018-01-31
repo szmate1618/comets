@@ -1,28 +1,28 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 
 
 namespace geo_literals
 {
-	constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; }
+	constexpr long double operator"" _deg(unsigned long long deg) { return deg / 180.0 * 3.14159265358979323846; } //TODO: geo::PI should be used here, somehow.
 
-	constexpr long double operator"" _deg(long double deg) { return deg / 180 * 3.14159265358979323846; }
+	constexpr long double operator"" _deg(long double deg) { return deg / 180.0 * 3.14159265358979323846; } //TODO: Same as above.
 
-	constexpr long double operator"" _rad(long double rad) { return rad; }
+	constexpr long double operator"" _rad(long double rad) { return rad; } //TODO: Add _pi_rad literal.
 }
 
 namespace geo
 {
 
-	static constexpr double PI = 3.14159265358979323846;
+	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
-	typedef double real;
+	using real = double; //TODO: This could be a template variable.
 	constexpr real epsilon = 0.0005;
 
 	struct point_2d { real x; real y; };
 
-	typedef point_2d vector_2d;
+	using vector_2d = point_2d;
 
 	struct triangle { point_2d a; point_2d b; point_2d c; };
 	

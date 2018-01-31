@@ -47,7 +47,7 @@ namespace Test
 			{
 				for(const auto j: (**i))
 				{
-					#pragma warning( disable : 4302 4311 )
+					#pragma warning( suppress : 4302 4311 )
 					Assert::AreEqual(1, reinterpret_cast<int>(j), L"Failed to retrieve correct entity pointer.");
 				}
 			}

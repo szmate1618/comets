@@ -29,7 +29,7 @@ namespace net
 {
 
 	#if PLATFORM == PLATFORM_WINDOWS
-	typedef int socklen_t;
+	using socklen_t = int;
 	#endif
 
 	class Socket
@@ -42,11 +42,13 @@ namespace net
 		void Open(unsigned short);
 		void Close();
 		bool IsOpen() const;
-		bool Send(const Address&, const void*, int) const;
-		int Receive(Address&, void*, int) const;
+		bool Send(const Address&, const void*, size_t) const;
+		bool Send(const Address&, size_t) const; //TODO: Add test.
+		int Receive(Address&, void*, size_t) const;
 		int Receive(Address&) const;
 
-		char recv_buffer[def::max_packet_size];
+		uint8_t send_buffer[def::max_packet_size];
+		uint8_t recv_buffer[def::max_packet_size];
 
 	protected: //TODO: Maybe making the test class its friend would be a better solution.
 
