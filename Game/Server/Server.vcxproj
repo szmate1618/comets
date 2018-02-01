@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractServer.hpp" />
     <ClInclude Include="GameServer.hpp" />
+    <ClInclude Include="PacketBuffers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractServer.cpp" />
