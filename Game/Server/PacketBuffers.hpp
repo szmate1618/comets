@@ -15,7 +15,7 @@ namespace server
 	public:
 
 		ClientInputPayloadBuffer();
-		virtual ~ClientInputPayloadBuffer();
+		~ClientInputPayloadBuffer();
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
@@ -31,7 +31,7 @@ namespace server
 	public:
 
 		ServerStatePayloadBuffer();
-		virtual ~ServerStatePayloadBuffer();
+		~ServerStatePayloadBuffer();
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
