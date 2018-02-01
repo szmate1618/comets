@@ -4,7 +4,7 @@
 namespace server
 {
 
-	ClientInputPayloadBuffer::ClientInputPayloadBuffer() : is_free(packet_buffer_length, true), client_inputs(packet_buffer_length)
+	ClientInputPayloadBuffer::ClientInputPayloadBuffer()
 	{
 		for (auto payload : client_inputs)
 		{
@@ -20,7 +20,7 @@ namespace server
 		}
 	}
 
-	ServerStatePayloadBuffer::ServerStatePayloadBuffer() : entity_ids(packet_buffer_length), server_states(packet_buffer_length)
+	ServerStatePayloadBuffer::ServerStatePayloadBuffer()
 	{
 		for (auto payload : server_states)
 		{

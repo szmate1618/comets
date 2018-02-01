@@ -3,7 +3,7 @@
 #include "..\Networking\Packets.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
-#include <vector>
+#include <array>
 #include <atomic>
 
 
@@ -22,8 +22,8 @@ namespace server
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
-		std::vector<std::atomic<bool>> is_free;
-		std::vector<net::ClientInputPayload> client_inputs;
+		std::array<std::atomic<bool>, packet_buffer_length> is_free;
+		std::array<net::ClientInputPayload, packet_buffer_length> client_inputs;
 
 	private:
 
@@ -38,8 +38,8 @@ namespace server
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
-		std::vector<def::entity_id> entity_ids;
-		std::vector<net::ServerStatePayload> server_states;
+		std::array<def::entity_id, packet_buffer_length> entity_ids;
+		std::array<net::ServerStatePayload, packet_buffer_length> server_states;
 
 	private:
 
