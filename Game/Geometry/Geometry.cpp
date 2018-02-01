@@ -53,8 +53,8 @@ namespace geo
 		double sign1 = length_cross(sub(b, a), sub(p, a));
 		double sign2 = length_cross(sub(c, b), sub(p, b));
 		double sign3 = length_cross(sub(a, c), sub(p, c));
-		// Isn't it a conditional? Maybe we should use bitwise operators.
-		// Or keep them like this, and and use short-circuit and don't even calculate sign3 if not necessary.
+		//Isn't it a conditional? Maybe we should use bitwise operators.
+		//Or keep them like this, and and use short-circuit and don't even calculate sign3 if not necessary.
 		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) || (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0); 
 	}
 

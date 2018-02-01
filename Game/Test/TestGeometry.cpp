@@ -245,7 +245,7 @@ find_convex_hexa:
 					}
 				}
 				
-				geo::point_2d* hexa = convex_hexagon_attempt; // Hah! It's not just an attempt anymore!
+				geo::point_2d* hexa = convex_hexagon_attempt; //Hah! It's not just an attempt anymore!
 				for (int j = 0; j < 1000; j++)
 				{
 					geo::point_2d p = { static_cast<geo::real>(rand()), static_cast<geo::real>(rand()) };
