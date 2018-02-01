@@ -10,6 +10,9 @@
 namespace server
 {
 
+	static constexpr int oversize_factor = 5;
+	static constexpr size_t packet_buffer_length = oversize_factor *  def::max_sessions;
+
 	class ClientInputPayloadBuffer
 	{
 	public:
