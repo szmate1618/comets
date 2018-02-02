@@ -20,7 +20,7 @@ namespace server
 		}
 	}
 
-	ServerStatePayloadBuffer::ServerStatePayloadBuffer()
+	ServerStatePayloadBuffer::ServerStatePayloadBuffer() : count{0}
 	{
 		for (auto payload : server_states)
 		{

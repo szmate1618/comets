@@ -38,6 +38,7 @@ namespace server
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
+		size_t count;
 		std::array<def::entity_id, packet_buffer_length> entity_ids;
 		std::array<net::ServerStatePayload, packet_buffer_length> server_states;
 
