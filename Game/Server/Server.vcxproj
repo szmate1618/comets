@@ -129,13 +129,13 @@
   <ItemGroup>
     <ClInclude Include="AbstractServer.hpp" />
     <ClInclude Include="GameServer.hpp" />
-    <ClInclude Include="PacketBuffers.hpp" />
+    <ClInclude Include="PacketPayloadBuffers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractServer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameServer.cpp" />
-    <ClCompile Include="PacketBuffers.cpp" />
+    <ClCompile Include="PacketPayloadBuffers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

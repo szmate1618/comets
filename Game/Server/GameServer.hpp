@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AbstractServer.hpp"
-#include "PacketBuffers.hpp"
+#include "PacketPayloadBuffers.hpp"
 #include "..\Networking\Protocol.hpp"
 #include "..\Networking\Packets.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
