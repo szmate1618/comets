@@ -22,7 +22,7 @@ namespace server
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
-		std::array<std::atomic<bool>, packet_buffer_length> is_free;
+		std::array<std::atomic<bool>, packet_buffer_length> is_free; //TODO: Initialize this to all true.
 		std::array<net::ClientInputPayload, packet_buffer_length> client_inputs;
 
 	private:
