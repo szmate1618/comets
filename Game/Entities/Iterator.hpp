@@ -8,9 +8,9 @@ namespace entity
 {
 
 	template<typename T>
-	class Iterator: public std::iterator
+	class Iterator: public std::iterator //TODO: Actually we don't need this STL boilerplate. This iterator is not currently used with any STL algorithm.
 	                <
-	                	std::forward_iterator_tag,
+	                	std::forward_iterator_tag, //TODO: This should be ptrdiff_t, also there is a deprecation warning.
 	                	T,
 	                	long,
 	                	const T*,
