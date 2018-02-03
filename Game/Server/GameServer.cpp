@@ -84,9 +84,8 @@ namespace server
 	GameServer::ImportStrategy::~ImportStrategy() {}
 	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
 	{
-		std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> dummy_return;
-		return dummy_return;
-	} //TODO: Actually implement this.
+		return { server_state_payload_buffer.count, server_state_payload_buffer.entity_ids, server_state_payload_buffer.server_states };
+	}
 	std::tuple<size_t, net::ClientInputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
 	{
 		assert(false && "Not actually implemented, not supposed to be called.");
