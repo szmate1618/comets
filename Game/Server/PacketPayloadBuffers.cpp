@@ -7,7 +7,7 @@ namespace server
 
 	ClientInputPayloadBuffer::ClientInputPayloadBuffer()
 	{
-		for (auto payload : client_inputs)
+		for (auto& payload : client_inputs)
 		{
 			payload.inputs = new uint8_t[def::max_packet_size];
 		}
@@ -15,7 +15,7 @@ namespace server
 
 	ClientInputPayloadBuffer::~ClientInputPayloadBuffer()
 	{
-		for (auto payload = std::rbegin(client_inputs); payload != std::rend(client_inputs); ++payload)
+		for (auto& payload = std::rbegin(client_inputs); payload != std::rend(client_inputs); ++payload)
 		{
 			delete[] payload->inputs;
 		}
@@ -23,7 +23,7 @@ namespace server
 
 	ServerStatePayloadBuffer::ServerStatePayloadBuffer() : count{0}
 	{
-		for (auto payload : server_states)
+		for (auto& payload : server_states)
 		{
 			payload.objects = new net::ServerObject[def::max_packet_size];
 		}
@@ -31,7 +31,7 @@ namespace server
 
 	ServerStatePayloadBuffer::~ServerStatePayloadBuffer()
 	{
-		for (auto payload = std::rbegin(server_states); payload != std::rend(server_states); ++payload)
+		for (auto& payload = std::rbegin(server_states); payload != std::rend(server_states); ++payload)
 		{
 			delete[] payload->objects;
 		}
