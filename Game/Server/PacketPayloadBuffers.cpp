@@ -1,5 +1,6 @@
 #include "PacketPayloadBuffers.hpp"
 
+#include <iterator>
 
 namespace server
 {
@@ -14,7 +15,7 @@ namespace server
 
 	ClientInputPayloadBuffer::~ClientInputPayloadBuffer()
 	{
-		for (auto payload = client_inputs.rbegin(); payload != client_inputs.rend(); ++payload)
+		for (auto payload = std::rbegin(client_inputs); payload != std::rend(client_inputs); ++payload)
 		{
 			delete[] payload->inputs;
 		}
@@ -30,7 +31,7 @@ namespace server
 
 	ServerStatePayloadBuffer::~ServerStatePayloadBuffer()
 	{
-		for (auto payload = server_states.rbegin(); payload != server_states.rend(); ++payload)
+		for (auto payload = std::rbegin(server_states); payload != std::rend(server_states); ++payload)
 		{
 			delete[] payload->objects;
 		}
