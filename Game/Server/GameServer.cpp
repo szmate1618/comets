@@ -60,6 +60,18 @@ namespace server
 	//Read input, update entity orientation, acceleration, forces, etc.
 	void GameServer::ProcessPackets()
 	{
+		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		for (size_t i = 0; i < packet_buffer_length; ++i)
+		{
+			if (!cipb.is_free[i].load())
+			{
+				net::ClientInputPayload& cip = cipb.client_inputs[i];
+				/*
+				Do things with cip here.
+				*/
+				if (--cip.duration <= 0) cipb.is_free[i].store(true);
+			}
+		}
 	}
 
 	void GameServer::UpdateState(def::time duration)
