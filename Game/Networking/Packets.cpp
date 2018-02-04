@@ -1,6 +1,8 @@
 #include "Packets.hpp"
 #include "BinarySerialization.hpp"
 
+#include <algorithm>
+
 
 namespace net
 {
@@ -33,6 +35,14 @@ namespace net
 		packet_data_current += io_mode::Process(packet_data_current, ack);
 		packet_data_current += io_mode::Process(packet_data_current, ack_bitfield);
 		return packet_data_current - packet_data_start;
+	}
+
+	void ClientInputPayload::DeepCopyFrom(const ClientInputPayload& that)
+	{
+		uint8_t* inputs = this->inputs;
+		*this = that;
+		this->inputs = inputs;
+		std::copy(that.inputs, that.inputs + that.count, this->inputs);
 	}
 
 	bool ClientInputPayload::operator==(const ClientInputPayload& other) const
@@ -75,6 +85,14 @@ namespace net
 		packet_data_current += io_mode::Process(packet_data_current, x);
 		packet_data_current += io_mode::Process(packet_data_current, y);
 		return packet_data_current - packet_data_start;
+	}
+
+	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
+	{
+		ServerObject* inputs = this->objects;
+		*this = that;
+		this->objects = objects;
+		std::copy(that.objects, that.objects + that.count, this->objects);
 	}
 
 	bool ServerStatePayload::operator==(const ServerStatePayload& other) const

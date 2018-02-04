@@ -57,6 +57,7 @@ namespace net
 		ClientInputPayload() = default;
 		ClientInputPayload(const ClientInputPayload& other) = default;
 		ClientInputPayload& operator=(const ClientInputPayload& other) = default;
+		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests.
 		bool operator==(const ClientInputPayload& other) const;
 		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
 
@@ -89,6 +90,7 @@ namespace net
 		ServerStatePayload() = default;
 		ServerStatePayload(const ServerStatePayload& other) = default;
 		ServerStatePayload& operator=(const ServerStatePayload& other) = default;
+		void DeepCopyFrom(const ServerStatePayload&); //TODO: Add tests.
 		bool operator==(const ServerStatePayload& other) const;
 		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
 
