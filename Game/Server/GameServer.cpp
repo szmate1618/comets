@@ -78,7 +78,17 @@ namespace server
 	GameServer::ExportStrategy::ExportStrategy(ClientInputPayloadBuffer& cipb) : client_input_payload_buffer{ cipb } {}
 	GameServer::ExportStrategy::~ExportStrategy() {}
 	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); }
-	void GameServer::ExportStrategy::Export(const net::ClientInputPayload&) const {} //TODO: Actually implement this.
+	void GameServer::ExportStrategy::Export(const net::ClientInputPayload& cip) const
+	{
+		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		while (!cipb.is_free[cipb.current_index].load())
+		{
+			cipb.current_index++;
+			cipb.current_index %= packet_buffer_length;
+		}
+		cipb.client_inputs[cipb.current_index].DeepCopyFrom(cip);
+		cipb.is_free[cipb.current_index].store(false);
+	}
 
 	GameServer::ImportStrategy::ImportStrategy(ServerStatePayloadBuffer& sspb) : server_state_payload_buffer{ sspb } {}
 	GameServer::ImportStrategy::~ImportStrategy() {}
