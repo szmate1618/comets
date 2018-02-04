@@ -38,7 +38,7 @@ namespace net
 		static inline size_t Process(uint8_t* packet_data, T t)
 		{
 			T nt = hton(t);
-			memcpy(packet_data, &nt, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
+			std::memcpy(packet_data, &nt, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
 			return sizeof(T);
 		}
 	};
@@ -56,7 +56,7 @@ namespace net
 		static inline size_t Process(uint8_t* packet_data, T& t)
 		{
 			T ht;
-			memcpy(&ht, packet_data, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
+			std::memcpy(&ht, packet_data, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
 			t = ntoh(ht);
 			return sizeof(T);
 		}
