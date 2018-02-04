@@ -1,8 +1,6 @@
 #include "Packets.hpp"
 #include "BinarySerialization.hpp"
 
-#include <algorithm>
-
 
 namespace net
 {
@@ -42,7 +40,7 @@ namespace net
 		uint8_t* inputs = this->inputs;
 		*this = that;
 		this->inputs = inputs;
-		std::copy(that.inputs, that.inputs + that.count, this->inputs);
+		std::memcpy(this->inputs, that.inputs, that.count);
 	}
 
 	bool ClientInputPayload::operator==(const ClientInputPayload& other) const
@@ -92,7 +90,7 @@ namespace net
 		ServerObject* inputs = this->objects;
 		*this = that;
 		this->objects = objects;
-		std::copy(that.objects, that.objects + that.count, this->objects);
+		std::memcpy(this->objects, that.objects, that.count);
 	}
 
 	bool ServerStatePayload::operator==(const ServerStatePayload& other) const
