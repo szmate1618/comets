@@ -5,8 +5,12 @@
 namespace server
 {
 
-	ClientInputPayloadBuffer::ClientInputPayloadBuffer()
+	ClientInputPayloadBuffer::ClientInputPayloadBuffer() : current_index{ 0 }
 	{
+		for (auto& flag : is_free)
+		{
+			flag.store(true);
+		}
 		for (auto& payload : client_inputs)
 		{
 			payload.inputs = new uint8_t[def::max_packet_size];
@@ -21,7 +25,7 @@ namespace server
 		}
 	}
 
-	ServerStatePayloadBuffer::ServerStatePayloadBuffer() : count{0}
+	ServerStatePayloadBuffer::ServerStatePayloadBuffer() : count{ 0 }
 	{
 		for (auto& payload : server_states)
 		{

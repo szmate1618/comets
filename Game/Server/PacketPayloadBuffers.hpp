@@ -21,7 +21,8 @@ namespace server
 
 		//It would be cleaner to make these private and provide a minimal necessary public interface
 		//but it's simpler this way.
-		std::atomic<bool> is_free[packet_buffer_length]; //TODO: Initialize this to all true.
+		size_t current_index;
+		std::atomic_bool is_free[packet_buffer_length];
 		net::ClientInputPayload client_inputs[packet_buffer_length];
 
 	private:
