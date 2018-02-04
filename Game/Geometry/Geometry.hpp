@@ -37,7 +37,7 @@ namespace geo
 		T* entity;
 	};
 	
-	bool equals(point_2d, point_2d, real);
+	bool equals(point_2d, point_2d, real); //TODO: Pass everything by reference.
 	
 	bool equals(point_2d, point_2d);
 
