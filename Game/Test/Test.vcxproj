@@ -166,10 +166,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NetworkTrafficPlayerAndRecorder.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NetworkTrafficPlayerAndRecorder.cpp" />
     <ClCompile Include="TestLogger.cpp" />
     <ClCompile Include="TestPackets.cpp" />
     <ClCompile Include="TestSocket.cpp" />
