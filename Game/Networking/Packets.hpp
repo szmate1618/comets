@@ -50,7 +50,7 @@ namespace net
 	public:
 
 		uint32_t entity_id;
-		uint8_t duration; //TODO: Also add entity_id.
+		uint8_t duration;
 		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
 
@@ -68,7 +68,7 @@ namespace net
 	public:
 
 		uint32_t type;
-		double radian; //TODO: User defined literals for degree and radian.
+		double radian;
 		double x;
 		double y;
 
