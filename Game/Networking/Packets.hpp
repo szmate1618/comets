@@ -22,10 +22,10 @@ namespace net
 		uint8_t packet_type;
 
 		Header() = default;
-		Header(const Header& other) = default;
-		Header& operator=(const Header& other) = default;
-		bool operator==(const Header& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
+		Header(const Header&) = default;
+		Header& operator=(const Header&) = default;
+		bool operator==(const Header&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
 
@@ -38,10 +38,10 @@ namespace net
 		uint32_t ack_bitfield;
 
 		ServerHeader() = default;
-		ServerHeader(const ServerHeader& other) = default;
-		ServerHeader& operator=(const ServerHeader& other) = default;
-		bool operator==(const ServerHeader& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
+		ServerHeader(const ServerHeader&) = default;
+		ServerHeader& operator=(const ServerHeader&) = default;
+		bool operator==(const ServerHeader&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
 
@@ -50,15 +50,16 @@ namespace net
 	public:
 
 		uint32_t entity_id;
-		uint8_t duration; //TODO: Also add entity_id.
+		uint8_t duration;
 		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
 
 		ClientInputPayload() = default;
-		ClientInputPayload(const ClientInputPayload& other) = default;
-		ClientInputPayload& operator=(const ClientInputPayload& other) = default;
-		bool operator==(const ClientInputPayload& other) const;
-		template<typename io_mode> size_t IO(uint8_t* packet_data_start);
+		ClientInputPayload(const ClientInputPayload&) = default;
+		ClientInputPayload& operator=(const ClientInputPayload&) = default;
+		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests.
+		bool operator==(const ClientInputPayload&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
 
@@ -67,15 +68,15 @@ namespace net
 	public:
 
 		uint32_t type;
-		double radian; //TODO: User defined literals for degree and radian.
+		double radian;
 		double x;
 		double y;
 
 		ServerObject() = default;
-		ServerObject(const ServerObject& other) = default;
-		ServerObject& operator=(const ServerObject& other) = default;
-		bool operator==(const ServerObject& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+		ServerObject(const ServerObject&) = default;
+		ServerObject& operator=(const ServerObject&) = default;
+		bool operator==(const ServerObject&) const;
+		template<typename io_mode>	size_t IO(uint8_t*);
 
 	};
 
@@ -87,10 +88,11 @@ namespace net
 		ServerObject* objects;
 
 		ServerStatePayload() = default;
-		ServerStatePayload(const ServerStatePayload& other) = default;
-		ServerStatePayload& operator=(const ServerStatePayload& other) = default;
-		bool operator==(const ServerStatePayload& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+		ServerStatePayload(const ServerStatePayload&) = default;
+		ServerStatePayload& operator=(const ServerStatePayload&) = default;
+		void DeepCopyFrom(const ServerStatePayload&); //TODO: Add tests.
+		bool operator==(const ServerStatePayload&) const;
+		template<typename io_mode>	size_t IO(uint8_t*);
 
 	};
 
@@ -103,10 +105,10 @@ namespace net
 		P payload;
 
 		Packet() = default;
-		Packet(const Packet<H, P>& other) = default;
-		Packet<H, P>& operator=(const Packet<H, P>& other) = default;
-		bool operator==(const Packet<H, P>& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+		Packet(const Packet<H, P>&) = default;
+		Packet<H, P>& operator=(const Packet<H, P>&) = default;
+		bool operator==(const Packet<H, P>&) const;
+		template<typename io_mode>	size_t IO(uint8_t*);
 
 	};
 
@@ -119,10 +121,10 @@ namespace net
 		P* payload;
 
 		PointeredPacket() = default;
-		PointeredPacket(const PointeredPacket<H, P>& other) = default;
-		PointeredPacket<H, P>& operator=(const PointeredPacket<H, P>& other) = default;
-		bool operator==(const PointeredPacket<H, P>& other) const;
-		template<typename io_mode>	size_t IO(uint8_t* packet_data_start);
+		PointeredPacket(const PointeredPacket<H, P>&) = default;
+		PointeredPacket<H, P>& operator=(const PointeredPacket<H, P>&) = default;
+		bool operator==(const PointeredPacket<H, P>&) const;
+		template<typename io_mode>	size_t IO(uint8_t*);
 
 	};
 

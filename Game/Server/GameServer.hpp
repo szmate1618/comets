@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractServer.hpp"
+#include "PacketPayloadBuffers.hpp"
 #include "..\Networking\Protocol.hpp"
 #include "..\Networking\Packets.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
@@ -31,10 +32,14 @@ namespace server
 		{
 		public:
 
-			ExportStrategy(std::vector<net::ClientInputPayload>&);
+			ExportStrategy(ClientInputPayloadBuffer&);
 			virtual ~ExportStrategy() override;
 			virtual void Export(const net::ServerStatePayload&) const override;
 			virtual void Export(const net::ClientInputPayload&) const override;
+
+		private:
+
+			ClientInputPayloadBuffer& client_input_payload_buffer;
 
 		};
 
@@ -42,16 +47,19 @@ namespace server
 		{
 		public:
 
-			ImportStrategy(std::vector<net::ServerStatePayload>&);
+			ImportStrategy(ServerStatePayloadBuffer&);
 			virtual ~ImportStrategy() override;
 			virtual std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> ImportServerState() const override;
 			virtual std::tuple<size_t, net::ClientInputPayload*> ImportClientIntput() const override;
 
+		private:
+
+			ServerStatePayloadBuffer& server_state_payload_buffer;
+
 		};
 
-		std::vector<def::entity_id> entity_buffer;
-		std::vector<net::ClientInputPayload> client_input_buffer;
-		std::vector<net::ServerStatePayload> server_state_buffer;
+		ClientInputPayloadBuffer client_input_payload_buffer;
+		ServerStatePayloadBuffer server_state_payload_buffer;
 		ExportStrategy export_strategy;
 		ImportStrategy import_strategy;
 		net::ServersideProtocol protocol;

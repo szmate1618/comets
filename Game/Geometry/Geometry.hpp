@@ -37,7 +37,7 @@ namespace geo
 		T* entity;
 	};
 	
-	bool equals(point_2d, point_2d, real);
+	bool equals(point_2d, point_2d, real); //TODO: Pass everything by reference.
 	
 	bool equals(point_2d, point_2d);
 
@@ -45,7 +45,7 @@ namespace geo
 
 	point_2d add(point_2d, point_2d);
 
-	point_2d mul(point_2d, real);
+	point_2d mul(point_2d, real); //TODO: Actually this is a vector operation.
 
 	double length_cross(point_2d, point_2d);
 

@@ -35,6 +35,14 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
+	void ClientInputPayload::DeepCopyFrom(const ClientInputPayload& that)
+	{
+		uint8_t* inputs = this->inputs;
+		*this = that;
+		this->inputs = inputs;
+		std::memcpy(this->inputs, that.inputs, that.count);
+	}
+
 	bool ClientInputPayload::operator==(const ClientInputPayload& other) const
 	{
 		if (entity_id != other.entity_id) return false;
@@ -75,6 +83,14 @@ namespace net
 		packet_data_current += io_mode::Process(packet_data_current, x);
 		packet_data_current += io_mode::Process(packet_data_current, y);
 		return packet_data_current - packet_data_start;
+	}
+
+	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
+	{
+		ServerObject* inputs = this->objects;
+		*this = that;
+		this->objects = objects;
+		std::memcpy(this->objects, that.objects, that.count);
 	}
 
 	bool ServerStatePayload::operator==(const ServerStatePayload& other) const
