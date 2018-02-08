@@ -69,7 +69,7 @@ namespace server
 				/*
 				Do things with cip here.
 				*/
-				if (--cip.duration <= 0) cipb.is_free[i].store(true);
+				if (--cip.duration <= 0) cipb.is_free[i].store(true); //TODO: This assumes the method is being called at a constant pace.
 			}
 		}
 	}
