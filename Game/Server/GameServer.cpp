@@ -77,14 +77,17 @@ namespace server
 		}
 	}
 
+	//Update current speed and position.
 	void GameServer::UpdateState(def::time duration)
 	{
 	}
 
+	//Test for collision at the current position, create new entities (e.g. explosions), remove expired (e.g. destroyed) entities.
 	void GameServer::TestCollisions()
 	{
 	}
 
+	//Test for visibility at the current position, send response.
 	void GameServer::SendPackets()
 	{
 		protocol.Respond();
