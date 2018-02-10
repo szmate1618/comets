@@ -19,7 +19,7 @@ namespace entity
 	{
     public:
 
-		//TODO: disable the default constructor here.
+		//TODO: Disable the default constructor here.
 		Iterator<T>(const T& element): element(&element) {}
 		virtual ~Iterator<T>() {}
         virtual Iterator<T>& operator++() {++element; return *this;}
