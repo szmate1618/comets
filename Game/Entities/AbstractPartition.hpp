@@ -2,7 +2,6 @@
 
 #include "Entities.hpp"
 #include "Iterator.hpp"
-#include "..\Geometry\Geometry.hpp"
 
 
 namespace entity
