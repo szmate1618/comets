@@ -61,11 +61,14 @@ namespace server
 	void GameServer::ProcessPackets()
 	{
 		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		ServerStatePayloadBuffer& sspb = server_state_payload_buffer;
+		sspb.count = 0;
 		for (size_t i = 0; i < packet_buffer_length; ++i)
 		{
 			if (!cipb.is_free[i].load())
 			{
 				net::ClientInputPayload& cip = cipb.client_inputs[i];
+				sspb.entity_ids[sspb.count++] = cip.entity_id;
 				/*
 				Do things with cip here.
 				*/
