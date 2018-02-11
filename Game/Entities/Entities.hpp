@@ -2,6 +2,7 @@
 
 #include "AbstractCollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 
 namespace entity
@@ -10,6 +11,7 @@ namespace entity
 	//A stationary entity that has a collision shape.
 	struct StaticEntity
 	{
+		def::entity_id id;
 		AbstractCollisionShape* shape;
 		geo::vector_2d orientation;
 		geo::vector_2d position;
