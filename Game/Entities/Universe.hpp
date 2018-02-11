@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Entities.hpp"
+#include "EntityHandle.hpp"
 #include "..\Utilities\StaticLinkedList.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
 #include <map>
+#include <unordered_map>
 #include <string>
 
 namespace entity
@@ -34,6 +36,7 @@ namespace entity
 
 	private:
 		
+		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
 		StaticEntityMap static_entities;
 		DynamicEntityMap dynamic_entities;
 
