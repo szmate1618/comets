@@ -142,6 +142,7 @@
     <ClInclude Include="AbstractCollisionShape.hpp" />
     <ClInclude Include="AbstractTriangulatedPoly.hpp" />
     <ClInclude Include="Entities.hpp" />
+    <ClInclude Include="EntityHandle.hpp" />
     <ClInclude Include="Iterator.hpp" />
     <ClInclude Include="SimplePartition.hpp" />
     <ClInclude Include="SimplePartitioner.hpp" />
