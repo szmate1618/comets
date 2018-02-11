@@ -147,6 +147,7 @@
     <ClInclude Include="SimplePartitioner.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
+    <ClInclude Include="Universe.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.vcxproj">
