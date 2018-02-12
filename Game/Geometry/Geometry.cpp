@@ -191,4 +191,9 @@ namespace geo
 		return tri_as_frame(t.a, t.b, t.c);
 	}
 
+	EmptyFrame add(EmptyFrame f, vector_2d v)
+	{
+		return { f.minx + v.x, f.maxx + v.x, f.miny + v.y, f.maxy + v.y };
+	}
+
 }

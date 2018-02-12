@@ -75,4 +75,6 @@ namespace geo
 
 	EmptyFrame tri_as_frame(triangle);
 
+	EmptyFrame add(EmptyFrame, vector_2d);
+
 }
