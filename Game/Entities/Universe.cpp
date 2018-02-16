@@ -10,9 +10,23 @@ namespace entity
 
 	Universe::~Universe() {}
 
-	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id)
+	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id, def::user_input input)
 	{
-
+		switch (input)
+		{
+		case def::turn_left:
+			return EntityTurnLeft(duration, entity_id);
+		case def::turn_right:
+			return EntityTurnRight(duration, entity_id);
+		case def::thrust:
+			return EntityThrust(duration, entity_id);
+		case def::brake:
+			return EntityBrake(duration, entity_id);
+		case def::fire:
+			return EntityFire(duration, entity_id);
+		default:
+			return false; //TODO: Do some warnlogging here.
+		}
 	}
 
 	bool Universe::EntityTurnLeft(def::time duration, def::entity_id entity_id)
