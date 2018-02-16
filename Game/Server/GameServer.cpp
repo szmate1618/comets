@@ -70,9 +70,10 @@ namespace server
 			{
 				net::ClientInputPayload& cip = cipb.client_inputs[i];
 				sspb.entity_ids[sspb.count++] = cip.entity_id;
-				/*
-				Do things with cip here.
-				*/
+				for (size_t j = 0; j < cip.count; ++j)
+				{
+					universe.EntityHandleInput(duration, cip.inputs[j]);
+				}
 				if (--cip.duration <= 0) cipb.is_free[i].store(true); //TODO: This assumes the method is being called at a constant pace.
 			}
 		}

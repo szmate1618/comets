@@ -10,6 +10,11 @@ namespace entity
 
 	Universe::~Universe() {}
 
+	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id)
+	{
+
+	}
+
 	bool Universe::EntityTurnLeft(def::time duration, def::entity_id entity_id)
 	{
 

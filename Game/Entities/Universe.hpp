@@ -24,6 +24,7 @@ namespace entity
 		Universe();
 		Universe(std::string);
 		~Universe();
+		bool EntityHandleInput(def::time, def::entity_id);
 		bool EntityTurnLeft(def::time, def::entity_id);
 		bool EntityTurnRight(def::time, def::entity_id);
 		bool EntityThrust(def::time, def::entity_id);
