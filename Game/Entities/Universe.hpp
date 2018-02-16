@@ -12,13 +12,9 @@
 namespace entity
 {
 
-	enum engine { inertial, anti_intertial, para_inertial, pre_programmed };
-	enum visibility { visible, invisible};
-	enum collidability { collidable, uncollidable };
-
-	template<typename T> using visibility_collidability_map = std::map<visibility, std::map<collidability, utils::StaticLinkedList<T>>>;
+	template<typename T> using visibility_collidability_map = std::map<visibility_class, std::map<collidability_class, utils::StaticLinkedList<T>>>;
 	using StaticEntityMap = visibility_collidability_map<StaticEntity>;
-	using DynamicEntityMap = std::map<engine, visibility_collidability_map<DynamicEntity>>;
+	using DynamicEntityMap = std::map<engine_type, visibility_collidability_map<DynamicEntity>>;
 
 	//The class responsible for managing all in-game entities.
 	class Universe
