@@ -11,7 +11,7 @@
 namespace net
 {
 
-	enum packet_types { client_input, server_state };
+	enum packet_type { client_input, server_state };
 
 	class Header
 	{
