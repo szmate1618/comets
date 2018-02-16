@@ -11,6 +11,7 @@ namespace server
 	//in the class rather than the order in which the members appear in the initializer list.
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
+		universe{},
 		export_strategy{ client_input_payload_buffer },
 		import_strategy{ server_state_payload_buffer },
 		protocol{ def::server_port, export_strategy, import_strategy },
@@ -80,16 +81,22 @@ namespace server
 	//Update current speed and position.
 	void GameServer::UpdateState(def::time duration)
 	{
+		universe.UpdateState(duration);
 	}
 
 	//Test for collision at the current position, create new entities (e.g. explosions), remove expired (e.g. destroyed) entities.
 	void GameServer::TestCollisions()
 	{
+		universe.TestCollisions();
 	}
 
 	//Test for visibility at the current position, send response.
 	void GameServer::SendPackets()
 	{
+		universe.TestCollisions();
+		/*
+		Collect visible environment for all queried entities.
+		*/
 		protocol.Respond();
 	}
 

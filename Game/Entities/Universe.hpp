@@ -29,6 +29,9 @@ namespace entity
 		bool EntityThrust(def::time, def::entity_id);
 		bool EntityBrake(def::time, def::entity_id);
 		bool EntityFire(def::time, def::entity_id);
+		void UpdateState(def::time);
+		void TestCollisions();
+		void TestVisibility();
 
 	private:
 		
