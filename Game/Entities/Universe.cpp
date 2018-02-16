@@ -54,4 +54,20 @@ namespace entity
 
 	}
 
+	void Universe::UpdateState(def::time duration)
+	{
+
+	}
+
+	void Universe::TestCollisions()
+	{
+
+	}
+
+	void Universe::TestVisibility()
+	{
+
+	}
+
+
 }
