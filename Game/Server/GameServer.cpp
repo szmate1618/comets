@@ -26,7 +26,7 @@ namespace server
 
 	void GameServer::Tick(def::time duration)
 	{
-		ProcessPackets();
+		ProcessPackets(duration);
 		UpdateState(duration);
 		TestCollisions();
 		SendPackets();
@@ -58,7 +58,7 @@ namespace server
 	}
 
 	//Read input, update entity orientation, acceleration, forces, etc.
-	void GameServer::ProcessPackets()
+	void GameServer::ProcessPackets(def::time duration)
 	{
 		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
 		ServerStatePayloadBuffer& sspb = server_state_payload_buffer;

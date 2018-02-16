@@ -24,11 +24,11 @@ namespace entity
 		Universe();
 		Universe(std::string);
 		~Universe();
-		bool EntityTurnLeft(def::entity_id);
-		bool EntityTurnRight(def::entity_id);
-		bool EntityThrust(def::entity_id);
-		bool EntityBrake(def::entity_id);
-		bool EntityFire(def::entity_id);
+		bool EntityTurnLeft(def::time, def::entity_id);
+		bool EntityTurnRight(def::time, def::entity_id);
+		bool EntityThrust(def::time, def::entity_id);
+		bool EntityBrake(def::time, def::entity_id);
+		bool EntityFire(def::time, def::entity_id);
 
 	private:
 		

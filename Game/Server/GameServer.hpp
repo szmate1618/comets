@@ -67,7 +67,7 @@ namespace server
 		std::thread input_thread;
 
 		void ReadPackets();
-		void ProcessPackets();
+		void ProcessPackets(def::time);
 		void UpdateState(def::time);
 		void TestCollisions();
 		void SendPackets();
