@@ -9,7 +9,7 @@ namespace entity
 {
 
 	//A stationary entity that has a collision shape.
-	struct StaticEntity
+	struct StaticEntity //TODO: Add AbstractPartition pointer.
 	{
 		def::entity_id id;
 		AbstractCollisionShape* shape;
