@@ -110,5 +110,8 @@
     <ClCompile Include="SimplePartitioner.cpp">
       <Filter>Source Files\Partitioners</Filter>
     </ClCompile>
+    <ClCompile Include="Universe.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
