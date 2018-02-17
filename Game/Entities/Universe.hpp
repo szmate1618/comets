@@ -25,10 +25,10 @@ namespace entity
 		Universe(std::string);
 		~Universe();
 		bool EntityHandleInput(def::time, def::entity_id, def::user_input);
-		void EntityTurnLeft(def::time, DynamicEntity&);
-		void EntityTurnRight(def::time, DynamicEntity&);
-		void EntityThrust(def::time, DynamicEntity&);
-		void EntityBrake(def::time, DynamicEntity&);
+		void EntityTurnLeft(def::time, DynamicEntity&, engine_type);
+		void EntityTurnRight(def::time, DynamicEntity&, engine_type);
+		void EntityThrust(def::time, DynamicEntity&, engine_type);
+		void EntityBrake(def::time, DynamicEntity&, engine_type);
 		void EntityFire(def::time, DynamicEntity&);
 		void UpdateState(def::time);
 		void TestCollisions();
@@ -47,6 +47,8 @@ namespace entity
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },
 			{ invisible,{ { collidable,{} },{ uncollidable,{} } } }
 		};
+
+		void EntityTurnDegree(DynamicEntity&, engine_type, geo::degree);
 
 	};
 
