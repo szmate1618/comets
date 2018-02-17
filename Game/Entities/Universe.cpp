@@ -12,46 +12,49 @@ namespace entity
 
 	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id, def::user_input input)
 	{
+		if (entity_registry.count(entity_id) == 0 || entity_registry[entity_id].dynamics == static_) return false;
+		DynamicEntity& entity = *(entity_registry[entity_id].de_pointer);
 		switch (input)
 		{
 		case def::turn_left:
-			return EntityTurnLeft(duration, entity_id);
+			EntityTurnLeft(duration, entity);
+			break;
 		case def::turn_right:
-			return EntityTurnRight(duration, entity_id);
+			EntityTurnRight(duration, entity);
+			break;
 		case def::thrust:
-			return EntityThrust(duration, entity_id);
+			EntityThrust(duration, entity);
+			break;
 		case def::brake:
-			return EntityBrake(duration, entity_id);
+			EntityBrake(duration, entity);
+			break;
 		case def::fire:
-			return EntityFire(duration, entity_id);
+			EntityFire(duration, entity);
+			break;
 		default:
 			return false; //TODO: Do some warnlogging here.
 		}
-	}
-
-	bool Universe::EntityTurnLeft(def::time duration, def::entity_id entity_id)
-	{
 		return true;
 	}
 
-	bool Universe::EntityTurnRight(def::time duration, def::entity_id entity_id)
+	void Universe::EntityTurnLeft(def::time duration, DynamicEntity entity)
 	{
-		return true;
 	}
 
-	bool Universe::EntityThrust(def::time duration, def::entity_id entity_id)
+	void Universe::EntityTurnRight(def::time duration, DynamicEntity entity)
 	{
-		return true;
 	}
 
-	bool Universe::EntityBrake(def::time duration, def::entity_id entity_id)
+	void Universe::EntityThrust(def::time duration, DynamicEntity entity)
 	{
-		return true;
 	}
 
-	bool Universe::EntityFire(def::time duration, def::entity_id entity_id)
+	void Universe::EntityBrake(def::time duration, DynamicEntity entity)
 	{
-		return true;
+	}
+
+	void Universe::EntityFire(def::time duration, DynamicEntity entity)
+	{
 	}
 
 	void Universe::UpdateState(def::time duration)
