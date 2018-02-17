@@ -37,23 +37,23 @@ namespace entity
 		return true;
 	}
 
-	void Universe::EntityTurnLeft(def::time duration, DynamicEntity entity)
+	void Universe::EntityTurnLeft(def::time duration, DynamicEntity& entity)
 	{
 	}
 
-	void Universe::EntityTurnRight(def::time duration, DynamicEntity entity)
+	void Universe::EntityTurnRight(def::time duration, DynamicEntity& entity)
 	{
 	}
 
-	void Universe::EntityThrust(def::time duration, DynamicEntity entity)
+	void Universe::EntityThrust(def::time duration, DynamicEntity& entity)
 	{
 	}
 
-	void Universe::EntityBrake(def::time duration, DynamicEntity entity)
+	void Universe::EntityBrake(def::time duration, DynamicEntity& entity)
 	{
 	}
 
-	void Universe::EntityFire(def::time duration, DynamicEntity entity)
+	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
 	}
 

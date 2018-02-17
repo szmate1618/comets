@@ -25,11 +25,11 @@ namespace entity
 		Universe(std::string);
 		~Universe();
 		bool EntityHandleInput(def::time, def::entity_id, def::user_input);
-		void EntityTurnLeft(def::time, DynamicEntity);
-		void EntityTurnRight(def::time, DynamicEntity);
-		void EntityThrust(def::time, DynamicEntity);
-		void EntityBrake(def::time, DynamicEntity);
-		void EntityFire(def::time, DynamicEntity);
+		void EntityTurnLeft(def::time, DynamicEntity&);
+		void EntityTurnRight(def::time, DynamicEntity&);
+		void EntityThrust(def::time, DynamicEntity&);
+		void EntityBrake(def::time, DynamicEntity&);
+		void EntityFire(def::time, DynamicEntity&);
 		void UpdateState(def::time);
 		void TestCollisions();
 		void TestVisibility();
