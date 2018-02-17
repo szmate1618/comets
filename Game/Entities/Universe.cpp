@@ -53,12 +53,38 @@ namespace entity
 
 	void Universe::EntityThrust(def::time duration, DynamicEntity& entity, engine_type engine)
 	{
-		entity.velocity = geo::add(entity.velocity, geo::mul(entity.acceleration, duration.count()));
+		switch (engine)
+		{
+		case entity::para_inertial:
+			[[fallthrough]];
+		case entity::inertial:
+			entity.velocity = geo::add(entity.velocity, geo::mul(entity.acceleration, duration.count()));
+			break;
+		case entity::anti_intertial:
+			entity.velocity = geo::point_2d_rotated({ entity.max_speed, 0 }, entity.orientation);
+			break;
+		default:
+			//TODO: Warnlogging.
+			break;
+		}
 	}
 
 	void Universe::EntityBrake(def::time duration, DynamicEntity& entity, engine_type engine)
 	{
-		entity.velocity = geo::add(entity.velocity, geo::mul(entity.acceleration, -duration.count()));
+		switch (engine)
+		{
+		case entity::para_inertial:
+			[[fallthrough]];
+		case entity::inertial:
+			entity.velocity = geo::sub(entity.velocity, geo::mul(entity.acceleration, duration.count()));
+			break;
+		case entity::anti_intertial:
+			entity.velocity = geo::point_2d_rotated({ -entity.max_speed, 0 }, entity.orientation);
+			break;
+		default:
+			//TODO: Warnlogging.
+			break;
+		}
 	}
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
