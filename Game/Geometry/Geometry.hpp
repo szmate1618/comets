@@ -17,6 +17,8 @@ namespace geo
 
 	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
+	using degree = double;
+
 	using real = double; //TODO: This could be a template variable.
 	constexpr real epsilon = 0.0005;
 
@@ -67,9 +69,9 @@ namespace geo
 
 	double tri_maxy(triangle);
 
-	point_2d point_2d_rotated(point_2d, double);
+	point_2d point_2d_rotated(point_2d, degree);
 
-	void rotate_point_2d(point_2d&, double);
+	void rotate_point_2d(point_2d&, degree);
 
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
 

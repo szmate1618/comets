@@ -141,7 +141,7 @@ namespace geo
 		}
 	}
 
-	point_2d point_2d_rotated(point_2d p, double radian)
+	point_2d point_2d_rotated(point_2d p, degree radian)
 	{
 		point_2d ret;
 		ret.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
@@ -149,7 +149,7 @@ namespace geo
 		return ret;
 	}
 
-	void rotate_point_2d(point_2d& p, double radian)
+	void rotate_point_2d(point_2d& p, degree radian)
 	{
 		real original_x = p.x; //Does this optimization actually do anything?
 		p.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
