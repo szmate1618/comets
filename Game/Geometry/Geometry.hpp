@@ -41,7 +41,7 @@ namespace geo
 	
 	bool equals(point_2d, point_2d, real); //TODO: Pass everything by reference.
 	
-	bool equals(point_2d, point_2d);
+	bool equals(point_2d, point_2d); //TODO: Implement these as member functions, with operator overloading.
 
 	point_2d sub(point_2d, point_2d);
 
