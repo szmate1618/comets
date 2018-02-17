@@ -72,7 +72,7 @@ namespace server
 				sspb.entity_ids[sspb.count++] = cip.entity_id;
 				for (size_t j = 0; j < cip.count; ++j)
 				{
-					universe.EntityHandleInput(duration, cip.inputs[j]);
+					universe.EntityHandleInput(duration, cip.entity_id, static_cast<def::user_input>(cip.inputs[j]));
 				}
 				if (--cip.duration <= 0) cipb.is_free[i].store(true); //TODO: This assumes the method is being called at a constant pace.
 			}

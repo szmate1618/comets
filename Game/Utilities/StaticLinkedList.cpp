@@ -1,4 +1,5 @@
 #include "StaticLinkedList.hpp"
+#include "..\Entities\Entities.hpp"
 
 
 namespace utils
@@ -27,7 +28,7 @@ namespace utils
 		elements[inend].previndex = instart;
 
 		//Init outlist.
-		elements[oustart].nextindex = outstart + 2;
+		elements[outstart].nextindex = outstart + 2;
 		elements[outend].previndex = outend - 2;
 	}
 
@@ -86,7 +87,11 @@ namespace utils
 	template<typename T>
 	__int32 StaticLinkedList<T>::Defragment()
 	{
-		//TODO: Implement this.
+		return -1; //TODO: Implement this.
 	}
+
+	//Explicit instantiations.
+	template class StaticLinkedList<entity::StaticEntity>;
+	template class StaticLinkedList<entity::DynamicEntity>;
 
 }

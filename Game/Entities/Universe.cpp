@@ -31,27 +31,27 @@ namespace entity
 
 	bool Universe::EntityTurnLeft(def::time duration, def::entity_id entity_id)
 	{
-
+		return true;
 	}
 
 	bool Universe::EntityTurnRight(def::time duration, def::entity_id entity_id)
 	{
-
+		return true;
 	}
 
 	bool Universe::EntityThrust(def::time duration, def::entity_id entity_id)
 	{
-
+		return true;
 	}
 
 	bool Universe::EntityBrake(def::time duration, def::entity_id entity_id)
 	{
-
+		return true;
 	}
 
 	bool Universe::EntityFire(def::time duration, def::entity_id entity_id)
 	{
-
+		return true;
 	}
 
 	void Universe::UpdateState(def::time duration)
