@@ -49,9 +49,9 @@ namespace geo
 
 	point_2d mul(point_2d, real); //TODO: Actually this is a vector operation.
 
-	double length_cross(point_2d, point_2d);
+	real length_cross(point_2d, point_2d);
 
-	double dot_product(point_2d, point_2d);
+	real dot_product(point_2d, point_2d);
 	
 	bool is_inside(point_2d, point_2d, point_2d, point_2d);
 
@@ -61,13 +61,13 @@ namespace geo
 
 	bool is_inside_convex(point_2d, point_2d, point_2d, point_2d, point_2d, point_2d, point_2d);
 
-	double tri_minx(triangle);
+	real tri_minx(triangle);
 
-	double tri_maxx(triangle);
+	real tri_maxx(triangle);
 
-	double tri_miny(triangle);
+	real tri_miny(triangle);
 
-	double tri_maxy(triangle);
+	real tri_maxy(triangle);
 
 	point_2d point_2d_rotated(point_2d, degree);
 

@@ -38,12 +38,12 @@ namespace geo
 		return r;
 	}
 
-	double length_cross(point_2d v1, point_2d v2)
+	real length_cross(point_2d v1, point_2d v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;
 	}
 
-	double dot_product(point_2d v1, point_2d v2)
+	real dot_product(point_2d v1, point_2d v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}
@@ -85,7 +85,7 @@ namespace geo
 	//1x0 4,6 a 0
 	//01x 2,3 b 1
 	//x01 1,5 c 2
-	double tri_minx(triangle t)
+	real tri_minx(triangle t)
 	{
 		if (t.a.x < t.b.x)
 		{
@@ -99,7 +99,7 @@ namespace geo
 		}
 	}
 
-	double tri_maxx(triangle t)
+	real tri_maxx(triangle t)
 	{
 		if (t.a.x > t.b.x)
 		{
@@ -113,7 +113,7 @@ namespace geo
 		}
 	}
 
-	double tri_miny(triangle t)
+	real tri_miny(triangle t)
 	{
 		if (t.a.y < t.b.y)
 		{
@@ -127,7 +127,7 @@ namespace geo
 		}
 	}
 
-	double tri_maxy(triangle t)
+	real tri_maxy(triangle t)
 	{
 		if (t.a.y > t.b.y)
 		{
