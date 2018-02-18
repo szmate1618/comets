@@ -43,6 +43,14 @@ namespace geo
 		return r;
 	}
 
+	point_2d div(point_2d v, real s)
+	{
+		point_2d r;
+		r.x = v.x / s;
+		r.y = v.y / s;
+		return r;
+	}
+
 	real length_cross(point_2d v1, point_2d v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;

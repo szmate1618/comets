@@ -51,6 +51,8 @@ namespace geo
 
 	point_2d mul(point_2d, real); //TODO: Actually this is a vector operation.
 
+	point_2d div(point_2d, real);
+
 	real length_cross(point_2d, point_2d);
 
 	real dot_product(point_2d, point_2d);
