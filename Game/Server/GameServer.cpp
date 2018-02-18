@@ -94,7 +94,7 @@ namespace server
 	//Test for visibility at the current position, send response.
 	void GameServer::SendPackets()
 	{
-		universe.TestCollisions();
+		universe.TestVisibility();
 		/*
 		Collect visible environment for all queried entities.
 		*/
