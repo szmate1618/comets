@@ -6,6 +6,28 @@ namespace utils
 {
 
 	template<typename T>
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, __int32 index) : list{ list }, index{ index } {}
+
+	template<typename T>
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.instart } {}
+
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator& StaticLinkedList<T>::Iterator::operator++() { index = list.elements[index].nextindex; return *this; }
+
+	template<typename T>
+	//We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::Iterator::operator++(int) { index = list.elements[index].nextindex; return *this; }
+
+	template<typename T>
+	bool StaticLinkedList<T>::Iterator::operator==(const Iterator other) const { return index == other.index; }
+
+	template<typename T>
+	bool StaticLinkedList<T>::Iterator::operator!=(const Iterator other) const { return index != other.index; }
+
+	template<typename T>
+	T& StaticLinkedList<T>::Iterator::operator*() const { return list.elements[index].element; }
+
+	template<typename T>
 	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
 	{
 	}
@@ -36,6 +58,18 @@ namespace utils
 	StaticLinkedList<T>::~StaticLinkedList()
 	{
 
+	}
+
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::begin()
+	{
+		return { *this };
+	}
+
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::end()
+	{
+		return { *this, inend };
 	}
 
 	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.

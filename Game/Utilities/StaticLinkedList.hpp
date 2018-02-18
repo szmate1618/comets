@@ -17,9 +17,30 @@ namespace utils
 
 	public:
 
+		class Iterator
+		{
+		public:
+
+			Iterator(StaticLinkedList<T>&, __int32);
+			Iterator(StaticLinkedList<T>&);
+			Iterator& operator++();
+			Iterator operator++(int);
+			bool operator==(const Iterator) const;
+			bool operator!=(const Iterator) const;
+			T& operator*() const;
+
+		private:
+
+			StaticLinkedList<T>& list;
+			__int32 index;
+
+		};
+
 		StaticLinkedList();
 		StaticLinkedList(__int32);
 		~StaticLinkedList();
+		Iterator begin();
+		Iterator end();
 		__int32 InsertAtFirstGap(T); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
 		__int32 RemoveAt(__int32);
 		__int32 Defragment();
