@@ -13,7 +13,6 @@ namespace utils
 	class StaticLinkedList
 	{
 
-		template<typename T>
 		struct ListElement { T element; __int32 previndex; __int32 nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int. //TODO: Use int32_t.
 
 	public:
@@ -28,7 +27,7 @@ namespace utils
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.
 		static constexpr __int32 default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
-		std::vector<ListElement<T>> elements;
+		std::vector<ListElement> elements;
 
 	private:
 
