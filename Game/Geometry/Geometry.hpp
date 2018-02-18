@@ -43,6 +43,8 @@ namespace geo
 	
 	bool equals(point_2d, point_2d); //TODO: Implement these as member functions, with operator overloading.
 
+	real length(vector_2d);
+
 	point_2d sub(point_2d, point_2d);
 
 	point_2d add(point_2d, point_2d);

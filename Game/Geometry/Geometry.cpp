@@ -14,6 +14,11 @@ namespace geo
 		return equals(v1, v2, epsilon);
 	}
 
+	real length(vector_2d v)
+	{
+		return std::sqrt(v.x * v.x + v.y * v.y);
+	}
+
 	point_2d sub(point_2d v1, point_2d v2)
 	{
 		point_2d r;
