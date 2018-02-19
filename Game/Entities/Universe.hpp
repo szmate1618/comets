@@ -49,6 +49,7 @@ namespace entity
 		};
 
 		void EntityTurnDegree(DynamicEntity&, engine_type, geo::degree);
+		void SpawnEntity(def::entity_id, def::owner_id, engine_type, dynamics_class, visibility_class, collidability_class, geo::point_2d);
 
 	};
 
