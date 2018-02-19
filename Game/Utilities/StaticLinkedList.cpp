@@ -82,6 +82,7 @@ namespace utils
 		{
 			//Resize.
 		}
+		elements[firstgap].element = element;
 		//Remove from outlist.
 		elements[elements[firstgap].previndex].nextindex = elements[firstgap].nextindex;
 		elements[elements[firstgap].nextindex].previndex = elements[firstgap].previndex;
