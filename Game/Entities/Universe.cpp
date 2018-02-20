@@ -155,7 +155,7 @@ namespace entity
 		//Iterate over all the partitions, inside of a partition check collision of everything with everything.
 	}
 
-	void Universe::TestVisibility()
+	void Universe::TestVisibility() //TODO: Maybe call this TestVision?
 	{
 		for (collidability_class c : {collidable, uncollidable})
 		{
