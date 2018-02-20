@@ -141,12 +141,33 @@ namespace entity
 
 	void Universe::TestCollisions()
 	{
-
+		for (visibility_class v : {visible, invisible})
+		{
+			for (StaticEntity& entity : static_entities[v][collidable])
+			{
+				//Insert all elements into a collision partitioner.
+			}
+			for (DynamicEntity& entity : dynamic_entities[v][collidable])
+			{
+				//Insert all elements into a collision partitioner.
+			}
+		}
+		//Iterate over all the partitions, inside of a partition check collision of everything with everything.
 	}
 
 	void Universe::TestVisibility()
 	{
-
+		for (collidability_class c : {collidable, uncollidable})
+		{
+			for (StaticEntity& entity : static_entities[visible][c])
+			{
+				//Insert all elements into a vision partitioner.
+			}
+			for (DynamicEntity& entity : dynamic_entities[visible][c])
+			{
+				//Insert all elements into a vision partitioner.
+			}
+		}
 	}
 
 	void Universe::EntityTurnDegree(DynamicEntity& entity, engine_type engine, geo::degree rotation)
