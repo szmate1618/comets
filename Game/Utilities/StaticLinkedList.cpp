@@ -20,10 +20,10 @@ namespace utils
 	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::Iterator::operator++(int) { index = list.elements[index].nextindex; return *this; }
 
 	template<typename T>
-	bool StaticLinkedList<T>::Iterator::operator==(const Iterator other) const { return index == other.index; }
+	bool StaticLinkedList<T>::Iterator::operator==(const Iterator& other) const { return index == other.index; }
 
 	template<typename T>
-	bool StaticLinkedList<T>::Iterator::operator!=(const Iterator other) const { return index != other.index; } //TODO: Delete to ==.
+	bool StaticLinkedList<T>::Iterator::operator!=(const Iterator& other) const { return index != other.index; } //TODO: Delete to ==.
 
 	template<typename T>
 	T& StaticLinkedList<T>::Iterator::operator*() const { return list.elements[index].element; }

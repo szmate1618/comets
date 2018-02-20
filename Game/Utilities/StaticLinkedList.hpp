@@ -25,8 +25,8 @@ namespace utils
 			Iterator(StaticLinkedList<T>&);
 			Iterator& operator++();
 			Iterator operator++(int);
-			bool operator==(const Iterator) const;
-			bool operator!=(const Iterator) const;
+			bool operator==(const Iterator&) const;
+			bool operator!=(const Iterator&) const;
 			T& operator*() const;
 
 		private:
