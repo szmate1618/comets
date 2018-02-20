@@ -16,6 +16,7 @@ namespace utils
 
 	template<typename T>
 	//We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
+	//TODO: Then maybe just delegate to the prefix increment operator.
 	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::Iterator::operator++(int) { index = list.elements[index].nextindex; return *this; }
 
 	template<typename T>
