@@ -28,12 +28,12 @@ namespace utils
 	T& StaticLinkedList<T>::Iterator::operator*() const { return list.elements[index].element; }
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
+	StaticLinkedList<T>::StaticLinkedList() : StaticLinkedList<T>{ default_size } //Constructor delegation, C++11!
 	{
 	}
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(__int32 size): elements(size)
+	StaticLinkedList<T>::StaticLinkedList(__int32 size) : elements(size)
 	{
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
