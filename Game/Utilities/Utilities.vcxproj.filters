@@ -27,6 +27,9 @@
     <ClInclude Include="CountOfArray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ForwardIterableSequenceView.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StaticLinkedList.cpp">

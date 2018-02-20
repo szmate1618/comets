@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClInclude Include="AssertTypeSizes.hpp" />
     <ClInclude Include="CountOfArray.hpp" />
+    <ClInclude Include="ForwardIterableSequenceView.hpp" />
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
