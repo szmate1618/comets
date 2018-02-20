@@ -2,6 +2,7 @@
 
 #include <initializer_list>
 #include <vector>
+#include <functional>
 
 
 namespace utils
@@ -39,7 +40,7 @@ namespace utils
 
 	private:
 
-		std::vector<T> sequence;
+		std::vector<reference_wrapper<T>> sequence;
 
 	};
 
