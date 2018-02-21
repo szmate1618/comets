@@ -39,9 +39,9 @@ namespace utils
 		StaticLinkedList();
 		StaticLinkedList(__int32);
 		~StaticLinkedList();
-		Iterator begin();
-		Iterator end();
-		__int32 InsertAtFirstGap(T); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
+		Iterator begin() const;
+		Iterator end() const;
+		__int32 InsertAtFirstGap(const T&); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
 		__int32 RemoveAt(__int32);
 		__int32 Defragment();
 

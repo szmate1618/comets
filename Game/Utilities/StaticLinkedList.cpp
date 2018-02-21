@@ -58,24 +58,23 @@ namespace utils
 	template<typename T>
 	StaticLinkedList<T>::~StaticLinkedList()
 	{
-
 	}
 
 	template<typename T>
-	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::begin()
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::begin() const
 	{
 		return { *this };
 	}
 
 	template<typename T>
-	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::end()
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::end() const
 	{
 		return { *this, inend };
 	}
 
 	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
 	template<typename T>
-	__int32 StaticLinkedList<T>::InsertAtFirstGap(T element)
+	__int32 StaticLinkedList<T>::InsertAtFirstGap(const T& element)
 	{
 		__int32 firstgap = elements[outstart].nextindex;
 
