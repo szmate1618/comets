@@ -7,7 +7,7 @@
 namespace utils
 {
 
-	template<typename T>
+	template<class T>
 	class ForwardIterableSequenceView
 	{
 
@@ -23,22 +23,22 @@ namespace utils
 			Iterator operator++(int);
 			bool operator==(const Iterator&) const;
 			bool operator!=(const Iterator&) const;
-			T& operator*() const;
+			typename T::value_type& operator*() const;
 
 		private:
 
 			ForwardIterableSequenceView<T>& view;
 			size_t current_container;
-			typename T::iterator current_position;
+			typename T::iterator& current_position;
 
 		};
 
 		ForwardIterableSequenceView() = delete;
-		ForwardIterableSequenceView(const T&);
+		ForwardIterableSequenceView(T&);
 		~ForwardIterableSequenceView();
-		void Append(const T&);
-		Iterator begin() const;
-		Iterator end() const;
+		void Append(T&);
+		Iterator begin();
+		Iterator end();
 
 	private:
 
