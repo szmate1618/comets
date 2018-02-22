@@ -1,6 +1,5 @@
 #pragma once
 
-#include <initializer_list>
 #include <vector>
 #include <functional>
 
@@ -18,29 +17,32 @@ namespace utils
 		{
 		public:
 
+			Iterator(ForwardIterableSequenceView<T>&, typename T::iterator&);
 			Iterator(ForwardIterableSequenceView<T>&);
 			Iterator& operator++();
 			Iterator operator++(int);
-			bool operator==(const Iterator) const;
-			bool operator!=(const Iterator) const;
+			bool operator==(const Iterator&) const;
+			bool operator!=(const Iterator&) const;
 			T& operator*() const;
 
 		private:
 
 			ForwardIterableSequenceView<T>& view;
 			size_t current_container;
-			T::iterator current_position;
+			typename T::iterator current_position;
 
 		};
 
-		ForwardIterableSequenceView(std::initializer_list<T>);
+		ForwardIterableSequenceView() = delete;
+		ForwardIterableSequenceView(const T&);
 		~ForwardIterableSequenceView();
-		Iterator begin();
-		Iterator end();
+		void Append(const T&);
+		Iterator begin() const;
+		Iterator end() const;
 
 	private:
 
-		std::vector<reference_wrapper<T>> sequence;
+		std::vector<std::reference_wrapper<T>> sequence;
 
 	};
 
