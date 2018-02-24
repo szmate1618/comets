@@ -5,7 +5,7 @@
 #include "..\Entities\Entities.hpp"
 
 #include <vector>
-#include <algorithm> 
+#include <algorithm>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -41,7 +41,7 @@ namespace Test
 			std::vector<int> v1{ 1, 2, 3 };
 			container v2(v1.size());
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
-			utils::ForwardIterableSequenceView<container> view(v2);
+			utils::ForwardIterableSequenceView<container> view{ v2 };
 			size_t i = 0;
 			for (auto p_entity : view)
 			{
@@ -49,6 +49,31 @@ namespace Test
 				i++;
 			}
 			Assert::AreEqual(v1.size(), i, L"Failed to enumerate all of the elements of a container.");
+		}
+
+		TEST_METHOD(IterateThroughMultipleContainers)
+		{
+			std::vector<int> v1{ 1, 2, 3 };
+			container v2(v1.size());
+			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
+			std::vector<int> v3{ 4, 5, 6, 7 };
+			container v4(v3.size());
+			std::transform(v3.begin(), v3.end(), v4.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
+			std::vector<int> v5{ 8, 9, 10 };
+			container v6(v5.size());
+			std::transform(v5.begin(), v5.end(), v6.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
+			utils::ForwardIterableSequenceView<container> view{ v2 };
+			view.Append(v4);
+			view.Append(v6);
+			v1.insert(v1.end(), v3.begin(), v3.end());
+			v1.insert(v1.end(), v5.begin(), v5.end());
+			size_t i = 0;
+			for (auto p_entity : view)
+			{
+				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of multiple containers yielded unexpected value.");
+				i++;
+			}
+			Assert::AreEqual(v1.size(), i, L"Failed to enumerate all of the elements of a sequence of containers.");
 		}
 
 	};

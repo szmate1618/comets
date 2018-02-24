@@ -35,7 +35,8 @@ namespace utils
 	template<class T>
 	bool ForwardIterableSequenceView<T>::Iterator::operator==(const Iterator& that) const
 	{
-		return current_position == that.current_position;
+		//WARNING: Ugly hack. According to the standard only iterators of the same container instance can be compared, so this is needed.
+		return current_container == view.sequence.size() - 1 && current_position == that.current_position;
 	}
 
 	template<class T>
