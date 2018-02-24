@@ -21,6 +21,21 @@ namespace Test
 
 	public:
 
+		TEST_METHOD(BeginEnd)
+		{
+			std::vector<int> v1{ 1, 2, 3 };
+			container v2(v1.size());
+			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
+			utils::ForwardIterableSequenceView<container> view{ v2 };
+			Assert::AreEqual(v1.front(), reinterpret_cast<int>(*view.begin()), L"Failed to correctly retrieve first element of a single container.");
+
+			std::vector<int> v3{ 4, 5, 6 };
+			container v4(v3.size());
+			std::transform(v3.begin(), v3.end(), v4.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
+			view.Append(v4);
+			Assert::AreEqual(v1.front(), reinterpret_cast<int>(*view.begin()), L"Failed to correctly retrieve first element of a sequence of containers.");
+		}
+
 		TEST_METHOD(Constructor)
 		{
 			std::vector<int> v1{ 1,2,3 };

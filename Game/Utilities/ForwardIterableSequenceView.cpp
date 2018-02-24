@@ -6,12 +6,12 @@ namespace utils
 {
 
 	template<class T>
-	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view, typename T::iterator& current_position)
+	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view, typename T::iterator current_position)
 		: view{ view }, current_position{ current_position } {}
 
 	template<class T>
 	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view)
-		: view{ view }, current_position{ view.sequence[0].get().begin() } {}
+		: view{ view }, current_position{ view.sequence.front().get().begin() } {}
 
 	template<class T>
 	typename ForwardIterableSequenceView<T>::Iterator& ForwardIterableSequenceView<T>::Iterator::operator++()

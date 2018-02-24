@@ -17,7 +17,7 @@ namespace utils
 		{
 		public:
 
-			Iterator(ForwardIterableSequenceView<T>&, typename T::iterator&);
+			Iterator(ForwardIterableSequenceView<T>&, typename T::iterator);
 			Iterator(ForwardIterableSequenceView<T>&);
 			Iterator& operator++();
 			Iterator operator++(int);
@@ -29,7 +29,7 @@ namespace utils
 
 			ForwardIterableSequenceView<T>& view;
 			size_t current_container;
-			typename T::iterator& current_position;
+			typename T::iterator current_position;
 
 		};
 
