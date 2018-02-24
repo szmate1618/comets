@@ -36,18 +36,19 @@ namespace Test
 			Assert::AreEqual(v1.front(), reinterpret_cast<int>(*view.begin()), L"Failed to correctly retrieve first element of a sequence of containers.");
 		}
 
-		TEST_METHOD(Constructor)
+		TEST_METHOD(IterateThroughAContainer)
 		{
-			std::vector<int> v1{ 1,2,3 };
+			std::vector<int> v1{ 1, 2, 3 };
 			container v2(v1.size());
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			utils::ForwardIterableSequenceView<container> view(v2);
-			int i = 0;
+			size_t i = 0;
 			for (auto p_entity : view)
 			{
-				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence yielded unexpected value.");
+				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of one container yielded unexpected value.");
 				i++;
 			}
+			Assert::AreEqual(v1.size(), i, L"Failed to enumerate all of the elements of a container.");
 		}
 
 	};

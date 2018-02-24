@@ -7,17 +7,17 @@ namespace utils
 
 	template<class T>
 	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view, typename T::iterator current_position)
-		: view{ view }, current_position{ current_position } {}
+		: view{ view }, current_position{ current_position }, current_container{ 0 } {}
 
 	template<class T>
 	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view)
-		: view{ view }, current_position{ view.sequence.front().get().begin() } {}
+		: Iterator{ view, view.sequence.front().get().begin() } {}
 
 	template<class T>
 	typename ForwardIterableSequenceView<T>::Iterator& ForwardIterableSequenceView<T>::Iterator::operator++()
 	{
 		++current_position;
-		if (current_position == view.sequence[current_container].get().end())
+		if (current_position == view.sequence[current_container].get().end() && current_container < view.sequence.size() - 1)
 		{
 			++current_container;
 			current_position = view.sequence[current_container].get().begin();
