@@ -6,12 +6,12 @@ namespace utils
 {
 
 	template<class T>
-	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view, typename T::iterator current_position)
-		: view{ view }, current_position{ current_position }, current_container{ 0 } {}
+	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view, typename T::iterator current_position, size_t current_container)
+		: view{ view }, current_position{ current_position }, current_container{ current_container } {}
 
 	template<class T>
 	ForwardIterableSequenceView<T>::Iterator::Iterator(ForwardIterableSequenceView<T>& view)
-		: Iterator{ view, view.sequence.front().get().begin() } {}
+		: Iterator{ view, view.sequence.front().get().begin(), 0 } {}
 
 	template<class T>
 	typename ForwardIterableSequenceView<T>::Iterator& ForwardIterableSequenceView<T>::Iterator::operator++()
@@ -35,8 +35,7 @@ namespace utils
 	template<class T>
 	bool ForwardIterableSequenceView<T>::Iterator::operator==(const Iterator& that) const
 	{
-		//WARNING: Ugly hack. According to the standard only iterators of the same container instance can be compared, so this is needed.
-		return current_container == view.sequence.size() - 1 && current_position == that.current_position;
+		return current_container == that.current_container && current_position == that.current_position;
 	}
 
 	template<class T>
@@ -76,7 +75,7 @@ namespace utils
 	template<class T>
 	typename ForwardIterableSequenceView<T>::Iterator ForwardIterableSequenceView<T>::end()
 	{
-		return { *this, sequence.back().get().end() };
+		return { *this, sequence.back().get().end() , sequence.size() - 1 };
 	}
 
 	//Explicit instantiations.
