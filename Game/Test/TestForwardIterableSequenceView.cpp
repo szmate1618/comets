@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <list>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -99,6 +100,24 @@ namespace Test
 			{
 				Assert::AreEqual(v1[i] * 2, v2[i], L"Failed to change one of the values in the original container. Maybe it is not passed by reference?");
 			}
+		}
+
+		TEST_METHOD(IterateThroughLists)
+		{
+			std::list<int> l1{ 5, 2, -4 };
+			std::list<int> l2{ 6, 23, 0, 144, 5, 5 };
+			std::vector<int> v;
+			v.insert(v.end(), l1.begin(), l1.end());
+			v.insert(v.end(), l2.begin(), l2.end());
+			utils::ForwardIterableSequenceView<std::list<int>> view{ l1 };
+			view.Append(l2);
+			size_t i = 0;
+			for (auto& entity : view)
+			{
+				Assert::AreEqual(v[i], entity, L"Iterating through the sequence of multiple lists yielded unexpected value.");
+				i++;
+			}
+			Assert::AreEqual(v.size(), i, L"Failed to enumerate all of the elements of a sequence of lists.");
 		}
 
 	};

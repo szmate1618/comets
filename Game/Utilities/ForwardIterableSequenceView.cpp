@@ -1,6 +1,8 @@
 #include "ForwardIterableSequenceView.hpp"
 #include "..\Entities\Entities.hpp"
 
+#include <list>
+
 
 namespace utils
 {
@@ -82,5 +84,6 @@ namespace utils
 	template class ForwardIterableSequenceView<std::vector<entity::StaticEntity*>>;
 	//The following are just for easier and more thorough testing.
 	template class ForwardIterableSequenceView<std::vector<int>>;
+	template class ForwardIterableSequenceView<std::list<int>>;
 
 }
