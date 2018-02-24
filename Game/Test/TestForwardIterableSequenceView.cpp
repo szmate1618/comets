@@ -48,10 +48,10 @@ namespace Test
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			utils::ForwardIterableSequenceView<container> view{ v2 };
 			size_t i = 0;
-			for (auto p_entity : view)
+			for (auto& entity : view)
 			{
 				#pragma warning( suppress : 4302 4311 )
-				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of one container yielded unexpected value.");
+				Assert::AreEqual(v1[i], reinterpret_cast<int>(entity), L"Iterating through the sequence of one container yielded unexpected value.");
 				i++;
 			}
 			Assert::AreEqual(v1.size(), i, L"Failed to enumerate all of the elements of a container.");
@@ -77,13 +77,28 @@ namespace Test
 			v1.insert(v1.end(), v3.begin(), v3.end());
 			v1.insert(v1.end(), v5.begin(), v5.end());
 			size_t i = 0;
-			for (auto p_entity : view)
+			for (auto& entity : view)
 			{
 				#pragma warning( suppress : 4302 4311 )
-				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of multiple containers yielded unexpected value.");
+				Assert::AreEqual(v1[i], reinterpret_cast<int>(entity), L"Iterating through the sequence of multiple containers yielded unexpected value.");
 				i++;
 			}
 			Assert::AreEqual(v1.size(), i, L"Failed to enumerate all of the elements of a sequence of containers.");
+		}
+
+		TEST_METHOD(PassByReference)
+		{
+			std::vector<int> v1{ 1, 2, 3 };
+			std::vector<int> v2{ v1 };
+			utils::ForwardIterableSequenceView<std::vector<int>> view{ v2 };
+			for (auto& entity : view)
+			{
+				entity *= 2;
+			}
+			for (size_t i = 0; i < v1.size(); i++)
+			{
+				Assert::AreEqual(v1[i] * 2, v2[i], L"Failed to change one of the values in the original container. Maybe it is not passed by reference?");
+			}
 		}
 
 	};

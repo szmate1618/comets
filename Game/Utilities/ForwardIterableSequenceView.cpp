@@ -80,5 +80,7 @@ namespace utils
 
 	//Explicit instantiations.
 	template class ForwardIterableSequenceView<std::vector<entity::StaticEntity*>>;
+	//The following are just for easier and more thorough testing.
+	template class ForwardIterableSequenceView<std::vector<int>>;
 
 }
