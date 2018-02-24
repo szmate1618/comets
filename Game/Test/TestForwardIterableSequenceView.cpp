@@ -25,14 +25,18 @@ namespace Test
 		{
 			std::vector<int> v1{ 1, 2, 3 };
 			container v2(v1.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			utils::ForwardIterableSequenceView<container> view{ v2 };
+			#pragma warning( suppress : 4302 4311 )
 			Assert::AreEqual(v1.front(), reinterpret_cast<int>(*view.begin()), L"Failed to correctly retrieve first element of a single container.");
 
 			std::vector<int> v3{ 4, 5, 6 };
 			container v4(v3.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v3.begin(), v3.end(), v4.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			view.Append(v4);
+			#pragma warning( suppress : 4302 4311 )
 			Assert::AreEqual(v1.front(), reinterpret_cast<int>(*view.begin()), L"Failed to correctly retrieve first element of a sequence of containers.");
 		}
 
@@ -40,11 +44,13 @@ namespace Test
 		{
 			std::vector<int> v1{ 1, 2, 3 };
 			container v2(v1.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			utils::ForwardIterableSequenceView<container> view{ v2 };
 			size_t i = 0;
 			for (auto p_entity : view)
 			{
+				#pragma warning( suppress : 4302 4311 )
 				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of one container yielded unexpected value.");
 				i++;
 			}
@@ -55,12 +61,15 @@ namespace Test
 		{
 			std::vector<int> v1{ 1, 2, 3 };
 			container v2(v1.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v1.begin(), v1.end(), v2.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			std::vector<int> v3{ 4, 5, 6, 7 };
 			container v4(v3.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v3.begin(), v3.end(), v4.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			std::vector<int> v5{ 8, 9, 10 };
 			container v6(v5.size());
+			#pragma warning( suppress : 4312 )
 			std::transform(v5.begin(), v5.end(), v6.begin(), [](int i) { return reinterpret_cast<pointer>(i); });
 			utils::ForwardIterableSequenceView<container> view{ v2 };
 			view.Append(v4);
@@ -70,6 +79,7 @@ namespace Test
 			size_t i = 0;
 			for (auto p_entity : view)
 			{
+				#pragma warning( suppress : 4302 4311 )
 				Assert::AreEqual(v1[i], reinterpret_cast<int>(p_entity), L"Iterating through the sequence of multiple containers yielded unexpected value.");
 				i++;
 			}
