@@ -152,7 +152,7 @@ namespace entity
 				//Insert all elements into a collision partitioner.
 			}
 		}
-		//Iterate over all the partitions, inside of a partition check collision of everything with everything.
+		//Iterate over all the partitions, inside of a partition check collisions for everything with everything.
 	}
 
 	void Universe::TestVisibility() //TODO: Maybe call this TestVision?
