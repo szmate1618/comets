@@ -92,34 +92,6 @@ namespace entity
 		//TODO: Implement this.
 	}
 
-	void Universe::SpawnEntity(def::entity_id entity,
-	                 def::owner_id owner,
-	                 engine_type engine,
-	                 dynamics_class dynamics,
-	                 visibility_class visibility,
-	                 collidability_class collidability,
-	                 geo::point_2d position)
-	{
-		if (entity_registry.count(entity) > 0) return;
-
-		EntityHandle handle{ owner, engine, dynamics, visibility, collidability, nullptr };
-		if (dynamics == dynamic)
-		{
-			DynamicEntity dynamic_entity;
-			dynamic_entity.position = position;
-			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
-			handle.de_pointer = &(dynamic_entities[visibility][collidability].elements[index].element); //TODO: Add a member method for this.
-		}
-		else
-		{
-			StaticEntity static_entity;
-			static_entity.position = position;
-			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
-			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
-		}
-		entity_registry[entity] = handle;
-	}
-
 	void Universe::UpdateState(def::time duration)
 	{
 		for (visibility_class v : {visible, invisible})
@@ -187,6 +159,34 @@ namespace entity
 			//TODO: Warnlogging.
 			break;
 		}
+	}
+
+	void Universe::SpawnEntity(def::entity_id entity,
+		def::owner_id owner,
+		engine_type engine,
+		dynamics_class dynamics,
+		visibility_class visibility,
+		collidability_class collidability,
+		geo::point_2d position)
+	{
+		if (entity_registry.count(entity) > 0) return;
+
+		EntityHandle handle{ owner, engine, dynamics, visibility, collidability, nullptr };
+		if (dynamics == dynamic)
+		{
+			DynamicEntity dynamic_entity;
+			dynamic_entity.position = position;
+			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
+			handle.de_pointer = &(dynamic_entities[visibility][collidability].elements[index].element); //TODO: Add a member method for this.
+		}
+		else
+		{
+			StaticEntity static_entity;
+			static_entity.position = position;
+			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
+			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
+		}
+		entity_registry[entity] = handle;
 	}
 
 }
