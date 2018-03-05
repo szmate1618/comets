@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractPartition.hpp" />
     <ClInclude Include="AbstractPartitioner.hpp" />
+    <ClInclude Include="AbstractVisionPartitioner.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="AbstractCollisionShape.hpp" />

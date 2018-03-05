@@ -75,6 +75,9 @@
     <ClInclude Include="EntityHandle.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractVisionPartitioner.hpp">
+      <Filter>Header Files\Partitioners</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
