@@ -11,6 +11,8 @@ namespace entity
 	class AbstractPartitioner
 	{
 
+	public:
+
 		class AbstractIterator
 		{
 		public:
@@ -21,8 +23,6 @@ namespace entity
 			virtual bool operator!=(const AbstractIterator&) const = 0;
 			virtual AbstractPartition& operator*() const = 0;
 		};
-
-	public:
 
 		AbstractPartitioner();
 		virtual ~AbstractPartitioner();

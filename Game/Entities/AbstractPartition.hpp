@@ -10,6 +10,8 @@ namespace entity
 	class AbstractPartition
 	{
 
+	public:
+
 		class AbstractIterator
 		{
 		public:
@@ -20,8 +22,6 @@ namespace entity
 			virtual bool operator!=(const AbstractIterator&) const = 0;
 			virtual const StaticEntity*& operator*() const = 0;
 		};
-
-	public:
 
 		virtual ~AbstractPartition();
 		virtual void Reset() = 0;
