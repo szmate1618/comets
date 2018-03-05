@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Entities.hpp"
-#include "Iterator.hpp"
 #include "AbstractPartition.hpp"
+#include "Entities.hpp"
 
 
 namespace entity
@@ -24,7 +23,6 @@ namespace entity
 			virtual AbstractPartition& operator*() const = 0;
 		};
 
-		AbstractPartitioner();
 		virtual ~AbstractPartitioner();
 		virtual void Insert(StaticEntity* const) = 0; //TODO: Include an EmptyFrame in AbstractCollisionShape.
 

@@ -2,9 +2,8 @@
 
 
 #include "AbstractPartitioner.hpp"
-#include "Entities.hpp"
-#include "Iterator.hpp"
 #include "AbstractPartition.hpp"
+#include "Entities.hpp"
 
 
 namespace entity

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entities.hpp"
-#include "Iterator.hpp"
 
 
 namespace entity
