@@ -28,7 +28,7 @@ namespace utils
 	}
 
 	template<class T>
-	//We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
+	//We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it. //TODO: Don't do this.
 	typename ForwardIterableSequenceView<T>::Iterator ForwardIterableSequenceView<T>::Iterator::operator++(int)
 	{
 		return ++*this;
