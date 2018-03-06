@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "AbstractPartitioner.hpp"
 #include "AbstractPartition.hpp"
 #include "Entities.hpp"
