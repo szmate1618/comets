@@ -144,6 +144,7 @@
     <ClInclude Include="Iterator.hpp" />
     <ClInclude Include="SimplePartition.hpp" />
     <ClInclude Include="SimplePartitioner.hpp" />
+    <ClInclude Include="SimpleVisionPartitioner.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
     <ClInclude Include="Universe.hpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="AbstractTriangulatedPoly.cpp" />
     <ClCompile Include="SimplePartition.cpp" />
     <ClCompile Include="SimplePartitioner.cpp" />
+    <ClCompile Include="SimpleVisionPartitioner.cpp" />
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp" />
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp" />
     <ClCompile Include="Universe.cpp" />

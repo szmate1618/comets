@@ -18,10 +18,11 @@ namespace entity
 		const SimplePartition* begin() const;
 		const SimplePartition* end() const;
 
-	private:
+	protected:
 
 		SimplePartition the_partition;
 
+	private:
 	};
 
 }
