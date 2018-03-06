@@ -135,9 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractPartition.hpp" />
-    <ClInclude Include="AbstractPartitioner.hpp" />
-    <ClInclude Include="AbstractVisionPartitioner.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="AbstractCollisionShape.hpp" />
@@ -162,8 +159,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractPartition.cpp" />
-    <ClCompile Include="AbstractPartitioner.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />

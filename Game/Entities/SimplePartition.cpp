@@ -7,38 +7,30 @@ namespace entity
 
 	SimplePartition::SimplePartition()
 	{
-		count = 0;
 	}
 
 	SimplePartition::~SimplePartition()
 	{
 	}
 
-    void SimplePartition::Add(StaticEntity* const entity)
+    void SimplePartition::Add(StaticEntity* entity)
 	{
-		assert(count < capacity);
-		elements[count] = entity;
-		++count;
+		elements.emplace_back(entity);
 	}
 
     void SimplePartition::Reset()
 	{
-		count = 0;
+		elements.clear();
 	}
 
-	Iterator<StaticEntity* const> SimplePartition::begin()
+	std::vector<StaticEntity*>::const_iterator SimplePartition::begin() const
 	{
-		return Iterator<StaticEntity* const>(elements[0]);
+		return elements.begin();
 	}
 
-    Iterator<StaticEntity* const> SimplePartition::end()
+	std::vector<StaticEntity*>::const_iterator SimplePartition::end() const
 	{
-		return Iterator<StaticEntity* const>(elements[count]);
-	}
-
-	long SimplePartition::getCapacity()
-	{
-		return capacity;
+		return elements.end();
 	}
 
 }

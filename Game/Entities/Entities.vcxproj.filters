@@ -54,12 +54,6 @@
     <ClInclude Include="Entities.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractPartitioner.hpp">
-      <Filter>Header Files\Partitioners</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractPartition.hpp">
-      <Filter>Header Files\Partitioners</Filter>
-    </ClInclude>
     <ClInclude Include="Iterator.hpp">
       <Filter>Header Files\Partitioners</Filter>
     </ClInclude>
@@ -74,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="EntityHandle.hpp">
       <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractVisionPartitioner.hpp">
-      <Filter>Header Files\Partitioners</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,13 +92,7 @@
     <ClCompile Include="AbstractTriangulatedPoly.cpp">
       <Filter>Source Files\CollisionShapes</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractPartition.cpp">
-      <Filter>Source Files\Partitioners</Filter>
-    </ClCompile>
     <ClCompile Include="SimplePartition.cpp">
-      <Filter>Source Files\Partitioners</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractPartitioner.cpp">
       <Filter>Source Files\Partitioners</Filter>
     </ClCompile>
     <ClCompile Include="SimplePartitioner.cpp">

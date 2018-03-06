@@ -1,31 +1,27 @@
 #pragma once
 
-#include "AbstractPartition.hpp"
 #include "Entities.hpp"
-#include "Iterator.hpp"
-#include "..\Geometry\Geometry.hpp"
+
+#include <vector>
 
 
 namespace entity
 {
 
-	class SimplePartition: public AbstractPartition
+	class SimplePartition
 	{
 	public:
 
 		SimplePartition();
-		virtual ~SimplePartition() override;
-		virtual void Reset() override;
-		virtual void Add(StaticEntity* const) override;
-		virtual Iterator<StaticEntity* const> begin() override;
-		virtual Iterator<StaticEntity* const> end() override;
-		static long getCapacity();
+		~SimplePartition();
+		void Reset();
+		void Add(StaticEntity*);
+		std::vector<StaticEntity*>::const_iterator begin() const;
+		std::vector<StaticEntity*>::const_iterator end() const;
 
 	private:
 
-		static const long capacity = 1000;
-		long count;
-		StaticEntity* elements[capacity];
+		std::vector<StaticEntity*> elements;
 
 	};
 
