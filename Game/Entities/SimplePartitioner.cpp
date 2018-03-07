@@ -12,19 +12,24 @@ namespace entity
 	{
 	}
 
-	void SimplePartitioner::Insert(geo::Frame<StaticEntity>& entity_frame)
+	void SimplePartitioner::Reset()
 	{
-		the_partition.Add(entity_frame.entity);
+		the_partition.Reset();
 	}
 
-	Iterator<AbstractPartition* const> SimplePartitioner::begin()
+	void SimplePartitioner::Insert(StaticEntity* entity)
 	{
-		return Iterator<AbstractPartition* const>(&the_partition);
+		the_partition.Add(entity);
 	}
 
-	Iterator<AbstractPartition* const> SimplePartitioner::end()
+	const SimplePartition* SimplePartitioner::begin() const
 	{
-		return Iterator<AbstractPartition* const>(&the_partition + 1);
+		return &the_partition;
+	}
+
+	const SimplePartition* SimplePartitioner::end() const
+	{
+		return begin() + 1;
 	}
 
 }

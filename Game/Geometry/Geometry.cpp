@@ -14,6 +14,11 @@ namespace geo
 		return equals(v1, v2, epsilon);
 	}
 
+	real length(vector_2d v)
+	{
+		return std::sqrt(v.x * v.x + v.y * v.y);
+	}
+
 	point_2d sub(point_2d v1, point_2d v2)
 	{
 		point_2d r;
@@ -38,12 +43,20 @@ namespace geo
 		return r;
 	}
 
-	double length_cross(point_2d v1, point_2d v2)
+	point_2d div(point_2d v, real s)
+	{
+		point_2d r;
+		r.x = v.x / s;
+		r.y = v.y / s;
+		return r;
+	}
+
+	real length_cross(point_2d v1, point_2d v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;
 	}
 
-	double dot_product(point_2d v1, point_2d v2)
+	real dot_product(point_2d v1, point_2d v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}
@@ -85,7 +98,7 @@ namespace geo
 	//1x0 4,6 a 0
 	//01x 2,3 b 1
 	//x01 1,5 c 2
-	double tri_minx(triangle t)
+	real tri_minx(triangle t)
 	{
 		if (t.a.x < t.b.x)
 		{
@@ -99,7 +112,7 @@ namespace geo
 		}
 	}
 
-	double tri_maxx(triangle t)
+	real tri_maxx(triangle t)
 	{
 		if (t.a.x > t.b.x)
 		{
@@ -113,7 +126,7 @@ namespace geo
 		}
 	}
 
-	double tri_miny(triangle t)
+	real tri_miny(triangle t)
 	{
 		if (t.a.y < t.b.y)
 		{
@@ -127,7 +140,7 @@ namespace geo
 		}
 	}
 
-	double tri_maxy(triangle t)
+	real tri_maxy(triangle t)
 	{
 		if (t.a.y > t.b.y)
 		{
@@ -141,7 +154,7 @@ namespace geo
 		}
 	}
 
-	point_2d point_2d_rotated(point_2d p, double radian)
+	point_2d point_2d_rotated(point_2d p, degree radian)
 	{
 		point_2d ret;
 		ret.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
@@ -149,7 +162,7 @@ namespace geo
 		return ret;
 	}
 
-	void rotate_point_2d(point_2d& p, double radian)
+	void rotate_point_2d(point_2d& p, degree radian)
 	{
 		real original_x = p.x; //Does this optimization actually do anything?
 		p.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
@@ -189,6 +202,11 @@ namespace geo
 	EmptyFrame tri_as_frame(triangle t)
 	{
 		return tri_as_frame(t.a, t.b, t.c);
+	}
+
+	EmptyFrame add(EmptyFrame f, vector_2d v)
+	{
+		return { f.minx + v.x, f.maxx + v.x, f.miny + v.y, f.maxy + v.y };
 	}
 
 }

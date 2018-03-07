@@ -1,16 +1,40 @@
 #include "StaticLinkedList.hpp"
+#include "..\Entities\Entities.hpp"
 
 
 namespace utils
 {
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(): StaticLinkedList<T>{default_size} //Constructor delegation, C++11!
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, __int32 index) : list{ list }, index{ index } {}
+
+	template<typename T>
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.instart } {}
+
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator& StaticLinkedList<T>::Iterator::operator++() { index = list.elements[index].nextindex; return *this; }
+
+	template<typename T>
+	//We break the usual C/C++ convention here, on purpose. We never intend to use a copy, so we don't create it.
+	//TODO: Then maybe just delegate to the prefix increment operator.
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::Iterator::operator++(int) { index = list.elements[index].nextindex; return *this; }
+
+	template<typename T>
+	bool StaticLinkedList<T>::Iterator::operator==(const Iterator& other) const { return index == other.index; }
+
+	template<typename T>
+	bool StaticLinkedList<T>::Iterator::operator!=(const Iterator& other) const { return index != other.index; } //TODO: Delegate to ==.
+
+	template<typename T>
+	T& StaticLinkedList<T>::Iterator::operator*() const { return list.elements[index].element; }
+
+	template<typename T>
+	StaticLinkedList<T>::StaticLinkedList() : StaticLinkedList<T>{ default_size } //Constructor delegation, C++11!
 	{
 	}
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(__int32 size): elements(size)
+	StaticLinkedList<T>::StaticLinkedList(__int32 size) : elements(size)
 	{
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
@@ -27,19 +51,30 @@ namespace utils
 		elements[inend].previndex = instart;
 
 		//Init outlist.
-		elements[oustart].nextindex = outstart + 2;
+		elements[outstart].nextindex = outstart + 2;
 		elements[outend].previndex = outend - 2;
 	}
 
 	template<typename T>
 	StaticLinkedList<T>::~StaticLinkedList()
 	{
+	}
 
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::begin()
+	{
+		return { *this };
+	}
+
+	template<typename T>
+	typename StaticLinkedList<T>::Iterator StaticLinkedList<T>::end()
+	{
+		return { *this, inend };
 	}
 
 	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
 	template<typename T>
-	__int32 StaticLinkedList<T>::InsertAtFirstGap(T element)
+	__int32 StaticLinkedList<T>::InsertAtFirstGap(const T& element)
 	{
 		__int32 firstgap = elements[outstart].nextindex;
 
@@ -47,6 +82,7 @@ namespace utils
 		{
 			//Resize.
 		}
+		elements[firstgap].element = element;
 		//Remove from outlist.
 		elements[elements[firstgap].previndex].nextindex = elements[firstgap].nextindex;
 		elements[elements[firstgap].nextindex].previndex = elements[firstgap].previndex;
@@ -86,7 +122,11 @@ namespace utils
 	template<typename T>
 	__int32 StaticLinkedList<T>::Defragment()
 	{
-		//TODO: Implement this.
+		return -1; //TODO: Implement this.
 	}
+
+	//Explicit instantiations.
+	template class StaticLinkedList<entity::StaticEntity>;
+	template class StaticLinkedList<entity::DynamicEntity>;
 
 }

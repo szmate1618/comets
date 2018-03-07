@@ -66,7 +66,7 @@ namespace net
 
 		ClientRegistry registry;
 		uint32_t sequence_number;
-		uint8_t buffer[def::max_packet_size]; //TODO: Is this used anywhere?
+		uint8_t buffer[def::max_packet_size];
 
 	};
 

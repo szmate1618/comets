@@ -17,6 +17,8 @@ namespace geo
 
 	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
+	using degree = double;
+
 	using real = double; //TODO: This could be a template variable.
 	constexpr real epsilon = 0.0005;
 
@@ -39,7 +41,9 @@ namespace geo
 	
 	bool equals(point_2d, point_2d, real); //TODO: Pass everything by reference.
 	
-	bool equals(point_2d, point_2d);
+	bool equals(point_2d, point_2d); //TODO: Implement these as member functions, with operator overloading.
+
+	real length(vector_2d);
 
 	point_2d sub(point_2d, point_2d);
 
@@ -47,9 +51,11 @@ namespace geo
 
 	point_2d mul(point_2d, real); //TODO: Actually this is a vector operation.
 
-	double length_cross(point_2d, point_2d);
+	point_2d div(point_2d, real);
 
-	double dot_product(point_2d, point_2d);
+	real length_cross(point_2d, point_2d);
+
+	real dot_product(point_2d, point_2d);
 	
 	bool is_inside(point_2d, point_2d, point_2d, point_2d);
 
@@ -59,20 +65,22 @@ namespace geo
 
 	bool is_inside_convex(point_2d, point_2d, point_2d, point_2d, point_2d, point_2d, point_2d);
 
-	double tri_minx(triangle);
+	real tri_minx(triangle);
 
-	double tri_maxx(triangle);
+	real tri_maxx(triangle);
 
-	double tri_miny(triangle);
+	real tri_miny(triangle);
 
-	double tri_maxy(triangle);
+	real tri_maxy(triangle);
 
-	point_2d point_2d_rotated(point_2d, double);
+	point_2d point_2d_rotated(point_2d, degree);
 
-	void rotate_point_2d(point_2d&, double);
+	void rotate_point_2d(point_2d&, degree);
 
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
 
 	EmptyFrame tri_as_frame(triangle);
+
+	EmptyFrame add(EmptyFrame, vector_2d);
 
 }

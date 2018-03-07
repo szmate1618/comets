@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClInclude Include="AssertTypeSizes.hpp" />
     <ClInclude Include="CountOfArray.hpp" />
+    <ClInclude Include="ForwardIterableSequenceView.hpp" />
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ForwardIterableSequenceView.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />

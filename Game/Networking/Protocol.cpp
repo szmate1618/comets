@@ -83,7 +83,7 @@ namespace net
 			{
 			case client_input:
 				ClientInputPayload payload;
-				payload.inputs = buffer; //TODO: Not really good, every packet should have its own buffer.
+				payload.inputs = buffer;
 				payload.IO<net::Read>(socket.recv_buffer + header_size);
 				exportstrategy.Export(payload);
 				registry.Touch(payload.entity_id, from);

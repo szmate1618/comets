@@ -84,7 +84,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -97,7 +97,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,7 +114,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,22 +131,23 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractPartition.hpp" />
-    <ClInclude Include="AbstractPartitioner.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="AbstractCollisionShape.hpp" />
     <ClInclude Include="AbstractTriangulatedPoly.hpp" />
     <ClInclude Include="Entities.hpp" />
+    <ClInclude Include="EntityHandle.hpp" />
     <ClInclude Include="Iterator.hpp" />
     <ClInclude Include="SimplePartition.hpp" />
     <ClInclude Include="SimplePartitioner.hpp" />
+    <ClInclude Include="SimpleVisionPartitioner.hpp" />
     <ClInclude Include="TriangulatedPolyNaiveRotation.hpp" />
     <ClInclude Include="TriangulatedPolyPrecomputedRotation.hpp" />
+    <ClInclude Include="Universe.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.vcxproj">
@@ -159,8 +160,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractPartition.cpp" />
-    <ClCompile Include="AbstractPartitioner.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
@@ -168,8 +167,10 @@
     <ClCompile Include="AbstractTriangulatedPoly.cpp" />
     <ClCompile Include="SimplePartition.cpp" />
     <ClCompile Include="SimplePartitioner.cpp" />
+    <ClCompile Include="SimpleVisionPartitioner.cpp" />
     <ClCompile Include="TriangulatedPolyNaiveRotation.cpp" />
     <ClCompile Include="TriangulatedPolyPrecomputedRotation.cpp" />
+    <ClCompile Include="Universe.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

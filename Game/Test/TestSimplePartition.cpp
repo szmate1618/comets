@@ -12,11 +12,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
-	TEST_CLASS(TestSimplePartition) //TODO: Add more testcases here, mainly for testing Iterator methods separately.
+	/*TEST_CLASS(TestSimplePartition) //TODO: Add more testcases here, mainly for testing Iterator methods separately.
 	{
 
-		typedef entity::StaticEntity* const pointer;
-		typedef entity::Iterator<pointer> iterator;
+		using pointer = entity::StaticEntity* const;
+		using iterator = entity::Iterator<pointer>;
 
 		void InitPartition(entity::SimplePartition& partition, const long input_array[], const long count)
 		{
@@ -90,6 +90,6 @@ namespace Test
 			Assert::AreEqual(21233133L, accumulator, L"Apparently things got tangled up in this continued nested iteration.");
 		}
 
-	};
+	};*/
 
 }

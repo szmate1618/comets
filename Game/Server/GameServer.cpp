@@ -11,6 +11,7 @@ namespace server
 	//in the class rather than the order in which the members appear in the initializer list.
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
+		universe{},
 		export_strategy{ client_input_payload_buffer },
 		import_strategy{ server_state_payload_buffer },
 		protocol{ def::server_port, export_strategy, import_strategy },
@@ -26,7 +27,7 @@ namespace server
 
 	void GameServer::Tick(def::time duration)
 	{
-		ProcessPackets();
+		ProcessPackets(duration);
 		UpdateState(duration);
 		TestCollisions();
 		SendPackets();
@@ -58,32 +59,45 @@ namespace server
 	}
 
 	//Read input, update entity orientation, acceleration, forces, etc.
-	void GameServer::ProcessPackets()
+	void GameServer::ProcessPackets(def::time duration)
 	{
 		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		ServerStatePayloadBuffer& sspb = server_state_payload_buffer;
+		sspb.count = 0;
 		for (size_t i = 0; i < packet_buffer_length; ++i)
 		{
 			if (!cipb.is_free[i].load())
 			{
 				net::ClientInputPayload& cip = cipb.client_inputs[i];
-				/*
-				Do things with cip here.
-				*/
-				if (--cip.duration <= 0) cipb.is_free[i].store(true);
+				sspb.entity_ids[sspb.count++] = cip.entity_id;
+				for (size_t j = 0; j < cip.count; ++j)
+				{
+					universe.EntityHandleInput(duration, cip.entity_id, static_cast<def::user_input>(cip.inputs[j]));
+				}
+				if (--cip.duration <= 0) cipb.is_free[i].store(true); //TODO: This assumes the method is being called at a constant pace.
 			}
 		}
 	}
 
+	//Update current speed and position.
 	void GameServer::UpdateState(def::time duration)
 	{
+		universe.UpdateState(duration);
 	}
 
+	//Test for collision at the current position, create new entities (e.g. explosions), remove expired (e.g. destroyed) entities.
 	void GameServer::TestCollisions()
 	{
+		universe.TestCollisions();
 	}
 
+	//Test for visibility at the current position, send response.
 	void GameServer::SendPackets()
 	{
+		universe.TestVisibility();
+		/*
+		Collect visible environment for all queried entities.
+		*/
 		protocol.Respond();
 	}
 

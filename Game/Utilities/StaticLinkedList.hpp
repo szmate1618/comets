@@ -13,22 +13,42 @@ namespace utils
 	class StaticLinkedList
 	{
 
-		template<typename T>
 		struct ListElement { T element; __int32 previndex; __int32 nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int. //TODO: Use int32_t.
 
 	public:
 
+		class Iterator
+		{
+		public:
+
+			Iterator(StaticLinkedList<T>&, __int32);
+			Iterator(StaticLinkedList<T>&);
+			Iterator& operator++();
+			Iterator operator++(int);
+			bool operator==(const Iterator&) const;
+			bool operator!=(const Iterator&) const;
+			T& operator*() const;
+
+		private:
+
+			StaticLinkedList<T>& list;
+			__int32 index;
+
+		};
+
 		StaticLinkedList();
 		StaticLinkedList(__int32);
 		~StaticLinkedList();
-		__int32 InsertAtFirstGap(T); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
+		Iterator begin();
+		Iterator end();
+		__int32 InsertAtFirstGap(const T&); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
 		__int32 RemoveAt(__int32);
 		__int32 Defragment();
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.
 		static constexpr __int32 default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
-		std::vector<ListElement<T>> elements;
+		std::vector<ListElement> elements;
 
 	private:
 

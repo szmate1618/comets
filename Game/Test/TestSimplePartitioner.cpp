@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
-	//This test class assumes that the partition itself is already tested, only need to test the partitioner logic.
+	/*//This test class assumes that the partition itself is already tested, only need to test the partitioner logic.
 	TEST_CLASS(TestSimplePartitioner)
 	{
 		
@@ -53,6 +53,6 @@ namespace Test
 			}
 		}
 
-	};
+	};*/
 
 }

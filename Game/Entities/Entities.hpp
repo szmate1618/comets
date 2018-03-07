@@ -2,22 +2,25 @@
 
 #include "AbstractCollisionShape.hpp"
 #include "..\Geometry\Geometry.hpp"
+#include "..\Definitions\TimeAndNetwork.hpp"
 
 
 namespace entity
 {
 
 	//A stationary entity that has a collision shape.
-	struct StaticEntity
+	struct StaticEntity //TODO: Add AbstractPartition pointer.
 	{
+		def::entity_id id;
 		AbstractCollisionShape* shape;
-		geo::vector_2d orientation;
+		geo::degree orientation;
 		geo::vector_2d position;
 	};
 
 	//A dynamic entity that can move and possibly be moved by other entities.
 	struct DynamicEntity: public StaticEntity
 	{
+		geo::degree angular_velocity;
 		geo::vector_2d velocity;
 		geo::real max_speed;
 		geo::vector_2d inertial_velocity;

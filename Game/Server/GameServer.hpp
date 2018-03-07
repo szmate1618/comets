@@ -2,6 +2,7 @@
 
 #include "AbstractServer.hpp"
 #include "PacketPayloadBuffers.hpp"
+#include "..\Entities\Universe.hpp"
 #include "..\Networking\Protocol.hpp"
 #include "..\Networking\Packets.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
@@ -58,6 +59,7 @@ namespace server
 
 		};
 
+		entity::Universe universe;
 		ClientInputPayloadBuffer client_input_payload_buffer;
 		ServerStatePayloadBuffer server_state_payload_buffer;
 		ExportStrategy export_strategy;
@@ -67,7 +69,7 @@ namespace server
 		std::thread input_thread;
 
 		void ReadPackets();
-		void ProcessPackets();
+		void ProcessPackets(def::time);
 		void UpdateState(def::time);
 		void TestCollisions();
 		void SendPackets();
