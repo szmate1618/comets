@@ -113,18 +113,32 @@ namespace entity
 
 	void Universe::TestCollisions()
 	{
+		collision_partitioner.Reset();
 		for (visibility_class v : {visible, invisible})
 		{
 			for (StaticEntity& entity : static_entities[v][collidable])
 			{
 				//Insert all elements into a collision partitioner.
+				collision_partitioner.Insert(&entity);
 			}
 			for (DynamicEntity& entity : dynamic_entities[v][collidable])
 			{
 				//Insert all elements into a collision partitioner.
+				collision_partitioner.Insert(&entity);
 			}
 		}
 		//Iterate over all the partitions, inside of a partition check collisions for everything with everything.
+		for (const auto& partition : collision_partitioner)
+		{
+			for (const StaticEntity* p_entity1 : partition)
+			{
+				for (const StaticEntity* p_entity2 : partition)
+				{
+					if (p_entity1 == p_entity2) continue;
+					//Test for collision.
+				}
+			}
+		}
 	}
 
 	void Universe::TestVisibility() //TODO: Maybe call this TestVision?
@@ -134,10 +148,12 @@ namespace entity
 			for (StaticEntity& entity : static_entities[visible][c])
 			{
 				//Insert all elements into a vision partitioner.
+				vision_partitioner.Insert(&entity);
 			}
 			for (DynamicEntity& entity : dynamic_entities[visible][c])
 			{
 				//Insert all elements into a vision partitioner.
+				vision_partitioner.Insert(&entity);
 			}
 		}
 	}

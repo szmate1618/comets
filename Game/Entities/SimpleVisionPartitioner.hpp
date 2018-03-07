@@ -6,7 +6,7 @@
 namespace entity
 {
 
-	class SimpleVisionPartitioner : SimplePartitioner
+	class SimpleVisionPartitioner : public SimplePartitioner
 	{
 	public:
 

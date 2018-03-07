@@ -2,6 +2,8 @@
 
 #include "Entities.hpp"
 #include "EntityHandle.hpp"
+#include "SimplePartitioner.hpp"
+#include "SimpleVisionPartitioner.hpp"
 #include "..\Utilities\StaticLinkedList.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
@@ -47,6 +49,8 @@ namespace entity
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },
 			{ invisible,{ { collidable,{} },{ uncollidable,{} } } }
 		};
+		SimplePartitioner collision_partitioner;
+		SimpleVisionPartitioner vision_partitioner;
 
 		void EntityTurnDegree(DynamicEntity&, engine_type, geo::degree);
 		void SpawnEntity(def::entity_id, def::owner_id, engine_type, dynamics_class, visibility_class, collidability_class, geo::point_2d);
