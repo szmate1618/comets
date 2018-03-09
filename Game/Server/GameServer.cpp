@@ -95,9 +95,22 @@ namespace server
 	void GameServer::SendPackets()
 	{
 		universe.TestVisibility();
-		/*
-		Collect visible environment for all queried entities.
-		*/
+		//Collect visible environment for all queried entities.
+		ServerStatePayloadBuffer& sspb = server_state_payload_buffer;
+		for (size_t i = 0; i < sspb.count; i++)
+		{
+			def::entity_id entity_id = sspb.entity_ids[i];
+			sspb.server_states[i].count = 0;
+			for (const auto& visible_entity : universe.GetVision(entity_id))
+			{
+				if (visible_entity->id == entity_id) continue;
+				net::ServerObject& server_object = sspb.server_states[i].objects[sspb.server_states[i].count++];
+				server_object.entity_id = visible_entity->id;
+				server_object.phi = visible_entity->orientation;
+				server_object.x = visible_entity->position.x;
+				server_object.y = visible_entity->position.y;
+			}
+		}
 		protocol.Respond();
 	}
 
