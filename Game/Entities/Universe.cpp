@@ -208,4 +208,16 @@ namespace entity
 		entity_registry[entity] = handle;
 	}
 
+	SimplePartition& Universe::GetVision(def::entity_id entity)
+	{
+		if (entity_registry[entity].dynamics == dynamics_class::static_)
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].se_pointer);
+		}
+		else
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].de_pointer);
+		}
+	}
+
 }
