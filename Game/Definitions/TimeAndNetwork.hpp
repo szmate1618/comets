@@ -23,7 +23,7 @@ namespace def
 	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 	//Protocol parameters
-	using entity_id = uint32_t; //When changed, also update ClientInputPayload accordingly.
+	using entity_id = uint32_t; //Used in ClientInputPayload and ServerObject. Changing it changes the protocol on the binary level.
 	using owner_id = uint32_t; //TODO: This is not used at the moment.
 	static constexpr uint8_t protocol_id = 77;
 	enum user_input { turn_left, turn_right, thrust, brake, fire }; //TODO: Maybe use strongly typed enum class (everywhere) instead?

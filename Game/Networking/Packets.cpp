@@ -71,15 +71,15 @@ namespace net
 
 	bool ServerObject::operator==(const ServerObject& other) const
 	{
-		return type == other.type && radian == other.radian && x == other.x && y == other.y;
+		return entity_id == other.entity_id && phi == other.phi && x == other.x && y == other.y;
 	}
 
 	template<typename io_mode>
 	size_t ServerObject::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
-		packet_data_current += io_mode::Process(packet_data_current, type);
-		packet_data_current += io_mode::Process(packet_data_current, radian);
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		packet_data_current += io_mode::Process(packet_data_current, phi);
 		packet_data_current += io_mode::Process(packet_data_current, x);
 		packet_data_current += io_mode::Process(packet_data_current, y);
 		return packet_data_current - packet_data_start;

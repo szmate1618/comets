@@ -49,7 +49,7 @@ namespace net
 	{
 	public:
 
-		uint32_t entity_id;
+		def::entity_id entity_id;
 		uint8_t duration;
 		uint16_t count; //count=0 will be used as client heartbeat.
 		uint8_t* inputs;
@@ -67,8 +67,8 @@ namespace net
 	{
 	public:
 
-		uint32_t type;
-		double radian;
+		def::entity_id entity_id; //TODO: Originally this was called 'type'. Find out why.
+		double phi;
 		double x;
 		double y;
 
