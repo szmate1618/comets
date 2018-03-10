@@ -13,7 +13,7 @@ namespace utils
 	class StaticLinkedList
 	{
 
-		struct ListElement { T element; __int32 previndex; __int32 nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int. //TODO: Use int32_t.
+		struct ListElement { T element; size_t previndex; size_t nextindex; }; //We don't want to use too much memory here, so we require a fixed 32 bit int.
 
 	public:
 
@@ -21,7 +21,7 @@ namespace utils
 		{
 		public:
 
-			Iterator(StaticLinkedList<T>&, __int32);
+			Iterator(StaticLinkedList<T>&, size_t);
 			Iterator(StaticLinkedList<T>&);
 			Iterator& operator++();
 			Iterator operator++(int);
@@ -32,29 +32,29 @@ namespace utils
 		private:
 
 			StaticLinkedList<T>& list;
-			__int32 index;
+			size_t index;
 
 		};
 
 		StaticLinkedList();
-		StaticLinkedList(__int32);
+		StaticLinkedList(size_t);
 		~StaticLinkedList();
 		Iterator begin();
 		Iterator end();
-		__int32 InsertAtFirstGap(const T&); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
-		__int32 RemoveAt(__int32);
-		__int32 Defragment();
+		size_t InsertAtFirstGap(const T&); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
+		size_t RemoveAt(size_t);
+		size_t Defragment();
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.
-		static constexpr __int32 default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
+		static constexpr size_t default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
 		std::vector<ListElement> elements;
 
 	private:
 
 		//TODO: These could be constexprs, too.
-		__int32 instart, inend;
-		__int32 outstart, outend;
+		size_t instart, inend;
+		size_t outstart, outend;
 
 	};
 
