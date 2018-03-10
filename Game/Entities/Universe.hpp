@@ -35,6 +35,7 @@ namespace entity
 		void UpdateState(def::time);
 		void TestCollisions();
 		void TestVisibility();
+		SimplePartition& GetVision(def::entity_id);
 
 	private:
 		

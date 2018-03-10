@@ -8,6 +8,7 @@
 namespace entity
 {
 
+	//TODO: Also include a geo::EmptyFrame, so that collisions of entities can be limited to specific partitions.
 	class SimplePartition
 	{
 	public:

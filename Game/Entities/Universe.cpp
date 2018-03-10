@@ -136,6 +136,9 @@ namespace entity
 				{
 					if (p_entity1 == p_entity2) continue;
 					//Test for collision.
+					AbstractCollisionShape& shape1 = *p_entity1->shape;
+					AbstractCollisionShape& shape2 = *p_entity2->shape;
+					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
 				}
 			}
 		}
@@ -203,6 +206,18 @@ namespace entity
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
 		}
 		entity_registry[entity] = handle;
+	}
+
+	SimplePartition& Universe::GetVision(def::entity_id entity)
+	{
+		if (entity_registry[entity].dynamics == dynamics_class::static_)
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].se_pointer);
+		}
+		else
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].de_pointer);
+		}
 	}
 
 }

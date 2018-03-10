@@ -7,6 +7,7 @@
 namespace entity
 {
 
+	//TODO: Find out if this is used somewhere, delete if not.
 	template<typename T>
 	class Iterator
 	{

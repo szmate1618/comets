@@ -6,7 +6,7 @@ namespace utils
 {
 
 	template<typename T>
-	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, __int32 index) : list{ list }, index{ index } {}
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, size_t index) : list{ list }, index{ index } {}
 
 	template<typename T>
 	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.instart } {}
@@ -34,13 +34,13 @@ namespace utils
 	}
 
 	template<typename T>
-	StaticLinkedList<T>::StaticLinkedList(__int32 size) : elements(size)
+	StaticLinkedList<T>::StaticLinkedList(size_t size) : elements(size)
 	{
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 
 		//Chain up all the elements.
-		for (__int32 i = 0; i < elements.size(); i++)
+		for (size_t i = 0; i < elements.size(); i++)
 		{
 			elements[i].previndex = i - 1;
 			elements[i].nextindex = i + 1;
@@ -74,9 +74,9 @@ namespace utils
 
 	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
 	template<typename T>
-	__int32 StaticLinkedList<T>::InsertAtFirstGap(const T& element)
+	size_t StaticLinkedList<T>::InsertAtFirstGap(const T& element)
 	{
-		__int32 firstgap = elements[outstart].nextindex;
+		size_t firstgap = elements[outstart].nextindex;
 
 		if (firstgap == outend)
 		{
@@ -98,14 +98,14 @@ namespace utils
 
 	//No error checking at all. Its the caller's responsibility to remove at previouly occupied positions.
 	template<typename T>
-	__int32 StaticLinkedList<T>::RemoveAt(__int32 index)
+	size_t StaticLinkedList<T>::RemoveAt(size_t index)
 	{
 		//Remove from inlist, that's the easy part.
 		elements[elements[index].previndex].nextindex = elements[index].nextindex;
 		elements[elements[index].nextindex].previndex = elements[index].previndex;
 
 		//Insert into outlist. A bit harder.
-		__int32 borderindex = outstart;
+		size_t borderindex = outstart;
 		while (borderindex < index)
 		{
 			borderindex = elements[borderindex].nextindex;
@@ -120,7 +120,7 @@ namespace utils
 
 	//TODO: Do some measurements to see when to use this.
 	template<typename T>
-	__int32 StaticLinkedList<T>::Defragment()
+	size_t StaticLinkedList<T>::Defragment()
 	{
 		return -1; //TODO: Implement this.
 	}
