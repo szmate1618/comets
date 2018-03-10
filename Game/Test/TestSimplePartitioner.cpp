@@ -19,6 +19,7 @@ namespace Test
 		{
 			for(long i = 0; i < count; ++i)
 			{
+				#pragma warning( suppress : 4312 )
 				partitioner.Insert((entity::StaticEntity*)input_array[i]);
 			}
 		}
