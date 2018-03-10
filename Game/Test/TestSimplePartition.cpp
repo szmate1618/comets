@@ -15,14 +15,12 @@ namespace Test
 	TEST_CLASS(TestSimplePartition) //TODO: Add more testcases here, mainly for testing Iterator methods separately.
 	{
 
-		using pointer = entity::StaticEntity* const;
-
 		void InitPartition(entity::SimplePartition& partition, const long input_array[], const long count)
 		{
 			for(long i = 0; i < count; ++i)
 			{
 				#pragma warning( suppress : 4312 )
-				partition.Add(reinterpret_cast<pointer>(input_array[i]));
+				partition.Add(reinterpret_cast<entity::StaticEntity*>(input_array[i]));
 			}
 		}
 
