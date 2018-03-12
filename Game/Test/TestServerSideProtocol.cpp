@@ -108,7 +108,7 @@ namespace Test
 
 			protocol->Tick();
 			Assert::AreEqual(packet1.payload, client_input_buffer[0], L"Failed to correctly recall client input1 payload after receiving another packet.");
-			protocol->Tick();
+			//protocol->Tick();
 			Assert::AreEqual(packet2.payload, client_input_buffer[1], L"Failed to correctly receive client input2 payload.");
 		}
 

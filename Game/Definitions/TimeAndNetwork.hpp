@@ -20,7 +20,7 @@ namespace def
 	static constexpr time client_rate = server_tick(2);
 
 	//Socket parameters
-	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU.
+	static constexpr int max_packet_size = 1000; //TODO: Check recommended max MTU. //TODO: Why is this not size_t?
 
 	//Protocol parameters
 	using entity_id = uint32_t; //Used in ClientInputPayload and ServerObject. Changing it changes the protocol on the binary level.
