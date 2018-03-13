@@ -194,14 +194,14 @@ namespace entity
 		if (dynamics == dynamic)
 		{
 			DynamicEntity dynamic_entity;
-			dynamic_entity.position = position;
+			dynamic_entity.position = position; //TODO: Also add shape.
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
 			handle.de_pointer = &(dynamic_entities[visibility][collidability].elements[index].element); //TODO: Add a member method for this.
 		}
 		else
 		{
 			StaticEntity static_entity;
-			static_entity.position = position;
+			static_entity.position = position; //TODO: Also add shape.
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
 		}
