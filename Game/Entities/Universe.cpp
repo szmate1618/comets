@@ -136,9 +136,11 @@ namespace entity
 				{
 					if (p_entity1 == p_entity2) continue;
 					//Test for collision.
+					#ifndef NO_COLLISION
 					AbstractCollisionShape& shape1 = *p_entity1->shape;
 					AbstractCollisionShape& shape2 = *p_entity2->shape;
 					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
+					#endif
 				}
 			}
 		}
