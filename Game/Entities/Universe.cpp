@@ -16,7 +16,7 @@ namespace entity
 		while (std::getline(initial_state_file, line))
 		{
 			std::stringstream linestream{ line };
-			int integer;
+			int temp;
 
 			def::entity_id entity;
 			def::owner_id owner;
@@ -28,10 +28,10 @@ namespace entity
 
 			linestream >> entity;
 			linestream >> owner;
-			linestream >> integer; engine = static_cast<engine_type>(integer);
-			linestream >> integer; dynamics = static_cast<dynamics_class>(integer);
-			linestream >> integer; visibility = static_cast<visibility_class>(integer);
-			linestream >> integer; collidability = static_cast<collidability_class>(integer);
+			linestream >> temp; engine = static_cast<engine_type>(temp);
+			linestream >> temp; dynamics = static_cast<dynamics_class>(temp);
+			linestream >> temp; visibility = static_cast<visibility_class>(temp);
+			linestream >> temp; collidability = static_cast<collidability_class>(temp);
 			linestream >> position.x >> position.y;
 
 			SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
