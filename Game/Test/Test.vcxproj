@@ -189,6 +189,7 @@
     <ClCompile Include="TestSimplePartitioner.cpp" />
     <ClCompile Include="TestStaticLinkedList.cpp" />
     <ClCompile Include="TestTriangulatedPolyCollision.cpp" />
+    <ClCompile Include="TestUniverse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.vcxproj">
