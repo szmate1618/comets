@@ -1,12 +1,42 @@
 #include "Universe.hpp"
 
+#include <fstream>
+#include <sstream>
+
 
 namespace entity
 {
 
 	Universe::Universe() {}
 
-	Universe::Universe(std::string) {} //TODO: Implement this.
+	Universe::Universe(std::string filename) //TODO: Add error handling.
+	{
+		std::ifstream initial_state_file{ filename };
+		std::string line;
+		while (std::getline(initial_state_file, line))
+		{
+			std::stringstream linestream{ line };
+			int integer;
+
+			def::entity_id entity;
+			def::owner_id owner;
+			engine_type engine;
+			dynamics_class dynamics;
+			visibility_class visibility;
+			collidability_class collidability;
+			geo::point_2d position;
+
+			linestream >> entity;
+			linestream >> owner;
+			linestream >> integer; engine = static_cast<engine_type>(integer);
+			linestream >> integer; dynamics = static_cast<dynamics_class>(integer);
+			linestream >> integer; visibility = static_cast<visibility_class>(integer);
+			linestream >> integer; collidability = static_cast<collidability_class>(integer);
+			linestream >> position.x >> position.y;
+
+			SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
+		}
+	}
 
 	Universe::~Universe() {}
 
