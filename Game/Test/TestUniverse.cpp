@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
+#define private public
 #include "..\Entities\Universe.hpp"
 
 
