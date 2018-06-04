@@ -132,7 +132,7 @@ namespace entity
 				{
 					geo::real speed = geo::length(entity.velocity);
 					if (speed > entity.max_speed) entity.velocity = geo::div(entity.velocity, speed / entity.max_speed);
-					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleratin only?
+					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
 					entity.position = geo::add(entity.position, geo::mul(geo::add(entity.velocity, entity.inertial_velocity), duration.count()));
 					entity.velocity = geo::div(entity.velocity, entity.friction);
 					entity.inertial_acceleration = { 0, 0 };
