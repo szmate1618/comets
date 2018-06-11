@@ -72,7 +72,7 @@ namespace utils
 		return { *this, inend };
 	}
 
-	//No error checking at all. Its the caller's responsibility to insert at previouly unoccupied positions.
+	//No error checking at all. It's the caller's responsibility to insert at previouly unoccupied positions.
 	template<typename T>
 	size_t StaticLinkedList<T>::InsertAtFirstGap(const T& element)
 	{
