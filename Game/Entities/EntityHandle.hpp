@@ -12,7 +12,7 @@ namespace entity
 	enum visibility_class { visible, invisible };
 	enum collidability_class { collidable, uncollidable };
 
-	struct EntityHandle
+	struct EntityHandle //TODO: Maybe merge this whole thing into StaticEntity?
 	{
 		def::owner_id owner;
 		engine_type engine;
