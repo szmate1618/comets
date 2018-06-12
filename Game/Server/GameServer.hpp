@@ -16,7 +16,7 @@
 namespace server
 {
 
-	using tick = def::server_tick;
+	using tick = def::server_tick; //TODO: This is unused, and a bit strange anyway.
 
 	class GameServer : public AbstractServer
 	{
