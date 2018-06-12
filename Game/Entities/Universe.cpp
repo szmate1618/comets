@@ -130,6 +130,7 @@ namespace entity
 			{
 				for (DynamicEntity& entity : dynamic_entities[v][c])
 				{
+					//TODO: Handle angular_velocity.
 					geo::real speed = geo::length(entity.velocity);
 					if (speed > entity.max_speed) entity.velocity = geo::div(entity.velocity, speed / entity.max_speed);
 					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
