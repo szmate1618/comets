@@ -81,29 +81,29 @@ namespace Test
 			Assert::AreEqual(c.GetName(), collider_name, L"Incorrect collider name when inviting MockCircle.");
 		}
 
-		TEST_METHOD(TriangulatedPolyPrecomputedRotation)
+		TEST_METHOD(TriangulatedPolyPrecomputedRotationInvites)
 		{
 			atp->InviteForCollision(dummy_frame, dummy_frame, *atn);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyNaiveRotation.");
+			Assert::AreEqual(tp.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyNaiveRotation.");
 			Assert::AreEqual(tn.GetName(), collider_name, L"Incorrect collider name when inviting MockTriangulatedPolyNaiveRotation.");
 			atp->InviteForCollision(dummy_frame, dummy_frame, *atp);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyPrecomputedRotation.");
+			Assert::AreEqual(tp.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyPrecomputedRotation.");
 			Assert::AreEqual(tp.GetName(), collider_name, L"Incorrect collider name when inviting MockTriangulatedPolyPrecomputedRotation.");
 			atp->InviteForCollision(dummy_frame, dummy_frame, *ac);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockCircle.");
+			Assert::AreEqual(tp.GetName(), inviter_name, L"Incorrect inviter name when inviting MockCircle.");
 			Assert::AreEqual(c.GetName(), collider_name, L"Incorrect collider name when inviting MockCircle.");
 		}
 
-		TEST_METHOD(Circle)
+		TEST_METHOD(CircleInvites)
 		{
 			ac->InviteForCollision(dummy_frame, dummy_frame, *atn);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyNaiveRotation.");
+			Assert::AreEqual(c.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyNaiveRotation.");
 			Assert::AreEqual(tn.GetName(), collider_name, L"Incorrect collider name when inviting MockTriangulatedPolyNaiveRotation.");
 			ac->InviteForCollision(dummy_frame, dummy_frame, *atp);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyPrecomputedRotation.");
+			Assert::AreEqual(c.GetName(), inviter_name, L"Incorrect inviter name when inviting MockTriangulatedPolyPrecomputedRotation.");
 			Assert::AreEqual(tp.GetName(), collider_name, L"Incorrect collider name when inviting MockTriangulatedPolyPrecomputedRotation.");
 			ac->InviteForCollision(dummy_frame, dummy_frame, *ac);
-			Assert::AreEqual(tn.GetName(), inviter_name, L"Incorrect inviter name when inviting MockCircle.");
+			Assert::AreEqual(c.GetName(), inviter_name, L"Incorrect inviter name when inviting MockCircle.");
 			Assert::AreEqual(c.GetName(), collider_name, L"Incorrect collider name when inviting MockCircle.");
 		}
 	};
