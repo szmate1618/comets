@@ -34,6 +34,7 @@ namespace Test
 			Assert::AreEqual(0xDD, static_cast<int>(address.GetD()), L"Incorrect D value.");
 			Assert::AreEqual(44444, static_cast<int>(address.GetPort()), L"Incorrect port.");
 		}
+
 	};
 
 }
