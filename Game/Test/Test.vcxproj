@@ -171,6 +171,7 @@
     <ClInclude Include="ToStringSpecializations.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TestDoubleDispatch.cpp" />
     <ClCompile Include="TestForwardIterableSequenceView.cpp" />
     <ClCompile Include="TestGameServer.cpp" />
     <ClCompile Include="TestLogger.cpp" />
