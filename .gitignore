@@ -5,6 +5,8 @@
 ## and on https://github.com/github/gitignore/blob/master/Unity.gitignore
 ## Note that in this .gitignore, .meta files are excluded
 ## since they are necessary for version controlling Unity projects.
+## Similarly, .sln is not ignored either, which is completely normal for
+## Visual Studio projects, but might be unusual for Unity ones.
 
 # User-specific files
 *.suo
@@ -306,7 +308,7 @@ ExportedObj/
 .consulo/
 *.csproj
 *.unityproj
-*.sln
+#*.sln #Commented out, since .sln files are necessary for version controlling VS projects.
 *.suo
 *.tmp
 *.user
