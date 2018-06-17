@@ -33,6 +33,11 @@ namespace entity
 		//TODO: implement this.
 	}
 	
+	const geo::EmptyFrame& Circle::GetBoundingBox()
+	{
+		return { 0,0,0,0 }; //TODO: Actually implement this.
+	}
+
 	std::string Circle::GetName()
 	{
 		return "Circle";

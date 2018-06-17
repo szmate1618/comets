@@ -16,6 +16,7 @@ namespace entity
 		TriangulatedPolyPrecomputedRotation();
 		TriangulatedPolyPrecomputedRotation(AbstractTriangulatedPoly&);
 		virtual ~TriangulatedPolyPrecomputedRotation() override;
+		virtual const geo::EmptyFrame& GetBoundingBox() override;
 		virtual void SetOrientation(double) override;
 	    virtual std::string GetName() override;
 

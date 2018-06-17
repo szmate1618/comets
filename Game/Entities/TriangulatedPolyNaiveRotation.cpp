@@ -17,6 +17,11 @@ namespace entity
 	{
 	}
 
+	const geo::EmptyFrame& TriangulatedPolyNaiveRotation::GetBoundingBox()
+	{
+		return { 0,0,0,0 }; //TODO: Actually implement this.
+	}
+
 	void TriangulatedPolyNaiveRotation::SetOrientation(double radian)
 	{
 		//TODO: implement this.

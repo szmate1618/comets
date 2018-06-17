@@ -1,12 +1,42 @@
 #include "Universe.hpp"
 
+#include <fstream>
+#include <sstream>
+
 
 namespace entity
 {
 
 	Universe::Universe() {}
 
-	Universe::Universe(std::string) {} //TODO: Implement this.
+	Universe::Universe(std::string filename) //TODO: Add error handling.
+	{
+		std::ifstream initial_state_file{ filename };
+		std::string line;
+		while (std::getline(initial_state_file, line))
+		{
+			std::stringstream linestream{ line };
+			int temp;
+
+			def::entity_id entity;
+			def::owner_id owner;
+			engine_type engine;
+			dynamics_class dynamics;
+			visibility_class visibility;
+			collidability_class collidability;
+			geo::point_2d position;
+
+			linestream >> entity;
+			linestream >> owner;
+			linestream >> temp; engine = static_cast<engine_type>(temp);
+			linestream >> temp; dynamics = static_cast<dynamics_class>(temp);
+			linestream >> temp; visibility = static_cast<visibility_class>(temp);
+			linestream >> temp; collidability = static_cast<collidability_class>(temp);
+			linestream >> position.x >> position.y;
+
+			SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
+		}
+	}
 
 	Universe::~Universe() {}
 
@@ -100,9 +130,10 @@ namespace entity
 			{
 				for (DynamicEntity& entity : dynamic_entities[v][c])
 				{
+					//TODO: Handle angular_velocity.
 					geo::real speed = geo::length(entity.velocity);
 					if (speed > entity.max_speed) entity.velocity = geo::div(entity.velocity, speed / entity.max_speed);
-					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleratin only?
+					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
 					entity.position = geo::add(entity.position, geo::mul(geo::add(entity.velocity, entity.inertial_velocity), duration.count()));
 					entity.velocity = geo::div(entity.velocity, entity.friction);
 					entity.inertial_acceleration = { 0, 0 };
@@ -136,9 +167,11 @@ namespace entity
 				{
 					if (p_entity1 == p_entity2) continue;
 					//Test for collision.
+					#ifndef NO_COLLISION
 					AbstractCollisionShape& shape1 = *p_entity1->shape;
 					AbstractCollisionShape& shape2 = *p_entity2->shape;
 					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
+					#endif
 				}
 			}
 		}
@@ -194,14 +227,14 @@ namespace entity
 		if (dynamics == dynamic)
 		{
 			DynamicEntity dynamic_entity;
-			dynamic_entity.position = position;
+			dynamic_entity.position = position; //TODO: Also add shape.
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
 			handle.de_pointer = &(dynamic_entities[visibility][collidability].elements[index].element); //TODO: Add a member method for this.
 		}
 		else
 		{
 			StaticEntity static_entity;
-			static_entity.position = position;
+			static_entity.position = position; //TODO: Also add shape.
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
 		}

@@ -165,6 +165,8 @@ namespace net
 		}
 	}
 
+	//Don't call this or MaybeCleanupSockets sockets directly, only from constructors and destructors, respectively.
+	//Otherwise sockets_in_scope might get detached from the actual socket usage.
 	void Socket::MaybeInitializeSockets()
 	{
 		AssertAndLog(sockets_in_scope >= 0, socket_count_error);
@@ -176,6 +178,8 @@ namespace net
 		#endif
 	}
 
+	//Don't call this or MaybeInitializeSockets sockets directly, only from destructors and constructors, respectively.
+	//Otherwise sockets_in_scope might get detached from the actual socket usage.
 	void Socket::MaybeCleanupSockets()
 	{
 		if (--sockets_in_scope != 0) return;

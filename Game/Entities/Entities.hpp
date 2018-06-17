@@ -23,9 +23,9 @@ namespace entity
 		geo::degree angular_velocity;
 		geo::vector_2d velocity;
 		geo::real max_speed;
-		geo::vector_2d inertial_velocity;
+		geo::vector_2d inertial_velocity; //TODO: Maybe call this external_velocity.
 		geo::vector_2d acceleration;
-		geo::vector_2d inertial_acceleration;
+		geo::vector_2d inertial_acceleration; //TODO: Maybe call this external_acceleration.
 		geo::real friction;
 	};
 

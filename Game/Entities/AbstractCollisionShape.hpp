@@ -18,7 +18,7 @@ namespace entity
 
 		AbstractCollisionShape();
 		virtual ~AbstractCollisionShape();
-		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) = 0;
+		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) = 0; //TODO: Figure out why this is pure virtual.
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) = 0;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) = 0;
 		virtual const geo::EmptyFrame& GetBoundingBox() = 0;
