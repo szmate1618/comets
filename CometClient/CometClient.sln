@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CometClient", "CometClient.csproj", "{F282B8F0-7256-3F8B-B5D9-48BEFB526C04}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CometClient.Editor", "CometClient.Editor.csproj", "{EE50311A-AC2C-5FCD-3072-BC5A330E741C}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F282B8F0-7256-3F8B-B5D9-48BEFB526C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F282B8F0-7256-3F8B-B5D9-48BEFB526C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F282B8F0-7256-3F8B-B5D9-48BEFB526C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F282B8F0-7256-3F8B-B5D9-48BEFB526C04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE50311A-AC2C-5FCD-3072-BC5A330E741C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE50311A-AC2C-5FCD-3072-BC5A330E741C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE50311A-AC2C-5FCD-3072-BC5A330E741C}.Release|Any CPU.ActiveCfg = Release|Any CPU
