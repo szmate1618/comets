@@ -25,6 +25,7 @@
 namespace net
 {
 
+	//TODO: Why not just use function overloading?
 	template<typename T> inline T hton(T t) { static_assert(false, "Template hton is not defined for this type of argument."); }
 	template<> inline float hton<float>(float t) { return t; }
 	template<> inline double hton<double>(double t) { return t; }

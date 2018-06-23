@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace net
 {
 
@@ -7,7 +8,7 @@ namespace net
     using uint8_t = Byte;
     using uint16_t = UInt16;
     using uint32_t = UInt32;
-    using entity_id = UInt32;
+    using entity_id = UInt32; //TODO: Find some way to emulate global typedefs.
 
     using ClientInputPacket = Packet<Header, ClientInputPayload>;
     using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
