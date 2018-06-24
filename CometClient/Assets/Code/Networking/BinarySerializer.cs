@@ -9,6 +9,13 @@ namespace net
     class BinarySerializer
     {
 
+        private static int Size(object t) { throw new InvalidOperationException(); }
+        private static int Size(float t) { return 4; }
+        private static int Size(double t) { return 8; }
+        private static int Size(Byte t) { return 1; }
+        private static int Size(UInt16 t) { return 2; }
+        private static int Size(UInt32 t) { return 4; }
+
         [StructLayout(LayoutKind.Explicit)]
         private struct DissectableUInt16
         {
@@ -39,6 +46,7 @@ namespace net
 
         static DissectableUInt32 _4bytes;
 
+        private static object HtoN(object t) { throw new InvalidOperationException(); }
         private static float HtoN(float t) { return t; }
         private static double HtoN(double t) { return t; }
         private static Byte HtoN(Byte t) { return t; }
@@ -57,18 +65,18 @@ namespace net
             return _4bytes.value;
         }
 
-        /*  struct Write
-          {
-              template<typename T>
-              static inline size_t Process(uint8_t* packet_data, T t)
-              {
-                  T nt = hton(t);
-                  std::memcpy(packet_data, &nt, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
-                  return sizeof(T);
-              }
-          };*/
+        struct Write
+        {
+            static int Process<T>(Byte[] packet_data, int index, T t)
+            {
+                T nt = (T)HtoN(t);
+                BitConverter.GetBytes(t).CopyTo(packet_data, index);
+                return Size(t);
+            }
+        };
 
-          private static float NtoH(float t) { return t; }
+        private static object NtoH(object t) { throw new InvalidOperationException(); }
+        private static float NtoH(float t) { return t; }
         private static double NtoH(double t) { return t; }
         private static Byte NtoH(Byte t) { return t; }
         private static UInt16 NtoH(UInt16 t)
@@ -82,17 +90,18 @@ namespace net
             return (uint)(_4bytes.lowest << 24 | _4bytes.lower << 16 | _4bytes.higher << 8 | _4bytes.highest);
         }
 
-          /*struct Read
-          {
-              template<typename T>
-              static inline size_t Process(uint8_t* packet_data, T& t)
-              {
-                  T ht;
-                  std::memcpy(&ht, packet_data, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
-                  t = ntoh(ht);
-                  return sizeof(T);
-              }
-          };*/
+        struct Read
+        {
+            template<typename T>
+            static inline size_t Process(uint8_t* packet_data, T& t)
+            {
+                T ht;
+                std::memcpy(&ht, packet_data, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
+                t = ntoh(ht);
+                return sizeof(T);
+            }
+        };
+
     };
 
 }
