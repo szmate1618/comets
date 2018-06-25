@@ -8,11 +8,16 @@ namespace def
 	{
 
 		//Socket parameters
-		public const int MaxPacketSize = 1000; //TODO: Check recommended max MTU.
+		public const ushort client_port = 7700;
+		public const int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 		//Protocol parameters
-		public const byte ProtocolId = 77;
+		public const byte protocol_id = 77;
 		public enum user_input { turn_left, turn_right, thrust, brake, fire };
+
+		//Server address
+		public static readonly byte[] server_ip = { 127, 0, 0, 1 }; //Fine for testing, but this must be configurable.
+		public const ushort server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
 
 	}
 
