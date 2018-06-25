@@ -52,7 +52,7 @@ public class NetworkController : MonoBehaviour
 			{
 				AddCommand(command);
 			}
-			udp_client.Send(buffer, );
+			udp_client.Send(buffer, client_input.Process(net.BinarySerializer.IOMode.Write, buffer, 0));
 			client_input.header.sequence_number++;
 		}
 	}

@@ -15,46 +15,111 @@ namespace net
 
 	enum packet_type { client_input, server_state };
 
-	class Header
+	interface BinarySerializable
+	{
+		int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index);
+	}
+
+	class Header : BinarySerializable
 	{
 		public uint8_t protocol_id;
 		public uint32_t sequence_number;
 		public uint8_t packet_type;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, protocol_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, sequence_number);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, packet_type);
+			return current_index - start_index;
+		}
 	};
 
-	class ServerHeader
+	class ServerHeader : BinarySerializable
 	{
 		public Header common_header;
 		public uint32_t ack;
 		public uint32_t ack_bitfield;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += common_header.Process(io_mode, packet_data, current_index);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ack);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ack_bitfield);
+			return current_index - start_index;
+		}
 	};
 
-	class ClientInputPayload
+	class ClientInputPayload : BinarySerializable
 	{
 		public entity_id entity_id;
 		public uint8_t duration;
 		public uint16_t count; //count=0 will be used as client heartbeat.
 		public uint8_t[] inputs;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, duration);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, count);
+			for (int i = 0; i < count; i++)
+			{
+				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, inputs[i]);
+			}
+			return current_index - start_index;
+		}
 	};
 
-	class ServerObject
+	class ServerObject : BinarySerializable
 	{
 		public entity_id entity_id; //TODO: Originally this was called 'type'. Find out why.
 		public double phi;
 		public double x;
 		public double y;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, phi);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, x);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, y);
+			return current_index - start_index;
+		}
 	};
 
-	class ServerStatePayload
+	class ServerStatePayload : BinarySerializable
 	{
 		public uint16_t count;
 		public ServerObject[] objects;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, count);
+			for (int i = 0; i < count; i++)
+			{
+				current_index += objects[i].Process(io_mode, packet_data, current_index);
+			}
+			return current_index - start_index;
+		}
 	};
 	
-	class Packet<H, P>
+	class Packet<H, P> where H : BinarySerializable where P : BinarySerializable
 	{
 		public H header;
 		public P payload;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += header.Process(io_mode, packet_data, current_index);
+			current_index += payload.Process(io_mode, packet_data, current_index);
+			return current_index - start_index;
+		}
 	};
 
 }

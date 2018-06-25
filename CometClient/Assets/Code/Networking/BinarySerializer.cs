@@ -65,16 +65,6 @@ namespace net
 			return _4bytes.value;
 		}
 
-		public class Write //TODO: Why is this a struct in the C++ version?
-		{
-			static int Process<T>(Byte[] packet_data, int index, T t)
-			{
-				T nt = (T)HtoN(t);
-				//BitConverter.GetBytes(t).CopyTo(packet_data, index);
-				return Size(t);
-			}
-		};
-
 		private static object NtoH(object t) { throw new InvalidOperationException(); }
 		private static float NtoH(float t) { return t; }
 		private static double NtoH(double t) { return t; }
@@ -92,21 +82,10 @@ namespace net
 
 		public enum IOMode { Read, Write };
 
-		public class Read
-		{
-			static int Process<T>(Byte[] packet_data, int index, T t)
-			{
-				T ht;
-				//std::memcpy(&ht, packet_data, sizeof(T)); //This is indeed the recommended way, see here: http://en.cppreference.com/w/cpp/language/reinterpret_cast
-				//t = (T)NtoH(ht);
-				return Size(t);
-			}
-		};
-
 		//I can't believe C# templates can't do this.
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, object t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, object t)
 		{ throw new InvalidOperationException(); }
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, ref float t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref float t)
 		{
 			int size = sizeof(float);
 			if (io_mode == IOMode.Read)
@@ -121,9 +100,9 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			index += size;
+			return index + size;
 		}
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, ref double t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref double t)
 		{
 			int size = sizeof(double);
 			if (io_mode == IOMode.Read)
@@ -138,9 +117,9 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			index += size;
+			return index + size;
 		}
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, ref Byte t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref Byte t)
 		{
 			int size = sizeof(Byte);
 			if (io_mode == IOMode.Read)
@@ -151,9 +130,9 @@ namespace net
 			{
 				packet_data[index] = t; //Special case.
 			}
-			index += size;
+			return index + size;
 		}
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, ref UInt16 t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref UInt16 t)
 		{
 			int size = sizeof(UInt16);
 			if (io_mode == IOMode.Read)
@@ -168,9 +147,9 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			index += size;
+			return index + size;
 		}
-		private static void Process(IOMode io_mode, Byte[] packet_data, ref int index, ref UInt32 t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref UInt32 t)
 		{
 			int size = sizeof(UInt32);
 			if (io_mode == IOMode.Read)
@@ -185,7 +164,7 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			index += size;
+			return index + size;
 		}
 
 	};
