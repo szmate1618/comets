@@ -9,13 +9,6 @@ namespace net
 	class BinarySerializer
 	{
 
-		private static int Size(object t) { throw new InvalidOperationException(); }
-		private static int Size(float t) { return 4; }
-		private static int Size(double t) { return 8; }
-		private static int Size(Byte t) { return 1; }
-		private static int Size(UInt16 t) { return 2; }
-		private static int Size(UInt32 t) { return 4; }
-
 		[StructLayout(LayoutKind.Explicit)]
 		private struct DissectableUInt16
 		{
@@ -100,7 +93,7 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			return index + size;
+			return size;
 		}
 		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref double t)
 		{
@@ -117,7 +110,7 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			return index + size;
+			return size;
 		}
 		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref Byte t)
 		{
@@ -130,7 +123,7 @@ namespace net
 			{
 				packet_data[index] = t; //Special case.
 			}
-			return index + size;
+			return size;
 		}
 		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref UInt16 t)
 		{
@@ -147,7 +140,7 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			return index + size;
+			return size;
 		}
 		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref UInt32 t)
 		{
@@ -164,7 +157,7 @@ namespace net
 					packet_data[index + i] = temp[i];
 				}
 			}
-			return index + size;
+			return size;
 		}
 
 	};
