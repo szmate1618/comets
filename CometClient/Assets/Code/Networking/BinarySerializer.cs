@@ -83,7 +83,7 @@ namespace net
 		public enum IOMode { Read, Write };
 
 		//I can't believe C# templates can't do this.
-		public static int Process(IOMode io_mode, Byte[] packet_data, int index, object t)
+		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref object t)
 		{ throw new InvalidOperationException(); }
 		public static int Process(IOMode io_mode, Byte[] packet_data, int index, ref float t)
 		{

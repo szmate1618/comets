@@ -29,9 +29,9 @@ namespace net
 		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
 		{
 			int current_index = start_index;
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, protocol_id);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, sequence_number);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, packet_type);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref protocol_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref sequence_number);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref packet_type);
 			return current_index - start_index;
 		}
 	};
@@ -46,8 +46,8 @@ namespace net
 		{
 			int current_index = start_index;
 			current_index += common_header.Process(io_mode, packet_data, current_index);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ack);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ack_bitfield);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref ack);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref ack_bitfield);
 			return current_index - start_index;
 		}
 	};
@@ -62,12 +62,12 @@ namespace net
 		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
 		{
 			int current_index = start_index;
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, entity_id);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, duration);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, count);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref duration);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref count);
 			for (int i = 0; i < count; i++)
 			{
-				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, inputs[i]);
+				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref inputs[i]);
 			}
 			return current_index - start_index;
 		}
@@ -83,10 +83,10 @@ namespace net
 		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
 		{
 			int current_index = start_index;
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, entity_id);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, phi);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, x);
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, y);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref phi);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref x);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref y);
 			return current_index - start_index;
 		}
 	};
@@ -99,7 +99,7 @@ namespace net
 		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
 		{
 			int current_index = start_index;
-			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, count);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref count);
 			for (int i = 0; i < count; i++)
 			{
 				current_index += objects[i].Process(io_mode, packet_data, current_index);
