@@ -8,30 +8,30 @@ using UnityEngine;
 public class NetworkController : MonoBehaviour
 {
 
-	UdpClient udp_client = new UdpClient(def.Network.client_port);
-
+	private net.Packet<net.Header, net.ClientInputPayload> client_input;
 	byte[] buffer = new byte[def.Network.max_packet_size];
+	UdpClient udp_client;
 
-	private net.Packet<net.Header, net.ClientInputPayload> client_input =
-		new net.Packet<net.Header, net.ClientInputPayload>()
-		{
-			header = new net.Header
-			{
-				protocol_id = def.Network.protocol_id,
-				sequence_number = 0,
-				packet_type = (byte)net.packet_type.client_input
-			},
-			payload = new net.ClientInputPayload
-			{
-				entity_id = 0, //TODO: Actually implement this behaviour.
-				duration = 2, //TODO: This should be calculated as the ratio of the server and the client simulation rate.
-				count = 0,
-				inputs = new byte[def.Network.max_packet_size]
-			}
-		};
-
-	private void Start()
+	void Start()
 	{
+		client_input =
+			new net.Packet<net.Header, net.ClientInputPayload>()
+			{
+				header = new net.Header
+				{
+					protocol_id = def.Network.protocol_id,
+					sequence_number = 0,
+					packet_type = (byte)net.packet_type.client_input
+				},
+				payload = new net.ClientInputPayload
+				{
+					entity_id = 0, //TODO: Actually implement this behaviour.
+					duration = 2, //TODO: This should be calculated as the ratio of the server and the client simulation rate.
+					count = 0,
+					inputs = new byte[def.Network.max_packet_size]
+				}
+			};
+		udp_client = new UdpClient(def.Network.client_port);
 		udp_client.Connect(new IPAddress(def.Network.server_ip), def.Network.server_port);
 	}
 	
@@ -52,9 +52,9 @@ public class NetworkController : MonoBehaviour
 			{
 				AddCommand(command);
 			}
-			udp_client.Send(buffer, client_input.Process(net.BinarySerializer.IOMode.Write, buffer, 0));
-			client_input.header.sequence_number++;
 		}
+		udp_client.Send(buffer, client_input.Process(net.BinarySerializer.IOMode.Write, buffer, 0));
+		client_input.header.sequence_number++;
 	}
 
 }

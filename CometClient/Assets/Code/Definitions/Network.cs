@@ -8,7 +8,7 @@ namespace def
 	{
 
 		//Socket parameters
-		public const ushort client_port = 7700;
+		public const ushort client_port = 7701; //This should be different from the server port, so that local testing is possible.
 		public const int max_packet_size = 1000; //TODO: Check recommended max MTU.
 
 		//Protocol parameters
