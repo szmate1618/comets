@@ -51,7 +51,8 @@ public class NetworkController : MonoBehaviour
 		send_buffer = new byte[def.Network.max_packet_size];
 		server = new IPEndPoint(new IPAddress(def.Network.server_ip), def.Network.server_port);
 		udp_client = new UdpClient(def.Network.client_port);
-		udp_client.Connect();
+		udp_client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 1);
+		udp_client.Connect(server);
 	}
 	
 	private void AddCommand(def.Network.user_input command)
