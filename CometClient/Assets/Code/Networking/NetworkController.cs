@@ -9,10 +9,13 @@ public class NetworkController : MonoBehaviour
 {
 
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
-	byte[] buffer = new byte[def.Network.max_packet_size];
-	UdpClient udp_client;
+	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
+	private byte[] receive_buffer;
+	private byte[] send_buffer;
+	private IPEndPoint server;
+	private UdpClient udp_client;
 
-	void Start()
+	private void Start()
 	{
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>()
@@ -31,8 +34,24 @@ public class NetworkController : MonoBehaviour
 					inputs = new byte[def.Network.max_packet_size]
 				}
 			};
+		server_state = //TODO: Write constructors for these.
+			new net.Packet<net.ServerHeader, net.ServerStatePayload>()
+			{
+				header = new net.ServerHeader
+				{
+					common_header = new net.Header { }
+				},
+				payload = new net.ServerStatePayload
+				{
+					objects = new net.ServerObject[def.Network.max_packet_size]
+				}
+			};
+
+		receive_buffer = new byte[def.Network.max_packet_size];
+		send_buffer = new byte[def.Network.max_packet_size];
+		server = new IPEndPoint(new IPAddress(def.Network.server_ip), def.Network.server_port);
 		udp_client = new UdpClient(def.Network.client_port);
-		udp_client.Connect(new IPAddress(def.Network.server_ip), def.Network.server_port);
+		udp_client.Connect();
 	}
 	
 	private void AddCommand(def.Network.user_input command)
@@ -53,8 +72,11 @@ public class NetworkController : MonoBehaviour
 				AddCommand(command);
 			}
 		}
-		udp_client.Send(buffer, client_input.Process(net.BinarySerializer.IOMode.Write, buffer, 0));
+		udp_client.Send(send_buffer, client_input.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 		client_input.header.sequence_number++;
+
+		receive_buffer = udp_client.Receive(ref server); //TODO: Do I really need to specify this explicitly but not for Send?
+		Debug.Log(receive_buffer);
 	}
 
 }
