@@ -74,30 +74,32 @@ namespace net
 		net::Address from;
 		int bytes_read = socket.Receive(from);
 
-		Header header;
-		size_t header_size = header.IO<net::Read>(socket.recv_buffer);
-
-		if (header.protocol_id == def::protocol_id)
+		if (bytes_read >= 0)
 		{
-			switch (header.packet_type)
+			Header header;
+			size_t header_size = header.IO<net::Read>(socket.recv_buffer);
+
+			if (header.protocol_id == def::protocol_id)
 			{
-			case client_input:
-				ClientInputPayload payload;
-				payload.inputs = buffer;
-				payload.IO<net::Read>(socket.recv_buffer + header_size);
-				exportstrategy.Export(payload);
-				registry.Touch(payload.entity_id, from);
-				break;
-			default:
-				//TODO: Some kind of errorlogging here.
-				break;
+				switch (header.packet_type)
+				{
+				case client_input:
+					ClientInputPayload payload;
+					payload.inputs = buffer;
+					payload.IO<net::Read>(socket.recv_buffer + header_size);
+					exportstrategy.Export(payload);
+					registry.Touch(payload.entity_id, from);
+					break;
+				default:
+					//TODO: Some kind of errorlogging here.
+					break;
+				}
+			}
+			else
+			{
+				//TODO: Some kind of warnlogging here.
 			}
 		}
-		else
-		{
-			//TODO: Some kind of warnlogging here.
-		}
-
 		return bytes_read;
 	}
 

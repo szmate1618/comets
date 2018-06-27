@@ -52,7 +52,7 @@ namespace server
 			backoff = 0s;
 			for (int i = 0; i < 10; i++)
 			{
-				if (protocol.Tick() < 0) backoff += def::max_socket_read_backoff / 10;
+				if (protocol.Tick() <= 0) backoff += def::max_socket_read_backoff / 10;
 				else backoff -= def::max_socket_read_backoff / 10;
 			}
 		}
