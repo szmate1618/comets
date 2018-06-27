@@ -52,8 +52,8 @@ namespace net
 		private static UInt32 HtoN(UInt32 t)
 		{
 			_4bytes.lowest = (byte)(t >> 24);
-			_4bytes.lower = (byte)((t >> 16) | 0xFF);
-			_4bytes.higher = (byte)((t >> 8) | 0xFF);
+			_4bytes.lower = (byte)((t >> 16) & 0xFF);
+			_4bytes.higher = (byte)((t >> 8) & 0xFF);
 			_4bytes.highest = (byte)(t & 0xFF);
 			return _4bytes.value;
 		}
@@ -83,11 +83,11 @@ namespace net
 			int size = sizeof(float);
 			if (io_mode == IOMode.Read)
 			{
-				t = BitConverter.ToSingle(packet_data, index);
+				t = NtoH(BitConverter.ToSingle(packet_data, index));
 			}
 			else if (io_mode == IOMode.Write)
 			{
-				Byte[] temp = BitConverter.GetBytes(t);
+				Byte[] temp = BitConverter.GetBytes(HtoN(t));
 				for (int i = 0; i < size; i++)
 				{
 					packet_data[index + i] = temp[i];
@@ -100,11 +100,11 @@ namespace net
 			int size = sizeof(double);
 			if (io_mode == IOMode.Read)
 			{
-				t = BitConverter.ToDouble(packet_data, index);
+				t = NtoH(BitConverter.ToDouble(packet_data, index));
 			}
 			else if (io_mode == IOMode.Write)
 			{
-				Byte[] temp = BitConverter.GetBytes(t);
+				Byte[] temp = BitConverter.GetBytes(HtoN(t));
 				for (int i = 0; i < size; i++)
 				{
 					packet_data[index + i] = temp[i];
@@ -130,11 +130,11 @@ namespace net
 			int size = sizeof(UInt16);
 			if (io_mode == IOMode.Read)
 			{
-				t = BitConverter.ToUInt16(packet_data, index);
+				t = NtoH(BitConverter.ToUInt16(packet_data, index));
 			}
 			else if (io_mode == IOMode.Write)
 			{
-				Byte[] temp = BitConverter.GetBytes(t);
+				Byte[] temp = BitConverter.GetBytes(HtoN(t));
 				for (int i = 0; i < size; i++)
 				{
 					packet_data[index + i] = temp[i];
@@ -147,11 +147,11 @@ namespace net
 			int size = sizeof(UInt32);
 			if (io_mode == IOMode.Read)
 			{
-				t = BitConverter.ToUInt32(packet_data, index);
+				t = NtoH(BitConverter.ToUInt32(packet_data, index));
 			}
 			else if (io_mode == IOMode.Write)
 			{
-				Byte[] temp = BitConverter.GetBytes(t);
+				Byte[] temp = BitConverter.GetBytes(HtoN(t));
 				for (int i = 0; i < size; i++)
 				{
 					packet_data[index + i] = temp[i];
