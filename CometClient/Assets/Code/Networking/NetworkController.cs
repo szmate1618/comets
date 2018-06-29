@@ -77,6 +77,7 @@ public class NetworkController : MonoBehaviour
 		client_input.header.sequence_number++;
 
 		receive_buffer = udp_client.Receive(ref server); //TODO: Do I really need to specify this explicitly but not for Send?
+		server_state.Process(net.BinarySerializer.IOMode.Read, receive_buffer, 0);
 		Debug.Log(receive_buffer);
 	}
 
