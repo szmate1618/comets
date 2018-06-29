@@ -46,6 +46,10 @@ public class NetworkController : MonoBehaviour
 					objects = new net.ServerObject[def.Network.max_packet_size]
 				}
 			};
+		for (int i = 0; i < server_state.payload.objects.Length; i++)
+		{
+			server_state.payload.objects[i] = new net.ServerObject { };
+		}
 
 		receive_buffer = new byte[def.Network.max_packet_size];
 		send_buffer = new byte[def.Network.max_packet_size];
