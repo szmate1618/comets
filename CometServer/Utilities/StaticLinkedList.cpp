@@ -9,7 +9,7 @@ namespace utils
 	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, size_t index) : list{ list }, index{ index } {}
 
 	template<typename T>
-	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.instart } {}
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.elements[list.instart].nextindex } {}
 
 	template<typename T>
 	typename StaticLinkedList<T>::Iterator& StaticLinkedList<T>::Iterator::operator++() { index = list.elements[index].nextindex; return *this; }
@@ -49,6 +49,8 @@ namespace utils
 		//Init inlist.
 		elements[instart].nextindex = inend;
 		elements[inend].previndex = instart;
+		elements[instart + 1].previndex = outstart;
+		elements[inend - 1].nextindex = outend;
 
 		//Init outlist.
 		elements[outstart].nextindex = outstart + 2;
