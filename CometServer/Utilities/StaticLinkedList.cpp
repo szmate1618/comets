@@ -1,6 +1,8 @@
 #include "StaticLinkedList.hpp"
 #include "..\Entities\Entities.hpp"
 
+#include <cassert>
+
 
 namespace utils
 {
@@ -36,6 +38,8 @@ namespace utils
 	template<typename T>
 	StaticLinkedList<T>::StaticLinkedList(size_t size) : elements(size)
 	{
+		assert(size > 4 && "Argument 'size' must be greater than 4, so that there is space for actual data between the 4 guard elements.");
+
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 
@@ -49,12 +53,12 @@ namespace utils
 		//Init inlist.
 		elements[instart].nextindex = inend;
 		elements[inend].previndex = instart;
-		elements[instart + 1].previndex = outstart;
-		elements[inend - 1].nextindex = outend;
 
 		//Init outlist.
 		elements[outstart].nextindex = outstart + 2;
 		elements[outend].previndex = outend - 2;
+		elements[outstart + 2].previndex = outstart;
+		elements[outend - 2].nextindex = outend;
 	}
 
 	template<typename T>
