@@ -103,7 +103,6 @@ namespace server
 			sspb.server_states[i].count = 0;
 			for (const auto& visible_entity : universe.GetVision(entity_id))
 			{
-				if (visible_entity->id == entity_id) continue;
 				net::ServerObject& server_object = sspb.server_states[i].objects[sspb.server_states[i].count++];
 				server_object.entity_id = visible_entity->id;
 				server_object.phi = visible_entity->orientation;
