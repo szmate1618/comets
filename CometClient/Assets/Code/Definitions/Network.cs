@@ -1,6 +1,4 @@
 ﻿//TODO: Unify this with the C++ version, as much as possible.
-using System;
-
 namespace def
 {
 
