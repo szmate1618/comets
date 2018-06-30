@@ -74,7 +74,7 @@ namespace net
 		net::Address from;
 		int bytes_read = socket.Receive(from);
 
-		if (bytes_read >= 0)
+		if (bytes_read > 0)
 		{
 			Header header;
 			size_t header_size = header.IO<net::Read>(socket.recv_buffer);
