@@ -1,6 +1,8 @@
 #include "StaticLinkedList.hpp"
 #include "..\Entities\Entities.hpp"
 
+#include <cassert>
+
 
 namespace utils
 {
@@ -9,7 +11,7 @@ namespace utils
 	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list, size_t index) : list{ list }, index{ index } {}
 
 	template<typename T>
-	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.instart } {}
+	StaticLinkedList<T>::Iterator::Iterator(StaticLinkedList<T>& list) : Iterator{ list, list.elements[list.instart].nextindex } {}
 
 	template<typename T>
 	typename StaticLinkedList<T>::Iterator& StaticLinkedList<T>::Iterator::operator++() { index = list.elements[index].nextindex; return *this; }
@@ -36,6 +38,8 @@ namespace utils
 	template<typename T>
 	StaticLinkedList<T>::StaticLinkedList(size_t size) : elements(size)
 	{
+		assert(size > 4 && "Argument 'size' must be greater than 4, so that there is space for actual data between the 4 guard elements.");
+
 		instart = 1; inend = elements.size() - 2;
 		outstart = 0; outend = elements.size() - 1;
 
@@ -53,6 +57,8 @@ namespace utils
 		//Init outlist.
 		elements[outstart].nextindex = outstart + 2;
 		elements[outend].previndex = outend - 2;
+		elements[outstart + 2].previndex = outstart;
+		elements[outend - 2].nextindex = outend;
 	}
 
 	template<typename T>

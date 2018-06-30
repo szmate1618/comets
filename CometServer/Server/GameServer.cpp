@@ -11,7 +11,7 @@ namespace server
 	//in the class rather than the order in which the members appear in the initializer list.
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
-		universe{},
+		universe{R"(universe_initial_state.ssv)"},
 		export_strategy{ client_input_payload_buffer },
 		import_strategy{ server_state_payload_buffer },
 		protocol{ def::server_port, export_strategy, import_strategy },
@@ -52,7 +52,7 @@ namespace server
 			backoff = 0s;
 			for (int i = 0; i < 10; i++)
 			{
-				if (protocol.Tick() < 0) backoff += def::max_socket_read_backoff / 10;
+				if (protocol.Tick() <= 0) backoff += def::max_socket_read_backoff / 10;
 				else backoff -= def::max_socket_read_backoff / 10;
 			}
 		}
