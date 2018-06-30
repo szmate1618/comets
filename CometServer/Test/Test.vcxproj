@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug - no collision|Win32">
+      <Configuration>Debug - no collision</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug - no collision|x64">
+      <Configuration>Debug - no collision</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -32,7 +40,21 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -61,7 +83,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,7 +105,17 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -106,7 +144,41 @@
       <AdditionalDependencies>..\Networking\$(Platform)\$(Configuration)\ClientRegistry.obj;..\Networking\$(Platform)\$(Configuration)\Connection.obj;..\Networking\$(Platform)\$(Configuration)\Protocol.obj;..\Networking\$(Platform)\$(Configuration)\Packets.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;..\Networking\$(Platform)\$(Configuration)\Address.obj;..\Networking\$(Platform)\$(Configuration)\Socket.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyNaiveRotation.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyPrecomputedRotation.obj;..\Entities\$(Platform)\$(Configuration)\Circle.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\ForwardIterableSequenceView.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UseFullPaths>true</UseFullPaths>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\Networking\$(Platform)\$(Configuration)\ClientRegistry.obj;..\Networking\$(Platform)\$(Configuration)\Connection.obj;..\Networking\$(Platform)\$(Configuration)\Protocol.obj;..\Networking\$(Platform)\$(Configuration)\Packets.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;..\Networking\$(Platform)\$(Configuration)\Address.obj;..\Networking\$(Platform)\$(Configuration)\Socket.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyNaiveRotation.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyPrecomputedRotation.obj;..\Entities\$(Platform)\$(Configuration)\Circle.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\ForwardIterableSequenceView.obj;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UseFullPaths>true</UseFullPaths>
+      <AdditionalOptions>/std:c++latest</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\Networking\$(Platform)\$(Configuration)\ClientRegistry.obj;..\Networking\$(Platform)\$(Configuration)\Connection.obj;..\Networking\$(Platform)\$(Configuration)\Protocol.obj;..\Networking\$(Platform)\$(Configuration)\Packets.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;..\Networking\$(Platform)\$(Configuration)\Address.obj;..\Networking\$(Platform)\$(Configuration)\Socket.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartitioner.obj;..\Entities\$(Platform)\$(Configuration)\SimplePartition.obj;..\Entities\$(Platform)\$(Configuration)\AbstractCollisionShape.obj;..\Entities\$(Platform)\$(Configuration)\AbstractTriangulatedPoly.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyNaiveRotation.obj;..\Entities\$(Platform)\$(Configuration)\TriangulatedPolyPrecomputedRotation.obj;..\Entities\$(Platform)\$(Configuration)\Circle.obj;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\ForwardIterableSequenceView.obj;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -180,7 +252,9 @@
     <ClCompile Include="TestSocket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
