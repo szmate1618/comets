@@ -232,11 +232,11 @@ namespace entity
 			dynamic_entity.id = entity;
 			dynamic_entity.orientation = 0;
 			dynamic_entity.position = position;
-			dynamic_entity.angular_velocity = 0;
+			dynamic_entity.angular_velocity = 3; //TODO: Clean up the logic around this, and/or maybe rename to max_angular_velocity, or even max_angular_speed.
 			dynamic_entity.velocity = { 0, 0 };
 			dynamic_entity.max_speed = 10;
 			dynamic_entity.inertial_velocity = { 0, 0 };
-			dynamic_entity.acceleration = { 0.01, 0.01 };
+			dynamic_entity.acceleration = { 5, 0 };
 			dynamic_entity.inertial_acceleration = { 0, 0 };
 			dynamic_entity.friction = 0;
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
