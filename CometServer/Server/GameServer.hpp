@@ -67,6 +67,7 @@ namespace server
 		net::ServersideProtocol protocol;
 		std::atomic<bool> running;
 		std::thread input_thread;
+		int tick;
 
 		void ReadPackets();
 		void ProcessPackets(def::time);

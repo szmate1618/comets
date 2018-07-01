@@ -16,7 +16,8 @@ namespace server
 		import_strategy{ server_state_payload_buffer },
 		protocol{ def::server_port, export_strategy, import_strategy },
 		running{ true },
-		input_thread{ [=] { ReadPackets(); } }
+		input_thread{ [=] { ReadPackets(); } },
+		tick{ 0 }
 	{
 	}
 
@@ -30,7 +31,10 @@ namespace server
 		ProcessPackets(duration);
 		UpdateState(duration);
 		TestCollisions();
-		SendPackets();
+		//TODO: Isn't this part of the logic supposed to be a part of the protocol? Maybe not, but think about it.
+		//TODO: This should be calculated as the ratio of the server and client rate.
+		if (tick % 2 == 1) SendPackets();
+		tick++;
 	}
 
 	//This must be thread safe, because it's also called from ReadPackets.
@@ -103,7 +107,6 @@ namespace server
 			sspb.server_states[i].count = 0;
 			for (const auto& visible_entity : universe.GetVision(entity_id))
 			{
-				if (visible_entity->id == entity_id) continue;
 				net::ServerObject& server_object = sspb.server_states[i].objects[sspb.server_states[i].count++];
 				server_object.entity_id = visible_entity->id;
 				server_object.phi = visible_entity->orientation;

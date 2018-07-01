@@ -7,6 +7,7 @@ using UnityEngine;
 public class NetworkController : MonoBehaviour
 {
 
+	private GameObject player;
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
 	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
 	private byte[] receive_buffer;
@@ -16,6 +17,8 @@ public class NetworkController : MonoBehaviour
 
 	private void Start()
 	{
+		player = GameObject.Find("Space Ship");
+
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>()
 			{
@@ -81,7 +84,9 @@ public class NetworkController : MonoBehaviour
 
 		receive_buffer = udp_client.Receive(ref server); //TODO: Do I really need to specify this explicitly but not for Send?
 		server_state.Process(net.BinarySerializer.IOMode.Read, receive_buffer, 0);
-		Debug.Log(receive_buffer);
+		var player_object = server_state.payload.objects[0];
+		player.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)player_object.phi);
+		player.transform.position = new Vector3((float)player_object.x, (float)player_object.y, 0);
 	}
 
 }
