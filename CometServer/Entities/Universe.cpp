@@ -135,7 +135,7 @@ namespace entity
 					if (speed > entity.max_speed) entity.velocity = geo::div(entity.velocity, speed / entity.max_speed);
 					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
 					entity.position = geo::add(entity.position, geo::mul(geo::add(entity.velocity, entity.inertial_velocity), duration.count()));
-					entity.velocity = geo::div(entity.velocity, entity.friction);
+					entity.velocity = geo::div(entity.velocity, 1 + entity.friction); //TODO: Is this really how we want to define friction?
 					entity.inertial_acceleration = { 0, 0 };
 				}
 			}
@@ -228,8 +228,17 @@ namespace entity
 		if (dynamics == dynamic)
 		{
 			DynamicEntity dynamic_entity;
+			//TODO: Also add shape, and make all the following values configurable.
 			dynamic_entity.id = entity;
-			dynamic_entity.position = position; //TODO: Also add shape.
+			dynamic_entity.orientation = 0;
+			dynamic_entity.position = position;
+			dynamic_entity.angular_velocity = 0;
+			dynamic_entity.velocity = { 0, 0 };
+			dynamic_entity.max_speed = 10;
+			dynamic_entity.inertial_velocity = { 0, 0 };
+			dynamic_entity.acceleration = { 0.01, 0.01 };
+			dynamic_entity.inertial_acceleration = { 0, 0 };
+			dynamic_entity.friction = 0;
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
 			handle.de_pointer = &(dynamic_entities[visibility][collidability].elements[index].element); //TODO: Add a member method for this.
 		}
