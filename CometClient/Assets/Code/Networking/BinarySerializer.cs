@@ -39,8 +39,8 @@ namespace net
 		static DissectableUInt32 _4bytes;
 
 		private static object HtoN(object t) { throw new InvalidOperationException(); }
-		private static float HtoN(float t) { return t; }
-		private static double HtoN(double t) { return t; }
+		private static float HtoN(float t) { return t; } //TODO: Handle floating point endianness.
+		private static double HtoN(double t) { return t; } //TODO: Handle floating point endianness.
 		private static Byte HtoN(Byte t) { return t; }
 		private static UInt16 HtoN(UInt16 t)
 		{
