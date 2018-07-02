@@ -173,6 +173,7 @@
     <ClInclude Include="CountOfArray.hpp" />
     <ClInclude Include="ForwardIterableSequenceView.hpp" />
     <ClInclude Include="Logger.hpp" />
+    <ClInclude Include="sqlite3.h" />
     <ClInclude Include="StaticLinkedList.hpp" />
   </ItemGroup>
   <ItemGroup>
