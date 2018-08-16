@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS Hulls;
 CREATE TABLE Hulls
 (
 	HullID INTEGER PRIMARY KEY ASC,
-	shape TEXT, texture TEXT
+	shape TEXT,
+	texture TEXT
 );
 
 DROP TABLE IF EXISTS Entities;
@@ -30,7 +31,7 @@ CREATE TABLE Entities
 	PositionX REAL,
 	PositionY REAL,
 	Orientation REAL
-	--TODO: Also add velocity, acceleration, friciton, etc.
+	--TODO: Also add velocity, acceleration, friction, etc.
 );
 
 COMMIT;
