@@ -3,14 +3,18 @@ PRAGMA foreign_keys=ON;
 
 BEGIN TRANSACTION;
 
+--Drop the tables in the reversed order of their creation,
+--avoiding to break the foreign key contraints.
+DROP TABLE IF EXISTS Entities;
+DROP TABLE IF EXISTS Hulls;
 DROP TABLE IF EXISTS Users;
+
 CREATE TABLE Users
 (
 	UserID INTEGER PRIMARY KEY ASC,
 	PasswordHash TEXT
 );
 
-DROP TABLE IF EXISTS Hulls;
 CREATE TABLE Hulls
 (
 	HullID INTEGER PRIMARY KEY ASC,
@@ -18,7 +22,6 @@ CREATE TABLE Hulls
 	texture TEXT
 );
 
-DROP TABLE IF EXISTS Entities;
 CREATE TABLE Entities
 (
 	EntityID INTEGER PRIMARY KEY ASC,
