@@ -115,6 +115,9 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'">
     <ClCompile>
@@ -123,6 +126,9 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -131,6 +137,9 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'">
     <ClCompile>
@@ -139,6 +148,9 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest</AdditionalOptions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -153,6 +165,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -167,6 +182,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)sqlite3_$(Platform).dll "$(OutDir)sqlite3.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssertTypeSizes.hpp" />
