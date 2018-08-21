@@ -1,2 +1,2 @@
-call db_path.bat
-sqlite3_x86.exe %DB_PATH%
+call db_env_vars.bat
+%SQLITE_EXE% %DB_PATH%

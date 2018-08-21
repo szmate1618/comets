@@ -1,3 +1,3 @@
-call db_path.bat
-sqlite3_x86.exe %DB_PATH% ".dump" > backup_dump.sql
-sqlite3_x86.exe %DB_PATH% ".read recreate_empty_db.sql"
+call db_env_vars.bat
+%SQLITE_EXE% %DB_PATH% ".dump" > backup_dump.sql
+%SQLITE_EXE% %DB_PATH% ".read recreate_empty_db.sql"
