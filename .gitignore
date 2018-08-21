@@ -22,11 +22,15 @@
 
 # Build results
 [Dd]ebug/
+#A new configuration, very specific to this project.
+[Dd]ebug - no collision/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
 x64/
 x86/
+#This is now used instead of x86, so that build directories could be unified between configurations.
+Win32/
 bld/
 [Bb]in/
 [Oo]bj/
