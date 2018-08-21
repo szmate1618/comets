@@ -1,4 +1,5 @@
 #include "Universe.hpp"
+#include "..\Utilities\sqlite3.h"
 
 #include <fstream>
 #include <sstream>
