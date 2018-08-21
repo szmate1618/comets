@@ -1,7 +1,7 @@
 # Tools
 Tools for working with the game data database.
 The most important files are the following ones:
-- sqlite3_x86.exe  
+- sqlite3_Win32.exe  
   The SQLite3 executable.
 - db_env_vars.bat  
   Defines an environment variable containing the path and name of the database,
