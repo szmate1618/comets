@@ -18,8 +18,8 @@ CREATE TABLE Users
 CREATE TABLE Hulls
 (
 	HullID INTEGER PRIMARY KEY ASC,
-	shape TEXT,
-	texture TEXT
+	Shape TEXT,
+	Texture TEXT
 );
 
 CREATE TABLE Entities
