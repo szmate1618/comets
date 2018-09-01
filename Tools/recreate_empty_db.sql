@@ -3,7 +3,7 @@ PRAGMA foreign_keys=ON;
 
 BEGIN TRANSACTION;
 
---Drop the tables in the reversed order of their creation,
+--Drop the tables in the reverse order of their creation,
 --avoiding to break the foreign key contraints.
 DROP TABLE IF EXISTS Entities;
 DROP TABLE IF EXISTS Hulls;
