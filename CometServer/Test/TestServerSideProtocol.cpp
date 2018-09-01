@@ -93,6 +93,10 @@ namespace Test
 			Assert::AreEqual(packet.payload, client_input_buffer[0], L"Failed to correctly receive client input payload.");
 		}
 
+		BEGIN_TEST_METHOD_ATTRIBUTE(Receive2)
+			TEST_IGNORE()
+		END_TEST_METHOD_ATTRIBUTE()
+
 		TEST_METHOD(Receive2)
 		{
 			net::Socket client_socket;
