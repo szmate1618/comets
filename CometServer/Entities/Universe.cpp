@@ -10,8 +10,8 @@ namespace entity
 	Universe::Universe(std::string filename) //TODO: Add error handling.
 	{
 		sqlite3* db_connection;
-		int z = sqlite3_open("game_data.sqlite3", &db_connection); //TODO: Add error handling.
-		int err = sqlite3_exec //TODO: Add error handling.
+		sqlite3_open("game_data.sqlite3", &db_connection); //TODO: Add error handling.
+		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
 			"SELECT EntityID, OwnerID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
@@ -33,7 +33,7 @@ namespace entity
 				collidability_class collidability;
 				if (std::strcmp("collidable", argv[5]) == 0) collidability = collidable;
 				else if (std::strcmp("uncollidable", argv[5]) == 0) collidability = uncollidable;
-				geo::point_2d position{ std::atoi(argv[6]), std::atoi(argv[7]) };
+				geo::point_2d position{ std::atof(argv[6]), std::atof(argv[7]) };
 				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
 				return 0;
 			},
