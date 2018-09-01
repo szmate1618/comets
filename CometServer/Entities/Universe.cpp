@@ -1,7 +1,5 @@
 #include "Universe.hpp"
-
-#include <fstream>
-#include <sstream>
+#include "..\Utilities\sqlite3.h"
 
 
 namespace entity
@@ -11,31 +9,38 @@ namespace entity
 
 	Universe::Universe(std::string filename) //TODO: Add error handling.
 	{
-		std::ifstream initial_state_file{ filename };
-		std::string line;
-		while (std::getline(initial_state_file, line))
-		{
-			std::stringstream linestream{ line };
-			int temp;
-
-			def::entity_id entity;
-			def::owner_id owner;
-			engine_type engine;
-			dynamics_class dynamics;
-			visibility_class visibility;
-			collidability_class collidability;
-			geo::point_2d position;
-
-			linestream >> entity;
-			linestream >> owner;
-			linestream >> temp; engine = static_cast<engine_type>(temp);
-			linestream >> temp; dynamics = static_cast<dynamics_class>(temp);
-			linestream >> temp; visibility = static_cast<visibility_class>(temp);
-			linestream >> temp; collidability = static_cast<collidability_class>(temp);
-			linestream >> position.x >> position.y;
-
-			SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
-		}
+		sqlite3* db_connection;
+		sqlite3_open("game_data.sqlite3", &db_connection); //TODO: Add error handling.
+		sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT EntityID, OwnerID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
+			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				def::entity_id entity = std::atoi(argv[0]);
+				def::owner_id owner = std::atoi(argv[1]);
+				engine_type engine;
+				if (std::strcmp("inertial", argv[2]) == 0) engine = inertial;
+				else if (std::strcmp("anti_inertial", argv[2]) == 0) engine = anti_intertial;
+				else if (std::strcmp("para_inertial", argv[2]) == 0) engine = para_inertial;
+				else if (std::strcmp("pre_programmed", argv[2]) == 0) engine = pre_programmed;
+				dynamics_class dynamics;
+				if (std::strcmp("static_", argv[3]) == 0) dynamics = static_;
+				else if (std::strcmp("dynamic", argv[3]) == 0) dynamics = dynamic;
+				visibility_class visibility;
+				if (std::strcmp("visible", argv[4]) == 0) visibility = visible;
+				else if (std::strcmp("invisible", argv[4]) == 0) visibility = invisible;
+				collidability_class collidability;
+				if (std::strcmp("collidable", argv[5]) == 0) collidability = collidable;
+				else if (std::strcmp("uncollidable", argv[5]) == 0) collidability = uncollidable;
+				geo::point_2d position{ std::atof(argv[6]), std::atof(argv[7]) };
+				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		);
+		sqlite3_close(db_connection);
 	}
 
 	Universe::~Universe() {}
