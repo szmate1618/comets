@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
@@ -7,17 +8,20 @@ using UnityEngine;
 public class NetworkController : MonoBehaviour
 {
 
-	private GameObject player;
+	public GameObject spaceShip;
+
+	private GameObject mainCamera;
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
 	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
 	private byte[] receive_buffer;
 	private byte[] send_buffer;
 	private IPEndPoint server;
 	private UdpClient udp_client;
+	private Dictionary<UInt32, GameObject> entities = new Dictionary<UInt32, GameObject>();
 
 	private void Start()
 	{
-		player = GameObject.Find("Space Ship");
+		mainCamera = GameObject.Find("Main Camera");
 
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>()
@@ -84,9 +88,17 @@ public class NetworkController : MonoBehaviour
 
 		receive_buffer = udp_client.Receive(ref server); //TODO: Do I really need to specify this explicitly but not for Send?
 		server_state.Process(net.BinarySerializer.IOMode.Read, receive_buffer, 0);
-		var player_object = server_state.payload.objects[0];
-		player.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)player_object.phi);
-		player.transform.position = new Vector3((float)player_object.x, (float)player_object.y, 0);
+		for (int i = 0; i < server_state.payload.count; i++)
+		{
+			net.ServerObject entity = server_state.payload.objects[i];
+			if (!entities.ContainsKey(entity.entity_id))
+			{
+				entities.Add(entity.entity_id, Instantiate(spaceShip));
+			}
+			entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
+			entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
+		}
+		mainCamera.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
 	}
 
 }
