@@ -1,8 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-Shader "Unlit/FishEyeShader"
+﻿Shader "FishEyeShader"
 {
 	Properties
 	{
@@ -10,7 +6,6 @@ Shader "Unlit/FishEyeShader"
 	}
 	SubShader
 	{
-		Tags { "RenderType" = "Opaque" }
 		LOD 100
 
 		Pass
