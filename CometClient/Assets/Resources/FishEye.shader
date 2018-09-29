@@ -37,7 +37,7 @@
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.vertex.xy /= sqrt(length(o.vertex.xy) * 5);
+				o.vertex.xy /= sqrt(length(o.vertex.xy) * 10);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
 			}
