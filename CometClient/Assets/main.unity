@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e41d9a53f9e3004787ff280bba60946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1304200938}
   spaceShip: {fileID: 1930354249278484, guid: 311ea793fb9888045b460ceae9e12890, type: 2}
 --- !u!4 &1989732395
 Transform:
