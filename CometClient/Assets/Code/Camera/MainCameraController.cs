@@ -9,12 +9,6 @@ public class MainCameraController : MonoBehaviour
 
 	private void Start ()
 	{
-		/*Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-		var asd = GetComponent<Camera>().cullingMatrix;
-		GetComponent<Camera>().cullingMatrix = Matrix4x4.Frustum(-10.0f, 10.0f, -10.0f, 11.0f, 0.3f, 110.0f);
-		//fishEyeShader = Shader.Find("FishEye");
-		Plane[] planes2 = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-		var qwe = GetComponent<Camera>().cullingMatrix;*/
 		GetComponent<Camera>().SetReplacementShader(fishEyeShader, "");
 	}
 
@@ -25,11 +19,4 @@ public class MainCameraController : MonoBehaviour
 							Camera.main.worldToCameraMatrix;
 	}
 
-		/*private void OnRenderImage(RenderTexture src, RenderTexture dst)
-		{
-			//fishEyeShader = Shader.Find("FishEye");
-			var cam = GetComponent<Camera>();//.SetReplacementShader(fishEyeShader, "");
-			Graphics.Blit(src, dst, new Material(fishEyeShader));
-		}*/
-
-	}
+}
