@@ -7,6 +7,8 @@
 	SubShader
 	{
 		LOD 100
+		Blend SrcAlpha OneMinusSrcAlpha
+		Tags {"Queue" = "Transparent"}
 
 		Pass
 		{
