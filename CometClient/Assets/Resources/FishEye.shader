@@ -36,14 +36,8 @@
 			v2f vert(appdata v)
 			{
 				v2f o;
-				/*float2 ObjSpaceCameraPos = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 1.0)).xy;
-				float2 offset = v.vertex.xy - ObjSpaceCameraPos;
-				float l = length(offset);
-				v.vertex.xy = ObjSpaceCameraPos + offset / sqrt(l);*/
-				
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				float l = length(o.vertex.xy);
-				o.vertex.xy /= sqrt(l*5);
+				o.vertex.xy /= sqrt(length(o.vertex.xy) * 5);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
 			}
