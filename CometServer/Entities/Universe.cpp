@@ -68,6 +68,9 @@ namespace entity
 		case def::fire:
 			EntityFire(duration, entity);
 			break;
+		case def::warp:
+			EntityWarp(duration, entity);
+			break;
 		default:
 			return false; //TODO: Do some warnlogging here.
 		}
@@ -125,6 +128,11 @@ namespace entity
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
 		//TODO: Implement this.
+	}
+
+	void Universe::EntityWarp(def::time duration, DynamicEntity& entity)
+	{
+		entity.position = { 0, 0 }; //TODO: Make the warp point configureable.
 	}
 
 	void Universe::UpdateState(def::time duration)
