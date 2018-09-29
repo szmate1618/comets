@@ -1,4 +1,4 @@
-﻿Shader "FishEyeShader"
+﻿Shader "FisheyeShader"
 {
 	Properties
 	{
