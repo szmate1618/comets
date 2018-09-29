@@ -33,6 +33,7 @@ namespace entity
 		void EntityThrust(def::time, DynamicEntity&, engine_type);
 		void EntityBrake(def::time, DynamicEntity&, engine_type);
 		void EntityFire(def::time, DynamicEntity&);
+		void EntityWarp(def::time, DynamicEntity&);
 		void UpdateState(def::time);
 		void TestCollisions();
 		void TestVisibility();
