@@ -47,7 +47,11 @@ namespace utils
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.
+		#ifdef NDEBUG //This is to speed up the launches of debug builds.
 		static constexpr size_t default_size = 1'000'000; //Yay for decimal separator apostrophe! C++11!
+		#else
+		static constexpr size_t default_size = 1'000;
+		#endif
 		std::vector<ListElement> elements;
 
 	private:
