@@ -8,6 +8,7 @@ using UnityEngine;
 public class NetworkController : MonoBehaviour
 {
 
+	public GameObject mainCamera;
 	public GameObject spaceShip;
 
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
@@ -95,7 +96,7 @@ public class NetworkController : MonoBehaviour
 			entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
 			entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
 		}
-		Camera.main.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
+		mainCamera.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
 	}
 
 }
