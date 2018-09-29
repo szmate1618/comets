@@ -10,7 +10,6 @@ public class NetworkController : MonoBehaviour
 
 	public GameObject spaceShip;
 
-	private GameObject mainCamera;
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
 	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
 	private byte[] receive_buffer;
@@ -21,8 +20,6 @@ public class NetworkController : MonoBehaviour
 
 	private void Start()
 	{
-		mainCamera = GameObject.Find("Main Camera");
-
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>()
 			{
@@ -98,7 +95,7 @@ public class NetworkController : MonoBehaviour
 			entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
 			entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
 		}
-		mainCamera.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
+		Camera.main.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
 	}
 
 }

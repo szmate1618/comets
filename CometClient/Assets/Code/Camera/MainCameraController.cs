@@ -9,7 +9,7 @@ public class MainCameraController : MonoBehaviour
 
 	private void Start ()
 	{
-		GetComponent<Camera>().SetReplacementShader(fishEyeShader, "");
+		Camera.main.SetReplacementShader(fishEyeShader, "");
 	}
 
 	void OnPreCull()
