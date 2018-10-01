@@ -11,7 +11,7 @@ namespace def
 
 		//Protocol parameters
 		public const byte protocol_id = 77;
-		public enum user_input { turn_left, turn_right, thrust, brake, fire };
+		public enum user_input { turn_left, turn_right, thrust, brake, fire, warp };
 
 		//Server address
 		public static readonly byte[] server_ip = { 127, 0, 0, 1 }; //Fine for testing, but this must be configurable.
