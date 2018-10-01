@@ -26,7 +26,7 @@ namespace def
 	using entity_id = uint32_t; //Used in ClientInputPayload and ServerObject. Changing it changes the protocol on the binary level.
 	using owner_id = uint32_t; //TODO: This is not used at the moment.
 	static constexpr uint8_t protocol_id = 77;
-	enum user_input { turn_left, turn_right, thrust, brake, fire }; //TODO: Maybe use strongly typed enum class (everywhere) instead?
+	enum user_input { turn_left, turn_right, thrust, brake, fire, warp }; //TODO: Maybe use strongly typed enum class (everywhere) instead?
 
 	//Server configuration
 	static constexpr unsigned short server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
