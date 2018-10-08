@@ -3,9 +3,26 @@ import bpy
 
 def export_shape(context, filepath):
     print("running export_shape...")
-    f = open(filepath, 'w', encoding='utf-8')
-    f.write("Hello World")
-    f.close()
+    object = context.active_object
+    bpy.ops.object.mode_set(mode='EDIT')
+    bpy.ops.mesh.quads_convert_to_tris()
+    bpy.ops.object.mode_set(mode='OBJECT') #quads_convert_to_tris() sometimes does not take effect without switching back to Object Mode.
+    object.data.transform(object.matrix_world)
+    mesh = object.data
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write("{} {}\n".format(len(mesh.vertices), len(mesh.polygons)))
+        for v in mesh.vertices:
+            assert len(v.co) == 3, "Coordinate is not XYZ."
+            f.write("{} {}\n".format(v.co[0], v.co[1])) #Z coordinate is implicitly 0.
+        if mesh.uv_layers.active: #If there is a UV mapping specified.
+            uvs = {mesh.loops[l].vertex_index: mesh.uv_layers.active.data[l].uv for p in mesh.polygons for l in p.loop_indices}
+            for v in mesh.vertices:
+                f.write("{} {}\n".format(uvs[v.index][0], uvs[v.index][1]))
+        else: #If there is no UV mapping specified.
+            pass
+        for p in mesh.polygons:
+            assert len(p.vertices) == 3, "Mesh is not triangulated."
+            f.write("{} {} {}\n".format(p.vertices[0], p.vertices[1], p.vertices[2]))
 
     return {'FINISHED'}
 
