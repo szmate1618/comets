@@ -1,7 +1,7 @@
 import bpy
 
 
-def export_shape(context, filepath):
+def export_shape(context, filepath, recreate_uv):
     print("running export_shape...")
     object = context.active_object
     bpy.ops.object.mode_set(mode='EDIT')
@@ -16,11 +16,11 @@ def export_shape(context, filepath):
             assert len(v.co) == 3, "Coordinate is not XYZ."
             f.write("{} {}\n".format(v.co[0], v.co[1])) #Z coordinate is implicitly 0.
         #Print UV coordinates.
-        if mesh.uv_layers.active: #If there is a UV mapping specified.
+        if mesh.uv_layers.active and not recreate_uv: #If there is a UV mapping specified which we want to keep.
             uvs = {mesh.loops[l].vertex_index: mesh.uv_layers.active.data[l].uv for p in mesh.polygons for l in p.loop_indices}
             for v in mesh.vertices:
                 f.write("{} {}\n".format(uvs[v.index][0], uvs[v.index][1]))
-        else: #If there is no UV mapping specified.
+        else: #If there is no UV mapping specified, or we want to recreate it.
             x_coordinates = [v.co[0] for v in mesh.vertices]
             y_coordinates = [v.co[1] for v in mesh.vertices]
             min_x = min(x_coordinates)
@@ -59,8 +59,16 @@ class ShapeExporter(Operator, ExportHelper):
             maxlen=255,  # Max internal buffer length, longer would be clamped.
             )
 
+    # List of operator properties, the attributes will be assigned
+    # to the class instance from the operator settings before calling.
+    recreate_uv = BoolProperty(
+                    name="Recreate UV",
+                    description="Automatically recreate the UV mapping, even if one already exists",
+                    default=True,
+                  )
+
     def execute(self, context):
-        return export_shape(context, self.filepath)
+        return export_shape(context, self.filepath, self.recreate_uv)
 
 
 # Only needed if you want to add into a dynamic menu
