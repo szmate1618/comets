@@ -1,5 +1,5 @@
 # Tools
-Tools for working with the game data database.
+Tools for working with the game data database, and other utility scripts.
 The most important files are the following ones:
 - sqlite3_Win32.exe  
   The SQLite3 executable.
@@ -12,3 +12,5 @@ The most important files are the following ones:
   Calls recreate_empty_db.bat then fills the tables with dummy data for testing.
 - db_command_line.bat  
   Opens a command line for the database.
+- export_shape.py
+  A Blender export script, for our custom 2D shape format.
