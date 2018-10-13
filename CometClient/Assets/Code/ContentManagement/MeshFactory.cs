@@ -67,8 +67,8 @@ public class MeshFactory
 								.ToArray();
 				int[] triangles = Enumerable
 										.Range(1, M)
-										.Select(x => Array.ConvertAll(file.ReadLine().Split(' '), y => Int32.Parse(y)))
-										.Aggregate((x, y) => x.Concat(y).ToArray())
+										.Select(x => file.ReadLine().Split(' ').Select(y => Int32.Parse(y)))
+										.Aggregate((x, y) => x.Concat(y))
 									.ToArray();
 				return Create(vertices, uvs, triangles);
 			}
