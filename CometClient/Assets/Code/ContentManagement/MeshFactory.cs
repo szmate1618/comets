@@ -80,7 +80,8 @@ public class MeshFactory
 		}
 		catch (Exception e)
 		{
-			Debug.LogError($"Failed to read file {filename}.");
+			//TODO: C# 6 has string interpolation. Investigate if it's worth upgrading from C# 4.
+			Debug.LogError("Failed to read file " + filename + ".");
 			return null; 
 		}
 
