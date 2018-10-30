@@ -59,16 +59,16 @@ public class MeshFactory
 										.Range(1, N)
 										.Select(x => file.ReadLine().Split(' '))
 										.Select(x => new Vector2(Single.Parse(x[0]), Single.Parse(x[1])))
-									.ToArray();
+										.ToArray();
 				Vector2[] uvs = Enumerable
 									.Range(1, N)
 									.Select(x => file.ReadLine().Split(' '))
 									.Select(x => new Vector2(Single.Parse(x[0]), Single.Parse(x[1])))
-								.ToArray();
+									.ToArray();
 				int[] triangles = Enumerable
-										.Range(1, M)
-										.Select(x => file.ReadLine().Split(' ').Select(y => Int32.Parse(y)))
-										.Aggregate((x, y) => x.Concat(y))
+									.Range(1, M)
+									.Select(x => file.ReadLine().Split(' ').Select(y => Int32.Parse(y)))
+									.Aggregate((x, y) => x.Concat(y))
 									.ToArray();
 				return Create(vertices, uvs, triangles);
 			}
@@ -84,6 +84,6 @@ public class MeshFactory
 			Debug.LogError("Failed to read file " + filename + ".");
 			return null; 
 		}
-
 	}
+
 }
