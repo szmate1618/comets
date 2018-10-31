@@ -87,7 +87,7 @@ namespace net
 
 	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
 	{
-		ServerObject* inputs = this->objects;
+		ServerObject* inputs = this->objects; //TODO: THis variable is not used at all.
 		*this = that;
 		this->objects = objects;
 		std::memcpy(this->objects, that.objects, that.count);
@@ -113,6 +113,46 @@ namespace net
 			packet_data_current += i->IO<io_mode>(packet_data_current);
 		}
 		return packet_data_current - packet_data_start;
+	}
+
+	bool ShapeRequest::operator==(const ShapeRequest& other) const
+	{
+		return entity_id == other.entity_id;
+	}
+
+	template<typename io_mode>
+	size_t ShapeRequest::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		return packet_data_current - packet_data_start;
+	}
+
+	void ShapeDescription::DeepCopyFrom(const ShapeDescription& that)
+	{
+		*this = that;
+		std::memcpy(this->vertices, that.vertices, that.vertex_count);
+		std::memcpy(this->uvs, that.uvs, that.vertex_count);
+		std::memcpy(this->triangles, that.triangles, that.triangle_count);
+	}
+
+	bool ShapeDescription::operator==(const ShapeDescription& other) const
+	{
+		if (!(vertex_count == other.vertex_count)) return false;
+		if (!(triangle_count == other.triangle_count)) return false;
+		for (int i = 0; i < vertex_count; ++i)
+		{
+			if (!(vertices[i] == other.vertices[i])) return false;
+		}
+		for (int i = 0; i < vertex_count; ++i)
+		{
+			if (!(uvs[i] == other.uvs[i])) return false;
+		}
+		for (int i = 0; i < triangle_count; ++i)
+		{
+			if (!(triangles[i] == other.triangles[i])) return false;
+		}
+		return true;
 	}
 
 	template<typename H, typename P>

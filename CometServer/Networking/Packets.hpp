@@ -11,7 +11,7 @@
 namespace net
 {
 
-	enum packet_type { client_input, server_state };
+	enum packet_type { client_input, server_state, shape_request, shape_description };
 
 	class Header
 	{
@@ -93,6 +93,39 @@ namespace net
 		void DeepCopyFrom(const ServerStatePayload&); //TODO: Add tests.
 		bool operator==(const ServerStatePayload&) const;
 		template<typename io_mode>	size_t IO(uint8_t*);
+
+	};
+
+	class ShapeRequest
+	{
+	public:
+
+		def::entity_id entity_id;
+
+		ShapeRequest() = default;
+		ShapeRequest(const ShapeRequest&) = default;
+		ShapeRequest& operator=(const ShapeRequest&) = default;
+		bool operator==(const ShapeRequest&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
+
+	};
+
+	class ShapeDescription
+	{
+	public:
+
+		uint16_t vertex_count;
+		uint16_t triangle_count;
+		float* vertices;
+		float* uvs;
+		uint16_t* triangles;
+
+		ShapeDescription() = default;
+		ShapeDescription(const ShapeDescription&) = default;
+		ShapeDescription& operator=(const ShapeDescription&) = default;
+		void DeepCopyFrom(const ShapeDescription&); //TODO: Add tests.
+		bool operator==(const ShapeDescription&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
 
