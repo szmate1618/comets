@@ -202,17 +202,33 @@ namespace net
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
+	template size_t ShapeRequest::IO<Read>(uint8_t*);
+	template size_t ShapeRequest::IO<Write>(uint8_t*);
+	template size_t ShapeDescription::IO<Read>(uint8_t*);
+	template size_t ShapeDescription::IO<Write>(uint8_t*);
 	template class Packet<Header, ClientInputPacket>;
 	template size_t Packet<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t Packet<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePayload>;
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
+	template class Packet<Header, ShapeRequest>;
+	template size_t Packet<Header, ShapeRequest>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ShapeRequest>::IO<Write>(uint8_t*);
+	template class Packet<ServerHeader, ShapeDescription>;
+	template size_t Packet<ServerHeader, ShapeDescription>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ShapeDescription>::IO<Write>(uint8_t*);
 	template class PointeredPacket<Header, ClientInputPacket>;
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class PointeredPacket<ServerHeader, ServerStatePayload>;
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ShapeRequest>;
+	template size_t PointeredPacket<Header, ShapeRequest>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ShapeRequest>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ShapeDescription>;
+	template size_t PointeredPacket<ServerHeader, ShapeDescription>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ShapeDescription>::IO<Write>(uint8_t*);
 
 }
