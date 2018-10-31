@@ -37,9 +37,7 @@ namespace net
 
 	void ClientInputPayload::DeepCopyFrom(const ClientInputPayload& that)
 	{
-		uint8_t* inputs = this->inputs;
 		*this = that;
-		this->inputs = inputs;
 		std::memcpy(this->inputs, that.inputs, that.count);
 	}
 
@@ -87,9 +85,7 @@ namespace net
 
 	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
 	{
-		ServerObject* inputs = this->objects; //TODO: THis variable is not used at all.
 		*this = that;
-		this->objects = objects;
 		std::memcpy(this->objects, that.objects, that.count);
 	}
 
