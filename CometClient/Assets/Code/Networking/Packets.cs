@@ -10,9 +10,6 @@ namespace net
 	using uint32_t = UInt32;
 	using entity_id = UInt32; //TODO: Find some way to emulate global typedefs.
 
-	using ClientInputPacket = Packet<Header, ClientInputPayload>;
-	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
-
 	enum packet_type { client_input, server_state };
 
 	interface BinarySerializable
