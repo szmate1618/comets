@@ -164,7 +164,7 @@ namespace net
 	using ClientInputPacket = Packet<Header, ClientInputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
 	using ShapeRequestPacket = Packet<Header, ShapeRequest>;
-	using ShapeDescriptionPacket = Packet<ServerHeader, ShapeDescriptionPacket>;
+	using ShapeDescriptionPacket = Packet<ServerHeader, ShapeDescription>;
 
 	class AbstractExportStrategy
 	{

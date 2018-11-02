@@ -136,19 +136,40 @@ namespace net
 	{
 		if (!(vertex_count == other.vertex_count)) return false;
 		if (!(triangle_count == other.triangle_count)) return false;
-		for (int i = 0; i < vertex_count; ++i)
+		for (int i = 0; i < vertex_count * 2; ++i)
 		{
 			if (!(vertices[i] == other.vertices[i])) return false;
 		}
-		for (int i = 0; i < vertex_count; ++i)
+		for (int i = 0; i < vertex_count * 2; ++i)
 		{
 			if (!(uvs[i] == other.uvs[i])) return false;
 		}
-		for (int i = 0; i < triangle_count; ++i)
+		for (int i = 0; i < triangle_count * 3; ++i)
 		{
 			if (!(triangles[i] == other.triangles[i])) return false;
 		}
 		return true;
+	}
+
+	template<typename io_mode>
+	size_t ShapeDescription::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, vertex_count);
+		packet_data_current += io_mode::Process(packet_data_current, triangle_count);
+		for (float* i = vertices; i - vertices < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
+		}
+		for (float* i = uvs; i - uvs < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
+		}
+		for (uint16_t* i = triangles; i - triangles < triangle_count * 3; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
+		}
+		return packet_data_current - packet_data_start;
 	}
 
 	template<typename H, typename P>
