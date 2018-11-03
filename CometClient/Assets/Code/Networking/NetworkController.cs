@@ -13,6 +13,8 @@ public class NetworkController : MonoBehaviour
 
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
 	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
+	private net.Packet<net.Header, net.ShapeRequest> shape_request;
+	private net.Packet<net.ServerHeader, net.ShapeDescription> shape_description;
 	private byte[] receive_buffer;
 	private byte[] send_buffer;
 	private IPEndPoint server;
@@ -54,6 +56,33 @@ public class NetworkController : MonoBehaviour
 		{
 			server_state.payload.objects[i] = new net.ServerObject { };
 		}
+		shape_request =
+			new net.Packet<net.Header, net.ShapeRequest>()
+			{
+				header = new net.Header
+				{
+					protocol_id = def.Network.protocol_id,
+					sequence_number = 0,
+					packet_type = (byte)net.packet_type.client_input
+				},
+				payload = new net.ShapeRequest { entity_id = 0 }
+			};
+		shape_description =
+			new net.Packet<net.ServerHeader, net.ShapeDescription>()
+			{
+				header = new net.ServerHeader
+				{
+					common_header = new net.Header { }
+				},
+				payload = new net.ShapeDescription
+				{
+					vertex_count = 0,
+					triangle_count = 0,
+					vertices = new float[def.Network.max_packet_size],
+					uvs = new float[def.Network.max_packet_size],
+					triangles = new UInt16[def.Network.max_packet_size]
+				}
+			};
 
 		receive_buffer = new byte[def.Network.max_packet_size];
 		send_buffer = new byte[def.Network.max_packet_size];
