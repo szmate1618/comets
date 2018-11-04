@@ -9,12 +9,13 @@ public class NetworkController : MonoBehaviour
 {
 
 	public GameObject mainCamera;
-	public GameObject spaceShip;
+	public GameObject placeHolder;
 
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
-	private net.Packet<net.ServerHeader, net.ServerStatePayload> server_state;
 	private net.Packet<net.Header, net.ShapeRequest> shape_request;
-	private net.Packet<net.ServerHeader, net.ShapeDescription> shape_description;
+	private net.ServerHeader server_header;
+	private net.ServerStatePayload server_state;
+	private net.ShapeDescription shape_description;
 	private byte[] receive_buffer;
 	private byte[] send_buffer;
 	private IPEndPoint server;
@@ -24,7 +25,7 @@ public class NetworkController : MonoBehaviour
 	private void Start()
 	{
 		client_input =
-			new net.Packet<net.Header, net.ClientInputPayload>()
+			new net.Packet<net.Header, net.ClientInputPayload>
 			{
 				header = new net.Header
 				{
@@ -40,24 +41,8 @@ public class NetworkController : MonoBehaviour
 					inputs = new byte[def.Network.max_packet_size]
 				}
 			};
-		server_state = //TODO: Write constructors for these.
-			new net.Packet<net.ServerHeader, net.ServerStatePayload>()
-			{
-				header = new net.ServerHeader
-				{
-					common_header = new net.Header { }
-				},
-				payload = new net.ServerStatePayload
-				{
-					objects = new net.ServerObject[def.Network.max_packet_size]
-				}
-			};
-		for (int i = 0; i < server_state.payload.objects.Length; i++)
-		{
-			server_state.payload.objects[i] = new net.ServerObject { };
-		}
 		shape_request =
-			new net.Packet<net.Header, net.ShapeRequest>()
+			new net.Packet<net.Header, net.ShapeRequest>
 			{
 				header = new net.Header
 				{
@@ -67,21 +52,22 @@ public class NetworkController : MonoBehaviour
 				},
 				payload = new net.ShapeRequest { entity_id = 0 }
 			};
-		shape_description =
-			new net.Packet<net.ServerHeader, net.ShapeDescription>()
+		server_header = new net.ServerHeader() { common_header = new net.Header() };
+		server_state = //TODO: Write constructors for these.
+			new net.ServerStatePayload
 			{
-				header = new net.ServerHeader
-				{
-					common_header = new net.Header { }
-				},
-				payload = new net.ShapeDescription
-				{
-					vertex_count = 0,
-					triangle_count = 0,
-					vertices = new float[def.Network.max_packet_size],
-					uvs = new float[def.Network.max_packet_size],
-					triangles = new UInt16[def.Network.max_packet_size]
-				}
+				objects = new net.ServerObject[def.Network.max_packet_size]
+			};
+		for (int i = 0; i < server_state.objects.Length; i++)
+		{
+			server_state.objects[i] = new net.ServerObject { };
+		}
+		shape_description =
+			new net.ShapeDescription
+			{
+				vertices = new float[def.Network.max_packet_size],
+				uvs = new float[def.Network.max_packet_size],
+				triangles = new UInt16[def.Network.max_packet_size]
 			};
 
 		receive_buffer = new byte[def.Network.max_packet_size];
@@ -114,18 +100,19 @@ public class NetworkController : MonoBehaviour
 		client_input.header.sequence_number++;
 
 		receive_buffer = udp_client.Receive(ref server); //TODO: Do I really need to specify this explicitly but not for Send?
-		server_state.Process(net.BinarySerializer.IOMode.Read, receive_buffer, 0);
-		for (int i = 0; i < server_state.payload.count; i++)
+		int bytes_read = server_header.Process(net.BinarySerializer.IOMode.Read, receive_buffer, 0);
+		server_state.Process(net.BinarySerializer.IOMode.Read, receive_buffer, bytes_read);
+		for (int i = 0; i < server_state.count; i++)
 		{
-			net.ServerObject entity = server_state.payload.objects[i];
+			net.ServerObject entity = server_state.objects[i];
 			if (!entities.ContainsKey(entity.entity_id))
 			{
-				entities.Add(entity.entity_id, Instantiate(spaceShip));
+				entities.Add(entity.entity_id, Instantiate(placeHolder));
 			}
 			entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
 			entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
 		}
-		mainCamera.transform.position = new Vector3((float)server_state.payload.objects[0].x, (float)server_state.payload.objects[0].y, mainCamera.transform.position.z);
+		mainCamera.transform.position = new Vector3((float)server_state.objects[0].x, (float)server_state.objects[0].y, mainCamera.transform.position.z);
 	}
 
 }
