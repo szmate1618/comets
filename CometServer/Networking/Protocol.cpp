@@ -97,7 +97,7 @@ namespace net
 						ShapeRequest request;
 						request.IO<net::Read>(socket.recv_buffer + header_size);
 						ShapeDescriptionPacket description;
-						description.header = { def::protocol_id, sequence_number, server_state, 0, 0 };
+						description.header = { def::protocol_id, sequence_number, shape_description, 0, 0 };
 						float vertices[] = { 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5 };
 						float uvs[] = { 1, 0, 0, 0, -0, 1, 1, 1 };
 						uint16_t triangles[] = { 0, 1, 3, 2, 3, 1 };
