@@ -113,7 +113,7 @@ public class NetworkController : MonoBehaviour
 						if (!entities.ContainsKey(entity.entity_id))
 						{
 							shape_request.payload.entity_id = entity.entity_id;
-							//TODO: SEnd this redundantly, multiple times.
+							//TODO: Send this redundantly, multiple times.
 							udp_client.Send(send_buffer, shape_request.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 							entities.Add(entity.entity_id, Instantiate(placeHolder));
 						}
