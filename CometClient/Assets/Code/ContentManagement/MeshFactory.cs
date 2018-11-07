@@ -21,12 +21,6 @@ public class MeshFactory
 	}
 
 	//Create polygon mesh.
-	public static Mesh Create(Vector2[] vertices, Vector2[] uvs, int[] triangles)
-	{
-		return Create(vertices.Select(vector2 => new Vector3(vector2.x, vector2.y, 0)).ToArray(), uvs, triangles);
-	}
-
-	//Create polygon mesh.
 	public static Mesh Create(Vector3[] vertices, Vector2[] uvs, int[] triangles)
 	{
 		Mesh mesh =  new Mesh();
@@ -35,6 +29,25 @@ public class MeshFactory
 		mesh.triangles = triangles;
 		SetNormals(mesh);
 		return mesh;
+	}
+
+	//Create polygon mesh.
+	public static Mesh Create(Vector2[] vertices, Vector2[] uvs, int[] triangles)
+	{
+		return Create(vertices.Select(vector2 => new Vector3(vector2.x, vector2.y, 0)).ToArray(), uvs, triangles);
+	}
+
+	//Create polygon mesh.
+	public static Mesh Create(int vertex_count, int triangle_count, float[] vertices, float[] uvs, int[] triangles)
+	{
+		Vector2[] vertex_vectors = new Vector2[vertex_count];
+		Vector2[] uv_vectors = new Vector2[vertex_count];
+		for (int i = 0; i < vertex_count; i += 2)
+		{
+			vertex_vectors[i] = new Vector2(vertices[i], vertices[i + 1]);
+			uv_vectors[i] = new Vector2(uvs[i], uvs[i + 1]);
+		}
+		return Create(vertex_vectors, uv_vectors, triangles);
 	}
 
 	//Create tessellated circle.
