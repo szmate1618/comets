@@ -56,7 +56,7 @@ namespace net
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }, sequence_number{ 0 }
 	{
 	}
 
@@ -101,7 +101,7 @@ namespace net
 						float vertices[] = { 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5 };
 						float uvs[] = { 1, 0, 0, 0, -0, 1, 1, 1 };
 						uint16_t triangles[] = { 0, 1, 3, 2, 3, 1 };
-						description.payload = { static_cast<uint16_t>(util::countof(vertices)), static_cast<uint16_t>(util::countof(triangles)), vertices, uvs, triangles };
+						description.payload = { request.entity_id, static_cast<uint16_t>(util::countof(vertices) / 2), static_cast<uint16_t>(util::countof(triangles) / 3), vertices, uvs, triangles };
 						size_t bytes_written = description.IO<net::Write>(socket.send_buffer);
 						socket.Send(from, bytes_written);
 						break;
