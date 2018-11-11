@@ -37,7 +37,9 @@ namespace net
 
 	void ClientInputPayload::DeepCopyFrom(const ClientInputPayload& that)
 	{
+		uint8_t* these_inputs = this->inputs;
 		*this = that;
+		this->inputs = these_inputs;
 		std::memcpy(this->inputs, that.inputs, that.count);
 	}
 
@@ -85,7 +87,9 @@ namespace net
 
 	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
 	{
+		ServerObject* these_objects = this->objects;
 		*this = that;
+		this->objects = these_objects;
 		std::memcpy(this->objects, that.objects, that.count);
 	}
 
@@ -126,7 +130,9 @@ namespace net
 
 	void ShapeDescription::DeepCopyFrom(const ShapeDescription& that)
 	{
-		*this = that;
+		this->entity_id = that.entity_id;
+		this->vertex_count = that.vertex_count;
+		this->triangle_count = that.triangle_count;
 		std::memcpy(this->vertices, that.vertices, that.vertex_count);
 		std::memcpy(this->uvs, that.uvs, that.vertex_count);
 		std::memcpy(this->triangles, that.triangles, that.triangle_count);
@@ -134,6 +140,7 @@ namespace net
 
 	bool ShapeDescription::operator==(const ShapeDescription& other) const
 	{
+		if (!(entity_id == other.entity_id)) return false;
 		if (!(vertex_count == other.vertex_count)) return false;
 		if (!(triangle_count == other.triangle_count)) return false;
 		for (int i = 0; i < vertex_count * 2; ++i)
@@ -155,6 +162,7 @@ namespace net
 	size_t ShapeDescription::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
 		packet_data_current += io_mode::Process(packet_data_current, vertex_count);
 		packet_data_current += io_mode::Process(packet_data_current, triangle_count);
 		for (float* i = vertices; i - vertices < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.
