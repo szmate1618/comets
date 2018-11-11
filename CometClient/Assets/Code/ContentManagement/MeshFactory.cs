@@ -38,16 +38,17 @@ public class MeshFactory
 	}
 
 	//Create polygon mesh.
-	public static Mesh Create(int vertex_count, int triangle_count, float[] vertices, float[] uvs, int[] triangles)
+	public static Mesh Create(int vertex_count, int triangle_count, float[] vertices, float[] uvs, ushort[] triangles)
 	{
 		Vector2[] vertex_vectors = new Vector2[vertex_count];
 		Vector2[] uv_vectors = new Vector2[vertex_count];
-		for (int i = 0; i < vertex_count; i += 2)
+		int[] triangle_ints = triangles.Take(triangle_count * 3).Select(Convert.ToInt32).ToArray();
+		for (int i = 0; i < vertex_count * 2; i += 2)
 		{
 			vertex_vectors[i] = new Vector2(vertices[i], vertices[i + 1]);
 			uv_vectors[i] = new Vector2(uvs[i], uvs[i + 1]);
 		}
-		return Create(vertex_vectors, uv_vectors, triangles);
+		return Create(vertex_vectors, uv_vectors, triangle_ints);
 	}
 
 	//Create tessellated circle.
