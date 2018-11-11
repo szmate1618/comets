@@ -119,6 +119,7 @@ namespace net
 
 	class ShapeDescription : BinarySerializable
 	{
+		public entity_id entity_id;
 		public uint16_t vertex_count;
 		public uint16_t triangle_count;
 		public float[] vertices;
@@ -128,6 +129,7 @@ namespace net
 		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
 		{
 			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
 			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref vertex_count);
 			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref triangle_count);
 			for (int i = 0; i < vertex_count * 2; i++)
