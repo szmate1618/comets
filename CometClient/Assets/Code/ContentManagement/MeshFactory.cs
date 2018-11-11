@@ -43,10 +43,10 @@ public class MeshFactory
 		Vector2[] vertex_vectors = new Vector2[vertex_count];
 		Vector2[] uv_vectors = new Vector2[vertex_count];
 		int[] triangle_ints = triangles.Take(triangle_count * 3).Select(Convert.ToInt32).ToArray();
-		for (int i = 0; i < vertex_count * 2; i += 2)
+		for (int i = 0; i < vertex_count; i++)
 		{
-			vertex_vectors[i] = new Vector2(vertices[i], vertices[i + 1]);
-			uv_vectors[i] = new Vector2(uvs[i], uvs[i + 1]);
+			vertex_vectors[i] = new Vector2(vertices[2 * i], vertices[2 * i + 1]);
+			uv_vectors[i] = new Vector2(uvs[2 * i], uvs[2 * i + 1]);
 		}
 		return Create(vertex_vectors, uv_vectors, triangle_ints);
 	}
