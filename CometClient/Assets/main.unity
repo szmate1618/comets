@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c75132c74c5a6647b9b41088ea0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fisheyeShader: {fileID: 0}
+  fisheyeShader: {fileID: 4800000, guid: 973fba7a71ca3c740a6cc3874b870afa, type: 3}
 --- !u!1 &1989732393
 GameObject:
   m_ObjectHideFlags: 0
