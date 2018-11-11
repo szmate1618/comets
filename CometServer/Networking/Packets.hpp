@@ -57,7 +57,7 @@ namespace net
 		ClientInputPayload() = default;
 		ClientInputPayload(const ClientInputPayload&) = default;
 		ClientInputPayload& operator=(const ClientInputPayload&) = default;
-		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests.
+		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests. //TODO: But really, it just bit me and I wasted hours.
 		bool operator==(const ClientInputPayload&) const;
 		template<typename io_mode> size_t IO(uint8_t*);
 
@@ -114,6 +114,7 @@ namespace net
 	{
 	public:
 
+		def::entity_id entity_id;
 		uint16_t vertex_count;
 		uint16_t triangle_count;
 		float* vertices;
