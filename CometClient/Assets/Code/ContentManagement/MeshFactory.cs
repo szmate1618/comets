@@ -8,6 +8,9 @@ using UnityEngine;
 public class MeshFactory
 {
 
+	//Set normal vectors.
+	//Note that these are only used for calculating lighting,
+	//Unity determines triangle visibility based on winding order (clockwise ordering is visible).
 	public static void SetNormals(Mesh mesh)
 	{
 		mesh.normals = new Vector3[mesh.vertexCount];
