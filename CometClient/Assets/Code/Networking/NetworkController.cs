@@ -114,6 +114,8 @@ public class NetworkController : MonoBehaviour
 						{
 							shape_request.payload.entity_id = entity.entity_id;
 							//TODO: Send this redundantly, multiple times.
+							//It would be easy with Graphics.DrawMesh, but for some mysterious reason, that doesn't work,
+							//nor does it throw any exceptions.
 							udp_client.Send(send_buffer, shape_request.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 							entities.Add(entity.entity_id, Instantiate(placeHolder));
 						}
@@ -123,6 +125,16 @@ public class NetworkController : MonoBehaviour
 					break;
 				case net.packet_type.shape_description:
 					shape_description.Process(net.BinarySerializer.IOMode.Read, receive_buffer, bytes_read);
+					GameObject entityGameObject = new GameObject("Entity#" + shape_description.entity_id);
+					entityGameObject.AddComponent<MeshFilter>();
+					entityGameObject.AddComponent<MeshRenderer>();
+					entityGameObject.GetComponent<MeshFilter>().mesh = MeshFactory.Create(shape_description.vertex_count, shape_description.triangle_count,
+						shape_description.vertices, shape_description.uvs, shape_description.triangles);
+					//TODO: Some kind of default material should be used here, so the fisheye could be turned off if desired.
+					entityGameObject.GetComponent<MeshRenderer>().material = new Material(Resources.Load<Shader>("Fisheye"));
+					entityGameObject.GetComponent<MeshRenderer>().material.mainTexture = Resources.Load<Texture2D>("EntityTextures/0");
+					Destroy(entities[shape_description.entity_id]);
+					entities[shape_description.entity_id] = entityGameObject;
 					break;
 			}
 		}
