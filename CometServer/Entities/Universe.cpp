@@ -10,7 +10,7 @@ namespace entity
 	Universe::Universe(std::string filename) //TODO: Add error handling.
 	{
 		sqlite3* db_connection;
-		sqlite3_open("game_data.sqlite3", &db_connection); //TODO: Add error handling.
+		sqlite3_open(filename.c_str(), &db_connection); //TODO: Add error handling.
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
