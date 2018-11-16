@@ -73,7 +73,7 @@ namespace server
 			if (!cipb.is_free[i].load())
 			{
 				net::ClientInputPayload& cip = cipb.client_inputs[i];
-				sspb.entity_ids[sspb.count++] = cip.entity_id;
+				sspb.entity_ids[sspb.count++] = cip.entity_id; //Actually, this is only necessary if we send a response during the same tick.
 				for (size_t j = 0; j < cip.count; ++j)
 				{
 					universe.EntityHandleInput(duration, cip.entity_id, static_cast<def::user_input>(cip.inputs[j]));
