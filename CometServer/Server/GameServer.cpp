@@ -119,7 +119,6 @@ namespace server
 
 	GameServer::ExportStrategy::ExportStrategy(ClientInputPayloadBuffer& cipb) : client_input_payload_buffer{ cipb } {}
 	GameServer::ExportStrategy::~ExportStrategy() {}
-	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); }
 	void GameServer::ExportStrategy::Export(const net::ClientInputPayload& cip) const
 	{
 		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
@@ -131,17 +130,18 @@ namespace server
 		cipb.client_inputs[cipb.current_index].DeepCopyFrom(cip);
 		cipb.is_free[cipb.current_index].store(false);
 	}
+	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); }
 
 	GameServer::ImportStrategy::ImportStrategy(ServerStatePayloadBuffer& sspb) : server_state_payload_buffer{ sspb } {}
 	GameServer::ImportStrategy::~ImportStrategy() {}
-	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
-	{
-		return { server_state_payload_buffer.count, server_state_payload_buffer.entity_ids, server_state_payload_buffer.server_states };
-	}
 	std::tuple<size_t, net::ClientInputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
 	{
 		assert(false && "Not actually implemented, not supposed to be called.");
 		return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
+	}
+	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
+	{
+		return { server_state_payload_buffer.count, server_state_payload_buffer.entity_ids, server_state_payload_buffer.server_states };
 	}
 
 }

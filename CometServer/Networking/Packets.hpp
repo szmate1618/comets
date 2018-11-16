@@ -173,8 +173,8 @@ namespace net
 
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
-		virtual void Export(const ServerStatePayload&) const = 0;
 		virtual void Export(const ClientInputPayload&) const = 0;
+		virtual void Export(const ServerStatePayload&) const = 0;
 
 	};
 
@@ -184,8 +184,8 @@ namespace net
 
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
-		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
 		virtual std::tuple<size_t, ClientInputPayload*> ImportClientIntput() const = 0;
+		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
 
 	};
 
