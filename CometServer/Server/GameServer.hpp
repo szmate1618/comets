@@ -36,7 +36,7 @@ namespace server
 			ExportStrategy(GameServer&);
 			virtual ~ExportStrategy() override;
 			virtual void Export(const net::ClientInputPayload&) const override;
-			virtual net::ShapeDescription& ExportImport(const net::ShapeRequest&) const override;
+			virtual net::ShapeDescriptionPayload& ExportImport(const net::ShapeRequestPayload&) const override;
 
 		private:
 
@@ -61,7 +61,7 @@ namespace server
 		entity::Universe universe;
 		ClientInputPayloadBuffer client_input_payload_buffer;
 		ServerStatePayloadBuffer server_state_payload_buffer;
-		net::ShapeDescription shape_description_payload;
+		net::ShapeDescriptionPayload shape_description_payload;
 		ExportStrategy export_strategy;
 		ImportStrategy import_strategy;
 		net::ServersideProtocol protocol;

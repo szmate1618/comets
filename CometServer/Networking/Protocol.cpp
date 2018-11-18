@@ -93,7 +93,7 @@ namespace net
 					}
 					case shape_request:
 					{
-						ShapeRequest shape_request_payload;
+						ShapeRequestPayload shape_request_payload;
 						shape_request_payload.IO<net::Read>(socket.recv_buffer + header_size);
 						ShapeDescriptionPacket shape_description_packet;
 						shape_description_packet.header = { def::protocol_id, sequence_number, shape_description, 0, 0 }; //TODO: Use sequence_number correctly.

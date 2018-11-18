@@ -115,20 +115,20 @@ namespace net
 		return packet_data_current - packet_data_start;
 	}
 
-	bool ShapeRequest::operator==(const ShapeRequest& other) const
+	bool ShapeRequestPayload::operator==(const ShapeRequestPayload& other) const
 	{
 		return entity_id == other.entity_id;
 	}
 
 	template<typename io_mode>
-	size_t ShapeRequest::IO(uint8_t* packet_data_start)
+	size_t ShapeRequestPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, entity_id);
 		return packet_data_current - packet_data_start;
 	}
 
-	void ShapeDescription::DeepCopyFrom(const ShapeDescription& that)
+	void ShapeDescriptionPayload::DeepCopyFrom(const ShapeDescriptionPayload& that)
 	{
 		this->entity_id = that.entity_id;
 		this->vertex_count = that.vertex_count;
@@ -138,7 +138,7 @@ namespace net
 		std::memcpy(this->triangles, that.triangles, that.triangle_count);
 	}
 
-	bool ShapeDescription::operator==(const ShapeDescription& other) const
+	bool ShapeDescriptionPayload::operator==(const ShapeDescriptionPayload& other) const
 	{
 		if (!(entity_id == other.entity_id)) return false;
 		if (!(vertex_count == other.vertex_count)) return false;
@@ -159,7 +159,7 @@ namespace net
 	}
 
 	template<typename io_mode>
-	size_t ShapeDescription::IO(uint8_t* packet_data_start)
+	size_t ShapeDescriptionPayload::IO(uint8_t* packet_data_start)
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, entity_id);
@@ -231,33 +231,33 @@ namespace net
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
-	template size_t ShapeRequest::IO<Read>(uint8_t*);
-	template size_t ShapeRequest::IO<Write>(uint8_t*);
-	template size_t ShapeDescription::IO<Read>(uint8_t*);
-	template size_t ShapeDescription::IO<Write>(uint8_t*);
+	template size_t ShapeRequestPayload::IO<Read>(uint8_t*);
+	template size_t ShapeRequestPayload::IO<Write>(uint8_t*);
+	template size_t ShapeDescriptionPayload::IO<Read>(uint8_t*);
+	template size_t ShapeDescriptionPayload::IO<Write>(uint8_t*);
 	template class Packet<Header, ClientInputPacket>;
 	template size_t Packet<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t Packet<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePayload>;
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
-	template class Packet<Header, ShapeRequest>;
-	template size_t Packet<Header, ShapeRequest>::IO<Read>(uint8_t*);
-	template size_t Packet<Header, ShapeRequest>::IO<Write>(uint8_t*);
-	template class Packet<ServerHeader, ShapeDescription>;
-	template size_t Packet<ServerHeader, ShapeDescription>::IO<Read>(uint8_t*);
-	template size_t Packet<ServerHeader, ShapeDescription>::IO<Write>(uint8_t*);
+	template class Packet<Header, ShapeRequestPayload>;
+	template size_t Packet<Header, ShapeRequestPayload>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ShapeRequestPayload>::IO<Write>(uint8_t*);
+	template class Packet<ServerHeader, ShapeDescriptionPayload>;
+	template size_t Packet<ServerHeader, ShapeDescriptionPayload>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ShapeDescriptionPayload>::IO<Write>(uint8_t*);
 	template class PointeredPacket<Header, ClientInputPacket>;
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class PointeredPacket<ServerHeader, ServerStatePayload>;
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
-	template class PointeredPacket<Header, ShapeRequest>;
-	template size_t PointeredPacket<Header, ShapeRequest>::IO<Read>(uint8_t*);
-	template size_t PointeredPacket<Header, ShapeRequest>::IO<Write>(uint8_t*);
-	template class PointeredPacket<ServerHeader, ShapeDescription>;
-	template size_t PointeredPacket<ServerHeader, ShapeDescription>::IO<Read>(uint8_t*);
-	template size_t PointeredPacket<ServerHeader, ShapeDescription>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ShapeRequestPayload>;
+	template size_t PointeredPacket<Header, ShapeRequestPayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ShapeRequestPayload>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ShapeDescriptionPayload>;
+	template size_t PointeredPacket<ServerHeader, ShapeDescriptionPayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ShapeDescriptionPayload>::IO<Write>(uint8_t*);
 
 }

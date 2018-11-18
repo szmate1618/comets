@@ -96,21 +96,21 @@ namespace net
 
 	};
 
-	class ShapeRequest
+	class ShapeRequestPayload
 	{
 	public:
 
 		def::entity_id entity_id;
 
-		ShapeRequest() = default;
-		ShapeRequest(const ShapeRequest&) = default;
-		ShapeRequest& operator=(const ShapeRequest&) = default;
-		bool operator==(const ShapeRequest&) const;
+		ShapeRequestPayload() = default;
+		ShapeRequestPayload(const ShapeRequestPayload&) = default;
+		ShapeRequestPayload& operator=(const ShapeRequestPayload&) = default;
+		bool operator==(const ShapeRequestPayload&) const;
 		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
 
-	class ShapeDescription
+	class ShapeDescriptionPayload
 	{
 	public:
 
@@ -121,11 +121,11 @@ namespace net
 		float* uvs;
 		uint16_t* triangles;
 
-		ShapeDescription() = default;
-		ShapeDescription(const ShapeDescription&) = default;
-		ShapeDescription& operator=(const ShapeDescription&) = default;
-		void DeepCopyFrom(const ShapeDescription&); //TODO: Add tests.
-		bool operator==(const ShapeDescription&) const;
+		ShapeDescriptionPayload() = default;
+		ShapeDescriptionPayload(const ShapeDescriptionPayload&) = default;
+		ShapeDescriptionPayload& operator=(const ShapeDescriptionPayload&) = default;
+		void DeepCopyFrom(const ShapeDescriptionPayload&); //TODO: Add tests.
+		bool operator==(const ShapeDescriptionPayload&) const;
 		template<typename io_mode> size_t IO(uint8_t*);
 
 	};
@@ -164,8 +164,8 @@ namespace net
 
 	using ClientInputPacket = Packet<Header, ClientInputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
-	using ShapeRequestPacket = Packet<Header, ShapeRequest>;
-	using ShapeDescriptionPacket = Packet<ServerHeader, ShapeDescription>;
+	using ShapeRequestPacket = Packet<Header, ShapeRequestPayload>;
+	using ShapeDescriptionPacket = Packet<ServerHeader, ShapeDescriptionPayload>;
 
 	class AbstractExportStrategy
 	{
@@ -175,7 +175,7 @@ namespace net
 		virtual ~AbstractExportStrategy();
 		virtual void Export(const ClientInputPayload&) const = 0;
 		//TODO: Clean up this part. Maybe merge the export and import strategies, or use buffers like for ClientInputPayload.
-		virtual ShapeDescription& ExportImport(const net::ShapeRequest&) const = 0;
+		virtual ShapeDescriptionPayload& ExportImport(const net::ShapeRequestPayload&) const = 0;
 
 	};
 

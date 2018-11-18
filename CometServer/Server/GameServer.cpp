@@ -136,7 +136,7 @@ namespace server
 	float vertices[] = { 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5 };
 	float uvs[] = { 1, 1, 0, 1, 0, 0, 1, 0 };
 	uint16_t triangles[] = { 0, 3, 1, 2, 1, 3 };
-	net::ShapeDescription& GameServer::ExportStrategy::ExportImport(const net::ShapeRequest& srp) const
+	net::ShapeDescriptionPayload& GameServer::ExportStrategy::ExportImport(const net::ShapeRequestPayload& srp) const
 	{
 		game_server.shape_description_payload = { srp.entity_id, static_cast<uint16_t>(util::countof(vertices) / 2), static_cast<uint16_t>(util::countof(triangles) / 3), vertices, uvs, triangles };
 		return game_server.shape_description_payload;

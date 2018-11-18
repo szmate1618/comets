@@ -30,10 +30,10 @@ namespace Test
 			{
 				client_input_buffer.emplace_back(ci);
 			}
-			virtual net::ShapeDescription& ExportImport(const net::ShapeRequest&) const override
+			virtual net::ShapeDescriptionPayload& ExportImport(const net::ShapeRequestPayload&) const override
 			{
 				//TODO: Write test for this.
-				return *reinterpret_cast<net::ShapeDescription*>(0);
+				return *reinterpret_cast<net::ShapeDescriptionPayload*>(0);
 			}
 
 		};
