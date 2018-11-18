@@ -26,10 +26,14 @@ namespace Test
 
 			DummyExportStrategy() {}
 			virtual ~DummyExportStrategy() {}
-			virtual void Export(const net::ServerStatePayload& ss) const override { Assert::Fail(L"Not actually implemented, not supposed to be called."); }
 			virtual void Export(const net::ClientInputPayload& ci) const override
 			{
 				client_input_buffer.emplace_back(ci);
+			}
+			virtual net::ShapeDescription& ExportImport(const net::ShapeRequest&) const override
+			{
+				//TODO: Write test for this.
+				return *reinterpret_cast<net::ShapeDescription*>(0);
 			}
 
 		};
@@ -44,11 +48,6 @@ namespace Test
 			{
 				return { entity_buffer.size(), &entity_buffer.front(), &server_state_buffer.front() };
 			};
-			virtual std::tuple<size_t, net::ClientInputPayload*> ImportClientIntput() const override
-			{
-				Assert::Fail(L"Not actually implemented, not supposed to be called.");
-				return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
-			}
 		};
 
 		net::Address server_address{ 127, 0, 0, 1, def::server_port };

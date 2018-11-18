@@ -174,7 +174,8 @@ namespace net
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
 		virtual void Export(const ClientInputPayload&) const = 0;
-		virtual void Export(const ServerStatePayload&) const = 0;
+		//TODO: Clean up this part. Maybe merge the export and import strategies, or use buffers like for ClientInputPayload.
+		virtual ShapeDescription& ExportImport(const net::ShapeRequest&) const = 0;
 
 	};
 
@@ -184,7 +185,6 @@ namespace net
 
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
-		virtual std::tuple<size_t, ClientInputPayload*> ImportClientIntput() const = 0;
 		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
 
 	};

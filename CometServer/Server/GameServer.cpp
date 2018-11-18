@@ -1,4 +1,5 @@
 #include "GameServer.hpp"
+#include "..\Utilities\CountOfArray.hpp"
 
 #include <cassert>
 #include <chrono>
@@ -12,8 +13,8 @@ namespace server
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
 		universe{ "game_data.sqlite3" },
-		export_strategy{ client_input_payload_buffer },
-		import_strategy{ server_state_payload_buffer },
+		export_strategy{ *this },
+		import_strategy{ *this },
 		protocol{ def::server_port, export_strategy, import_strategy },
 		running{ true },
 		input_thread{ [=] { ReadPackets(); } },
@@ -117,11 +118,11 @@ namespace server
 		protocol.Respond();
 	}
 
-	GameServer::ExportStrategy::ExportStrategy(ClientInputPayloadBuffer& cipb) : client_input_payload_buffer{ cipb } {}
+	GameServer::ExportStrategy::ExportStrategy(GameServer& gs) : game_server{ gs } {}
 	GameServer::ExportStrategy::~ExportStrategy() {}
 	void GameServer::ExportStrategy::Export(const net::ClientInputPayload& cip) const
 	{
-		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		ClientInputPayloadBuffer& cipb = game_server.client_input_payload_buffer;
 		while (!cipb.is_free[cipb.current_index].load())
 		{
 			cipb.current_index++;
@@ -130,18 +131,23 @@ namespace server
 		cipb.client_inputs[cipb.current_index].DeepCopyFrom(cip);
 		cipb.is_free[cipb.current_index].store(false);
 	}
-	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); }
 
-	GameServer::ImportStrategy::ImportStrategy(ServerStatePayloadBuffer& sspb) : server_state_payload_buffer{ sspb } {}
-	GameServer::ImportStrategy::~ImportStrategy() {}
-	std::tuple<size_t, net::ClientInputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
+	//Dummy shape. TODO: Store this normally.
+	float vertices[] = { 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5 };
+	float uvs[] = { 1, 1, 0, 1, 0, 0, 1, 0 };
+	uint16_t triangles[] = { 0, 3, 1, 2, 1, 3 };
+	net::ShapeDescription& GameServer::ExportStrategy::ExportImport(const net::ShapeRequest& srp) const
 	{
-		assert(false && "Not actually implemented, not supposed to be called.");
-		return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
+		game_server.shape_description_payload = { srp.entity_id, static_cast<uint16_t>(util::countof(vertices) / 2), static_cast<uint16_t>(util::countof(triangles) / 3), vertices, uvs, triangles };
+		return game_server.shape_description_payload;
 	}
+
+	GameServer::ImportStrategy::ImportStrategy(GameServer& gs) : game_server{ gs } {}
+	GameServer::ImportStrategy::~ImportStrategy() {}
 	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
 	{
-		return { server_state_payload_buffer.count, server_state_payload_buffer.entity_ids, server_state_payload_buffer.server_states };
+		ServerStatePayloadBuffer& sspb = game_server.server_state_payload_buffer;
+		return { sspb.count, sspb.entity_ids, sspb.server_states };
 	}
 
 }
