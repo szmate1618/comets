@@ -10,6 +10,7 @@
 #include <map>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 
 namespace entity
@@ -39,9 +40,19 @@ namespace entity
 		void TestVisibility();
 		SimplePartition& GetVision(def::entity_id);
 
+		struct EntityShape
+		{
+			std::vector<float> vertices;
+			std::vector<float> uvs;
+			std::vector<uint16_t> triangles;
+		};
+
+		EntityShape& GetShape(def::entity_id);
+
 	private:
-		
+
 		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
+		std::unordered_map<def::shape_id, EntityShape> shape_registry;
 		StaticEntityMap static_entities =
 		{
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },
@@ -56,7 +67,15 @@ namespace entity
 		SimpleVisionPartitioner vision_partitioner;
 
 		void EntityTurnDegree(DynamicEntity&, engine_type, geo::degree);
-		void SpawnEntity(def::entity_id, def::owner_id, engine_type, dynamics_class, visibility_class, collidability_class, geo::point_2d);
+		void SpawnEntity(def::entity_id,
+			def::owner_id,
+			def::shape_id,
+			def::texture_id,
+			engine_type,
+			dynamics_class,
+			visibility_class,
+			collidability_class,
+			geo::point_2d);
 
 	};
 

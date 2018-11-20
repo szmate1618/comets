@@ -15,6 +15,8 @@ namespace entity
 	struct EntityHandle //TODO: Maybe merge this whole thing into StaticEntity?
 	{
 		def::owner_id owner;
+		def::shape_id shape;
+		def::texture_id texture;
 		engine_type engine;
 		dynamics_class dynamics;
 		visibility_class visibility;

@@ -138,7 +138,13 @@ namespace server
 	uint16_t triangles[] = { 0, 3, 1, 2, 1, 3 };
 	net::ShapeDescriptionPayload& GameServer::ExportStrategy::ExportImport(const net::ShapeRequestPayload& srp) const
 	{
-		game_server.shape_description_payload = { srp.entity_id, static_cast<uint16_t>(util::countof(vertices) / 2), static_cast<uint16_t>(util::countof(triangles) / 3), vertices, uvs, triangles };
+		entity::Universe::EntityShape& entity_shape = game_server.universe.GetShape(srp.entity_id);
+		game_server.shape_description_payload.entity_id = srp.entity_id;
+		game_server.shape_description_payload.vertex_count = static_cast<uint16_t>(entity_shape.vertices.size() / 2);
+		game_server.shape_description_payload.triangle_count = static_cast<uint16_t>(entity_shape.triangles.size() / 3);
+		game_server.shape_description_payload.vertices = &entity_shape.vertices[0];
+		game_server.shape_description_payload.uvs = &entity_shape.uvs[0];
+		game_server.shape_description_payload.triangles = &entity_shape.triangles[0];
 		return game_server.shape_description_payload;
 	}
 
