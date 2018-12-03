@@ -132,10 +132,6 @@ namespace server
 		cipb.is_free[cipb.current_index].store(false);
 	}
 
-	//Dummy shape. TODO: Store this normally.
-	float vertices[] = { 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5 };
-	float uvs[] = { 1, 1, 0, 1, 0, 0, 1, 0 };
-	uint16_t triangles[] = { 0, 3, 1, 2, 1, 3 };
 	net::ShapeDescriptionPayload& GameServer::ExportStrategy::ExportImport(const net::ShapeRequestPayload& srp) const
 	{
 		entity::Universe::EntityShape& entity_shape = game_server.universe.GetShape(srp.entity_id);
