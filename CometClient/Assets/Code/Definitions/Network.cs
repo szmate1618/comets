@@ -17,6 +17,8 @@ namespace def
 		public static readonly byte[] server_ip = { 127, 0, 0, 1 }; //Fine for testing, but this must be configurable.
 		public const ushort server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
 
+		//TODO: Actually implement this behaviour.
+		public const uint my_entity_id = 0;
 	}
 
 }

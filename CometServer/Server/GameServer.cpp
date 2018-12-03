@@ -1,4 +1,5 @@
 #include "GameServer.hpp"
+#include "..\Utilities\CountOfArray.hpp"
 
 #include <cassert>
 #include <chrono>
@@ -11,9 +12,9 @@ namespace server
 	//in the class rather than the order in which the members appear in the initializer list.
 	//To avoid confusion, it is best to specify the initializers in the member declaration order."
 	GameServer::GameServer() :
-		universe{R"(universe_initial_state.ssv)"},
-		export_strategy{ client_input_payload_buffer },
-		import_strategy{ server_state_payload_buffer },
+		universe{ "game_data.sqlite3" },
+		export_strategy{ *this },
+		import_strategy{ *this },
 		protocol{ def::server_port, export_strategy, import_strategy },
 		running{ true },
 		input_thread{ [=] { ReadPackets(); } },
@@ -73,7 +74,7 @@ namespace server
 			if (!cipb.is_free[i].load())
 			{
 				net::ClientInputPayload& cip = cipb.client_inputs[i];
-				sspb.entity_ids[sspb.count++] = cip.entity_id;
+				sspb.entity_ids[sspb.count++] = cip.entity_id; //Actually, this is only necessary if we send a response during the same tick.
 				for (size_t j = 0; j < cip.count; ++j)
 				{
 					universe.EntityHandleInput(duration, cip.entity_id, static_cast<def::user_input>(cip.inputs[j]));
@@ -117,12 +118,11 @@ namespace server
 		protocol.Respond();
 	}
 
-	GameServer::ExportStrategy::ExportStrategy(ClientInputPayloadBuffer& cipb) : client_input_payload_buffer{ cipb } {}
+	GameServer::ExportStrategy::ExportStrategy(GameServer& gs) : game_server{ gs } {}
 	GameServer::ExportStrategy::~ExportStrategy() {}
-	void GameServer::ExportStrategy::Export(const net::ServerStatePayload&) const  { assert(false && "Not actually implemented, not supposed to be called."); }
 	void GameServer::ExportStrategy::Export(const net::ClientInputPayload& cip) const
 	{
-		ClientInputPayloadBuffer& cipb = client_input_payload_buffer;
+		ClientInputPayloadBuffer& cipb = game_server.client_input_payload_buffer;
 		while (!cipb.is_free[cipb.current_index].load())
 		{
 			cipb.current_index++;
@@ -132,16 +132,24 @@ namespace server
 		cipb.is_free[cipb.current_index].store(false);
 	}
 
-	GameServer::ImportStrategy::ImportStrategy(ServerStatePayloadBuffer& sspb) : server_state_payload_buffer{ sspb } {}
+	net::ShapeDescriptionPayload& GameServer::ExportStrategy::ExportImport(const net::ShapeRequestPayload& srp) const
+	{
+		entity::Universe::EntityShape& entity_shape = game_server.universe.GetShape(srp.entity_id);
+		game_server.shape_description_payload.entity_id = srp.entity_id;
+		game_server.shape_description_payload.vertex_count = static_cast<uint16_t>(entity_shape.vertices.size() / 2);
+		game_server.shape_description_payload.triangle_count = static_cast<uint16_t>(entity_shape.triangles.size() / 3);
+		game_server.shape_description_payload.vertices = &entity_shape.vertices[0];
+		game_server.shape_description_payload.uvs = &entity_shape.uvs[0];
+		game_server.shape_description_payload.triangles = &entity_shape.triangles[0];
+		return game_server.shape_description_payload;
+	}
+
+	GameServer::ImportStrategy::ImportStrategy(GameServer& gs) : game_server{ gs } {}
 	GameServer::ImportStrategy::~ImportStrategy() {}
 	std::tuple<size_t, def::entity_id*, net::ServerStatePayload*> GameServer::ImportStrategy::ImportServerState() const
 	{
-		return { server_state_payload_buffer.count, server_state_payload_buffer.entity_ids, server_state_payload_buffer.server_states };
-	}
-	std::tuple<size_t, net::ClientInputPayload*> GameServer::ImportStrategy::ImportClientIntput() const
-	{
-		assert(false && "Not actually implemented, not supposed to be called.");
-		return *reinterpret_cast<std::tuple<size_t, net::ClientInputPayload*>*>(0);
+		ServerStatePayloadBuffer& sspb = game_server.server_state_payload_buffer;
+		return { sspb.count, sspb.entity_ids, sspb.server_states };
 	}
 
 }

@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c75132c74c5a6647b9b41088ea0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishEyeShader: {fileID: 4800000, guid: 973fba7a71ca3c740a6cc3874b870afa, type: 3}
+  fisheyeShader: {fileID: 4800000, guid: 973fba7a71ca3c740a6cc3874b870afa, type: 3}
 --- !u!1 &1989732393
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1304200938}
-  spaceShip: {fileID: 1930354249278484, guid: 311ea793fb9888045b460ceae9e12890, type: 2}
+  placeHolder: {fileID: 1681846463854338, guid: 515babda85a709040aecb4b09e6e06e9,
+    type: 2}
 --- !u!4 &1989732395
 Transform:
   m_ObjectHideFlags: 0

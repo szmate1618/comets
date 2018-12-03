@@ -6,7 +6,7 @@ BEGIN TRANSACTION;
 --Drop the tables in the reverse order of their creation,
 --avoiding to break the foreign key contraints.
 DROP TABLE IF EXISTS Entities;
-DROP TABLE IF EXISTS Hulls;
+DROP TABLE IF EXISTS Shapes;
 DROP TABLE IF EXISTS Users;
 
 CREATE TABLE Users
@@ -15,18 +15,18 @@ CREATE TABLE Users
 	PasswordHash TEXT
 );
 
-CREATE TABLE Hulls
+CREATE TABLE Shapes
 (
-	HullID INTEGER PRIMARY KEY ASC,
-	Shape TEXT,
-	Texture TEXT
+	ShapeID INTEGER PRIMARY KEY ASC,
+	Shape TEXT
 );
 
 CREATE TABLE Entities
 (
 	EntityID INTEGER PRIMARY KEY ASC,
-	OwnerID references Users(UserID),
-	HullID references Hulls(HullID),
+	OwnerID INTEGER references Users(UserID),
+	ShapeID INTEGER references Shapes(ShapeID),
+	TextureID INTEGER,
 	Engine TEXT, --inertial, anti_intertial, para_inertial, pre_programmed
 	Dynamics TEXT, --static_, dynamic
 	Visibility TEXT, --visible, invisible

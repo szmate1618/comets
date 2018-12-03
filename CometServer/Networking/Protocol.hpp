@@ -66,7 +66,7 @@ namespace net
 
 		ClientRegistry registry;
 		uint32_t sequence_number;
-		uint8_t buffer[def::max_packet_size];
+		uint8_t buffer[def::max_packet_size]; //TODO: Figure out why this is used instead of just socket.send_buffer.
 
 	};
 

@@ -37,9 +37,9 @@ namespace net
 
 	void ClientInputPayload::DeepCopyFrom(const ClientInputPayload& that)
 	{
-		uint8_t* inputs = this->inputs;
+		uint8_t* these_inputs = this->inputs;
 		*this = that;
-		this->inputs = inputs;
+		this->inputs = these_inputs;
 		std::memcpy(this->inputs, that.inputs, that.count);
 	}
 
@@ -87,9 +87,9 @@ namespace net
 
 	void ServerStatePayload::DeepCopyFrom(const ServerStatePayload& that)
 	{
-		ServerObject* inputs = this->objects;
+		ServerObject* these_objects = this->objects;
 		*this = that;
-		this->objects = objects;
+		this->objects = these_objects;
 		std::memcpy(this->objects, that.objects, that.count);
 	}
 
@@ -111,6 +111,71 @@ namespace net
 		for (ServerObject* i = objects; i - objects < count; ++i) //TODO: Somehow handle overindexing.
 		{
 			packet_data_current += i->IO<io_mode>(packet_data_current);
+		}
+		return packet_data_current - packet_data_start;
+	}
+
+	bool ShapeRequestPayload::operator==(const ShapeRequestPayload& other) const
+	{
+		return entity_id == other.entity_id;
+	}
+
+	template<typename io_mode>
+	size_t ShapeRequestPayload::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		return packet_data_current - packet_data_start;
+	}
+
+	void ShapeDescriptionPayload::DeepCopyFrom(const ShapeDescriptionPayload& that)
+	{
+		this->entity_id = that.entity_id;
+		this->vertex_count = that.vertex_count;
+		this->triangle_count = that.triangle_count;
+		std::memcpy(this->vertices, that.vertices, that.vertex_count);
+		std::memcpy(this->uvs, that.uvs, that.vertex_count);
+		std::memcpy(this->triangles, that.triangles, that.triangle_count);
+	}
+
+	bool ShapeDescriptionPayload::operator==(const ShapeDescriptionPayload& other) const
+	{
+		if (!(entity_id == other.entity_id)) return false;
+		if (!(vertex_count == other.vertex_count)) return false;
+		if (!(triangle_count == other.triangle_count)) return false;
+		for (int i = 0; i < vertex_count * 2; ++i)
+		{
+			if (!(vertices[i] == other.vertices[i])) return false;
+		}
+		for (int i = 0; i < vertex_count * 2; ++i)
+		{
+			if (!(uvs[i] == other.uvs[i])) return false;
+		}
+		for (int i = 0; i < triangle_count * 3; ++i)
+		{
+			if (!(triangles[i] == other.triangles[i])) return false;
+		}
+		return true;
+	}
+
+	template<typename io_mode>
+	size_t ShapeDescriptionPayload::IO(uint8_t* packet_data_start)
+	{
+		uint8_t* packet_data_current = packet_data_start;
+		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		packet_data_current += io_mode::Process(packet_data_current, vertex_count);
+		packet_data_current += io_mode::Process(packet_data_current, triangle_count);
+		for (float* i = vertices; i - vertices < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
+		}
+		for (float* i = uvs; i - uvs < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
+		}
+		for (uint16_t* i = triangles; i - triangles < triangle_count * 3; ++i) //TODO: Somehow handle overindexing.
+		{
+			packet_data_current += io_mode::Process(packet_data_current, *i);
 		}
 		return packet_data_current - packet_data_start;
 	}
@@ -166,17 +231,33 @@ namespace net
 	template size_t ServerObject::IO<Write>(uint8_t*);
 	template size_t ServerStatePayload::IO<Read>(uint8_t*);
 	template size_t ServerStatePayload::IO<Write>(uint8_t*);
+	template size_t ShapeRequestPayload::IO<Read>(uint8_t*);
+	template size_t ShapeRequestPayload::IO<Write>(uint8_t*);
+	template size_t ShapeDescriptionPayload::IO<Read>(uint8_t*);
+	template size_t ShapeDescriptionPayload::IO<Write>(uint8_t*);
 	template class Packet<Header, ClientInputPacket>;
 	template size_t Packet<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t Packet<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class Packet<ServerHeader, ServerStatePayload>;
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t Packet<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
+	template class Packet<Header, ShapeRequestPayload>;
+	template size_t Packet<Header, ShapeRequestPayload>::IO<Read>(uint8_t*);
+	template size_t Packet<Header, ShapeRequestPayload>::IO<Write>(uint8_t*);
+	template class Packet<ServerHeader, ShapeDescriptionPayload>;
+	template size_t Packet<ServerHeader, ShapeDescriptionPayload>::IO<Read>(uint8_t*);
+	template size_t Packet<ServerHeader, ShapeDescriptionPayload>::IO<Write>(uint8_t*);
 	template class PointeredPacket<Header, ClientInputPacket>;
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<Header, ClientInputPacket>::IO<Write>(uint8_t*);
 	template class PointeredPacket<ServerHeader, ServerStatePayload>;
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Read>(uint8_t*);
 	template size_t PointeredPacket<ServerHeader, ServerStatePayload>::IO<Write>(uint8_t*);
+	template class PointeredPacket<Header, ShapeRequestPayload>;
+	template size_t PointeredPacket<Header, ShapeRequestPayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<Header, ShapeRequestPayload>::IO<Write>(uint8_t*);
+	template class PointeredPacket<ServerHeader, ShapeDescriptionPayload>;
+	template size_t PointeredPacket<ServerHeader, ShapeDescriptionPayload>::IO<Read>(uint8_t*);
+	template size_t PointeredPacket<ServerHeader, ShapeDescriptionPayload>::IO<Write>(uint8_t*);
 
 }

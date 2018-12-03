@@ -11,7 +11,7 @@
 namespace net
 {
 
-	enum packet_type { client_input, server_state };
+	enum packet_type { client_input, server_state, shape_request, shape_description };
 
 	class Header
 	{
@@ -57,7 +57,7 @@ namespace net
 		ClientInputPayload() = default;
 		ClientInputPayload(const ClientInputPayload&) = default;
 		ClientInputPayload& operator=(const ClientInputPayload&) = default;
-		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests.
+		void DeepCopyFrom(const ClientInputPayload&); //TODO: Add tests. //TODO: But really, it just bit me and I wasted hours.
 		bool operator==(const ClientInputPayload&) const;
 		template<typename io_mode> size_t IO(uint8_t*);
 
@@ -96,6 +96,40 @@ namespace net
 
 	};
 
+	class ShapeRequestPayload
+	{
+	public:
+
+		def::entity_id entity_id;
+
+		ShapeRequestPayload() = default;
+		ShapeRequestPayload(const ShapeRequestPayload&) = default;
+		ShapeRequestPayload& operator=(const ShapeRequestPayload&) = default;
+		bool operator==(const ShapeRequestPayload&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
+
+	};
+
+	class ShapeDescriptionPayload
+	{
+	public:
+
+		def::entity_id entity_id;
+		uint16_t vertex_count;
+		uint16_t triangle_count;
+		float* vertices;
+		float* uvs;
+		uint16_t* triangles;
+
+		ShapeDescriptionPayload() = default;
+		ShapeDescriptionPayload(const ShapeDescriptionPayload&) = default;
+		ShapeDescriptionPayload& operator=(const ShapeDescriptionPayload&) = default;
+		void DeepCopyFrom(const ShapeDescriptionPayload&); //TODO: Add tests.
+		bool operator==(const ShapeDescriptionPayload&) const;
+		template<typename io_mode> size_t IO(uint8_t*);
+
+	};
+
 	template<typename H, typename P>
 	class Packet
 	{
@@ -130,6 +164,8 @@ namespace net
 
 	using ClientInputPacket = Packet<Header, ClientInputPayload>;
 	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
+	using ShapeRequestPacket = Packet<Header, ShapeRequestPayload>;
+	using ShapeDescriptionPacket = Packet<ServerHeader, ShapeDescriptionPayload>;
 
 	class AbstractExportStrategy
 	{
@@ -137,8 +173,9 @@ namespace net
 
 		AbstractExportStrategy();
 		virtual ~AbstractExportStrategy();
-		virtual void Export(const ServerStatePayload&) const = 0;
 		virtual void Export(const ClientInputPayload&) const = 0;
+		//TODO: Clean up this part. Maybe merge the export and import strategies, or use buffers like for ClientInputPayload.
+		virtual ShapeDescriptionPayload& ExportImport(const net::ShapeRequestPayload&) const = 0;
 
 	};
 
@@ -149,7 +186,6 @@ namespace net
 		AbstractImportStrategy();
 		virtual ~AbstractImportStrategy();
 		virtual std::tuple<size_t, def::entity_id*, ServerStatePayload*> ImportServerState() const = 0;
-		virtual std::tuple<size_t, ClientInputPayload*> ImportClientIntput() const = 0;
 
 	};
 

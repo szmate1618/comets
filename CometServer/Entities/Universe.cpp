@@ -1,6 +1,8 @@
 #include "Universe.hpp"
 #include "..\Utilities\sqlite3.h"
 
+#include <sstream>
+
 
 namespace entity
 {
@@ -10,31 +12,67 @@ namespace entity
 	Universe::Universe(std::string filename) //TODO: Add error handling.
 	{
 		sqlite3* db_connection;
-		sqlite3_open("game_data.sqlite3", &db_connection); //TODO: Add error handling.
+		sqlite3_open(filename.c_str(), &db_connection); //TODO: Add error handling.
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
-			"SELECT EntityID, OwnerID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
+			"SELECT EntityID, OwnerID, ShapeID, TextureID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
 			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
 			{
 				def::entity_id entity = std::atoi(argv[0]);
 				def::owner_id owner = std::atoi(argv[1]);
+				def::shape_id shape = std::atoi(argv[2]);
+				def::texture_id texture = std::atoi(argv[3]);
 				engine_type engine;
-				if (std::strcmp("inertial", argv[2]) == 0) engine = inertial;
-				else if (std::strcmp("anti_inertial", argv[2]) == 0) engine = anti_intertial;
-				else if (std::strcmp("para_inertial", argv[2]) == 0) engine = para_inertial;
-				else if (std::strcmp("pre_programmed", argv[2]) == 0) engine = pre_programmed;
+				if (std::strcmp("inertial", argv[4]) == 0) engine = inertial;
+				else if (std::strcmp("anti_inertial", argv[4]) == 0) engine = anti_intertial;
+				else if (std::strcmp("para_inertial", argv[4]) == 0) engine = para_inertial;
+				else if (std::strcmp("pre_programmed", argv[4]) == 0) engine = pre_programmed;
 				dynamics_class dynamics;
-				if (std::strcmp("static_", argv[3]) == 0) dynamics = static_;
-				else if (std::strcmp("dynamic", argv[3]) == 0) dynamics = dynamic;
+				if (std::strcmp("static_", argv[5]) == 0) dynamics = static_;
+				else if (std::strcmp("dynamic", argv[5]) == 0) dynamics = dynamic;
 				visibility_class visibility;
-				if (std::strcmp("visible", argv[4]) == 0) visibility = visible;
-				else if (std::strcmp("invisible", argv[4]) == 0) visibility = invisible;
+				if (std::strcmp("visible", argv[6]) == 0) visibility = visible;
+				else if (std::strcmp("invisible", argv[6]) == 0) visibility = invisible;
 				collidability_class collidability;
-				if (std::strcmp("collidable", argv[5]) == 0) collidability = collidable;
-				else if (std::strcmp("uncollidable", argv[5]) == 0) collidability = uncollidable;
-				geo::point_2d position{ std::atof(argv[6]), std::atof(argv[7]) };
-				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, engine, dynamics, visibility, collidability, position);
+				if (std::strcmp("collidable", argv[7]) == 0) collidability = collidable;
+				else if (std::strcmp("uncollidable", argv[7]) == 0) collidability = uncollidable;
+				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
+				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, position);
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		); sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT ShapeID, Shape FROM Shapes;",
+			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				def::shape_id shape_id = std::atoi(argv[0]);
+				std::stringstream shape(argv[1]);
+				size_t vertex_count;
+				size_t triangle_count;
+				shape >> vertex_count >> triangle_count;
+				static_cast<Universe*>(universe)->shape_registry.emplace
+				(shape_id, EntityShape{
+					std::vector<float>(vertex_count * 2),
+					std::vector<float>(vertex_count * 2),
+					std::vector<uint16_t>(triangle_count * 3)
+				});
+				EntityShape& entity_shape = static_cast<Universe*>(universe)->shape_registry.at(shape_id);
+				for (size_t i = 0; i < vertex_count * 2; i++)
+				{
+					shape >> entity_shape.vertices[i];
+				}
+				for (size_t i = 0; i < vertex_count * 2; i++)
+				{
+					shape >> entity_shape.uvs[i];
+				}
+				for (size_t i = 0; i < triangle_count * 3; i++)
+				{
+					shape >> entity_shape.triangles[i];
+				}
 				return 0;
 			},
 			static_cast<void*>(this),
@@ -229,6 +267,8 @@ namespace entity
 
 	void Universe::SpawnEntity(def::entity_id entity,
 		def::owner_id owner,
+		def::shape_id shape,
+		def::texture_id texture,
 		engine_type engine,
 		dynamics_class dynamics,
 		visibility_class visibility,
@@ -237,7 +277,7 @@ namespace entity
 	{
 		if (entity_registry.count(entity) > 0) return;
 
-		EntityHandle handle{ owner, engine, dynamics, visibility, collidability, nullptr };
+		EntityHandle handle{ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr };
 		if (dynamics == dynamic)
 		{
 			DynamicEntity dynamic_entity;
@@ -249,7 +289,7 @@ namespace entity
 			dynamic_entity.velocity = { 0, 0 };
 			dynamic_entity.max_speed = 10;
 			dynamic_entity.inertial_velocity = { 0, 0 };
-			dynamic_entity.acceleration = { 5, 0 };
+			dynamic_entity.acceleration = { 0, 5 };
 			dynamic_entity.inertial_acceleration = { 0, 0 };
 			dynamic_entity.friction = 0;
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
@@ -276,6 +316,11 @@ namespace entity
 		{
 			return vision_partitioner.GetPartition(entity_registry[entity].de_pointer);
 		}
+	}
+
+	Universe::EntityShape& Universe::GetShape(def::entity_id entity)
+	{
+		return shape_registry.at(entity_registry.at(entity).shape);
 	}
 
 }

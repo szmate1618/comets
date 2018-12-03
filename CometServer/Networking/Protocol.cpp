@@ -1,6 +1,5 @@
 #include "Protocol.hpp"
 
-
 namespace net
 {
 
@@ -56,7 +55,7 @@ namespace net
 	}
 
 	ServersideProtocol::ServersideProtocol(unsigned short port, const AbstractExportStrategy& exportstrategy, const AbstractImportStrategy& importstrategy)
-		: AbstractProtocol{ port, exportstrategy, importstrategy }
+		: AbstractProtocol{ port, exportstrategy, importstrategy }, sequence_number{ 0 }
 	{
 	}
 
@@ -83,16 +82,31 @@ namespace net
 			{
 				switch (header.packet_type)
 				{
-				case client_input:
-					ClientInputPayload payload;
-					payload.inputs = buffer;
-					payload.IO<net::Read>(socket.recv_buffer + header_size);
-					exportstrategy.Export(payload);
-					registry.Touch(payload.entity_id, from);
-					break;
-				default:
-					//TODO: Some kind of errorlogging here.
-					break;
+					case client_input:
+					{
+						ClientInputPayload client_input_payload;
+						client_input_payload.inputs = buffer;
+						client_input_payload.IO<net::Read>(socket.recv_buffer + header_size);
+						exportstrategy.Export(client_input_payload);
+						registry.Touch(client_input_payload.entity_id, from);
+						break;
+					}
+					case shape_request:
+					{
+						ShapeRequestPayload shape_request_payload;
+						shape_request_payload.IO<net::Read>(socket.recv_buffer + header_size);
+						ShapeDescriptionPacket shape_description_packet;
+						shape_description_packet.header = { def::protocol_id, sequence_number, shape_description, 0, 0 }; //TODO: Use sequence_number correctly.
+						shape_description_packet.payload = exportstrategy.ExportImport(shape_request_payload);
+						size_t bytes_written = shape_description_packet.IO<net::Write>(socket.send_buffer);
+						socket.Send(from, bytes_written);
+						break;
+					}
+					default:
+					{
+						//TODO: Some kind of errorlogging here.
+						break;
+					}
 				}
 			}
 			else

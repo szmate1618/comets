@@ -10,10 +10,7 @@ namespace net
 	using uint32_t = UInt32;
 	using entity_id = UInt32; //TODO: Find some way to emulate global typedefs.
 
-	using ClientInputPacket = Packet<Header, ClientInputPayload>;
-	using ServerStatePacket = Packet<ServerHeader, ServerStatePayload>;
-
-	enum packet_type { client_input, server_state };
+	enum packet_type { client_input, server_state, shape_request, shape_description };
 
 	interface BinarySerializable
 	{
@@ -107,7 +104,50 @@ namespace net
 			return current_index - start_index;
 		}
 	};
-	
+
+	class ShapeRequest : BinarySerializable
+	{
+		public entity_id entity_id;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
+			return current_index - start_index;
+		}
+	};
+
+	class ShapeDescription : BinarySerializable
+	{
+		public entity_id entity_id;
+		public uint16_t vertex_count;
+		public uint16_t triangle_count;
+		public float[] vertices;
+		public float[] uvs;
+		public uint16_t[] triangles;
+
+		public int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index)
+		{
+			int current_index = start_index;
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref vertex_count);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref triangle_count);
+			for (int i = 0; i < vertex_count * 2; i++)
+			{
+				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref vertices[i]);
+			}
+			for (int i = 0; i < vertex_count * 2; i++)
+			{
+				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref uvs[i]);
+			}
+			for (int i = 0; i < triangle_count * 3; i++)
+			{
+				current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref triangles[i]);
+			}
+			return current_index - start_index;
+		}
+	};
+
 	class Packet<H, P> where H : BinarySerializable where P : BinarySerializable
 	{
 		public H header;
