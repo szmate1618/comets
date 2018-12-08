@@ -18,7 +18,7 @@ CREATE TABLE Users
 CREATE TABLE Shapes
 (
 	ShapeID INTEGER PRIMARY KEY ASC,
-	Shape TEXT
+	Shape TEXT --Note that Unity's backface culling relies on winding order. Counterclockwise faces are culled.
 );
 
 CREATE TABLE Entities
