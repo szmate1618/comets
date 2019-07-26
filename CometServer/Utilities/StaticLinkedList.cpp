@@ -102,7 +102,7 @@ namespace utils
 		return firstgap;
 	}
 
-	//No error checking at all. Its the caller's responsibility to remove at previouly occupied positions.
+	//No error checking at all. It's the caller's responsibility to remove at previouly occupied positions.
 	template<typename T>
 	size_t StaticLinkedList<T>::RemoveAt(size_t index)
 	{
