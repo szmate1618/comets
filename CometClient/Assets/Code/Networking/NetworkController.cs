@@ -110,7 +110,7 @@ public class NetworkController : MonoBehaviour
 					for (int i = 0; i < server_state.count; i++)
 					{
 						net.ServerObject entity = server_state.objects[i];
-						if (!entities.ContainsKey(entity.entity_id))
+						if (!entities.ContainsKey(entity.entity_id)) //TODO: Check for shape, instead of the entity itself.
 						{
 							shape_request.payload.entity_id = entity.entity_id;
 							//TODO: Send this redundantly, multiple times.
