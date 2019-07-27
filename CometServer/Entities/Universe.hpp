@@ -75,7 +75,9 @@ namespace entity
 			dynamics_class,
 			visibility_class,
 			collidability_class,
-			geo::point_2d);
+			geo::degree,
+			geo::point_2d,
+			geo::vector_2d); //TODO: This is not a valid parameter when creating static entities.
 
 	};
 
