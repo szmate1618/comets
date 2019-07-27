@@ -165,7 +165,16 @@ namespace entity
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
-		//TODO: Implement this.
+		SpawnEntity(entity_registry.size() + 1, //TODO: Actually avoid collisions.
+			entity_registry[entity.id].owner,
+			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
+			1, //Completely arbitrary texture_id. TODO: Same as above.
+			entity::anti_intertial,
+			entity::dynamic,
+			entity::visible,
+			entity::collidable,
+			entity.position
+		);
 	}
 
 	void Universe::EntityWarp(def::time duration, DynamicEntity& entity)
