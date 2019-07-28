@@ -167,7 +167,7 @@ namespace entity
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
-		SpawnEntity(entity_registry.size() + 1, //TODO: Actually avoid collisions.
+		SpawnEntity(static_cast<def::entity_id>(entity_registry.size() + 1), //TODO: Actually avoid collisions.
 			entity_registry[entity.id].owner,
 			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
 			1, //Completely arbitrary texture_id. TODO: Same as above.
