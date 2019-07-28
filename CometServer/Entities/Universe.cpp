@@ -45,7 +45,8 @@ namespace entity
 			},
 			static_cast<void*>(this),
 			nullptr
-		); sqlite3_exec //TODO: Add error handling.
+		);
+		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
 			"SELECT ShapeID, Shape FROM Shapes;",
