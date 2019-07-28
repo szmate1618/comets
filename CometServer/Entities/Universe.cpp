@@ -314,7 +314,7 @@ namespace entity
 		{
 			StaticEntity static_entity;
 			static_entity.id = entity;
-			static_entity.id = orientation;
+			static_entity.orientation = orientation;
 			static_entity.position = position; //TODO: Also add shape.
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
