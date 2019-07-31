@@ -37,13 +37,16 @@ namespace entity
 				collidability_class collidability;
 				if (std::strcmp("collidable", argv[7]) == 0) collidability = collidable;
 				else if (std::strcmp("uncollidable", argv[7]) == 0) collidability = uncollidable;
+				geo::degree orientation{ 0 };
 				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
-				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, position);
+				geo::vector_2d velocity{ 0, 0 };
+				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
 				return 0;
 			},
 			static_cast<void*>(this),
 			nullptr
-		); sqlite3_exec //TODO: Add error handling.
+		);
+		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
 			"SELECT ShapeID, Shape FROM Shapes;",
@@ -165,7 +168,18 @@ namespace entity
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
-		//TODO: Implement this.
+		SpawnEntity(static_cast<def::entity_id>(entity_registry.size() + 1), //TODO: Actually avoid collisions.
+			entity_registry[entity.id].owner,
+			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
+			1, //Completely arbitrary texture_id. TODO: Same as above.
+			entity::anti_intertial,
+			entity::dynamic,
+			entity::visible,
+			entity::collidable,
+			entity.orientation,
+			entity.position,
+			geo::point_2d_rotated({ 0, 10.0 }, entity.orientation) //TODO: Make this configurable.
+		);
 	}
 
 	void Universe::EntityWarp(def::time duration, DynamicEntity& entity)
@@ -273,7 +287,9 @@ namespace entity
 		dynamics_class dynamics,
 		visibility_class visibility,
 		collidability_class collidability,
-		geo::point_2d position)
+		geo::degree orientation,
+		geo::point_2d position,
+		geo::vector_2d velocity)
 	{
 		if (entity_registry.count(entity) > 0) return;
 
@@ -283,10 +299,10 @@ namespace entity
 			DynamicEntity dynamic_entity;
 			//TODO: Also add shape, and make all the following values configurable.
 			dynamic_entity.id = entity;
-			dynamic_entity.orientation = 0;
+			dynamic_entity.orientation = orientation;
 			dynamic_entity.position = position;
 			dynamic_entity.angular_velocity = 3; //TODO: Clean up the logic around this, and/or maybe rename to max_angular_velocity, or even max_angular_speed.
-			dynamic_entity.velocity = { 0, 0 };
+			dynamic_entity.velocity = velocity;
 			dynamic_entity.max_speed = 10;
 			dynamic_entity.inertial_velocity = { 0, 0 };
 			dynamic_entity.acceleration = { 0, 5 };
@@ -299,6 +315,7 @@ namespace entity
 		{
 			StaticEntity static_entity;
 			static_entity.id = entity;
+			static_entity.orientation = orientation;
 			static_entity.position = position; //TODO: Also add shape.
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
