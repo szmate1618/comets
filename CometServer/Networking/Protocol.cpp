@@ -125,6 +125,7 @@ namespace net
 		auto[count, entities, payloads] = importstrategy.ImportServerState();
 		for (size_t i = 0; i < count; i++)
 		{
+			//TODO: Why write the buffer for entities we don't send anyway?
 			packet.payload = &(payloads[i]);
 			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
 			if (registry.Contains(entities[i]))
