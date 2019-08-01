@@ -1,5 +1,8 @@
 #include "Protocol.hpp"
 
+#include <cassert>
+
+
 namespace net
 {
 
@@ -128,6 +131,7 @@ namespace net
 			//TODO: Why write the buffer for entities we don't send anyway?
 			packet.payload = &(payloads[i]);
 			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
+			assert(bytes_written < def::max_packet_size && "Buffer overflow error.");
 			if (registry.Contains(entities[i]))
 			{
 				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written)); //TODO: Maybe tracelog sent bytes.
