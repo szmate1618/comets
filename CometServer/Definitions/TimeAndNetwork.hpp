@@ -34,4 +34,8 @@ namespace def
 	static constexpr unsigned short server_port = 7700; //TODO: This should be specified in a config file. Maybe the others, too.
 	static constexpr int max_sessions = 1000; //Yeah, this one, too. //TODO: Benchmark how many we can actually serve. //TODO: Currently this is not enforced.
 
+	//Weapon parameters
+	static constexpr time default_weapon_cooldown = 0.3s;
+	static constexpr time zero_seconds = 0s;
+
 }
