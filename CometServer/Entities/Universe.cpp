@@ -245,6 +245,7 @@ namespace entity
 					#ifndef NO_COLLISION
 					AbstractCollisionShape& shape1 = *p_entity1->shape;
 					AbstractCollisionShape& shape2 = *p_entity2->shape;
+					//TODO: Crop bounding boxes to the current partition.
 					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
 					#endif
 				}
