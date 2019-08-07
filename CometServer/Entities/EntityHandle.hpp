@@ -26,6 +26,7 @@ namespace entity
 			StaticEntity* se_pointer;
 			DynamicEntity* de_pointer;
 		};
+		def::time weapon_cooldown = def::zero_seconds;
 	};
 
 }

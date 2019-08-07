@@ -107,7 +107,7 @@ namespace entity
 			EntityBrake(duration, entity, entity_registry[entity_id].engine);
 			break;
 		case def::fire:
-			EntityFire(duration, entity);
+			EntityFireWithCooldown(duration, entity);
 			break;
 		case def::warp:
 			EntityWarp(duration, entity);
@@ -180,6 +180,16 @@ namespace entity
 			entity.position,
 			geo::point_2d_rotated({ 0, 10.0 }, entity.orientation) //TODO: Make this configurable.
 		);
+	}
+
+	void Universe::EntityFireWithCooldown(def::time duration, DynamicEntity& entity)
+	{
+		if (entity_registry[entity.id].weapon_cooldown <= def::zero_seconds)
+		{
+			EntityFire(duration, entity);
+			entity_registry[entity.id].weapon_cooldown = def::default_weapon_cooldown;
+		}
+		entity_registry[entity.id].weapon_cooldown -= duration;
 	}
 
 	void Universe::EntityWarp(def::time duration, DynamicEntity& entity)
@@ -320,6 +330,7 @@ namespace entity
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
 		}
+		//TODO: Common code in the above branches should be executed unconditionally.
 		entity_registry[entity] = handle;
 	}
 
