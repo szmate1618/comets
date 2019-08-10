@@ -4,11 +4,8 @@
 namespace entity 
 {
 
-	Circle::Circle()
-	{
-	}
-
-	Circle::Circle(geo::real radius): r(radius)
+	Circle::Circle(const geo::degree& orientation, const geo::vector_2d& position, const geo::real radius) :
+		AbstractCollisionShape{ orientation, position }, radius{ radius }
 	{
 	}
 

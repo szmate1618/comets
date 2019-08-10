@@ -13,8 +13,8 @@ namespace entity
 	{
 	public:
 
-		TriangulatedPolyPrecomputedRotation();
-		TriangulatedPolyPrecomputedRotation(AbstractTriangulatedPoly&);
+		TriangulatedPolyPrecomputedRotation() = delete;
+		TriangulatedPolyPrecomputedRotation(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&);
 		virtual ~TriangulatedPolyPrecomputedRotation() override;
 		virtual const geo::EmptyFrame& GetBoundingBox() override;
 		virtual void SetOrientation(double) override;
@@ -22,6 +22,7 @@ namespace entity
 
 	private:
 
+		//TODO: Remove if not needed.
 		static const int granularity = 3600;
 
 		std::vector<geo::point_2d> rotated_vertices[granularity]; //TODO: Find out why I am mixing normal arrays with vectors.

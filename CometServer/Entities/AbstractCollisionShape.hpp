@@ -16,7 +16,8 @@ namespace entity
 	{
 	public:
 
-		AbstractCollisionShape();
+		AbstractCollisionShape() = delete;
+		AbstractCollisionShape(const geo::degree&, const geo::vector_2d&);
 		virtual ~AbstractCollisionShape();
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) = 0; //TODO: Figure out why this is pure virtual.
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) = 0;
@@ -26,6 +27,8 @@ namespace entity
 
 	private:
 
+		const geo::degree& orientation;
+		const geo::vector_2d& position;
 	};
 
 }

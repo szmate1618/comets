@@ -4,12 +4,8 @@
 namespace entity
 {
 
-	TriangulatedPolyNaiveRotation::TriangulatedPolyNaiveRotation()
-	{
-
-	}
-
-	TriangulatedPolyNaiveRotation::TriangulatedPolyNaiveRotation(AbstractTriangulatedPoly& to)
+	TriangulatedPolyNaiveRotation::TriangulatedPolyNaiveRotation(const geo::degree& orientation, const geo::vector_2d& position, const std::vector<geo::vector_2d>& vertices) :
+		AbstractTriangulatedPoly{ orientation, position, vertices }
 	{
 	}
 
