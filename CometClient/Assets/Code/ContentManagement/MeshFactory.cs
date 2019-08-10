@@ -68,7 +68,7 @@ public class MeshFactory
 	//Create tessellated circle.
 	public static Mesh Create(float radius)
 	{
-		int segment_count = Mathf.CeilToInt(10 * radius);
+		int segment_count = Mathf.CeilToInt(20 * radius);
 		Vector3[] vertices = new Vector3[segment_count + 1];
 		int[] triangles = new int[segment_count * 3];
 		Quaternion segment_degree = Quaternion.Euler(0, 0, 360.0f / segment_count);
