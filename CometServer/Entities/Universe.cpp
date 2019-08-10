@@ -60,6 +60,7 @@ namespace entity
 				static_cast<Universe*>(universe)->shape_registry.emplace
 				(shape_id, EntityShape{
 					std::vector<float>(vertex_count * 2),
+					std::vector<geo::vector_2d>(vertex_count),
 					std::vector<float>(vertex_count * 2),
 					std::vector<uint16_t>(triangle_count * 3)
 				});
@@ -67,6 +68,11 @@ namespace entity
 				for (size_t i = 0; i < vertex_count * 2; i++)
 				{
 					shape >> entity_shape.vertices[i];
+				}
+				for (size_t i = 0; i < vertex_count; i++)
+				{
+					entity_shape.collision_vertices[i].x = static_cast<geo::real>(entity_shape.vertices[2 * i]);
+					entity_shape.collision_vertices[i].y = static_cast<geo::real>(entity_shape.vertices[2 * i + 1]);
 				}
 				for (size_t i = 0; i < vertex_count * 2; i++)
 				{

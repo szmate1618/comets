@@ -44,6 +44,7 @@ namespace entity
 		struct EntityShape
 		{
 			std::vector<float> vertices;
+			std::vector<geo::vector_2d> collision_vertices;
 			std::vector<float> uvs;
 			std::vector<uint16_t> triangles;
 		};
