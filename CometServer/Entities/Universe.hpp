@@ -54,6 +54,7 @@ namespace entity
 
 		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
 		std::unordered_map<def::shape_id, EntityShape> shape_registry;
+		std::unordered_map<def::entity_id, std::unique_ptr<AbstractCollisionShape>> collision_shape_registry;
 		StaticEntityMap static_entities =
 		{
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },
