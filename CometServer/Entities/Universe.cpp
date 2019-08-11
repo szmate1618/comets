@@ -249,8 +249,8 @@ namespace entity
 					if (p_entity1 == p_entity2) continue;
 					//Test for collision.
 					#ifndef NO_COLLISION
-					AbstractCollisionShape& shape1 = *p_entity1->shape;
-					AbstractCollisionShape& shape2 = *p_entity2->shape;
+					AbstractCollisionShape& shape1 = *collision_shape_registry.at(p_entity1->id);
+					AbstractCollisionShape& shape2 = *collision_shape_registry.at(p_entity2->id);
 					//TODO: Crop bounding boxes to the current partition.
 					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
 					#endif
