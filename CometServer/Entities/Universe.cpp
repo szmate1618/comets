@@ -16,39 +16,6 @@ namespace entity
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
-			"SELECT EntityID, OwnerID, ShapeID, TextureID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
-			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
-			{
-				def::entity_id entity = std::atoi(argv[0]);
-				def::owner_id owner = std::atoi(argv[1]);
-				def::shape_id shape = std::atoi(argv[2]);
-				def::texture_id texture = std::atoi(argv[3]);
-				engine_type engine;
-				if (std::strcmp("inertial", argv[4]) == 0) engine = inertial;
-				else if (std::strcmp("anti_inertial", argv[4]) == 0) engine = anti_intertial;
-				else if (std::strcmp("para_inertial", argv[4]) == 0) engine = para_inertial;
-				else if (std::strcmp("pre_programmed", argv[4]) == 0) engine = pre_programmed;
-				dynamics_class dynamics;
-				if (std::strcmp("static_", argv[5]) == 0) dynamics = static_;
-				else if (std::strcmp("dynamic", argv[5]) == 0) dynamics = dynamic;
-				visibility_class visibility;
-				if (std::strcmp("visible", argv[6]) == 0) visibility = visible;
-				else if (std::strcmp("invisible", argv[6]) == 0) visibility = invisible;
-				collidability_class collidability;
-				if (std::strcmp("collidable", argv[7]) == 0) collidability = collidable;
-				else if (std::strcmp("uncollidable", argv[7]) == 0) collidability = uncollidable;
-				geo::degree orientation{ 0 };
-				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
-				geo::vector_2d velocity{ 0, 0 };
-				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
-				return 0;
-			},
-			static_cast<void*>(this),
-			nullptr
-		);
-		sqlite3_exec //TODO: Add error handling.
-		(
-			db_connection,
 			"SELECT ShapeID, Shape FROM Shapes;",
 			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
 			{
@@ -82,6 +49,39 @@ namespace entity
 				{
 					shape >> entity_shape.triangles[i];
 				}
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		);
+		sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT EntityID, OwnerID, ShapeID, TextureID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
+			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				def::entity_id entity = std::atoi(argv[0]);
+				def::owner_id owner = std::atoi(argv[1]);
+				def::shape_id shape = std::atoi(argv[2]);
+				def::texture_id texture = std::atoi(argv[3]);
+				engine_type engine;
+				if (std::strcmp("inertial", argv[4]) == 0) engine = inertial;
+				else if (std::strcmp("anti_inertial", argv[4]) == 0) engine = anti_intertial;
+				else if (std::strcmp("para_inertial", argv[4]) == 0) engine = para_inertial;
+				else if (std::strcmp("pre_programmed", argv[4]) == 0) engine = pre_programmed;
+				dynamics_class dynamics;
+				if (std::strcmp("static_", argv[5]) == 0) dynamics = static_;
+				else if (std::strcmp("dynamic", argv[5]) == 0) dynamics = dynamic;
+				visibility_class visibility;
+				if (std::strcmp("visible", argv[6]) == 0) visibility = visible;
+				else if (std::strcmp("invisible", argv[6]) == 0) visibility = invisible;
+				collidability_class collidability;
+				if (std::strcmp("collidable", argv[7]) == 0) collidability = collidable;
+				else if (std::strcmp("uncollidable", argv[7]) == 0) collidability = uncollidable;
+				geo::degree orientation{ 0 };
+				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
+				geo::vector_2d velocity{ 0, 0 };
+				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
 				return 0;
 			},
 			static_cast<void*>(this),
