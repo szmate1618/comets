@@ -49,7 +49,7 @@ namespace entity
 			std::vector<uint16_t> triangles;
 		};
 
-		EntityShape& GetShape(def::entity_id);
+		EntityShape& GetShape(def::entity_id); //TODO: entity_id and shape_id should be incompatible types.
 
 	private:
 
