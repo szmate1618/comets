@@ -86,26 +86,6 @@ namespace entity
 				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
 				geo::vector_2d velocity{ 0, 0 };
 				universe->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
-
-				const EntityHandle& entity_handle = universe->entity_registry.at(entity);
-				const StaticEntity* static_entity = entity_handle.dynamics == dynamic ? entity_handle.de_pointer : entity_handle.se_pointer;
-				const std::vector<geo::vector_2d>& collision_vertices = universe->GetShape(entity).collision_vertices;
-				if (universe->GetShape(entity).collision_vertices.size() != 2) //If it's a polygon.
-				{
-					universe->collision_shape_registry.emplace
-					(
-						entity, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices }
-					);
-				}
-				else //If it's a circle.
-				{
-					geo::real radius = geo::length(geo::sub(collision_vertices[1], collision_vertices[0]));
-					universe->collision_shape_registry.emplace
-					(
-						entity, new Circle{ static_entity->orientation, static_entity->position, radius }
-					);
-				}
-
 				return 0;
 			},
 			static_cast<void*>(this),
@@ -363,6 +343,24 @@ namespace entity
 		}
 		//TODO: Common code in the above branches should be executed unconditionally.
 		entity_registry[entity] = handle;
+
+		const StaticEntity* static_entity = handle.dynamics == dynamic ? handle.de_pointer : handle.se_pointer;
+		const std::vector<geo::vector_2d>& collision_vertices = GetShape(entity).collision_vertices;
+		if (GetShape(entity).collision_vertices.size() != 2) //If it's a polygon.
+		{
+			collision_shape_registry.emplace
+			(
+				entity, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices }
+			);
+		}
+		else //If it's a circle.
+		{
+			geo::real radius = geo::length(geo::sub(collision_vertices[1], collision_vertices[0]));
+			collision_shape_registry.emplace
+			(
+				entity, new Circle{ static_entity->orientation, static_entity->position, radius }
+			);
+		}
 	}
 
 	SimplePartition& Universe::GetVision(def::entity_id entity)
