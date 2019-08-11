@@ -21,7 +21,7 @@ namespace entity
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
 		virtual void SetOrientation(double radian) = 0;
 					
-	private:
+	protected:
 
 		const std::vector<geo::vector_2d>& vertices;
 

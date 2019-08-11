@@ -25,10 +25,13 @@ namespace entity
 		virtual const geo::EmptyFrame& GetBoundingBox() = 0;
 		virtual std::string GetName() = 0; //Useful for debugging.
 
-	private:
+	protected:
 
 		const geo::degree& orientation;
 		const geo::vector_2d& position;
+
+	private:
+
 	};
 
 }
