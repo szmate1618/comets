@@ -114,7 +114,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|Win32'">
@@ -128,7 +128,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +141,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - no collision|x64'">
@@ -155,7 +155,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,7 +172,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -189,7 +189,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Utilities\sqlite3_$(Platform).lib;..\Geometry\$(Platform)\$(Configuration)\Geometry.obj;..\Utilities\$(Platform)\$(Configuration)\StaticLinkedList.obj;..\Utilities\$(Platform)\$(Configuration)\Logger.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
