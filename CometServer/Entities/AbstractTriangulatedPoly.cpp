@@ -1,4 +1,5 @@
 #include "AbstractTriangulatedPoly.hpp"
+#include "Circle.hpp"
 
 
 namespace entity 
@@ -73,8 +74,13 @@ namespace entity
 
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
+		for (size_t i = 0; i < vertices.size(); ++i)
+		{
+			geo::point_2d point = geo::add(geo::point_2d_rotated(vertices.at(i), orientation), position);
+			//TODO: Handle frames.
+			if (/*geo::is_inside(myframe, point) && */geo::length(geo::sub(point, that.GetPosition())) <= that.GetRadius()) return true;
+		}
 		return false;
-		//TODO: implement this.
 	}
 
 }

@@ -40,4 +40,9 @@ namespace entity
 		return "Circle";
 	}
 
+	const geo::real& Circle::GetRadius() const
+	{
+		return radius;
+	}
+
 }
