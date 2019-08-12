@@ -13,8 +13,8 @@ namespace entity
 	{
 	public:
 
-		TriangulatedPolyNaiveRotation();
-		TriangulatedPolyNaiveRotation(AbstractTriangulatedPoly&); //TODO: do I really need this here? And in TriangulatedPolyPrecomputedRotation?
+		TriangulatedPolyNaiveRotation() = delete;
+		TriangulatedPolyNaiveRotation(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&);
 		virtual ~TriangulatedPolyNaiveRotation() override;
 		virtual const geo::EmptyFrame& GetBoundingBox() override;
 		virtual void SetOrientation(double) override;

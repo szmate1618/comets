@@ -4,7 +4,6 @@
 #include "..\Geometry\Geometry.hpp"
 
 #include <vector>
-#include <string>
 
 
 namespace entity
@@ -14,17 +13,19 @@ namespace entity
 	{
 	public:
 
-		AbstractTriangulatedPoly();
-		AbstractTriangulatedPoly(std::string); //TODO: figure out why I declared this.
+		AbstractTriangulatedPoly() = delete;
+		AbstractTriangulatedPoly(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&);
 		virtual ~AbstractTriangulatedPoly() override;
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
 		virtual void SetOrientation(double radian) = 0;
 					
-	private:
+	protected:
 
-		static int arr[];  //Some preallocated general purpose memory, here goes thread safety.
+		const std::vector<geo::vector_2d>& vertices;
+
+		/*static int arr[];  //Some preallocated general purpose memory, here goes thread safety.
 						   //Wouldn't a local be better, though?
 		geo::real orientation;
 		geo::point_2d pivot;
@@ -40,7 +41,7 @@ namespace entity
 		};
 		std::vector<geo::point_2d> vertices;
 		std::vector<int> hull;
-		std::vector<trianlge_tile> faces;
+		std::vector<trianlge_tile> faces;*/
 	};
 
 }

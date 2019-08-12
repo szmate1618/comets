@@ -12,7 +12,6 @@ namespace entity
 	struct StaticEntity //TODO: Add AbstractPartition pointer.
 	{
 		def::entity_id id;
-		AbstractCollisionShape* shape; //TODO: Find out if this is used somewhere.
 		geo::degree orientation;
 		geo::vector_2d position;
 	};

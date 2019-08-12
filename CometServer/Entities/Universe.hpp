@@ -44,16 +44,18 @@ namespace entity
 		struct EntityShape
 		{
 			std::vector<float> vertices;
+			std::vector<geo::vector_2d> collision_vertices;
 			std::vector<float> uvs;
 			std::vector<uint16_t> triangles;
 		};
 
-		EntityShape& GetShape(def::entity_id);
+		EntityShape& GetShape(def::entity_id); //TODO: entity_id and shape_id should be incompatible types.
 
 	private:
 
 		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
 		std::unordered_map<def::shape_id, EntityShape> shape_registry;
+		std::unordered_map<def::entity_id, std::unique_ptr<AbstractCollisionShape>> collision_shape_registry;
 		StaticEntityMap static_entities =
 		{
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },

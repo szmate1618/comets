@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+
 
 public class MeshFactory
 {
@@ -26,10 +25,12 @@ public class MeshFactory
 	//Create polygon mesh.
 	public static Mesh Create(Vector3[] vertices, Vector2[] uvs, int[] triangles)
 	{
-		Mesh mesh =  new Mesh();
-		mesh.vertices = vertices;
-		mesh.uv = uvs;
-		mesh.triangles = triangles;
+		Mesh mesh = new Mesh
+		{
+			vertices = vertices,
+			uv = uvs,
+			triangles = triangles
+		};
 		SetNormals(mesh);
 		return mesh;
 	}
@@ -43,31 +44,63 @@ public class MeshFactory
 	//Create polygon mesh.
 	public static Mesh Create(int vertex_count, int triangle_count, float[] vertices, float[] uvs, ushort[] triangles)
 	{
-		Vector2[] vertex_vectors = new Vector2[vertex_count];
-		Vector2[] uv_vectors = new Vector2[vertex_count];
-		int[] triangle_ints = triangles.Take(triangle_count * 3).Select(Convert.ToInt32).ToArray();
-		for (int i = 0; i < vertex_count; i++)
+		if (vertex_count != 2) //If it's a polygon.
 		{
-			vertex_vectors[i] = new Vector2(vertices[2 * i], vertices[2 * i + 1]);
-			uv_vectors[i] = new Vector2(uvs[2 * i], uvs[2 * i + 1]);
+			Vector2[] vertex_vectors = new Vector2[vertex_count];
+			Vector2[] uv_vectors = new Vector2[vertex_count];
+			int[] triangle_ints = triangles.Take(triangle_count * 3).Select(Convert.ToInt32).ToArray();
+			for (int i = 0; i < vertex_count; i++)
+			{
+				vertex_vectors[i] = new Vector2(vertices[2 * i], vertices[2 * i + 1]);
+				uv_vectors[i] = new Vector2(uvs[2 * i], uvs[2 * i + 1]);
+			}
+			return Create(vertex_vectors, uv_vectors, triangle_ints);
 		}
-		return Create(vertex_vectors, uv_vectors, triangle_ints);
+		else //If it's a circle.
+		{
+			Vector2 vertex0 = new Vector2(vertices[0], vertices[1]);
+			Vector2 vertex1 = new Vector2(vertices[2], vertices[3]);
+			return Create((vertex1 - vertex0).magnitude);
+		}
 	}
 
 	//Create tessellated circle.
-	public static Mesh Create(double radius)
+	public static Mesh Create(float radius)
 	{
-		return new Mesh(); //TODO: Actually implement this.
+		int segment_count = Mathf.CeilToInt(20 * radius);
+		Vector3[] vertices = new Vector3[segment_count + 1];
+		int[] triangles = new int[segment_count * 3];
+		Quaternion segment_degree = Quaternion.Euler(0, 0, 360.0f / segment_count);
+
+		vertices[0] = new Vector3(0, 0);
+		vertices[1] = new Vector3(0, radius);
+		for (int i = 2; i < vertices.Length; i++)
+		{
+			vertices[i] = segment_degree * vertices[i - 1];
+
+		}
+
+		Vector2[] uvs = vertices
+							.Select(vector3 => new Vector2((vector3.x + radius) / (2 * radius), (vector3.y + radius) / (2 * radius)))
+							.ToArray();
+
+		triangles = Enumerable
+						.Range(1, segment_count)
+						.Select(x => new int[]{ x, 0, x + 1 > segment_count ? 1 : x + 1}.AsEnumerable())
+						.Aggregate((x, y) => x.Concat(y))
+						.ToArray();
+
+		return Create(vertices, uvs, triangles);
 	}
 
-	public static Mesh CreateFromFile (string filename)
+	public static Mesh CreateFromFile (string filename) //TODO: This is different from the current plaintext format.
 	{
 		try
 		{
 			Mesh mesh = new Mesh();
 			StreamReader file = new StreamReader(filename);
 			string header = file.ReadLine();
-			if (header.Contains(' ')) //If it's a polygon.
+			if (header != "2 1") //If it's a polygon.
 			{
 				int[] NM = Array.ConvertAll(header.Split(' '), x => Int32.Parse(x));
 				int N = NM[0];
@@ -91,7 +124,12 @@ public class MeshFactory
 			}
 			else //If it's a circle.
 			{
-				double radius = Double.Parse(header);
+				Vector2[] vertices = Enumerable
+										.Range(1, 2)
+										.Select(x => file.ReadLine().Split(' '))
+										.Select(x => new Vector2(Single.Parse(x[0]), Single.Parse(x[1])))
+										.ToArray();
+				float radius = (vertices[1] - vertices[0]).magnitude;
 				return Create(radius);
 			}
 		}

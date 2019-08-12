@@ -4,13 +4,10 @@
 namespace entity 
 {
 
-	int AbstractTriangulatedPoly::arr[5000];
+	//int AbstractTriangulatedPoly::arr[5000];
 
-	AbstractTriangulatedPoly::AbstractTriangulatedPoly()
-	{
-	}
-
-	AbstractTriangulatedPoly::AbstractTriangulatedPoly(std::string)
+	AbstractTriangulatedPoly::AbstractTriangulatedPoly(const geo::degree& orientation, const geo::vector_2d& position, const std::vector<geo::vector_2d>& vertices) :
+		AbstractCollisionShape{ orientation, position }, vertices{ vertices }
 	{
 	}
 
@@ -25,7 +22,8 @@ namespace entity
 
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& other)
 	{
-		int arr_counter = 0;
+		//TODO: Make this work.
+		/*int arr_counter = 0;
 		for(const int& i: hull)
 		{
 			if (geo::is_inside(myframe, vertices[i]))
@@ -68,7 +66,7 @@ namespace entity
 					}
 				}
 			}
-		}
+		}*/
 
 		return false;
 	}

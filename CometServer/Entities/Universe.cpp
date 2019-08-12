@@ -1,4 +1,6 @@
 #include "Universe.hpp"
+#include "TriangulatedPolyNaiveRotation.hpp"
+#include "Circle.hpp"
 #include "..\Utilities\sqlite3.h"
 
 #include <sstream>
@@ -16,9 +18,52 @@ namespace entity
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
-			"SELECT EntityID, OwnerID, ShapeID, TextureID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
-			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			"SELECT ShapeID, Shape FROM Shapes;",
+			[](void* void_universe, int, char** argv, char**) //TODO: This belongs in Utilities.
 			{
+				Universe* universe = static_cast<Universe*>(void_universe);
+				def::shape_id shape_id = std::atoi(argv[0]);
+				std::stringstream shape(argv[1]);
+				size_t vertex_count;
+				size_t triangle_count;
+				shape >> vertex_count >> triangle_count;
+				universe->shape_registry.emplace
+				(shape_id, EntityShape{
+					std::vector<float>(vertex_count * 2),
+					std::vector<geo::vector_2d>(vertex_count),
+					std::vector<float>(vertex_count * 2),
+					std::vector<uint16_t>(triangle_count * 3)
+				});
+				EntityShape& entity_shape = universe->shape_registry.at(shape_id);
+				for (size_t i = 0; i < vertex_count * 2; i++)
+				{
+					shape >> entity_shape.vertices[i];
+				}
+				for (size_t i = 0; i < vertex_count; i++)
+				{
+					entity_shape.collision_vertices[i].x = static_cast<geo::real>(entity_shape.vertices[2 * i]);
+					entity_shape.collision_vertices[i].y = static_cast<geo::real>(entity_shape.vertices[2 * i + 1]);
+				}
+				for (size_t i = 0; i < vertex_count * 2; i++)
+				{
+					shape >> entity_shape.uvs[i];
+				}
+				for (size_t i = 0; i < triangle_count * 3; i++)
+				{
+					shape >> entity_shape.triangles[i];
+				}
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		);
+		sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT EntityID, OwnerID, ShapeID, TextureID, Engine, Dynamics, Visibility, Collidability, PositionX, PositionY FROM Entities;",
+			[](void* void_universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				Universe* universe = static_cast<Universe*>(void_universe);
 				def::entity_id entity = std::atoi(argv[0]);
 				def::owner_id owner = std::atoi(argv[1]);
 				def::shape_id shape = std::atoi(argv[2]);
@@ -40,42 +85,7 @@ namespace entity
 				geo::degree orientation{ 0 };
 				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
 				geo::vector_2d velocity{ 0, 0 };
-				static_cast<Universe*>(universe)->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
-				return 0;
-			},
-			static_cast<void*>(this),
-			nullptr
-		);
-		sqlite3_exec //TODO: Add error handling.
-		(
-			db_connection,
-			"SELECT ShapeID, Shape FROM Shapes;",
-			[](void* universe, int, char** argv, char**) //TODO: This belongs in Utilities.
-			{
-				def::shape_id shape_id = std::atoi(argv[0]);
-				std::stringstream shape(argv[1]);
-				size_t vertex_count;
-				size_t triangle_count;
-				shape >> vertex_count >> triangle_count;
-				static_cast<Universe*>(universe)->shape_registry.emplace
-				(shape_id, EntityShape{
-					std::vector<float>(vertex_count * 2),
-					std::vector<float>(vertex_count * 2),
-					std::vector<uint16_t>(triangle_count * 3)
-				});
-				EntityShape& entity_shape = static_cast<Universe*>(universe)->shape_registry.at(shape_id);
-				for (size_t i = 0; i < vertex_count * 2; i++)
-				{
-					shape >> entity_shape.vertices[i];
-				}
-				for (size_t i = 0; i < vertex_count * 2; i++)
-				{
-					shape >> entity_shape.uvs[i];
-				}
-				for (size_t i = 0; i < triangle_count * 3; i++)
-				{
-					shape >> entity_shape.triangles[i];
-				}
+				universe->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
 				return 0;
 			},
 			static_cast<void*>(this),
@@ -243,8 +253,9 @@ namespace entity
 					if (p_entity1 == p_entity2) continue;
 					//Test for collision.
 					#ifndef NO_COLLISION
-					AbstractCollisionShape& shape1 = *p_entity1->shape;
-					AbstractCollisionShape& shape2 = *p_entity2->shape;
+					AbstractCollisionShape& shape1 = *collision_shape_registry.at(p_entity1->id);
+					AbstractCollisionShape& shape2 = *collision_shape_registry.at(p_entity2->id);
+					//TODO: Crop bounding boxes to the current partition.
 					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
 					#endif
 				}
@@ -332,6 +343,24 @@ namespace entity
 		}
 		//TODO: Common code in the above branches should be executed unconditionally.
 		entity_registry[entity] = handle;
+
+		const StaticEntity* static_entity = handle.dynamics == dynamic ? handle.de_pointer : handle.se_pointer;
+		const std::vector<geo::vector_2d>& collision_vertices = GetShape(entity).collision_vertices;
+		if (GetShape(entity).collision_vertices.size() != 2) //If it's a polygon.
+		{
+			collision_shape_registry.emplace
+			(
+				entity, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices }
+			);
+		}
+		else //If it's a circle.
+		{
+			geo::real radius = geo::length(geo::sub(collision_vertices[1], collision_vertices[0]));
+			collision_shape_registry.emplace
+			(
+				entity, new Circle{ static_entity->orientation, static_entity->position, radius }
+			);
+		}
 	}
 
 	SimplePartition& Universe::GetVision(def::entity_id entity)

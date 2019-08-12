@@ -14,6 +14,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
+	geo::degree dummy_orientation;
+	geo::vector_2d dummy_position;
+	std::vector<geo::vector_2d> dummy_vertices;
+	geo::real dummy_radius;
+
 	std::string inviter_name;
 	std::string collider_name;
 	
@@ -22,6 +27,10 @@ namespace Test
 
 	class MockTriangulatedPolyNaiveRotation : public entity::TriangulatedPolyNaiveRotation
 	{
+	public:
+		MockTriangulatedPolyNaiveRotation() : entity::TriangulatedPolyNaiveRotation{ dummy_orientation, dummy_position, dummy_vertices }
+		{
+		}
 		virtual bool CollideInto(geo::EmptyFrame f1, geo::EmptyFrame f2, entity::AbstractTriangulatedPoly& s) override
 		{
 			GetNamesAndReturn();
@@ -34,6 +43,10 @@ namespace Test
 
 	class MockTriangulatedPolyPrecomputedRotation : public entity::TriangulatedPolyPrecomputedRotation
 	{
+	public:
+		MockTriangulatedPolyPrecomputedRotation() : entity::TriangulatedPolyPrecomputedRotation{ dummy_orientation, dummy_position, dummy_vertices }
+		{
+		}
 		virtual bool CollideInto(geo::EmptyFrame f1, geo::EmptyFrame f2, entity::AbstractTriangulatedPoly& s) override
 		{
 			GetNamesAndReturn();
@@ -46,6 +59,10 @@ namespace Test
 
 	class MockCircle : public entity::Circle
 	{
+	public:
+		MockCircle() : entity::Circle{ dummy_orientation, dummy_position, dummy_radius }
+		{
+		}
 		virtual bool CollideInto(geo::EmptyFrame f1, geo::EmptyFrame f2, entity::AbstractTriangulatedPoly& s) override
 		{
 			GetNamesAndReturn();
