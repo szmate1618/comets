@@ -26,6 +26,7 @@ namespace entity
 	
 	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
+		//TODO: Handle frames.
 		return geo::length(geo::sub(this->position, that.position)) <= this->radius + that.radius;
 	}
 	
