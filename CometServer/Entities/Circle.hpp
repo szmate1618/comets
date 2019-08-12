@@ -21,6 +21,7 @@ namespace entity
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
 		virtual const geo::EmptyFrame& GetBoundingBox() override;
 		virtual std::string GetName() override;
+		const geo::real& GetRadius() const;
 
 		const geo::real radius;
 

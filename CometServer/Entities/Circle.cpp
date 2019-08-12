@@ -26,8 +26,8 @@ namespace entity
 	
 	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
-		return false;
-		//TODO: implement this.
+		//TODO: Handle frames.
+		return geo::length(geo::sub(this->position, that.position)) <= this->radius + that.radius;
 	}
 	
 	const geo::EmptyFrame& Circle::GetBoundingBox()
@@ -38,6 +38,11 @@ namespace entity
 	std::string Circle::GetName()
 	{
 		return "Circle";
+	}
+
+	const geo::real& Circle::GetRadius() const
+	{
+		return radius;
 	}
 
 }

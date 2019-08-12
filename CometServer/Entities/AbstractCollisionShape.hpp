@@ -24,6 +24,8 @@ namespace entity
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) = 0;
 		virtual const geo::EmptyFrame& GetBoundingBox() = 0;
 		virtual std::string GetName() = 0; //Useful for debugging.
+		const geo::degree& GetOrientation() const;
+		const geo::vector_2d& GetPosition() const;
 
 	protected:
 

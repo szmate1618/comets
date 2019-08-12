@@ -2,6 +2,7 @@
 #include "TriangulatedPolyNaiveRotation.hpp"
 #include "Circle.hpp"
 #include "..\Utilities\sqlite3.h"
+#include "..\Utilities\Logger.hpp"
 
 #include <sstream>
 
@@ -256,7 +257,10 @@ namespace entity
 					AbstractCollisionShape& shape1 = *collision_shape_registry.at(p_entity1->id);
 					AbstractCollisionShape& shape2 = *collision_shape_registry.at(p_entity2->id);
 					//TODO: Crop bounding boxes to the current partition.
-					shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2);
+					if (shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2))
+					{
+						util::Log(util::trace, "Entity " + std::to_string(p_entity2->id) + " collided into entity " + std::to_string(p_entity1->id) + ".");
+					}
 					#endif
 				}
 			}

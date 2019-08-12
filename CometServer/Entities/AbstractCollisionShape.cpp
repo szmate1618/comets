@@ -13,4 +13,14 @@ namespace entity
 	{
 	}
 
+	const geo::degree& AbstractCollisionShape::GetOrientation() const
+	{
+		return orientation;
+	}
+
+	const geo::vector_2d& AbstractCollisionShape::GetPosition() const
+	{
+		return position;
+	}
+
 }
