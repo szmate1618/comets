@@ -14,7 +14,7 @@ namespace entity
 	public:
 
 		AbstractTriangulatedPoly() = delete;
-		AbstractTriangulatedPoly(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&);
+		AbstractTriangulatedPoly(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&, const std::vector<uint16_t>&);
 		virtual ~AbstractTriangulatedPoly() override;
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;
@@ -24,10 +24,11 @@ namespace entity
 	protected:
 
 		const std::vector<geo::vector_2d>& vertices;
+		const std::vector<uint16_t>& triangles;
 
-		/*static int arr[];  //Some preallocated general purpose memory, here goes thread safety.
+		static int arr[];  //Some preallocated general purpose memory, here goes thread safety.
 						   //Wouldn't a local be better, though?
-		geo::real orientation;
+		/*geo::real orientation;
 		geo::point_2d pivot;
 		geo::vector_2d velocity;
 		geo::vector_2d acceleration;

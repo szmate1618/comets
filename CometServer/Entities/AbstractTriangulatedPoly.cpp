@@ -5,10 +5,16 @@
 namespace entity 
 {
 
-	//int AbstractTriangulatedPoly::arr[5000];
+	int AbstractTriangulatedPoly::arr[5000];
 
-	AbstractTriangulatedPoly::AbstractTriangulatedPoly(const geo::degree& orientation, const geo::vector_2d& position, const std::vector<geo::vector_2d>& vertices) :
-		AbstractCollisionShape{ orientation, position }, vertices{ vertices }
+	AbstractTriangulatedPoly::AbstractTriangulatedPoly
+	(
+		const geo::degree& orientation,
+		const geo::vector_2d& position,
+		const std::vector<geo::vector_2d>& vertices,
+		const std::vector<uint16_t>& triangles
+	) :
+		AbstractCollisionShape{ orientation, position }, vertices{ vertices }, triangles{ triangles }
 	{
 	}
 
@@ -23,51 +29,58 @@ namespace entity
 
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& other)
 	{
-		//TODO: Make this work.
-		/*int arr_counter = 0;
-		for(const int& i: hull)
+		int arr_counter = 0;
+		for (int i = 0; i < vertices.size(); ++i)
 		{
-			if (geo::is_inside(myframe, vertices[i]))
+			if (geo::is_inside(myframe, geo::add(geo::point_2d_rotated(vertices[i], orientation), position)) &&
+				geo::is_inside(otherframe, geo::add(geo::point_2d_rotated(vertices[i], orientation), position)))
+			{
+				arr[arr_counter] = i;
+				arr_counter++;
+			}
+		}
+		arr[arr_counter] = -1; //TODO: Add checks for overindexing.
+		arr_counter++;
+		int other_start = arr_counter;
+		for(int i = 0; i < other.triangles.size() / 3; ++i)
+		{
+			//TODO: By Unity convention, vertices are enumerated in a clockwise winding order.
+			//Maybe this extra information could be used to speed up the collision check.
+			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i)), other.orientation), other.position);
+			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i + 1)), other.orientation), other.position);
+			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i + 2)), other.orientation), other.position);
+			//TODO: This condition is too strict, think of a right angle triangle as a counter example.
+			if (geo::is_inside(otherframe, point_a)
+				|| geo::is_inside(otherframe, point_b)
+				|| geo::is_inside(otherframe, point_c))
 			{
 				arr[arr_counter] = i;
 				arr_counter++;
 			}
 		}
 		arr[arr_counter] = -1;
-		arr_counter++;
-		int other_start = arr_counter;
-		int j = 0;
-		for(const trianlge_tile& t: other.faces)
-		{
-			if (geo::is_inside(otherframe, other.vertices[t.a])
-				|| geo::is_inside(otherframe, other.vertices[t.b])
-				|| geo::is_inside(otherframe, other.vertices[t.c]))
-			{
-				arr[arr_counter] = j;
-				arr_counter++;
-			}
-			j++;
-		}
-		arr[arr_counter] = -1;
 
 		if (arr[0] == -1 || arr[other_start] == -1) return false; //at least one of the frames is empty
 	
-		for (j = other_start; arr[j] != -1; j++) //TODO declare j here
+		for (int i = other_start; arr[i] != -1; ++i)
 		{
-			geo::triangle other_face = { other.vertices[other.faces[j].a], other.vertices[other.faces[j].b], other.vertices[other.faces[j].c] };
+			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i])), other.orientation), other.position);
+			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i] + 1)), other.orientation), other.position);
+			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i] + 2)), other.orientation), other.position);
+			geo::triangle other_face = { point_a, point_b, point_c };
 			geo::EmptyFrame other_face_frame = geo::tri_as_frame(other_face);
-			for (int i = 0; arr[i] != -1; i++)
+			for (int j = 0; arr[j] != -1; ++j)
 			{
 				//TODO measure if this outer conditional is really neccesary
-				if (geo::is_inside(other_face_frame, vertices[i]))
+				if (geo::is_inside(other_face_frame, vertices.at(arr[j])))
 				{
-					if (geo::is_inside(other_face, vertices[i]))
+					if (geo::is_inside(other_face, vertices.at(arr[j])))
 					{
 						return true;
 					}
 				}
 			}
-		}*/
+		}
 
 		return false;
 	}

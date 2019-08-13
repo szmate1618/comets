@@ -17,6 +17,7 @@ namespace Test
 	geo::degree dummy_orientation;
 	geo::vector_2d dummy_position;
 	std::vector<geo::vector_2d> dummy_vertices;
+	std::vector<uint16_t> dummy_triangles;
 	geo::real dummy_radius;
 
 	std::string inviter_name;
@@ -28,7 +29,7 @@ namespace Test
 	class MockTriangulatedPolyNaiveRotation : public entity::TriangulatedPolyNaiveRotation
 	{
 	public:
-		MockTriangulatedPolyNaiveRotation() : entity::TriangulatedPolyNaiveRotation{ dummy_orientation, dummy_position, dummy_vertices }
+		MockTriangulatedPolyNaiveRotation() : entity::TriangulatedPolyNaiveRotation{ dummy_orientation, dummy_position, dummy_vertices, dummy_triangles }
 		{
 		}
 		virtual bool CollideInto(geo::EmptyFrame f1, geo::EmptyFrame f2, entity::AbstractTriangulatedPoly& s) override
@@ -44,7 +45,7 @@ namespace Test
 	class MockTriangulatedPolyPrecomputedRotation : public entity::TriangulatedPolyPrecomputedRotation
 	{
 	public:
-		MockTriangulatedPolyPrecomputedRotation() : entity::TriangulatedPolyPrecomputedRotation{ dummy_orientation, dummy_position, dummy_vertices }
+		MockTriangulatedPolyPrecomputedRotation() : entity::TriangulatedPolyPrecomputedRotation{ dummy_orientation, dummy_position, dummy_vertices, dummy_triangles }
 		{
 		}
 		virtual bool CollideInto(geo::EmptyFrame f1, geo::EmptyFrame f2, entity::AbstractTriangulatedPoly& s) override
