@@ -78,7 +78,7 @@ namespace entity
 		{
 			geo::point_2d point = geo::add(geo::point_2d_rotated(vertices.at(i), orientation), position);
 			//TODO: Handle frames.
-			if (/*geo::is_inside(myframe, point) && */geo::length(geo::sub(point, that.GetPosition())) <= that.GetRadius()) return true;
+			if (geo::is_inside(myframe, point) && geo::length(geo::sub(point, that.GetPosition())) <= that.GetRadius()) return true;
 		}
 		return false;
 	}
