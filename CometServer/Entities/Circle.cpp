@@ -32,7 +32,7 @@ namespace entity
 	
 	const geo::EmptyFrame& Circle::GetBoundingBox()
 	{
-		return { 10000, 10000, 10000, 10000 }; //TODO: Actually implement this.
+		return { -10000, 10000, -10000, 10000 }; //TODO: Actually implement this.
 	}
 
 	std::string Circle::GetName()
