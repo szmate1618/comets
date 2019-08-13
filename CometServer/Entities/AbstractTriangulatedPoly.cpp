@@ -46,9 +46,9 @@ namespace entity
 		{
 			//TODO: By Unity convention, vertices are enumerated in a clockwise winding order.
 			//Maybe this extra information could be used to speed up the collision check.
-			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i)), other.orientation), other.position);
-			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i + 1)), other.orientation), other.position);
-			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(i + 2)), other.orientation), other.position);
+			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * i)), other.orientation), other.position);
+			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * i + 1)), other.orientation), other.position);
+			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * i + 2)), other.orientation), other.position);
 			//TODO: This condition is too strict, think of a right angle triangle as a counter example.
 			if (geo::is_inside(otherframe, point_a)
 				|| geo::is_inside(otherframe, point_b)
@@ -64,17 +64,17 @@ namespace entity
 	
 		for (int i = other_start; arr[i] != -1; ++i)
 		{
-			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i])), other.orientation), other.position);
-			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i] + 1)), other.orientation), other.position);
-			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(arr[i] + 2)), other.orientation), other.position);
+			geo::point_2d point_a = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * arr[i])), other.orientation), other.position);
+			geo::point_2d point_b = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * arr[i] + 1)), other.orientation), other.position);
+			geo::point_2d point_c = geo::add(geo::point_2d_rotated(other.vertices.at(other.triangles.at(3 * arr[i] + 2)), other.orientation), other.position);
 			geo::triangle other_face = { point_a, point_b, point_c };
 			geo::EmptyFrame other_face_frame = geo::tri_as_frame(other_face);
 			for (int j = 0; arr[j] != -1; ++j)
 			{
 				//TODO measure if this outer conditional is really neccesary
-				if (geo::is_inside(other_face_frame, vertices.at(arr[j])))
+				if (geo::is_inside(other_face_frame, geo::add(geo::point_2d_rotated(vertices.at(arr[j]), orientation), position)))
 				{
-					if (geo::is_inside(other_face, vertices.at(arr[j])))
+					if (geo::is_inside(other_face, geo::add(geo::point_2d_rotated(vertices.at(arr[j]), orientation), position)))
 					{
 						return true;
 					}
