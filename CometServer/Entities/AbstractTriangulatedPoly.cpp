@@ -74,9 +74,9 @@ namespace entity
 
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
-		for (size_t i = 0; i < vertices.size(); ++i)
+		for (const geo::point_2d vertex : vertices)
 		{
-			geo::point_2d point = geo::add(geo::point_2d_rotated(vertices.at(i), orientation), position);
+			geo::point_2d point = geo::add(geo::point_2d_rotated(vertex, orientation), position);
 			//TODO: Handle frames.
 			if (geo::is_inside(myframe, point) && geo::length(geo::sub(point, that.GetPosition())) <= that.GetRadius()) return true;
 		}
