@@ -350,11 +350,12 @@ namespace entity
 
 		const StaticEntity* static_entity = handle.dynamics == dynamic ? handle.de_pointer : handle.se_pointer;
 		const std::vector<geo::vector_2d>& collision_vertices = GetShape(entity).collision_vertices;
+		const std::vector<uint16_t>& triangles = GetShape(entity).triangles;
 		if (GetShape(entity).collision_vertices.size() != 2) //If it's a polygon.
 		{
 			collision_shape_registry.emplace
 			(
-				entity, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices }
+				entity, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices, triangles }
 			);
 		}
 		else //If it's a circle.

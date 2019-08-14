@@ -14,7 +14,7 @@ namespace entity
 	public:
 
 		TriangulatedPolyPrecomputedRotation() = delete;
-		TriangulatedPolyPrecomputedRotation(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&);
+		TriangulatedPolyPrecomputedRotation(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&, const std::vector<uint16_t>&);
 		virtual ~TriangulatedPolyPrecomputedRotation() override;
 		virtual const geo::EmptyFrame& GetBoundingBox() override;
 		virtual void SetOrientation(double) override;
