@@ -6,7 +6,7 @@ namespace entity
 
 	TriangulatedPolyPrecomputedRotation::TriangulatedPolyPrecomputedRotation
 	(
-		const geo::degree& orientation,
+		const geo::radian& orientation,
 		const geo::vector_2d& position,
 		const std::vector<geo::vector_2d>& vertices,
 		const std::vector<uint16_t>& triangles

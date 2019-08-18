@@ -69,7 +69,7 @@ namespace entity
 		SimplePartitioner collision_partitioner;
 		SimpleVisionPartitioner vision_partitioner;
 
-		void EntityTurnDegree(DynamicEntity&, engine_type, geo::degree);
+		void EntityTurnDegree(DynamicEntity&, engine_type, geo::radian);
 		void SpawnEntity(def::entity_id,
 			def::owner_id,
 			def::shape_id,
@@ -78,7 +78,7 @@ namespace entity
 			dynamics_class,
 			visibility_class,
 			collidability_class,
-			geo::degree,
+			geo::radian,
 			geo::point_2d,
 			geo::vector_2d); //TODO: This is not a valid parameter when creating static entities.
 

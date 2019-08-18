@@ -14,7 +14,7 @@ namespace entity
 	public:
 
 		AbstractTriangulatedPoly() = delete;
-		AbstractTriangulatedPoly(const geo::degree&, const geo::vector_2d&, const std::vector<geo::vector_2d>&, const std::vector<uint16_t>&);
+		AbstractTriangulatedPoly(const geo::radian&, const geo::vector_2d&, const std::vector<geo::vector_2d>&, const std::vector<uint16_t>&);
 		virtual ~AbstractTriangulatedPoly() override;
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;

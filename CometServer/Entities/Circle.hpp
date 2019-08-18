@@ -14,7 +14,7 @@ namespace entity
 	public:
 
 		Circle() = delete;
-		Circle(const geo::degree&, const geo::vector_2d&, const geo::real);
+		Circle(const geo::radian&, const geo::vector_2d&, const geo::real);
 		virtual ~Circle() override;
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;

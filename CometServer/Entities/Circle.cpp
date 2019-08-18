@@ -4,7 +4,7 @@
 namespace entity 
 {
 
-	Circle::Circle(const geo::degree& orientation, const geo::vector_2d& position, const geo::real radius) :
+	Circle::Circle(const geo::radian& orientation, const geo::vector_2d& position, const geo::real radius) :
 		AbstractCollisionShape{ orientation, position }, radius{ radius }
 	{
 	}
@@ -27,7 +27,7 @@ namespace entity
 	bool Circle::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, Circle& that)
 	{
 		//TODO: Handle frames.
-		return geo::length(geo::sub(this->position, that.position)) <= this->radius + that.radius;
+		return (this->position - that.position).length() <= this->radius + that.radius;
 	}
 	
 	const geo::EmptyFrame& Circle::GetBoundingBox()

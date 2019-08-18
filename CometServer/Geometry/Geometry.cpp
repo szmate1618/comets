@@ -4,94 +4,121 @@
 namespace geo
 {
 
-	bool equals(point_2d v1, point_2d v2, real tolerance) //Shouldn't we pass _everything_ by reference?
+	bool vector_2d::equals(const vector_2d& other, real tolerance) const
 	{
-		return std::abs(v1.x - v2.x) <= tolerance && std::abs(v1.y - v2.y) <= tolerance;
+		return std::abs(x - other.x) <= tolerance && std::abs(y - other.y) <= tolerance;
 	}
 
-	bool equals(point_2d v1, point_2d v2)
+	bool vector_2d::operator==(const vector_2d& other) const
 	{
-		return equals(v1, v2, epsilon);
+		return x == other.x && y == other.y;
 	}
 
-	real length(vector_2d v)
+	real vector_2d::length() const
 	{
-		return std::sqrt(v.x * v.x + v.y * v.y);
+		return std::sqrt(x * x + y * y);
 	}
 
-	point_2d sub(point_2d v1, point_2d v2)
+	vector_2d vector_2d::operator-(const vector_2d& other) const
 	{
-		point_2d r;
-		r.x = v1.x - v2.x;
-		r.y = v1.y - v2.y;
-		return r;
+		vector_2d ret;
+		ret.x = x - other.x;
+		ret.y = y - other.y;
+		return ret;
 	}
 
-	point_2d add(point_2d v1, point_2d v2)
+	vector_2d vector_2d::operator+(const vector_2d& other) const
 	{
-		point_2d r;
-		r.x = v1.x + v2.x;
-		r.y = v1.y + v2.y;
-		return r;
+		vector_2d ret;
+		ret.x = x + other.x;
+		ret.y = y + other.y;
+		return ret;
 	}
 
-	point_2d mul(point_2d v, real s)
+	vector_2d vector_2d::operator*(const real r) const
 	{
-		point_2d r;
-		r.x = v.x * s;
-		r.y = v.y * s;
-		return r;
+		vector_2d ret;
+		ret.x = x * r;
+		ret.y = y * r;
+		return ret;
 	}
 
-	point_2d div(point_2d v, real s)
+	vector_2d vector_2d::operator/(const real r) const
 	{
-		point_2d r;
-		r.x = v.x / s;
-		r.y = v.y / s;
-		return r;
+		vector_2d ret;
+		ret.x = x / r;
+		ret.y = y / r;
+		return ret;
 	}
 
-	real length_cross(point_2d v1, point_2d v2)
+	real vector_2d::length_cross(const vector_2d& other) const
 	{
-		return v1.x * v2.y - v1.y * v2.x;
+		return x * other.y - y * other.x;
 	}
 
-	real dot_product(point_2d v1, point_2d v2)
+	real vector_2d::dot_product(const vector_2d& other) const
 	{
-		return v1.x * v2.x + v1.y * v2.y;
+		return x * other.x + y * other.y;
 	}
 
-	bool is_inside(point_2d a, point_2d b, point_2d c, point_2d p)
+	real vector_2d::operator*(const vector_2d& other) const
 	{
-		double sign1 = length_cross(sub(b, a), sub(p, a));
-		double sign2 = length_cross(sub(c, b), sub(p, b));
-		double sign3 = length_cross(sub(a, c), sub(p, c));
+		return this->dot_product(other);
+	}
+
+	bool vector_2d::is_inside(const vector_2d& a, const vector_2d& b, const vector_2d& c) const
+	{
+		double sign2 = (c - b).length_cross(*this - b);
+		double sign3 = (a - c).length_cross(*this - c);
+		double sign1 = (b - a).length_cross(*this - a);
 		//Isn't it a conditional? Maybe we should use bitwise operators.
 		//Or keep them like this, and and use short-circuit and don't even calculate sign3 if not necessary.
 		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) || (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0); 
 	}
 
-	bool is_inside(triangle t, point_2d p)
+	bool vector_2d::is_inside(const triangle& t) const
 	{
 		//Can I trust MSVC to inline this? It doesn't need to be explicitlty asked to do it if the correct compiler flag is set.
-		return is_inside(t.a, t.b, t.c, p);
+		//NOTE: My understanding of what the 'inline' keyword means and what it doesn't has improved since writing the above comment.
+		//In short, the compiler inlines whatever it wants, it probably knows better than I do.
+		return this->is_inside(t.a, t.b, t.c);
 	}
 
-	bool is_inside(EmptyFrame f, point_2d p)
+	bool vector_2d::is_inside(const EmptyFrame& f) const
 	{
-		return (f.minx <= p.x && f.maxx >= p.x && f.miny <= p.y && f.maxy >= p.y);
+		return (f.minx <= x && f.maxx >= x && f.miny <= y && f.maxy >= y);
 	}
 
-	bool is_inside_convex(point_2d a, point_2d b, point_2d c, point_2d d, point_2d e, point_2d f, point_2d p)
+	bool vector_2d::is_inside_convex(const vector_2d& a, const vector_2d& b, const vector_2d& c, const vector_2d& d, const vector_2d& e, const vector_2d& f) const
 	{
-		double sign1 = length_cross(sub(b, a), sub(p, a));
-		double sign2 = length_cross(sub(c, b), sub(p, b));
-		double sign3 = length_cross(sub(d, c), sub(p, c));
-		double sign4 = length_cross(sub(e, d), sub(p, d));
-		double sign5 = length_cross(sub(f, e), sub(p, e));
-		double sign6 = length_cross(sub(a, f), sub(p, f));
+		double sign1 = (b - a).length_cross(*this - a);
+		double sign2 = (c - b).length_cross(*this - b);
+		double sign3 = (d - c).length_cross(*this - c);
+		double sign4 = (e - d).length_cross(*this - d);
+		double sign5 = (f - e).length_cross(*this - e);
+		double sign6 = (a - f).length_cross(*this - f);
 		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) && (sign4 >= 0) && (sign5 >= 0) && (sign6 >= 0)
 			|| (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0) && (sign4 <= 0) && (sign5 <= 0) && (sign6 <= 0); 
+	}
+
+	vector_2d vector_2d::rotated(const radian angle) const
+	{
+		vector_2d ret;
+		ret.x = std::cos(angle) * x - std::sin(angle) * y;
+		ret.y = std::sin(angle) * x + std::cos(angle) * y;
+		return ret;
+	}
+
+	void vector_2d::rotate(const radian angle)
+	{
+		real original_x = x; //Does this optimization actually do anything?
+		x = std::cos(angle) * x - std::sin(angle) * y;
+		y = std::sin(angle) * original_x + std::cos(angle) * y;
+	}
+
+	vector_2d vector_2d::transformed(const radian angle, const vector_2d& center) const
+	{
+		return this->rotated(angle) + center;
 	}
 
 	//a<b b<c c<a 
@@ -152,21 +179,6 @@ namespace geo
 			if (t.b.y > t.c.y) return t.b.y;
 			else return t.c.y;
 		}
-	}
-
-	point_2d point_2d_rotated(point_2d p, degree radian)
-	{
-		point_2d ret;
-		ret.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
-		ret.y = std::sin(radian) * p.x + std::cos(radian) * p.y;
-		return ret;
-	}
-
-	void rotate_point_2d(point_2d& p, degree radian)
-	{
-		real original_x = p.x; //Does this optimization actually do anything?
-		p.x = std::cos(radian) * p.x - std::sin(radian) * p.y;
-		p.y = std::sin(radian) * original_x + std::cos(radian) * p.y;
 	}
 
 	EmptyFrame tri_as_frame(point_2d a, point_2d b, point_2d c)
