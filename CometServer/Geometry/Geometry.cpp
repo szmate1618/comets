@@ -187,25 +187,25 @@ namespace geo
 		int acc_x = (a.x < b.x) << 2 | (b.x < c.x) << 1 | (c.x < a.x);
 		switch (acc_x)
 		{
-		case 0: {f.minx = a.x; f.maxx = a.x; break; } //all equal, should not happen
-		case 1: {f.minx = c.x; f.maxx = a.x; break; } //a >= b >= c and a > c
-		case 2: {f.minx = b.x; f.maxx = c.x; break; } //c >= a >= b and c > b
-		case 3: {f.minx = b.x; f.maxx = a.x; break; }
-		case 4: {f.minx = a.x; f.maxx = b.x; break; }
-		case 5: {f.minx = c.x; f.maxx = b.x; break; }
-		case 6: {f.minx = a.x; f.maxx = c.x; break; }
+		case 0: { f.minx = a.x; f.maxx = a.x; break; } //all equal, should not happen
+		case 1: { f.minx = c.x; f.maxx = a.x; break; } //a >= b >= c and a > c
+		case 2: { f.minx = b.x; f.maxx = c.x; break; } //c >= a >= b and c > b
+		case 3: { f.minx = b.x; f.maxx = a.x; break; }
+		case 4: { f.minx = a.x; f.maxx = b.x; break; }
+		case 5: { f.minx = c.x; f.maxx = b.x; break; }
+		case 6: { f.minx = a.x; f.maxx = c.x; break; }
 		//case 7 is impossible
 		}
 		int acc_y = (a.y < b.y) << 2 | (b.y < c.y) << 1 | (c.y < a.y);
 		switch (acc_y)
 		{
-		case 0: {f.miny = a.y; f.maxy = a.y; break; } //all equal, should not happen
-		case 1: {f.miny = c.y; f.maxy = a.y; break; } //a >= b >= c and a > c
-		case 2: {f.miny = b.y; f.maxy = c.y; break; } //c >= a >= b and c > b
-		case 3: {f.miny = b.y; f.maxy = a.y; break; }
-		case 4: {f.miny = a.y; f.maxy = b.y; break; }
-		case 5: {f.miny = c.y; f.maxy = b.y; break; }
-		case 6: {f.miny = a.y; f.maxy = c.y; break; }
+		case 0: { f.miny = a.y; f.maxy = a.y; break; } //all equal, should not happen
+		case 1: { f.miny = c.y; f.maxy = a.y; break; } //a >= b >= c and a > c
+		case 2: { f.miny = b.y; f.maxy = c.y; break; } //c >= a >= b and c > b
+		case 3: { f.miny = b.y; f.maxy = a.y; break; }
+		case 4: { f.miny = a.y; f.maxy = b.y; break; }
+		case 5: { f.miny = c.y; f.maxy = b.y; break; }
+		case 6: { f.miny = a.y; f.maxy = c.y; break; }
 		//case 7 is impossible
 		}
 		return f;
