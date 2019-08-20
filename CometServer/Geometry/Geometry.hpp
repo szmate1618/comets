@@ -15,6 +15,8 @@ namespace geo_literals
 namespace geo
 {
 
+	//NOTE: All of the following structs must be PODs, consequently they can't have user defined constructors.
+
 	//Forward declarations.
 	struct triangle;
 	struct EmptyFrame;
