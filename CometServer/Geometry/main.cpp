@@ -37,7 +37,7 @@ int main()
 	t.a.x = 1.1f;
 	t.b.x = 3.1f;
 	t.c.x = 2.1f;
-	std::cout << geo::tri_minx(t);
+	std::cout << t.minx();
 	getchar();
 	std::cout << "mofo" << std::endl;
 	clock_t begin = clock();

@@ -4,7 +4,7 @@
 namespace entity 
 {
 
-	AbstractCollisionShape::AbstractCollisionShape(const geo::degree& orientation, const geo::vector_2d& position) :
+	AbstractCollisionShape::AbstractCollisionShape(const geo::radian& orientation, const geo::vector_2d& position) :
 		orientation{ orientation }, position{ position }
 	{
 	}
@@ -13,7 +13,7 @@ namespace entity
 	{
 	}
 
-	const geo::degree& AbstractCollisionShape::GetOrientation() const
+	const geo::radian& AbstractCollisionShape::GetOrientation() const
 	{
 		return orientation;
 	}

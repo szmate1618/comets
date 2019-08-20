@@ -14,7 +14,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace Test
 {
 
-	geo::degree dummy_orientation;
+	geo::radian dummy_orientation;
 	geo::vector_2d dummy_position;
 	std::vector<geo::vector_2d> dummy_vertices;
 	std::vector<uint16_t> dummy_triangles;

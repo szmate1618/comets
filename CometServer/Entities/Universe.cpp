@@ -83,7 +83,7 @@ namespace entity
 				collidability_class collidability;
 				if (std::strcmp("collidable", argv[7]) == 0) collidability = collidable;
 				else if (std::strcmp("uncollidable", argv[7]) == 0) collidability = uncollidable;
-				geo::degree orientation{ 0 };
+				geo::radian orientation{ 0 };
 				geo::point_2d position{ std::atof(argv[8]), std::atof(argv[9]) };
 				geo::vector_2d velocity{ 0, 0 };
 				universe->SpawnEntity(entity, owner, shape, texture, engine, dynamics, visibility, collidability, orientation, position, velocity);
@@ -131,13 +131,13 @@ namespace entity
 
 	void Universe::EntityTurnLeft(def::time duration, DynamicEntity& entity, engine_type engine)
 	{
-		geo::degree rotation = entity.angular_velocity * duration.count();
+		geo::radian rotation = entity.angular_velocity * duration.count();
 		EntityTurnDegree(entity, engine, rotation);
 	}
 
 	void Universe::EntityTurnRight(def::time duration, DynamicEntity& entity, engine_type engine)
 	{
-		geo::degree rotation = entity.angular_velocity * duration.count();
+		geo::radian rotation = entity.angular_velocity * duration.count();
 		EntityTurnDegree(entity, engine, -rotation);
 	}
 
@@ -148,10 +148,10 @@ namespace entity
 		case entity::para_inertial:
 			[[fallthrough]];
 		case entity::inertial:
-			entity.velocity = geo::add(entity.velocity, geo::mul(entity.acceleration, duration.count()));
+			entity.velocity = entity.velocity + entity.acceleration * duration.count();
 			break;
 		case entity::anti_intertial:
-			entity.velocity = geo::point_2d_rotated({ entity.max_speed, 0 }, entity.orientation);
+			entity.velocity = geo::vector_2d{ entity.max_speed, 0 }.rotated(entity.orientation);
 			break;
 		default:
 			//TODO: Warnlogging.
@@ -166,10 +166,10 @@ namespace entity
 		case entity::para_inertial:
 			[[fallthrough]];
 		case entity::inertial:
-			entity.velocity = geo::sub(entity.velocity, geo::mul(entity.acceleration, duration.count()));
+			entity.velocity = entity.velocity - entity.acceleration * duration.count();
 			break;
 		case entity::anti_intertial:
-			entity.velocity = geo::point_2d_rotated({ -entity.max_speed, 0 }, entity.orientation);
+			entity.velocity = geo::vector_2d{ -entity.max_speed, 0 }.rotated(entity.orientation);
 			break;
 		default:
 			//TODO: Warnlogging.
@@ -189,7 +189,7 @@ namespace entity
 			entity::collidable,
 			entity.orientation,
 			entity.position,
-			geo::point_2d_rotated({ 0, 10.0 }, entity.orientation) //TODO: Make this configurable.
+			geo::vector_2d{ 0, 10.0 }.rotated(entity.orientation) //TODO: Make this configurable.
 		);
 	}
 
@@ -217,11 +217,11 @@ namespace entity
 				for (DynamicEntity& entity : dynamic_entities[v][c])
 				{
 					//TODO: Handle angular_velocity.
-					geo::real speed = geo::length(entity.velocity);
-					if (speed > entity.max_speed) entity.velocity = geo::div(entity.velocity, speed / entity.max_speed);
-					entity.inertial_velocity = geo::mul(entity.inertial_acceleration, duration.count()); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
-					entity.position = geo::add(entity.position, geo::mul(geo::add(entity.velocity, entity.inertial_velocity), duration.count()));
-					entity.velocity = geo::div(entity.velocity, 1 + entity.friction); //TODO: Is this really how we want to define friction?
+					geo::real speed = entity.velocity.length();
+					if (speed > entity.max_speed) entity.velocity = entity.velocity / (speed / entity.max_speed);
+					entity.inertial_velocity = entity.inertial_acceleration * duration.count(); //TODO: Do we need to store this intermediate value? Can't just use inertial_acceleration only?
+					entity.position = entity.position + (entity.velocity + entity.inertial_velocity) * duration.count();
+					entity.velocity = entity.velocity / (1 + entity.friction); //TODO: Is this really how we want to define friction?
 					entity.inertial_acceleration = { 0, 0 };
 				}
 			}
@@ -285,15 +285,15 @@ namespace entity
 		}
 	}
 
-	void Universe::EntityTurnDegree(DynamicEntity& entity, engine_type engine, geo::degree rotation)
+	void Universe::EntityTurnDegree(DynamicEntity& entity, engine_type engine, geo::radian rotation)
 	{
 		switch (engine)
 		{
 		case entity::para_inertial:
-			geo::rotate_point_2d(entity.velocity, rotation);
+			entity.velocity.rotate(rotation);
 			[[fallthrough]];
 		case entity::inertial:
-			geo::rotate_point_2d(entity.acceleration, rotation);
+			entity.acceleration.rotate(rotation);
 			[[fallthrough]];
 		case entity::anti_intertial:
 			entity.orientation += rotation;
@@ -312,7 +312,7 @@ namespace entity
 		dynamics_class dynamics,
 		visibility_class visibility,
 		collidability_class collidability,
-		geo::degree orientation,
+		geo::radian orientation,
 		geo::point_2d position,
 		geo::vector_2d velocity)
 	{
@@ -360,7 +360,7 @@ namespace entity
 		}
 		else //If it's a circle.
 		{
-			geo::real radius = geo::length(geo::sub(collision_vertices[1], collision_vertices[0]));
+			geo::real radius = (collision_vertices[1] - collision_vertices[0]).length();
 			collision_shape_registry.emplace
 			(
 				entity, new Circle{ static_entity->orientation, static_entity->position, radius }

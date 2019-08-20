@@ -15,22 +15,67 @@ namespace geo_literals
 namespace geo
 {
 
+	//Forward declarations.
+	struct triangle;
+	struct EmptyFrame;
+
 	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
-	using degree = double;
+	using radian = double;
 
 	using real = double; //TODO: This could be a template variable.
 	constexpr real epsilon = 0.0005;
 
-	struct point_2d { real x; real y; };
+	struct vector_2d
+	{
 
-	using vector_2d = point_2d;
+		real x;
+		real y;
 
-	struct triangle { point_2d a; point_2d b; point_2d c; };
+		bool equals(const vector_2d&, const real) const;
+		bool operator==(const vector_2d&) const;
+		real length() const;
+		vector_2d operator-(const vector_2d&) const;
+		vector_2d operator+(const vector_2d&) const;
+		vector_2d operator*(const real) const;
+		vector_2d operator/(const real) const;
+		real length_cross(const vector_2d&) const;
+		real dot_product(const vector_2d&) const;
+		real operator*(const vector_2d&) const;
+		bool is_inside(const vector_2d&, const vector_2d&, const vector_2d&) const;
+		bool is_inside(const triangle&) const;
+		bool is_inside(const EmptyFrame&) const;
+		bool is_inside_convex(const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&) const;
+		vector_2d rotated(const radian) const;
+		void rotate(const radian);
+		vector_2d transformed(const radian, const vector_2d& center) const;
+
+	};
+
+	using point_2d = vector_2d;
+
+	struct triangle
+	{
+
+		point_2d a;
+		point_2d b;
+		point_2d c;
+
+		real maxx() const;
+		real miny() const;
+		real maxy() const;
+		real minx() const;
+		EmptyFrame as_frame() const;
+
+	};
 	
 	struct EmptyFrame
 	{
+
 		real minx, maxx, miny, maxy;
+
+		EmptyFrame operator+(const vector_2d&) const;
+
 	};
 
 	template <class T>
@@ -38,49 +83,5 @@ namespace geo
 	{
 		T* entity;
 	};
-	
-	bool equals(point_2d, point_2d, real); //TODO: Pass everything by reference.
-	
-	bool equals(point_2d, point_2d); //TODO: Implement these as member functions, with operator overloading.
-
-	real length(vector_2d);
-
-	point_2d sub(point_2d, point_2d);
-
-	point_2d add(point_2d, point_2d);
-
-	point_2d mul(point_2d, real); //TODO: Actually this is a vector operation.
-
-	point_2d div(point_2d, real);
-
-	real length_cross(point_2d, point_2d);
-
-	real dot_product(point_2d, point_2d);
-	
-	bool is_inside(point_2d, point_2d, point_2d, point_2d);
-
-	bool is_inside(triangle, point_2d);
-
-	bool is_inside(EmptyFrame, point_2d);
-
-	bool is_inside_convex(point_2d, point_2d, point_2d, point_2d, point_2d, point_2d, point_2d);
-
-	real tri_minx(triangle);
-
-	real tri_maxx(triangle);
-
-	real tri_miny(triangle);
-
-	real tri_maxy(triangle);
-
-	point_2d point_2d_rotated(point_2d, degree);
-
-	void rotate_point_2d(point_2d&, degree);
-
-	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
-
-	EmptyFrame tri_as_frame(triangle);
-
-	EmptyFrame add(EmptyFrame, vector_2d);
 
 }
