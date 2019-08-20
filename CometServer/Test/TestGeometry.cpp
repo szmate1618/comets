@@ -85,10 +85,10 @@ namespace Test
 			geo::point_2d b = {2, -1};
 			geo::point_2d c = {1, 1};
 			geo::triangle t = {a, b, c};
-			Assert::AreEqual(0.0, geo::tri_minx(t), L"Failed to find minimal x coordinate of triangle.");
-			Assert::AreEqual(2.0, geo::tri_maxx(t), L"Failed to find maximal x coordinate of triangle.");
-			Assert::AreEqual(-1.0, geo::tri_miny(t), L"Failed to find minimal y coordinate of triangle.");
-			Assert::AreEqual(1.0, geo::tri_maxy(t), L"Failed to find maximal y coordinate of triangle.");
+			Assert::AreEqual(0.0, t.minx(), L"Failed to find minimal x coordinate of triangle.");
+			Assert::AreEqual(2.0, t.maxx(), L"Failed to find maximal x coordinate of triangle.");
+			Assert::AreEqual(-1.0, t.miny(), L"Failed to find minimal y coordinate of triangle.");
+			Assert::AreEqual(1.0, t.maxy(), L"Failed to find maximal y coordinate of triangle.");
 
 			geo::EmptyFrame f = geo::tri_as_frame(a, b, c);
 			Assert::AreEqual(0.0, f.minx, L"Failed to find minimal x coordinate of frame.");
@@ -101,10 +101,10 @@ namespace Test
 		{
 			geo::point_2d a = {0, 0};
 			geo::triangle t = {a, a, a};
-			Assert::AreEqual(0.0, geo::tri_minx(t), L"Failed to find minimal x coordinate of infinitesimal triangle.");
-			Assert::AreEqual(0.0, geo::tri_maxx(t), L"Failed to find maximal x coordinate of infinitesimal triangle.");
-			Assert::AreEqual(0.0, geo::tri_miny(t), L"Failed to find minimal y coordinate of infinitesimal triangle.");
-			Assert::AreEqual(0.0, geo::tri_maxy(t), L"Failed to find maximal y coordinate of infinitesimal triangle.");
+			Assert::AreEqual(0.0, t.minx(), L"Failed to find minimal x coordinate of infinitesimal triangle.");
+			Assert::AreEqual(0.0, t.maxx(), L"Failed to find maximal x coordinate of infinitesimal triangle.");
+			Assert::AreEqual(0.0, t.miny(), L"Failed to find minimal y coordinate of infinitesimal triangle.");
+			Assert::AreEqual(0.0, t.maxy(), L"Failed to find maximal y coordinate of infinitesimal triangle.");
 
 			geo::EmptyFrame f = geo::tri_as_frame(a, a, a);
 			Assert::AreEqual(0.0, f.minx, L"Failed to find minimal x coordinate of infinitesimal frame.");
@@ -127,10 +127,10 @@ namespace Test
 				geo::real maxy = __max(a.y, __max(b.y, c.y));
 
 				geo::triangle t = {a, b, c};
-				Assert::AreEqual(minx, geo::tri_minx(t), L"Failed to find minimal x coordinate of triangle.");
-				Assert::AreEqual(maxx, geo::tri_maxx(t), L"Failed to find maximal x coordinate of triangle.");
-				Assert::AreEqual(miny, geo::tri_miny(t), L"Failed to find minimal y coordinate of triangle.");
-				Assert::AreEqual(maxy, geo::tri_maxy(t), L"Failed to find maximal y coordinate of triangle.");
+				Assert::AreEqual(minx, t.minx(), L"Failed to find minimal x coordinate of triangle.");
+				Assert::AreEqual(maxx, t.maxx(), L"Failed to find maximal x coordinate of triangle.");
+				Assert::AreEqual(miny, t.miny(), L"Failed to find minimal y coordinate of triangle.");
+				Assert::AreEqual(maxy, t.maxy(), L"Failed to find maximal y coordinate of triangle.");
 
 				geo::EmptyFrame f = geo::tri_as_frame(a, b, c);
 				Assert::AreEqual(minx, f.minx, L"Failed to find minimal x coordinate of frame.");

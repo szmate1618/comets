@@ -28,6 +28,7 @@ namespace geo
 
 	struct vector_2d
 	{
+
 		real x;
 		real y;
 
@@ -48,11 +49,24 @@ namespace geo
 		vector_2d rotated(const radian) const;
 		void rotate(const radian);
 		vector_2d transformed(const radian, const vector_2d& center) const;
+
 	};
 
 	using point_2d = vector_2d;
 
-	struct triangle { point_2d a; point_2d b; point_2d c; };
+	struct triangle
+	{
+
+		point_2d a;
+		point_2d b;
+		point_2d c;
+
+		real maxx() const;
+		real miny() const;
+		real maxy() const;
+		real minx() const;
+
+	};
 	
 	struct EmptyFrame
 	{
@@ -64,14 +78,6 @@ namespace geo
 	{
 		T* entity;
 	};
-
-	real tri_minx(triangle);
-
-	real tri_maxx(triangle);
-
-	real tri_miny(triangle);
-
-	real tri_maxy(triangle);
 
 	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
 

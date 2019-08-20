@@ -125,59 +125,59 @@ namespace geo
 	//1x0 4,6 a 0
 	//01x 2,3 b 1
 	//x01 1,5 c 2
-	real tri_minx(triangle t)
+	real triangle::minx() const
 	{
-		if (t.a.x < t.b.x)
+		if (this->a.x < this->b.x)
 		{
-			if (t.a.x < t.c.x) return t.a.x;
-			else return t.c.x;
+			if (this->a.x < this->c.x) return this->a.x;
+			else return this->c.x;
 		}
 		else
 		{
-			if (t.b.x < t.c.x) return t.b.x;
-			else return t.c.x;
+			if (this->b.x < this->c.x) return this->b.x;
+			else return this->c.x;
 		}
 	}
 
-	real tri_maxx(triangle t)
+	real triangle::maxx() const
 	{
-		if (t.a.x > t.b.x)
+		if (this->a.x > this->b.x)
 		{
-			if (t.a.x > t.c.x) return t.a.x;
-			else return t.c.x;
+			if (this->a.x > this->c.x) return this->a.x;
+			else return this->c.x;
 		}
 		else
 		{
-			if (t.b.x > t.c.x) return t.b.x;
-			else return t.c.x;
+			if (this->b.x > this->c.x) return this->b.x;
+			else return this->c.x;
 		}
 	}
 
-	real tri_miny(triangle t)
+	real triangle::miny() const
 	{
-		if (t.a.y < t.b.y)
+		if (this->a.y < this->b.y)
 		{
-			if (t.a.y < t.c.y) return t.a.y;
-			else return t.c.y;
+			if (this->a.y < this->c.y) return this->a.y;
+			else return this->c.y;
 		}
 		else
 		{
-			if (t.b.y < t.c.y) return t.b.y;
-			else return t.c.y;
+			if (this->b.y < this->c.y) return this->b.y;
+			else return this->c.y;
 		}
 	}
 
-	real tri_maxy(triangle t)
+	real triangle::maxy() const
 	{
-		if (t.a.y > t.b.y)
+		if (this->a.y > this->b.y)
 		{
-			if (t.a.y > t.c.y) return t.a.y;
-			else return t.c.y;
+			if (this->a.y > this->c.y) return this->a.y;
+			else return this->c.y;
 		}
 		else
 		{
-			if (t.b.y > t.c.y) return t.b.y;
-			else return t.c.y;
+			if (this->b.y > this->c.y) return this->b.y;
+			else return this->c.y;
 		}
 	}
 
