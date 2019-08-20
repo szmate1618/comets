@@ -68,7 +68,7 @@ namespace entity
 			geo::point_2d point_b = other.vertices.at(other.triangles.at(3 * arr[i] + 1)).transformed(other.orientation, other.position);
 			geo::point_2d point_c = other.vertices.at(other.triangles.at(3 * arr[i] + 2)).transformed(other.orientation, other.position);
 			geo::triangle other_face = { point_a, point_b, point_c };
-			geo::EmptyFrame other_face_frame = geo::tri_as_frame(other_face);
+			geo::EmptyFrame other_face_frame = other_face.as_frame();
 			for (int j = 0; arr[j] != -1; ++j)
 			{
 				//TODO measure if this outer conditional is really neccesary

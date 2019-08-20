@@ -65,12 +65,17 @@ namespace geo
 		real miny() const;
 		real maxy() const;
 		real minx() const;
+		EmptyFrame as_frame() const;
 
 	};
 	
 	struct EmptyFrame
 	{
+
 		real minx, maxx, miny, maxy;
+
+		EmptyFrame operator+(const vector_2d&) const;
+
 	};
 
 	template <class T>
@@ -78,11 +83,5 @@ namespace geo
 	{
 		T* entity;
 	};
-
-	EmptyFrame tri_as_frame(point_2d, point_2d, point_2d);
-
-	EmptyFrame tri_as_frame(triangle);
-
-	EmptyFrame add(EmptyFrame, vector_2d);
 
 }
