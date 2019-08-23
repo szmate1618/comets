@@ -52,6 +52,7 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -62,6 +63,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -287,11 +289,24 @@
 			// 
 			this.openFileDialog2.FileName = "openFileDialog2";
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBox1.BackColor = System.Drawing.Color.Black;
+			this.pictureBox1.Location = new System.Drawing.Point(310, 12);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(660, 679);
+			this.pictureBox1.TabIndex = 22;
+			this.pictureBox1.TabStop = false;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(982, 703);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.trackBar6);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.trackBar7);
@@ -326,6 +341,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -357,6 +373,7 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.OpenFileDialog openFileDialog2;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
 
