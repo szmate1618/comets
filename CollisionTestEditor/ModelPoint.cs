@@ -2,10 +2,8 @@
 
 namespace CollisionTestEditor
 {
-
 	class ModelPoint
 	{
-
 		public double x;
 		public double y;
 
@@ -77,7 +75,5 @@ namespace CollisionTestEditor
 		{
 			return new ModelPoint(p1.x - p2.x, p1.y - p2.y);
 		}
-
 	}
-
 }

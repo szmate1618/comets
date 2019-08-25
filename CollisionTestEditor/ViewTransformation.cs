@@ -3,10 +3,8 @@ using System.Drawing;
 
 namespace CollisionTestEditor
 {
-
 	class ViewTransformation
 	{
-
 		public double zoom;
 		public double offset_x;
 		public double offset_y;
@@ -27,7 +25,5 @@ namespace CollisionTestEditor
 		{
 			return new ModelPoint((p.X - offset_x) / zoom, (offset_y - p.Y) / zoom);
 		}
-
 	}
-
 }
