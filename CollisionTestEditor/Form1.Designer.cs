@@ -74,6 +74,7 @@
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Load shape";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// label1
 			// 
@@ -280,14 +281,17 @@
 			this.button2.TabIndex = 11;
 			this.button2.Text = "Load shape";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
 			// 
 			// openFileDialog2
 			// 
 			this.openFileDialog2.FileName = "openFileDialog2";
+			this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
 			// 
 			// pictureBox1
 			// 
