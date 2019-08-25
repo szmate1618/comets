@@ -9,5 +9,11 @@ namespace CollisionTestEditor
 		ModelPoint position;
 		List<ModelPoint> vertices;
 		List<int> triangles;
+		bool is_circle;
+
+		public Shape(string description)
+		{
+			this.description = description;
+		}
 	}
 }
