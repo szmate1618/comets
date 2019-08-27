@@ -37,52 +37,11 @@ namespace CollisionTestEditor
 
 		public static void Draw(Graphics g, ViewTransformation vt, Shape shape1, Shape shape2)
 		{
+			g.Clear(Color.Black);
 			DrawShape(g, vt, shape1, Color.FromArgb(128, color1));
 			DrawShape(g, vt, shape2, Color.FromArgb(128, color2));
 			DrawMarkers(g, vt, shape1, color1);
 			DrawMarkers(g, vt, shape2, color2);
-				/*List<ModelPoint> points = m.getPoints();
-				List<ModelPoint> selection = m.getSelection();
-				List<ModelTriangle> grid = m.getGrid();
-				g.Clear(Color.Black);
-				SolidBrush normalbrush = new SolidBrush(normalcolor);
-				SolidBrush selectionbrush = new SolidBrush(selectioncolor);
-				Brush linebrush;
-				foreach (ModelTriangle mt in grid)
-				{
-					DrawTriangle(g, normalbrush, mt);
-				}
-				for (int i = 0; i < points.Count; i++)
-				{
-					ModelPoint nextpoint = points[(i + 1) % points.Count];
-					DrawLine(g, normalbrush, points[i], nextpoint);
-
-					if (selection.Contains(points[i]))
-					{
-						if (selection.Contains(nextpoint))
-						{
-							linebrush = selectionbrush;
-						}
-						else
-						{
-							linebrush = CreateGradient(points[i], nextpoint, selectioncolor, normalcolor);
-						}
-						DrawLine(g, linebrush, points[i], nextpoint);
-						DrawMarker(g, selectionbrush, points[i]);
-					}
-					else
-					{
-						if (selection.Contains(nextpoint))
-						{
-							linebrush = CreateGradient(points[i], nextpoint, normalcolor, selectioncolor);
-						}
-						else
-						{
-							linebrush = normalbrush;
-						}
-						DrawLine(g, linebrush, points[i], nextpoint);
-						DrawMarker(g, normalbrush, points[i]);
-					}*/
 		}
 	}
 }
