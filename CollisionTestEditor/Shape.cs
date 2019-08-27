@@ -31,6 +31,8 @@ namespace CollisionTestEditor
 					.Split()
 					.Select((c, i) => new { Coord = Convert.ToDouble(c), Index = i })
 					.GroupBy(x => (int)(x.Index / 2))
+					//"Elements in a grouping are yielded in the order that the elements that produced them appear in source."
+					//https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupby
 					.Select(g => new ModelPoint(g.ToList()[0].Coord, g.ToList()[1].Coord))
 					.ToList();
 				sr.ReadLine();
