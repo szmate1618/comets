@@ -29,7 +29,7 @@ namespace CollisionTestEditor
 				is_circle = false;
 				vertices = sr.ReadLine()
 					.Split()
-					.Select((c, i) => new { Coord = Convert.ToDouble(c), Index = i })
+					.Select((x, i) => new { Coord = Convert.ToDouble(x), Index = i })
 					.GroupBy(x => (int)(x.Index / 2))
 					//"Elements in a grouping are yielded in the order that the elements that produced them appear in source."
 					//https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupby
@@ -41,6 +41,23 @@ namespace CollisionTestEditor
 			else
 			{
 				is_circle = true;
+				List<double> fake_vertices = sr.ReadLine().Split().Select(x => Convert.ToDouble(x)).ToList();
+				ModelPoint vertex0 = new ModelPoint(fake_vertices[0], fake_vertices[1]);
+				ModelPoint vertex1 = new ModelPoint(fake_vertices[2], fake_vertices[3]);
+
+				double radius = (vertex1 - vertex0).Length();
+				int segment_count = Convert.ToInt32(Math.Ceiling(20 * radius));
+
+				vertices = new List<ModelPoint>(segment_count + 1);
+				triangles = new List<int>(segment_count * 3);
+				double segment_radian = 2 * Math.PI / segment_count;
+
+				vertices[0] = new ModelPoint(0, 0);
+				vertices[1] = new ModelPoint(0, radius);
+				for (int i = 2; i < vertices.Count; i++)
+				{
+					vertices[i] = vertices[i - 1].Rotated(segment_radian);
+				}
 			}
 		}
 	}
