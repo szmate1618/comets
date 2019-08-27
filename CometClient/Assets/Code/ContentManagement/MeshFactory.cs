@@ -78,7 +78,6 @@ public class MeshFactory
 		for (int i = 2; i < vertices.Length; i++)
 		{
 			vertices[i] = segment_degree * vertices[i - 1];
-
 		}
 
 		Vector2[] uvs = vertices
