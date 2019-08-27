@@ -7,10 +7,10 @@ namespace CollisionTestEditor
 {
 	class Shape
 	{
-		private string description;
-		private List<ModelPoint> vertices;
-		private List<int> triangles;
-		private bool is_circle;
+		public string description;
+		public List<ModelPoint> vertices;
+		public List<int> triangles;
+		public bool is_circle;
 
 		public double orientation;
 		public ModelPoint position;
