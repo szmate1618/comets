@@ -27,7 +27,7 @@ namespace entity
 				std::stringstream shape(argv[1]);
 				size_t vertex_count;
 				size_t triangle_count;
-				shape >> vertex_count >> triangle_count;
+				shape >> vertex_count >> triangle_count; //NOTE: This allows both space and newline separators.
 				universe->shape_registry.emplace
 				(shape_id, EntityShape{
 					std::vector<float>(vertex_count * 2),
