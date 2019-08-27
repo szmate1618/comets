@@ -29,9 +29,21 @@ namespace CollisionTestEditor
 		private static void DrawMarkers(Graphics g, ViewTransformation vt, Shape shape, Color color)
 		{
 			if (shape == null) return;
-			foreach (ModelPoint modelPoint in shape.vertices)
+			if (!shape.is_circle)
 			{
-				DrawMarker(g, vt.ModelPointToPoint(modelPoint), 5, color);
+				foreach (ModelPoint modelPoint in shape.vertices)
+				{
+					DrawMarker(g, vt.ModelPointToPoint(modelPoint), 5, color);
+				}
+			}
+			else
+			{
+				ModelPoint modelCenter = new ModelPoint(0, 0);
+				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y - shape.radius));
+				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
+
+				Pen pen = new Pen(color);
+				g.DrawEllipse(pen, upperLeftCorner.X, upperLeftCorner.Y, diameter, diameter);
 			}
 		}
 
