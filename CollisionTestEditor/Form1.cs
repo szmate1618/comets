@@ -22,6 +22,7 @@ namespace CollisionTestEditor
 			InitializeComponent();
 
 			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+			pictureBox1.MouseWheel += pictureBox1_MouseWheel;
 			viewTransformation = new ViewTransformation(100.0, pictureBox1.Width / 2, pictureBox1.Height / 2);
 		}
 
@@ -50,6 +51,12 @@ namespace CollisionTestEditor
 		private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
 		{
 			shape2 = new Shape(File.ReadAllText(openFileDialog2.FileName));
+			Draw();
+		}
+
+		private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+		{
+			viewTransformation.zoom *= 1 + 0.1 * e.Delta / 120;
 			Draw();
 		}
 	}
