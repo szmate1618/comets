@@ -27,25 +27,29 @@ namespace CollisionTestEditor
 			if (!VT.StartsWith("2 1"))
 			{
 				is_circle = false;
-				vertices = sr.ReadLine()
-					.Split()
-					.Select((x, i) => new { Coord = Convert.ToDouble(x), Index = i })
-					.GroupBy(x => (int)(x.Index / 2))
-					//"Elements in a grouping are yielded in the order that the elements that produced them appear in source."
-					//https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupby
-					.Select(g => new ModelPoint(g.ToList()[0].Coord, g.ToList()[1].Coord))
+				vertices = Enumerable
+					.Range(1, vertex_count)
+					.Select(x => sr.ReadLine().Split(' '))
+					.Select(x => new ModelPoint(Convert.ToDouble(x[0]), Convert.ToDouble(x[1]))).
+					ToList();
+				//Skip UV coordinates.
+				Enumerable.Range(1, vertex_count).Select(x => sr.ReadLine());
+				triangles = Enumerable
+					.Range(1, triangle_count)
+					.Select(x => sr.ReadLine().Split(' ').Select(y => Convert.ToInt32(y)))
+					.Aggregate((x, y) => x.Concat(y))
 					.ToList();
-				sr.ReadLine();
-				triangles = sr.ReadLine().Split().Select(i => Convert.ToInt32(i)).ToList();
 			}
 			else
 			{
 				is_circle = true;
-				List<double> fake_vertices = sr.ReadLine().Split().Select(x => Convert.ToDouble(x)).ToList();
-				ModelPoint vertex0 = new ModelPoint(fake_vertices[0], fake_vertices[1]);
-				ModelPoint vertex1 = new ModelPoint(fake_vertices[2], fake_vertices[3]);
+				List<ModelPoint> fake_vertices = Enumerable
+					.Range(1, 2)
+					.Select(x => sr.ReadLine().Split(' '))
+					.Select(x => new ModelPoint(Convert.ToDouble(x[0]), Convert.ToDouble(x[1]))).
+					ToList();
 
-				double radius = (vertex1 - vertex0).Length();
+				double radius = (fake_vertices[1] - fake_vertices[0]).Length();
 				int segment_count = Convert.ToInt32(Math.Ceiling(20 * radius));
 
 				vertices = new List<ModelPoint>(segment_count + 1);
