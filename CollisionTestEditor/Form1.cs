@@ -21,9 +21,9 @@ namespace CollisionTestEditor
 		{
 			InitializeComponent();
 
-			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 			pictureBox1.MouseWheel += pictureBox1_MouseWheel;
-			viewTransformation = new ViewTransformation(100.0, pictureBox1.Width / 2, pictureBox1.Height / 2);
+			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+			viewTransformation = new ViewTransformation(40.0, pictureBox1.Width / 2, pictureBox1.Height / 2);
 		}
 
 		private void Draw()
@@ -57,6 +57,13 @@ namespace CollisionTestEditor
 		private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
 		{
 			viewTransformation.zoom *= 1 + 0.1 * e.Delta / 120;
+			Draw();
+		}
+
+		private void Form1_ResizeEnd(object sender, EventArgs e)
+		{
+			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+			viewTransformation = new ViewTransformation(viewTransformation.zoom, pictureBox1.Width / 2, pictureBox1.Height / 2);
 			Draw();
 		}
 	}

@@ -335,6 +335,7 @@
 			this.Controls.Add(this.button1);
 			this.Name = "Form1";
 			this.Text = "CollisionTestEditor";
+			this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
