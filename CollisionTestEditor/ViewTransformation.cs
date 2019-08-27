@@ -16,6 +16,11 @@ namespace CollisionTestEditor
 			this.offset_y = offset_y;
 		}
 
+		public int ModelLengthToLength(double ml)
+		{
+			return Convert.ToInt32(ml * zoom);
+		}
+
 		public Point ModelPointToPoint(ModelPoint mp)
 		{
 			return new Point(Convert.ToInt32(mp.x * zoom + offset_x), Convert.ToInt32(offset_y - mp.y * zoom));
