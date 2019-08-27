@@ -10,6 +10,7 @@ namespace CollisionTestEditor
 		public string description;
 		public List<ModelPoint> vertices;
 		public List<int> triangles;
+		public double radius;
 		public bool is_circle;
 
 		public double orientation;
@@ -49,7 +50,7 @@ namespace CollisionTestEditor
 						.Select(x => new ModelPoint(Convert.ToDouble(x[0]), Convert.ToDouble(x[1]))).
 						ToList();
 
-					double radius = (fake_vertices[1] - fake_vertices[0]).Length();
+					radius = (fake_vertices[1] - fake_vertices[0]).Length();
 					int segment_count = Convert.ToInt32(Math.Ceiling(20 * radius));
 
 					vertices = new List<ModelPoint>(segment_count + 1);
