@@ -51,18 +51,6 @@ namespace CollisionTestEditor
 						ToList();
 
 					radius = (fake_vertices[1] - fake_vertices[0]).Length();
-					int segment_count = Convert.ToInt32(Math.Ceiling(20 * radius));
-
-					vertices = new List<ModelPoint>(segment_count + 1);
-					triangles = new List<int>(segment_count * 3);
-					double segment_radian = 2 * Math.PI / segment_count;
-
-					vertices.Add(new ModelPoint(0, 0));
-					vertices.Add(new ModelPoint(0, radius));
-					for (int i = 2; i < vertices.Count; i++)
-					{
-						vertices.Add(vertices.Last().Rotated(segment_radian));
-					}
 				}
 			}
 		}
