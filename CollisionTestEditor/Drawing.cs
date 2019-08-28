@@ -34,7 +34,8 @@ namespace CollisionTestEditor
 			else
 			{
 				ModelPoint modelCenter = new ModelPoint(0, 0);
-				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y - shape.radius));
+				//NOTE: Y is mirrored between model and screen coordinate systems.
+				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y + shape.radius));
 				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
 				g.FillEllipse(brush, upperLeftCorner.X, upperLeftCorner.Y, diameter, diameter);
 			}
@@ -60,7 +61,8 @@ namespace CollisionTestEditor
 			else
 			{
 				ModelPoint modelCenter = new ModelPoint(0, 0);
-				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y - shape.radius));
+				//NOTE: Y is mirrored between model and screen coordinate systems.
+				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y + shape.radius));
 				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
 
 				Pen pen = new Pen(color);
