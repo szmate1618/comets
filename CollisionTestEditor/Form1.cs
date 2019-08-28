@@ -27,6 +27,14 @@ namespace CollisionTestEditor
 			pictureBox1.Invalidate();
 		}
 
+		private void UpdateShapes()
+		{
+			shape1.orientation = TrackBarUtils.GetRadian(trackBar1);
+			shape1.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar2, trackBar3), TrackBarUtils.GetCoordinate(trackBar5, trackBar4));
+			shape2.orientation = TrackBarUtils.GetRadian(trackBar6);
+			shape1.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar7, trackBar8), TrackBarUtils.GetCoordinate(trackBar9, trackBar10));
+		}
+
 		private void button1_Click(object sender, EventArgs e)
 		{
 			openFileDialog1.ShowDialog();
