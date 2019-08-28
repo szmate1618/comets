@@ -17,6 +17,27 @@ namespace CollisionTestEditor
 		private static void DrawShape(Graphics g, ViewTransformation vt, Shape shape, Color color)
 		{
 			if (shape == null) return;
+			Brush brush = new SolidBrush(color);
+			if (!shape.is_circle)
+			{
+				for (int i = 0; i < shape.triangles.Count; i += 3)
+				{
+					Point[] points = new Point[]
+					{
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i]]),
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 1]]),
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 2]])
+					};
+					g.FillPolygon(brush, points);
+				}
+			}
+			else
+			{
+				ModelPoint modelCenter = new ModelPoint(0, 0);
+				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y - shape.radius));
+				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
+				g.FillEllipse(brush, upperLeftCorner.X, upperLeftCorner.Y, diameter, diameter);
+			}
 		}
 
 		private static void DrawMarker(Graphics g, Point p, int halfLength, Color color)
