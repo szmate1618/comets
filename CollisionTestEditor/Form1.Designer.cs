@@ -117,7 +117,7 @@
 			// trackBar3
 			// 
 			this.trackBar3.Location = new System.Drawing.Point(204, 82);
-			this.trackBar3.Maximum = 100;
+			this.trackBar3.Maximum = 99;
 			this.trackBar3.Name = "trackBar3";
 			this.trackBar3.Size = new System.Drawing.Size(100, 56);
 			this.trackBar3.TabIndex = 6;
@@ -135,7 +135,7 @@
 			// trackBar4
 			// 
 			this.trackBar4.Location = new System.Drawing.Point(204, 135);
-			this.trackBar4.Maximum = 100;
+			this.trackBar4.Maximum = 99;
 			this.trackBar4.Name = "trackBar4";
 			this.trackBar4.Size = new System.Drawing.Size(100, 56);
 			this.trackBar4.TabIndex = 10;
@@ -173,7 +173,7 @@
 			// 
 			this.trackBar6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trackBar6.Location = new System.Drawing.Point(204, 635);
-			this.trackBar6.Maximum = 100;
+			this.trackBar6.Maximum = 99;
 			this.trackBar6.Name = "trackBar6";
 			this.trackBar6.Size = new System.Drawing.Size(100, 56);
 			this.trackBar6.TabIndex = 21;
@@ -214,7 +214,7 @@
 			// 
 			this.trackBar8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trackBar8.Location = new System.Drawing.Point(204, 582);
-			this.trackBar8.Maximum = 100;
+			this.trackBar8.Maximum = 99;
 			this.trackBar8.Name = "trackBar8";
 			this.trackBar8.Size = new System.Drawing.Size(100, 56);
 			this.trackBar8.TabIndex = 17;
