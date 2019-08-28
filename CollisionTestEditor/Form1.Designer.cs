@@ -35,19 +35,19 @@
 			this.trackBar2 = new System.Windows.Forms.TrackBar();
 			this.trackBar3 = new System.Windows.Forms.TrackBar();
 			this.label3 = new System.Windows.Forms.Label();
-			this.trackBar4 = new System.Windows.Forms.TrackBar();
-			this.label4 = new System.Windows.Forms.Label();
 			this.trackBar5 = new System.Windows.Forms.TrackBar();
+			this.label4 = new System.Windows.Forms.Label();
+			this.trackBar4 = new System.Windows.Forms.TrackBar();
 			this.label5 = new System.Windows.Forms.Label();
-			this.trackBar6 = new System.Windows.Forms.TrackBar();
+			this.trackBar10 = new System.Windows.Forms.TrackBar();
 			this.label6 = new System.Windows.Forms.Label();
-			this.trackBar7 = new System.Windows.Forms.TrackBar();
+			this.trackBar9 = new System.Windows.Forms.TrackBar();
 			this.label7 = new System.Windows.Forms.Label();
 			this.trackBar8 = new System.Windows.Forms.TrackBar();
 			this.label8 = new System.Windows.Forms.Label();
-			this.trackBar9 = new System.Windows.Forms.TrackBar();
+			this.trackBar7 = new System.Windows.Forms.TrackBar();
 			this.label9 = new System.Windows.Forms.Label();
-			this.trackBar10 = new System.Windows.Forms.TrackBar();
+			this.trackBar6 = new System.Windows.Forms.TrackBar();
 			this.label10 = new System.Windows.Forms.Label();
 			this.button2 = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -56,13 +56,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -132,13 +132,13 @@
 			this.label3.TabIndex = 5;
 			this.label3.Text = "{x}";
 			// 
-			// trackBar4
+			// trackBar5
 			// 
-			this.trackBar4.Location = new System.Drawing.Point(204, 135);
-			this.trackBar4.Maximum = 99;
-			this.trackBar4.Name = "trackBar4";
-			this.trackBar4.Size = new System.Drawing.Size(100, 56);
-			this.trackBar4.TabIndex = 10;
+			this.trackBar5.Location = new System.Drawing.Point(204, 135);
+			this.trackBar5.Maximum = 99;
+			this.trackBar5.Name = "trackBar5";
+			this.trackBar5.Size = new System.Drawing.Size(100, 56);
+			this.trackBar5.TabIndex = 10;
 			// 
 			// label4
 			// 
@@ -150,14 +150,14 @@
 			this.label4.TabIndex = 9;
 			this.label4.Text = "{y}";
 			// 
-			// trackBar5
+			// trackBar4
 			// 
-			this.trackBar5.Location = new System.Drawing.Point(54, 135);
-			this.trackBar5.Maximum = 100;
-			this.trackBar5.Minimum = -100;
-			this.trackBar5.Name = "trackBar5";
-			this.trackBar5.Size = new System.Drawing.Size(100, 56);
-			this.trackBar5.TabIndex = 8;
+			this.trackBar4.Location = new System.Drawing.Point(54, 135);
+			this.trackBar4.Maximum = 100;
+			this.trackBar4.Minimum = -100;
+			this.trackBar4.Name = "trackBar4";
+			this.trackBar4.Size = new System.Drawing.Size(100, 56);
+			this.trackBar4.TabIndex = 8;
 			// 
 			// label5
 			// 
@@ -169,14 +169,14 @@
 			this.label5.TabIndex = 7;
 			this.label5.Text = "[y]";
 			// 
-			// trackBar6
+			// trackBar10
 			// 
-			this.trackBar6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.trackBar6.Location = new System.Drawing.Point(204, 635);
-			this.trackBar6.Maximum = 99;
-			this.trackBar6.Name = "trackBar6";
-			this.trackBar6.Size = new System.Drawing.Size(100, 56);
-			this.trackBar6.TabIndex = 21;
+			this.trackBar10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trackBar10.Location = new System.Drawing.Point(204, 635);
+			this.trackBar10.Maximum = 99;
+			this.trackBar10.Name = "trackBar10";
+			this.trackBar10.Size = new System.Drawing.Size(100, 56);
+			this.trackBar10.TabIndex = 21;
 			// 
 			// label6
 			// 
@@ -189,15 +189,15 @@
 			this.label6.TabIndex = 20;
 			this.label6.Text = "{y}";
 			// 
-			// trackBar7
+			// trackBar9
 			// 
-			this.trackBar7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.trackBar7.Location = new System.Drawing.Point(54, 635);
-			this.trackBar7.Maximum = 100;
-			this.trackBar7.Minimum = -100;
-			this.trackBar7.Name = "trackBar7";
-			this.trackBar7.Size = new System.Drawing.Size(100, 56);
-			this.trackBar7.TabIndex = 19;
+			this.trackBar9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trackBar9.Location = new System.Drawing.Point(54, 635);
+			this.trackBar9.Maximum = 100;
+			this.trackBar9.Minimum = -100;
+			this.trackBar9.Name = "trackBar9";
+			this.trackBar9.Size = new System.Drawing.Size(100, 56);
+			this.trackBar9.TabIndex = 19;
 			// 
 			// label7
 			// 
@@ -230,15 +230,15 @@
 			this.label8.TabIndex = 16;
 			this.label8.Text = "{x}";
 			// 
-			// trackBar9
+			// trackBar7
 			// 
-			this.trackBar9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.trackBar9.Location = new System.Drawing.Point(54, 582);
-			this.trackBar9.Maximum = 100;
-			this.trackBar9.Minimum = -100;
-			this.trackBar9.Name = "trackBar9";
-			this.trackBar9.Size = new System.Drawing.Size(100, 56);
-			this.trackBar9.TabIndex = 15;
+			this.trackBar7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trackBar7.Location = new System.Drawing.Point(54, 582);
+			this.trackBar7.Maximum = 100;
+			this.trackBar7.Minimum = -100;
+			this.trackBar7.Name = "trackBar7";
+			this.trackBar7.Size = new System.Drawing.Size(100, 56);
+			this.trackBar7.TabIndex = 15;
 			// 
 			// label9
 			// 
@@ -251,15 +251,15 @@
 			this.label9.TabIndex = 14;
 			this.label9.Text = "[x]";
 			// 
-			// trackBar10
+			// trackBar6
 			// 
-			this.trackBar10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.trackBar10.Location = new System.Drawing.Point(54, 543);
-			this.trackBar10.Maximum = 360;
-			this.trackBar10.Minimum = -360;
-			this.trackBar10.Name = "trackBar10";
-			this.trackBar10.Size = new System.Drawing.Size(100, 56);
-			this.trackBar10.TabIndex = 13;
+			this.trackBar6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trackBar6.Location = new System.Drawing.Point(54, 543);
+			this.trackBar6.Maximum = 360;
+			this.trackBar6.Minimum = -360;
+			this.trackBar6.Name = "trackBar6";
+			this.trackBar6.Size = new System.Drawing.Size(100, 56);
+			this.trackBar6.TabIndex = 13;
 			// 
 			// label10
 			// 
@@ -311,20 +311,20 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(982, 703);
 			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.trackBar6);
+			this.Controls.Add(this.trackBar10);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.trackBar7);
+			this.Controls.Add(this.trackBar9);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.trackBar8);
 			this.Controls.Add(this.label8);
-			this.Controls.Add(this.trackBar9);
+			this.Controls.Add(this.trackBar7);
 			this.Controls.Add(this.label9);
-			this.Controls.Add(this.trackBar10);
+			this.Controls.Add(this.trackBar6);
 			this.Controls.Add(this.label10);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.trackBar4);
-			this.Controls.Add(this.label4);
 			this.Controls.Add(this.trackBar5);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.trackBar4);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.trackBar3);
 			this.Controls.Add(this.label3);
@@ -339,13 +339,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -361,19 +361,19 @@
 		private System.Windows.Forms.TrackBar trackBar2;
 		private System.Windows.Forms.TrackBar trackBar3;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TrackBar trackBar4;
-		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TrackBar trackBar5;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TrackBar trackBar4;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TrackBar trackBar6;
+		private System.Windows.Forms.TrackBar trackBar10;
 		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.TrackBar trackBar7;
+		private System.Windows.Forms.TrackBar trackBar9;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TrackBar trackBar8;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TrackBar trackBar9;
+		private System.Windows.Forms.TrackBar trackBar7;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.TrackBar trackBar10;
+		private System.Windows.Forms.TrackBar trackBar6;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
