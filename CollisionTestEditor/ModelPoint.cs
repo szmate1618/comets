@@ -66,6 +66,11 @@ namespace CollisionTestEditor
 			return new ModelPoint(Math.Cos(radian) * x - Math.Sin(radian) * y, Math.Sin(radian) * x + Math.Cos(radian) * y);
 		}
 
+		public ModelPoint Transformed(double radian, ModelPoint position)
+		{
+			return Rotated(radian) + position;
+		}
+
 		public static ModelPoint operator -(ModelPoint p)
 		{
 			return new ModelPoint(-p.x, -p.y);

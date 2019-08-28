@@ -24,16 +24,16 @@ namespace CollisionTestEditor
 				{
 					Point[] points = new Point[]
 					{
-						vt.ModelPointToPoint(shape.vertices[shape.triangles[i]]),
-						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 1]]),
-						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 2]])
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i]].Transformed(shape.orientation, shape.position)),
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 1]].Transformed(shape.orientation, shape.position)),
+						vt.ModelPointToPoint(shape.vertices[shape.triangles[i + 2]].Transformed(shape.orientation, shape.position))
 					};
 					g.FillPolygon(brush, points);
 				}
 			}
 			else
 			{
-				ModelPoint modelCenter = new ModelPoint(0, 0);
+				ModelPoint modelCenter = shape.position;
 				//NOTE: Y is mirrored between model and screen coordinate systems.
 				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y + shape.radius));
 				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
@@ -55,12 +55,12 @@ namespace CollisionTestEditor
 			{
 				foreach (ModelPoint modelPoint in shape.vertices)
 				{
-					DrawMarker(g, vt.ModelPointToPoint(modelPoint), 5, color);
+					DrawMarker(g, vt.ModelPointToPoint(modelPoint.Transformed(shape.orientation, shape.position)), 5, color);
 				}
 			}
 			else
 			{
-				ModelPoint modelCenter = new ModelPoint(0, 0);
+				ModelPoint modelCenter = shape.position;
 				//NOTE: Y is mirrored between model and screen coordinate systems.
 				Point upperLeftCorner = vt.ModelPointToPoint(new ModelPoint(modelCenter.x - shape.radius, modelCenter.y + shape.radius));
 				int diameter = 2 * vt.ModelLengthToLength(shape.radius);
