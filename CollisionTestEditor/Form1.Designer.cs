@@ -94,6 +94,7 @@
 			this.trackBar1.Name = "trackBar1";
 			this.trackBar1.Size = new System.Drawing.Size(100, 56);
 			this.trackBar1.TabIndex = 2;
+			this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label2
 			// 
@@ -113,14 +114,17 @@
 			this.trackBar2.Name = "trackBar2";
 			this.trackBar2.Size = new System.Drawing.Size(100, 56);
 			this.trackBar2.TabIndex = 4;
+			this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// trackBar3
 			// 
 			this.trackBar3.Location = new System.Drawing.Point(204, 82);
 			this.trackBar3.Maximum = 99;
+			this.trackBar3.Minimum = -99;
 			this.trackBar3.Name = "trackBar3";
 			this.trackBar3.Size = new System.Drawing.Size(100, 56);
 			this.trackBar3.TabIndex = 6;
+			this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label3
 			// 
@@ -136,9 +140,11 @@
 			// 
 			this.trackBar5.Location = new System.Drawing.Point(204, 135);
 			this.trackBar5.Maximum = 99;
+			this.trackBar5.Minimum = -99;
 			this.trackBar5.Name = "trackBar5";
 			this.trackBar5.Size = new System.Drawing.Size(100, 56);
 			this.trackBar5.TabIndex = 10;
+			this.trackBar5.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label4
 			// 
@@ -158,6 +164,7 @@
 			this.trackBar4.Name = "trackBar4";
 			this.trackBar4.Size = new System.Drawing.Size(100, 56);
 			this.trackBar4.TabIndex = 8;
+			this.trackBar4.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label5
 			// 
@@ -174,9 +181,11 @@
 			this.trackBar10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trackBar10.Location = new System.Drawing.Point(204, 635);
 			this.trackBar10.Maximum = 99;
+			this.trackBar10.Minimum = -99;
 			this.trackBar10.Name = "trackBar10";
 			this.trackBar10.Size = new System.Drawing.Size(100, 56);
 			this.trackBar10.TabIndex = 21;
+			this.trackBar10.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label6
 			// 
@@ -198,6 +207,7 @@
 			this.trackBar9.Name = "trackBar9";
 			this.trackBar9.Size = new System.Drawing.Size(100, 56);
 			this.trackBar9.TabIndex = 19;
+			this.trackBar9.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label7
 			// 
@@ -215,9 +225,11 @@
 			this.trackBar8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trackBar8.Location = new System.Drawing.Point(204, 582);
 			this.trackBar8.Maximum = 99;
+			this.trackBar8.Minimum = -99;
 			this.trackBar8.Name = "trackBar8";
 			this.trackBar8.Size = new System.Drawing.Size(100, 56);
 			this.trackBar8.TabIndex = 17;
+			this.trackBar8.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label8
 			// 
@@ -239,6 +251,7 @@
 			this.trackBar7.Name = "trackBar7";
 			this.trackBar7.Size = new System.Drawing.Size(100, 56);
 			this.trackBar7.TabIndex = 15;
+			this.trackBar7.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label9
 			// 
@@ -260,6 +273,7 @@
 			this.trackBar6.Name = "trackBar6";
 			this.trackBar6.Size = new System.Drawing.Size(100, 56);
 			this.trackBar6.TabIndex = 13;
+			this.trackBar6.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
 			// 
 			// label10
 			// 

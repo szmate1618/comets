@@ -29,10 +29,16 @@ namespace CollisionTestEditor
 
 		private void UpdateShapes()
 		{
-			shape1.orientation = TrackBarUtils.GetRadian(trackBar1);
-			shape1.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar2, trackBar3), TrackBarUtils.GetCoordinate(trackBar5, trackBar4));
-			shape2.orientation = TrackBarUtils.GetRadian(trackBar6);
-			shape1.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar7, trackBar8), TrackBarUtils.GetCoordinate(trackBar9, trackBar10));
+			if (shape1 != null)
+			{
+				shape1.orientation = TrackBarUtils.GetRadian(trackBar1);
+				shape1.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar2, trackBar3), TrackBarUtils.GetCoordinate(trackBar4, trackBar5));
+			}
+			if (shape2 != null)
+			{
+				shape2.orientation = TrackBarUtils.GetRadian(trackBar6);
+				shape2.position = new ModelPoint(TrackBarUtils.GetCoordinate(trackBar7, trackBar8), TrackBarUtils.GetCoordinate(trackBar9, trackBar10));
+			}
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -67,6 +73,12 @@ namespace CollisionTestEditor
 		{
 			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 			viewTransformation = new ViewTransformation(viewTransformation.zoom, pictureBox1.Width / 2, pictureBox1.Height / 2);
+			Draw();
+		}
+
+		private void trackBar1_ValueChanged(object sender, EventArgs e)
+		{
+			UpdateShapes();
 			Draw();
 		}
 	}

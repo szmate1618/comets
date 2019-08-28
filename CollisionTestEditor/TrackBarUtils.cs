@@ -12,7 +12,7 @@ namespace CollisionTestEditor
 
 		public static double GetCoordinate(TrackBar integerPart, TrackBar fractionalPart)
 		{
-			return integerPart.Value + ((integerPart.Value > 0) ? 0.01 : -0.01) * fractionalPart.Value;
+			return integerPart.Value + fractionalPart.Value / 100.0;
 		}
 	}
 }
