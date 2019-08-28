@@ -34,7 +34,7 @@ namespace CollisionTestEditor
 
 		private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
 		{
-			shape1 = new Shape(File.ReadAllText(openFileDialog1.FileName));
+			shape1 = new Shape(File.ReadAllText(openFileDialog1.FileName), 0, new ModelPoint(0, 0));
 			Draw();
 		}
 
@@ -45,7 +45,7 @@ namespace CollisionTestEditor
 
 		private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
 		{
-			shape2 = new Shape(File.ReadAllText(openFileDialog2.FileName));
+			shape2 = new Shape(File.ReadAllText(openFileDialog2.FileName), 0, new ModelPoint(0, 0));
 			Draw();
 		}
 

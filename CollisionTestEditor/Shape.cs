@@ -16,9 +16,11 @@ namespace CollisionTestEditor
 		public double orientation;
 		public ModelPoint position;
 
-		public Shape(string description)
+		public Shape(string description, double orientation, ModelPoint position)
 		{
 			this.description = description;
+			this.orientation = orientation;
+			this.position = position;
 
 			using (StringReader sr = new StringReader(description))
 			{
