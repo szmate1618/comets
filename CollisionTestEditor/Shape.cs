@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CollisionTestEditor
 {
-	class Shape
+	class Shape : IFormattable
 	{
 		public string description;
 		public List<ModelPoint> vertices;
@@ -55,6 +55,11 @@ namespace CollisionTestEditor
 					radius = (fake_vertices[1] - fake_vertices[0]).Length();
 				}
 			}
+		}
+
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+			return string.Format("{0}\n{1}\n{2}\n", orientation, position, description);
 		}
 	}
 }

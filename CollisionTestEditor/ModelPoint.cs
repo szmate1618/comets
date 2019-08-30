@@ -2,7 +2,7 @@
 
 namespace CollisionTestEditor
 {
-	class ModelPoint
+	class ModelPoint : IFormattable
 	{
 		public double x;
 		public double y;
@@ -26,6 +26,11 @@ namespace CollisionTestEditor
 		public ModelPoint Transformed(double radian, ModelPoint position)
 		{
 			return Rotated(radian) + position;
+		}
+
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+			return string.Format("{0} {1}", x, y);
 		}
 
 		public static ModelPoint operator -(ModelPoint p)
