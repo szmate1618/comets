@@ -59,7 +59,7 @@ namespace CollisionTestEditor
 
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
-			return string.Format("{0}\n{1}\n{2}\n", orientation, position, description);
+			return string.Format("{0}\n{1}\n{2}", orientation, position, description);
 		}
 	}
 }
