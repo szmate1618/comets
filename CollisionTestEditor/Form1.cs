@@ -81,5 +81,21 @@ namespace CollisionTestEditor
 			UpdateShapes();
 			Draw();
 		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			saveFileDialog1.ShowDialog();
+		}
+
+		private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+		{
+			using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+			{
+				sw.WriteLine(checkBox1.Checked ? "TRUE" : "FALSE");
+				sw.WriteLine(checkBox2.Checked ? "TRUE" : "FALSE");
+				sw.WriteLine(shape1);
+				sw.WriteLine(shape2);
+			}
+		}
 	}
 }

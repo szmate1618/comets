@@ -56,6 +56,7 @@
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.button3 = new System.Windows.Forms.Button();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -341,6 +342,11 @@
 			this.button3.TabIndex = 25;
 			this.button3.Text = "Save scenario";
 			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
 			// 
 			// Form1
 			// 
@@ -422,6 +428,7 @@
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 	}
 }
 
