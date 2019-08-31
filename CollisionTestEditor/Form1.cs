@@ -99,8 +99,9 @@ namespace CollisionTestEditor
 			{
 				sw.WriteLine(checkBox1.Checked ? "TRUE" : "FALSE");
 				sw.WriteLine(checkBox2.Checked ? "TRUE" : "FALSE");
-				sw.WriteLine(shape1);
-				sw.WriteLine(shape2);
+				//Shape descriptions already contain a terminating newline.
+				sw.Write(shape1);
+				sw.Write(shape2);
 			}
 		}
 	}
