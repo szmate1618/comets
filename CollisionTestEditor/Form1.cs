@@ -19,6 +19,12 @@ namespace CollisionTestEditor
 			pictureBox1.MouseWheel += pictureBox1_MouseWheel;
 			pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 			viewTransformation = new ViewTransformation(40.0, pictureBox1.Width / 2, pictureBox1.Height / 2);
+
+			string defaultShapeFolder = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\Shapes"));
+			string defaultScenarioFolder = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\CometServer\Test\CollisionTestScenarios"));
+			openFileDialog1.InitialDirectory = defaultShapeFolder;
+			openFileDialog2.InitialDirectory = defaultShapeFolder;
+			saveFileDialog1.InitialDirectory = defaultScenarioFolder;
 		}
 
 		private void Draw()
