@@ -95,11 +95,13 @@ namespace Test
 			std::filesystem::path scenario_file_folder = std::filesystem::relative(R"(..\..\Test\CollisionTestScenarios)");
 			for (const auto& file : std::filesystem::directory_iterator(scenario_file_folder))
 			{
-				std::wstring fail_message1 = file.path().wstring() + L": 1 -> 2 collision is not detected.";
-				std::wstring fail_message2 = file.path().wstring() + L": 2 -> 1 collision is not detected.";
-
 				std::ifstream scenario(file.path().string());
 				ReadScenario(scenario);
+
+				std::wstring fail_message1 = file.path().wstring() +
+					(one_collides_into_two ? L": 1 -> 2 collision not detected." : L": 1 -> 2 false collision detected.");
+				std::wstring fail_message2 = file.path().wstring() +
+					(two_collides_into_one ? L": 2 -> 1 collision not detected." : L": 2 -> 1 false collision detected.");
 
 				std::unique_ptr<entity::AbstractCollisionShape> shape1;
 				std::unique_ptr<entity::AbstractCollisionShape> shape2;
