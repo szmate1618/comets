@@ -57,6 +57,8 @@
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.button3 = new System.Windows.Forms.Button();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.button4 = new System.Windows.Forms.Button();
+			this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -348,11 +350,27 @@
 			// 
 			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
 			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(146, 409);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(130, 23);
+			this.button4.TabIndex = 26;
+			this.button4.Text = "Load scenario";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
+			// 
+			// openFileDialog3
+			// 
+			this.openFileDialog3.FileName = "openFileDialog3";
+			this.openFileDialog3.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog3_FileOk);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(982, 703);
+			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.checkBox2);
 			this.Controls.Add(this.checkBox1);
@@ -429,6 +447,8 @@
 		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.OpenFileDialog openFileDialog3;
 	}
 }
 

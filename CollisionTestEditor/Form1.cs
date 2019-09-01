@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace CollisionTestEditor
 			openFileDialog1.InitialDirectory = defaultShapeFolder;
 			openFileDialog2.InitialDirectory = defaultShapeFolder;
 			saveFileDialog1.InitialDirectory = defaultScenarioFolder;
+			openFileDialog3.InitialDirectory = defaultScenarioFolder;
 		}
 
 		private void Draw()
@@ -55,6 +57,7 @@ namespace CollisionTestEditor
 		private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
 		{
 			shape1 = new Shape(File.ReadAllText(openFileDialog1.FileName), 0, new ModelPoint(0, 0));
+			UpdateShapes();
 			Draw();
 		}
 
@@ -66,6 +69,7 @@ namespace CollisionTestEditor
 		private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
 		{
 			shape2 = new Shape(File.ReadAllText(openFileDialog2.FileName), 0, new ModelPoint(0, 0));
+			UpdateShapes();
 			Draw();
 		}
 
@@ -103,6 +107,65 @@ namespace CollisionTestEditor
 				sw.Write(shape1);
 				sw.Write(shape2);
 			}
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			openFileDialog3.ShowDialog();
+		}
+
+		private void openFileDialog3_FileOk(object sender, CancelEventArgs e)
+		{
+			using (StreamReader sr = new StreamReader(openFileDialog3.FileName))
+			{
+				string line;
+				line = sr.ReadLine();
+				Debug.Assert(line == "TRUE" || line == "FALSE", "First line of " + openFileDialog3.FileName + " must be 'TRUE' or 'FALSE'.");
+				checkBox1.Checked = (line == "TRUE");
+				line = sr.ReadLine();
+				Debug.Assert(line == "TRUE" || line == "FALSE", "Second line of " + openFileDialog3.FileName + " must be 'TRUE' or 'FALSE'.");
+				checkBox2.Checked = (line == "TRUE");
+
+				double orientation;
+				ModelPoint position;
+
+				orientation = Convert.ToDouble(sr.ReadLine());
+				line = sr.ReadLine();
+				position = new ModelPoint(Convert.ToDouble(line.Split()[0]), Convert.ToDouble(line.Split()[1]));
+				trackBar1.Value = Convert.ToInt32(orientation / Math.PI * 180);
+				trackBar2.Value = Convert.ToInt32(Math.Truncate(position.x));
+				trackBar3.Value = Convert.ToInt32((position.x - Math.Truncate(position.x)) * 100);
+				trackBar4.Value = Convert.ToInt32(Math.Truncate(position.y));
+				trackBar5.Value = Convert.ToInt32((position.y - Math.Truncate(position.y)) * 100);
+
+				line = sr.ReadLine();
+				for (int i = 0; i < Convert.ToInt32(line.Split()[0]) * 2 + Convert.ToInt32(line.Split()[1]); i++)
+				{
+					line += "\n" + sr.ReadLine();
+				}
+				line += "\n";
+				shape1 = new Shape(line, 0, new ModelPoint(0, 0));
+
+				orientation = Convert.ToDouble(sr.ReadLine());
+				line = sr.ReadLine();
+				position = new ModelPoint(Convert.ToDouble(line.Split()[0]), Convert.ToDouble(line.Split()[1]));
+				trackBar6.Value = Convert.ToInt32(orientation / Math.PI * 180);
+				trackBar7.Value = Convert.ToInt32(Math.Truncate(position.x));
+				trackBar8.Value = Convert.ToInt32((position.x - Math.Truncate(position.x)) * 100);
+				trackBar9.Value = Convert.ToInt32(Math.Truncate(position.y));
+				trackBar10.Value = Convert.ToInt32((position.y - Math.Truncate(position.y)) * 100);
+
+				line = sr.ReadLine();
+				for (int i = 0; i < Convert.ToInt32(line.Split()[0]) * 2 + Convert.ToInt32(line.Split()[1]); i++)
+				{
+					line += "\n" + sr.ReadLine();
+				}
+				line += "\n";
+				shape2 = new Shape(line, 0, new ModelPoint(0, 0));
+			}
+
+			UpdateShapes();
+			Draw();
 		}
 	}
 }
