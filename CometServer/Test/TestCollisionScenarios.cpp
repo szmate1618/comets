@@ -92,7 +92,9 @@ namespace Test
 
 		TEST_METHOD(AllScenarios)
 		{
+			int scenarios_ran = 0;
 			std::filesystem::path scenario_file_folder = std::filesystem::relative(R"(..\..\Test\CollisionTestScenarios)");
+
 			for (const auto& file : std::filesystem::directory_iterator(scenario_file_folder))
 			{
 				std::ifstream scenario(file.path().string());
@@ -113,7 +115,11 @@ namespace Test
 
 				Assert::AreEqual(one_collides_into_two, shape2->InviteForCollision(dummy_frame, dummy_frame, *shape1), fail_message1.c_str());
 				Assert::AreEqual(two_collides_into_one, shape1->InviteForCollision(dummy_frame, dummy_frame, *shape2), fail_message2.c_str());
+
+				scenarios_ran++;
 			}
+
+			Logger::WriteMessage((std::to_string(scenarios_ran) + " collision test scenarios were run.").c_str());
 		}
 
 	};
