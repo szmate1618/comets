@@ -19,6 +19,9 @@ namespace Test
 	{
 	private:
 
+		bool one_collides_into_two;
+		bool two_collides_into_one;
+
 		struct CollisionTestEntity
 		{
 			geo::real orientation;
@@ -61,13 +64,28 @@ namespace Test
 			std::string line;
 			scenario >> line;
 			assert(line == "TRUE" || line == "FALSE");
-			bool one_collides_into_two = (line == "TRUE");
+			one_collides_into_two = (line == "TRUE");
 			scenario >> line;
 			assert(line == "TRUE" || line == "FALSE");
-			bool two_collides_into_one = (line == "TRUE");
+			two_collides_into_one = (line == "TRUE");
 
 			ReadEntity(scenario, entity1);
 			ReadEntity(scenario, entity2);
+		}
+
+		void ConstructCollisionShape(const CollisionTestEntity& entity, std::unique_ptr<entity::AbstractCollisionShape>&
+			shape)
+		{
+			if (entity.collision_vertices.size() != 2)
+			{
+				shape = std::make_unique<entity::TriangulatedPolyNaiveRotation>(entity.orientation, entity.position, entity.collision_vertices, entity.triangles);
+			}
+			else
+			{
+				//TODO: Handle off-center circles.
+				geo::real radius = (entity.collision_vertices[1] - entity.collision_vertices[0]).length();
+				shape = std::make_unique<entity::Circle>(entity.orientation, entity.position, radius);
+			}
 		}
 
 	public:
@@ -77,8 +95,22 @@ namespace Test
 			std::filesystem::path scenario_file_folder = std::filesystem::relative(R"(..\..\Test\CollisionTestScenarios)");
 			for (const auto& file : std::filesystem::directory_iterator(scenario_file_folder))
 			{
+				std::wstring fail_message1 = file.path().wstring() + L": 1 -> 2 collision is not detected.";
+				std::wstring fail_message2 = file.path().wstring() + L": 2 -> 1 collision is not detected.";
+
 				std::ifstream scenario(file.path().string());
 				ReadScenario(scenario);
+
+				std::unique_ptr<entity::AbstractCollisionShape> shape1;
+				std::unique_ptr<entity::AbstractCollisionShape> shape2;
+
+				ConstructCollisionShape(entity1, shape1);
+				ConstructCollisionShape(entity2, shape2);
+
+				geo::EmptyFrame dummy_frame{ -10e20, 10e20, -10e20, 10e20 };
+
+				Assert::AreEqual(one_collides_into_two, shape2->InviteForCollision(dummy_frame, dummy_frame, *shape1), fail_message1.c_str());
+				Assert::AreEqual(two_collides_into_one, shape1->InviteForCollision(dummy_frame, dummy_frame, *shape2), fail_message2.c_str());
 			}
 		}
 
