@@ -65,6 +65,7 @@ public class MeshFactory
 	}
 
 	//Create tessellated circle.
+	//TODO: Handle off-centered circles here, in all the collision checks, and collision test editor, too.
 	public static Mesh Create(float radius)
 	{
 		int segment_count = Mathf.CeilToInt(20 * radius);
@@ -77,7 +78,6 @@ public class MeshFactory
 		for (int i = 2; i < vertices.Length; i++)
 		{
 			vertices[i] = segment_degree * vertices[i - 1];
-
 		}
 
 		Vector2[] uvs = vertices
