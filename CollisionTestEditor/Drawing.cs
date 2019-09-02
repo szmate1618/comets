@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace CollisionTestEditor
 {
@@ -11,8 +6,6 @@ namespace CollisionTestEditor
 	{
 		private static Color color1 = Color.Red;
 		private static Color color2 = Color.Blue;
-		private static Color color1transcluent = Color.FromArgb(128, color1);
-		private static Color color2transcluent = Color.FromArgb(128, color2);
 
 		private static void DrawShape(Graphics g, ViewTransformation vt, Shape shape, Color color)
 		{
