@@ -11,6 +11,8 @@ namespace entity
 
 	class AbstractTriangulatedPoly: public AbstractCollisionShape
 	{
+		friend class Circle;
+
 	public:
 
 		AbstractTriangulatedPoly() = delete;
