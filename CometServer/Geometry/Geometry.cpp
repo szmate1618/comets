@@ -238,12 +238,14 @@ namespace geo
 		geo::real sign = ((b - a).length_cross(c - a) < 0 ? 1 : -1);
 		return
 		{
-			a + (b - a).cw_normal().normalized() * sign * radius,
-			b + (b - a).cw_normal().normalized() * sign * radius,
-			b + (c - b).cw_normal().normalized() * sign * radius,
-			c + (c - b).cw_normal().normalized() * sign * radius,
-			c + (a - c).cw_normal().normalized() * sign * radius,
-			a + (a - c).cw_normal().normalized() * sign * radius
+			//Clockwise winding order mean that the outward normals are rotated
+			//counterclockwise from the originating vector.
+			a + (b - a).ccw_normal().normalized() * sign * radius,
+			b + (b - a).ccw_normal().normalized() * sign * radius,
+			b + (c - b).ccw_normal().normalized() * sign * radius,
+			c + (c - b).ccw_normal().normalized() * sign * radius,
+			c + (a - c).ccw_normal().normalized() * sign * radius,
+			a + (a - c).ccw_normal().normalized() * sign * radius
 		};
 	}
 
