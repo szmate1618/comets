@@ -238,7 +238,7 @@ namespace geo
 		geo::real sign = ((b - a).length_cross(c - a) < 0 ? 1 : -1);
 		return
 		{
-			//Clockwise winding order mean that the outward normals are rotated
+			//Clockwise winding order means that the outward normals are rotated
 			//counterclockwise from the originating vector.
 			a + (b - a).ccw_normal().normalized() * sign * radius,
 			b + (b - a).ccw_normal().normalized() * sign * radius,
