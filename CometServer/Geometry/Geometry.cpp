@@ -19,6 +19,11 @@ namespace geo
 		return std::sqrt(x * x + y * y);
 	}
 
+	vector_2d vector_2d::normalized() const
+	{
+		return (*this) / length();
+	}
+
 	vector_2d vector_2d::operator-(const vector_2d& other) const
 	{
 		vector_2d ret;
@@ -99,6 +104,21 @@ namespace geo
 		double sign6 = (a - f).length_cross(*this - f);
 		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) && (sign4 >= 0) && (sign5 >= 0) && (sign6 >= 0)
 			|| (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0) && (sign4 <= 0) && (sign5 <= 0) && (sign6 <= 0); 
+	}
+
+	bool vector_2d::is_inside_convex(const hexagon& h) const
+	{
+		return is_inside_convex(h.a, h.b, h.c, h.d, h.e, h.f);
+	}
+
+	vector_2d vector_2d::cw_normal() const
+	{
+		return { y, -x };
+	}
+
+	vector_2d vector_2d::ccw_normal() const
+	{
+		return { -y, x };
 	}
 
 	vector_2d vector_2d::rotated(const radian angle) const
@@ -209,6 +229,24 @@ namespace geo
 		//case 7 is impossible
 		}
 		return f;
+	}
+
+	hexagon triangle::as_hexagon(const geo::real radius) const
+	{
+		//TODO: By Unity convention, vertices are enumerated in a clockwise winding order.
+		//This extra information could be used to speed this up.
+		geo::real sign = ((b - a).length_cross(c - a) < 0 ? 1 : -1);
+		return
+		{
+			//Clockwise winding order means that the outward normals are rotated
+			//counterclockwise from the originating vector.
+			a + (b - a).ccw_normal().normalized() * sign * radius,
+			b + (b - a).ccw_normal().normalized() * sign * radius,
+			b + (c - b).ccw_normal().normalized() * sign * radius,
+			c + (c - b).ccw_normal().normalized() * sign * radius,
+			c + (a - c).ccw_normal().normalized() * sign * radius,
+			a + (a - c).ccw_normal().normalized() * sign * radius
+		};
 	}
 
 	EmptyFrame EmptyFrame::operator+(const vector_2d& v) const

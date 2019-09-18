@@ -20,6 +20,7 @@ namespace geo
 	//Forward declarations.
 	struct triangle;
 	struct EmptyFrame;
+	struct hexagon;
 
 	static constexpr double PI = 3.14159265358979323846; //TODO: Is it any better than using the pi contstant declared in cmath?
 
@@ -37,6 +38,7 @@ namespace geo
 		bool equals(const vector_2d&, const real) const;
 		bool operator==(const vector_2d&) const;
 		real length() const;
+		vector_2d normalized() const;
 		vector_2d operator-(const vector_2d&) const;
 		vector_2d operator+(const vector_2d&) const;
 		vector_2d operator*(const real) const;
@@ -48,6 +50,9 @@ namespace geo
 		bool is_inside(const triangle&) const;
 		bool is_inside(const EmptyFrame&) const;
 		bool is_inside_convex(const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&, const vector_2d&) const;
+		bool is_inside_convex(const hexagon&) const;
+		vector_2d cw_normal() const;
+		vector_2d ccw_normal() const;
 		vector_2d rotated(const radian) const;
 		void rotate(const radian);
 		vector_2d transformed(const radian, const vector_2d& center) const;
@@ -68,6 +73,7 @@ namespace geo
 		real maxy() const;
 		real minx() const;
 		EmptyFrame as_frame() const;
+		hexagon as_hexagon(const geo::real) const;
 
 	};
 	
@@ -84,6 +90,18 @@ namespace geo
 	struct Frame: public EmptyFrame
 	{
 		T* entity;
+	};
+
+	struct hexagon
+	{
+
+		point_2d a;
+		point_2d b;
+		point_2d c;
+		point_2d d;
+		point_2d e;
+		point_2d f;
+
 	};
 
 }

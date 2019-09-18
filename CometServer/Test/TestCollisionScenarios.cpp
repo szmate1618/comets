@@ -122,6 +122,45 @@ namespace Test
 			Logger::WriteMessage((std::to_string(scenarios_ran) + " collision test scenarios were run.").c_str());
 		}
 
+		TEST_METHOD(AllScenariosWithRandomOffsets)
+		{
+			srand(6);
+
+			int scenarios_ran = 0;
+			std::filesystem::path scenario_file_folder = std::filesystem::relative(R"(..\..\Test\CollisionTestScenarios)");
+
+			for (const auto& file : std::filesystem::directory_iterator(scenario_file_folder))
+			{
+				std::ifstream scenario(file.path().string());
+				ReadScenario(scenario);
+
+				std::wstring fail_message1 = file.path().wstring() +
+					(one_collides_into_two ? L": 1 -> 2 collision not detected." : L": 1 -> 2 false collision detected.");
+				std::wstring fail_message2 = file.path().wstring() +
+					(two_collides_into_one ? L": 2 -> 1 collision not detected." : L": 2 -> 1 false collision detected.");
+
+				std::unique_ptr<entity::AbstractCollisionShape> shape1;
+				std::unique_ptr<entity::AbstractCollisionShape> shape2;
+
+				ConstructCollisionShape(entity1, shape1);
+				ConstructCollisionShape(entity2, shape2);
+
+				geo::real x_offset = (rand() - 0.5) * 200'000;
+				geo::real y_offset = (rand() - 0.5) * 200'000;
+				entity1.position = entity1.position + geo::vector_2d{ x_offset, y_offset };
+				entity2.position = entity2.position + geo::vector_2d{ x_offset, y_offset };
+
+				geo::EmptyFrame dummy_frame{ -10e20, 10e20, -10e20, 10e20 };
+
+				Assert::AreEqual(one_collides_into_two, shape2->InviteForCollision(dummy_frame, dummy_frame, *shape1), fail_message1.c_str());
+				Assert::AreEqual(two_collides_into_one, shape1->InviteForCollision(dummy_frame, dummy_frame, *shape2), fail_message2.c_str());
+
+				scenarios_ran++;
+			}
+
+			Logger::WriteMessage((std::to_string(scenarios_ran) + " collision test scenarios were run with random offsets.").c_str());
+		}
+
 	};
 
 }
