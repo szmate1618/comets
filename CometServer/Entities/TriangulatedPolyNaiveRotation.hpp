@@ -16,7 +16,7 @@ namespace entity
 		TriangulatedPolyNaiveRotation() = delete;
 		TriangulatedPolyNaiveRotation(const geo::radian&, const geo::vector_2d&, const std::vector<geo::vector_2d>&, const std::vector<uint16_t>&);
 		virtual ~TriangulatedPolyNaiveRotation() override;
-		virtual const geo::EmptyFrame& GetBoundingBox() override;
+		virtual geo::EmptyFrame GetBoundingBox() override;
 		virtual void SetOrientation(double) override;
 		virtual std::string GetName() override;
 

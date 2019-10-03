@@ -19,7 +19,7 @@ namespace entity
 		virtual bool InviteForCollision(geo::EmptyFrame, geo::EmptyFrame, AbstractCollisionShape&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, AbstractTriangulatedPoly&) override;
 		virtual bool CollideInto(geo::EmptyFrame, geo::EmptyFrame, Circle&) override;
-		virtual const geo::EmptyFrame& GetBoundingBox() override;
+		virtual geo::EmptyFrame GetBoundingBox() override;
 		virtual std::string GetName() override;
 		const geo::real& GetRadius() const;
 

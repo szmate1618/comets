@@ -19,7 +19,7 @@ namespace entity
 	{
 	}
 
-	const geo::EmptyFrame& TriangulatedPolyNaiveRotation::GetBoundingBox()
+	geo::EmptyFrame TriangulatedPolyNaiveRotation::GetBoundingBox()
 	{
 		return { -10000, 10000, -10000, 10000 }; //TODO: Actually implement this.
 	}
