@@ -22,7 +22,7 @@ CREATE TABLE Shapes
 	Shape TEXT --Note that Unity's backface culling relies on winding order. Counterclockwise faces are culled.
 );
 
-CREATE TABLE CollisionBehavior
+CREATE TABLE CollisionBehaviors
 (
 	ShapeID INTEGER references Shapes(ShapeID),
 	Condition TEXT,

@@ -10,7 +10,7 @@ INSERT INTO Users
 
 --Fill table Shapes.
 
-INSERT INTO CollisionBehavior
+INSERT INTO CollisionBehaviors
 (ShapeID,	Condition,		Action,		Parameter1,	Parameter2) VALUES
 (6,			'on_collision'	'explode'	4,			7),
 (7,			'on_collision'	'explode'	4,			8),
