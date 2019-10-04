@@ -1,7 +1,6 @@
 #include "Universe.hpp"
 #include "TriangulatedPolyNaiveRotation.hpp"
 #include "Circle.hpp"
-#include "..\Utilities\sqlite3.h"
 #include "..\Utilities\Logger.hpp"
 
 #include <sstream>
@@ -16,6 +15,18 @@ namespace entity
 	{
 		sqlite3* db_connection;
 		sqlite3_open(filename.c_str(), &db_connection); //TODO: Add error handling.
+
+		LoadShapes(db_connection);
+		LoadCollisionBehaviors(db_connection);
+		LoadEntities(db_connection);
+
+		sqlite3_close(db_connection);
+	}
+
+	Universe::~Universe() {}
+
+	void Universe::LoadShapes(sqlite3* db_connection)
+	{
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
@@ -58,6 +69,34 @@ namespace entity
 			static_cast<void*>(this),
 			nullptr
 		);
+	}
+
+	void Universe::LoadCollisionBehaviors(sqlite3* db_connection)
+	{
+		sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT ShapeID, Condition, Action, Parameter1, Parameter2 FROM CollisionBehaviors;",
+			[](void* void_universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				Universe* universe = static_cast<Universe*>(void_universe);
+				def::shape_id shape_id = std::atoi(argv[0]);
+				CollisionBehavior::Condition condition;
+				if (std::strcmp("on_collision", argv[1]) == 0) condition = CollisionBehavior::Condition::on_collision;
+				CollisionBehavior::Action action;
+				if (std::strcmp("explode", argv[2]) == 0) action = CollisionBehavior::Action::explode;
+				int parameter1 = std::atoi(argv[3]);
+				int parameter2 = std::atoi(argv[4]);
+				universe->collision_behavior_registry.emplace(shape_id, CollisionBehavior{ condition, action, parameter1, parameter2 });
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		);
+	}
+
+	void Universe::LoadEntities(sqlite3* db_connection)
+	{
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
@@ -92,10 +131,7 @@ namespace entity
 			static_cast<void*>(this),
 			nullptr
 		);
-		sqlite3_close(db_connection);
 	}
-
-	Universe::~Universe() {}
 
 	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id, def::user_input input)
 	{
@@ -384,5 +420,11 @@ namespace entity
 	{
 		return shape_registry.at(entity_registry.at(entity).shape);
 	}
+
+	Universe::CollisionBehavior& Universe::GetCollisionBehavior(def::entity_id entity)
+	{
+		return collision_behavior_registry.at(entity_registry.at(entity).shape);
+	}
+
 
 }

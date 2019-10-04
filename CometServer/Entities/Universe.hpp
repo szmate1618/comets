@@ -4,6 +4,7 @@
 #include "EntityHandle.hpp"
 #include "SimplePartitioner.hpp"
 #include "SimpleVisionPartitioner.hpp"
+#include "..\Utilities\sqlite3.h"
 #include "..\Utilities\StaticLinkedList.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
 
@@ -28,6 +29,9 @@ namespace entity
 		Universe();
 		Universe(std::string);
 		~Universe();
+		void LoadShapes(sqlite3*);
+		void LoadCollisionBehaviors(sqlite3*);
+		void LoadEntities(sqlite3*);
 		bool EntityHandleInput(def::time, def::entity_id, def::user_input);
 		void EntityTurnLeft(def::time, DynamicEntity&, engine_type);
 		void EntityTurnRight(def::time, DynamicEntity&, engine_type);
@@ -51,10 +55,21 @@ namespace entity
 
 		EntityShape& GetShape(def::entity_id); //TODO: entity_id and shape_id should be incompatible types.
 
+		struct CollisionBehavior
+		{
+			enum class Condition { on_collision } condition;
+			enum class Action { explode } action;
+			int parameter1;
+			int parameter2;
+		};
+
+		CollisionBehavior& GetCollisionBehavior(def::entity_id); //TODO: entity_id and shape_id should be incompatible types.
+
 	private:
 
 		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
 		std::unordered_map<def::shape_id, EntityShape> shape_registry;
+		std::unordered_map<def::shape_id, CollisionBehavior> collision_behavior_registry;
 		std::unordered_map<def::entity_id, std::unique_ptr<AbstractCollisionShape>> collision_shape_registry;
 		StaticEntityMap static_entities =
 		{
