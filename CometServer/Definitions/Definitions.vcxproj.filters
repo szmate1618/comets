@@ -18,5 +18,8 @@
     <ClInclude Include="TimeAndNetwork.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Gameplay.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
