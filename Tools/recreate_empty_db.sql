@@ -6,7 +6,7 @@ BEGIN TRANSACTION;
 --Drop the tables in the reverse order of their creation,
 --avoiding to break the foreign key contraints.
 DROP TABLE IF EXISTS Entities;
-DROP TABLE IF EXISTS CollisionBehaviour;
+DROP TABLE IF EXISTS CollisionBehaviors;
 DROP TABLE IF EXISTS Shapes;
 DROP TABLE IF EXISTS Users;
 
