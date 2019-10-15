@@ -68,6 +68,7 @@ namespace entity
 
 	private:
 
+		def::entity_id max_used_entity_id = 0; //TODO: Factor this into an EntityRegistry class.
 		std::unordered_map<def::entity_id, EntityHandle> entity_registry; //TODO: Compare the speed of map and unordered map wherever possible.
 		std::unordered_map<def::shape_id, EntityShape> shape_registry;
 		std::unordered_map<def::shape_id, CollisionBehavior> collision_behavior_registry;

@@ -222,7 +222,7 @@ namespace entity
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
-		SpawnEntity(static_cast<def::entity_id>(entity_registry.size() + 1), //TODO: Actually avoid collisions.
+		SpawnEntity(max_used_entity_id + 1, //TODO: Actually avoid collisions.
 			entity_registry[entity.id].owner,
 			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
 			1, //Completely arbitrary texture_id. TODO: Same as above.
@@ -390,7 +390,7 @@ namespace entity
 		{
 			EntityHandle& handle = entity_handles_to_add.at(i);
 			DynamicEntity& entity = entities_to_add.at(i);
-			entity.id = static_cast<def::entity_id>(entity_registry.size() + 1);
+			entity.id = max_used_entity_id + 1;
 
 			//TODO: Handle static entities.
 			auto index = dynamic_entities[handle.visibility][handle.collidability].InsertAtFirstGap(entity);
@@ -464,6 +464,7 @@ namespace entity
 		geo::vector_2d velocity)
 	{
 		if (entity_registry.count(entity) > 0) return; //TODO: Warnlogging.
+		if (entity > max_used_entity_id) max_used_entity_id = entity;
 
 		EntityHandle handle{ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr };
 		if (dynamics == dynamic)
