@@ -390,7 +390,7 @@ namespace entity
 		{
 			EntityHandle& handle = entity_handles_to_add.at(i);
 			DynamicEntity& entity = entities_to_add.at(i);
-			entity.id = entity_registry.size() + 1;
+			entity.id = static_cast<def::entity_id>(entity_registry.size() + 1);
 
 			//TODO: Handle static entities.
 			auto index = dynamic_entities[handle.visibility][handle.collidability].InsertAtFirstGap(entity);
