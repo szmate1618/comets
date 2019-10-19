@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "ToStringSpecializations.hpp"
 #include "..\Utilities\StaticLinkedList.hpp"
 
 #include <cassert>
