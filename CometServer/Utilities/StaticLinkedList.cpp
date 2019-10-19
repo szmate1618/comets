@@ -131,6 +131,13 @@ namespace utils
 		return -1; //TODO: Implement this.
 	}
 
+	//No error checking at all. It's the caller's responsibility to point to a valid element.
+	template<typename T>
+	size_t StaticLinkedList<T>::IndexOf(const T* element)
+	{
+		return reinterpret_cast<const ListElement*>(element) - &(elements[0]);
+	}
+
 	//Explicit instantiations.
 	template class StaticLinkedList<entity::StaticEntity>;
 	template class StaticLinkedList<entity::DynamicEntity>;

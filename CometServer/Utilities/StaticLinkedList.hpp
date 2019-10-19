@@ -44,6 +44,7 @@ namespace utils
 		size_t InsertAtFirstGap(const T&); //TODO: Add methods for compile-time polymorphism with STL LinkedList.
 		size_t RemoveAt(size_t);
 		size_t Defragment();
+		size_t IndexOf(const T*);
 
 		//Could use a static assert here to ensure its big enough to contain the guards.
 		//Or just dynamic assert in the constructor.

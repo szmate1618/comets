@@ -130,7 +130,6 @@ namespace Test
 			Assert::AreEqual(0, i);
 		}
 
-
 		TEST_METHOD(InsertIntoGap)
 		{
 			utils::StaticLinkedList<int> list(10);
@@ -142,6 +141,33 @@ namespace Test
 			list.RemoveAt(index);
 
 			Assert::AreEqual(index, list.InsertAtFirstGap(1));
+		}
+
+		TEST_METHOD(IndexOf)
+		{
+			utils::StaticLinkedList<int> list(20);
+			size_t index7;
+			size_t index9;
+			int* p7;
+			int* p9;
+
+			for (int i = 0; i < 10; i++)
+			{
+				size_t index = list.InsertAtFirstGap(i);
+				if (i == 7)
+				{
+					index7 = index;
+					p7 = &(list.elements.at(index7).element);
+				}
+				if (i == 9)
+				{
+					index9 = index;
+					p9 = &(list.elements.at(index9).element);
+				}
+			}
+
+			Assert::AreEqual(index7, list.IndexOf(p7));
+			Assert::AreEqual(index9, list.IndexOf(p9));
 		}
 
 	};
