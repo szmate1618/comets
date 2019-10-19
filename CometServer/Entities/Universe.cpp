@@ -316,18 +316,20 @@ namespace entity
 								case CollisionBehavior::Action::explode:
 									QueueEntityDestruct(p_entity1->id);
 									QueueEntityDestruct(p_entity2->id);
-									if (collision_behavior.parameter1 == 0) continue; //If the entity explodes into 0 fragments, then continue without spawning new entities.
-									QueueEntitySpawn(entity_registry.at(p_entity1->id).owner,
-										collision_behavior.parameter2,
-										entity_registry.at(p_entity1->id).texture,
-										inertial,
-										dynamic,
-										visible,
-										collidable,
-										0,
-										p_entity1->position,
-										{ (rand() / static_cast<double>(RAND_MAX) - 0.5) * 10,(rand() / static_cast<double>(RAND_MAX) - 0.5) * 10 }
-									);
+									for (int i = 0; i < collision_behavior.parameter1; i++)
+									{
+										QueueEntitySpawn(entity_registry.at(p_entity1->id).owner,
+											collision_behavior.parameter2,
+											entity_registry.at(p_entity1->id).texture,
+											inertial,
+											dynamic,
+											visible,
+											collidable,
+											0,
+											p_entity1->position,
+											{ (rand() / static_cast<double>(RAND_MAX) - 0.5) * 10,(rand() / static_cast<double>(RAND_MAX) - 0.5) * 10 }
+										);
+									}
 									break;
 								default:
 									//TODO: Warnlogging, at least.
