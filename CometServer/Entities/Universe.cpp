@@ -378,12 +378,17 @@ namespace entity
 	{
 		for (def::entity_id entity_id : entities_to_remove)
 		{
-			EntityHandle& entity = entity_registry.at(entity_id);
-			size_t index = dynamic_entities[entity.visibility][entity.collidability].IndexOf(entity.de_pointer);
-			dynamic_entities[entity.visibility][entity.collidability].RemoveAt(index);
-			collision_shape_registry.erase(entity_id);
-			entity_registry.erase(entity_id);
-			//TODO: Add support for static entities.
+			const auto entity_entry = entity_registry.find(entity_id);
+			//It's possible to queue a single entity for removal multiple times.
+			if (entity_entry != entity_registry.end())
+			{
+				EntityHandle& entity = entity_entry->second;
+				size_t index = dynamic_entities[entity.visibility][entity.collidability].IndexOf(entity.de_pointer);
+				dynamic_entities[entity.visibility][entity.collidability].RemoveAt(index);
+				collision_shape_registry.erase(entity_id);
+				entity_registry.erase(entity_id);
+				//TODO: Add support for static entities.
+			}
 		}
 		entities_to_remove.clear();
 
