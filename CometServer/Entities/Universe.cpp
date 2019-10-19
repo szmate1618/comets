@@ -315,8 +315,9 @@ namespace entity
 								{
 								case CollisionBehavior::Action::explode:
 									QueueEntityDestruct(p_entity1->id);
+									QueueEntityDestruct(p_entity2->id);
 									if (collision_behavior.parameter1 == 0) continue; //If the entity explodes into 0 fragments, then continue without spawning new entities.
-									/*QueueEntitySpawn(entity_registry.at(p_entity1->id).owner, //TODO: Uncomment this.
+									QueueEntitySpawn(entity_registry.at(p_entity1->id).owner,
 										collision_behavior.parameter2,
 										entity_registry.at(p_entity1->id).texture,
 										inertial,
@@ -326,7 +327,7 @@ namespace entity
 										0,
 										p_entity1->position,
 										{ (rand() / static_cast<double>(RAND_MAX) - 0.5) * 10,(rand() / static_cast<double>(RAND_MAX) - 0.5) * 10 }
-									);*/
+									);
 									break;
 								default:
 									//TODO: Warnlogging, at least.
@@ -463,8 +464,16 @@ namespace entity
 		geo::point_2d position,
 		geo::vector_2d velocity)
 	{
-		if (entity_registry.count(entity) > 0) return; //TODO: Warnlogging.
+		if (entity_registry.count(entity) > 0)
+		{
+			util::Log(util::warn, "Entity cannot be created, id " + std::to_string(entity) + " is already in use.");
+			return;
+		}
 		if (entity > max_used_entity_id) max_used_entity_id = entity;
+		else {
+			util::Log(util::warn, "Requested id " + std::to_string(entity) + " is smaller than max_used_entity_id.");
+		}
+		util::Log(util::trace, "Entity " + std::to_string(entity) + " has been created.");
 
 		EntityHandle handle{ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr };
 		if (dynamics == dynamic)
