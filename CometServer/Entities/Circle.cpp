@@ -50,7 +50,7 @@ namespace entity
 		return (this->position - that.position).length() <= this->radius + that.radius;
 	}
 	
-	const geo::EmptyFrame& Circle::GetBoundingBox()
+	geo::EmptyFrame Circle::GetBoundingBox()
 	{
 		return { -10000, 10000, -10000, 10000 }; //TODO: Actually implement this.
 	}

@@ -94,6 +94,7 @@ namespace server
 	void GameServer::TestCollisions()
 	{
 		universe.TestCollisions();
+		universe.ExecuteQueuedOperations(); //TODO: Maybe this should have its own method.
 	}
 
 	//Test for visibility at the current position, send response.

@@ -1,10 +1,11 @@
 #include "Universe.hpp"
 #include "TriangulatedPolyNaiveRotation.hpp"
 #include "Circle.hpp"
-#include "..\Utilities\sqlite3.h"
 #include "..\Utilities\Logger.hpp"
+#include "..\Definitions\Gameplay.hpp"
 
 #include <sstream>
+#include <cassert>
 
 
 namespace entity
@@ -14,8 +15,24 @@ namespace entity
 
 	Universe::Universe(std::string filename) //TODO: Add error handling.
 	{
+		entities_to_remove.reserve(def::expected_entity_count_fluctuation);
+		entity_handles_to_add.reserve(def::expected_entity_count_fluctuation);
+		entities_to_add.reserve(def::expected_entity_count_fluctuation);
+
 		sqlite3* db_connection;
 		sqlite3_open(filename.c_str(), &db_connection); //TODO: Add error handling.
+
+		LoadShapes(db_connection);
+		LoadCollisionBehaviors(db_connection);
+		LoadEntities(db_connection);
+
+		sqlite3_close(db_connection);
+	}
+
+	Universe::~Universe() {}
+
+	void Universe::LoadShapes(sqlite3* db_connection)
+	{
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
@@ -58,6 +75,35 @@ namespace entity
 			static_cast<void*>(this),
 			nullptr
 		);
+	}
+
+	void Universe::LoadCollisionBehaviors(sqlite3* db_connection)
+	{
+		sqlite3_exec //TODO: Add error handling.
+		(
+			db_connection,
+			"SELECT ShapeID, Condition, Action, Parameter1, Parameter2 FROM CollisionBehaviors;",
+			[](void* void_universe, int, char** argv, char**) //TODO: This belongs in Utilities.
+			{
+				Universe* universe = static_cast<Universe*>(void_universe);
+				def::shape_id shape_id = std::atoi(argv[0]);
+				CollisionBehavior::Condition condition;
+				if (std::strcmp("on_collision_take", argv[1]) == 0) condition = CollisionBehavior::Condition::on_collision_take;
+				else if (std::strcmp("on_collision_give", argv[1]) == 0) condition = CollisionBehavior::Condition::on_collision_give;
+				CollisionBehavior::Action action;
+				if (std::strcmp("explode", argv[2]) == 0) action = CollisionBehavior::Action::explode;
+				int parameter1 = std::atoi(argv[3]);
+				int parameter2 = std::atoi(argv[4]);
+				universe->collision_behavior_registry.emplace(shape_id, CollisionBehavior{ condition, action, parameter1, parameter2 });
+				return 0;
+			},
+			static_cast<void*>(this),
+			nullptr
+		);
+	}
+
+	void Universe::LoadEntities(sqlite3* db_connection)
+	{
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
@@ -92,10 +138,7 @@ namespace entity
 			static_cast<void*>(this),
 			nullptr
 		);
-		sqlite3_close(db_connection);
 	}
-
-	Universe::~Universe() {}
 
 	bool Universe::EntityHandleInput(def::time duration, def::entity_id entity_id, def::user_input input)
 	{
@@ -179,14 +222,14 @@ namespace entity
 
 	void Universe::EntityFire(def::time duration, DynamicEntity& entity)
 	{
-		SpawnEntity(static_cast<def::entity_id>(entity_registry.size() + 1), //TODO: Actually avoid collisions.
+		SpawnEntity(max_used_entity_id + 1, //TODO: Actually avoid collisions.
 			entity_registry[entity.id].owner,
 			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
 			1, //Completely arbitrary texture_id. TODO: Same as above.
-			entity::anti_intertial,
-			entity::dynamic,
-			entity::visible,
-			entity::collidable,
+			anti_intertial,
+			dynamic,
+			visible,
+			collidable,
 			entity.orientation,
 			entity.position,
 			geo::vector_2d{ 0, 10.0 }.rotated(entity.orientation) //TODO: Make this configurable.
@@ -252,6 +295,7 @@ namespace entity
 				for (const StaticEntity* p_entity2 : partition)
 				{
 					if (p_entity1 == p_entity2) continue;
+					if (entity_registry.at(p_entity1->id).owner == entity_registry.at(p_entity2->id).owner) continue;
 					//Test for collision.
 					#ifndef NO_COLLISION
 					AbstractCollisionShape& shape1 = *collision_shape_registry.at(p_entity1->id);
@@ -259,7 +303,40 @@ namespace entity
 					//TODO: Crop bounding boxes to the current partition.
 					if (shape1.InviteForCollision(shape1.GetBoundingBox(), shape2.GetBoundingBox(), shape2))
 					{
+						//The second entity collided into the first one.
 						util::Log(util::trace, "Entity " + std::to_string(p_entity2->id) + " collided into entity " + std::to_string(p_entity1->id) + ".");
+						const auto& collision_behavior_entry = collision_behavior_registry.find(entity_registry.at(p_entity1->id).shape);
+						if (collision_behavior_entry != collision_behavior_registry.end())
+						{
+							const CollisionBehavior collision_behavior = collision_behavior_entry->second;
+							if (collision_behavior.condition == CollisionBehavior::Condition::on_collision_take) //TODO: Either handle or remove other cases.
+							{
+								switch (collision_behavior.action)
+								{
+								case CollisionBehavior::Action::explode:
+									QueueEntityDestruct(p_entity1->id);
+									QueueEntityDestruct(p_entity2->id);
+									for (int i = 0; i < collision_behavior.parameter1; i++)
+									{
+										QueueEntitySpawn(entity_registry.at(p_entity1->id).owner,
+											collision_behavior.parameter2,
+											entity_registry.at(p_entity1->id).texture,
+											inertial,
+											dynamic,
+											visible,
+											collidable,
+											0,
+											p_entity1->position,
+											{ (rand() / static_cast<double>(RAND_MAX) - 0.5) * 10,(rand() / static_cast<double>(RAND_MAX) - 0.5) * 10 }
+										);
+									}
+									break;
+								default:
+									//TODO: Warnlogging, at least.
+									break;
+								}
+							}
+						}
 					}
 					#endif
 				}
@@ -283,6 +360,79 @@ namespace entity
 				vision_partitioner.Insert(&entity);
 			}
 		}
+	}
+
+	SimplePartition& Universe::GetVision(def::entity_id entity)
+	{
+		if (entity_registry[entity].dynamics == dynamics_class::static_)
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].se_pointer);
+		}
+		else
+		{
+			return vision_partitioner.GetPartition(entity_registry[entity].de_pointer);
+		}
+	}
+
+	void Universe::ExecuteQueuedOperations()
+	{
+		for (def::entity_id entity_id : entities_to_remove)
+		{
+			EntityHandle& entity = entity_registry.at(entity_id);
+			size_t index = dynamic_entities[entity.visibility][entity.collidability].IndexOf(entity.de_pointer);
+			dynamic_entities[entity.visibility][entity.collidability].RemoveAt(index);
+			collision_shape_registry.erase(entity_id);
+			entity_registry.erase(entity_id);
+			//TODO: Add support for static entities.
+		}
+		entities_to_remove.clear();
+
+		assert(entity_handles_to_add.size() == entities_to_add.size());
+		for (size_t i = 0; i < entity_handles_to_add.size(); i++)
+		{
+			EntityHandle& handle = entity_handles_to_add.at(i);
+			DynamicEntity& entity = entities_to_add.at(i);
+			entity.id = max_used_entity_id + 1;
+			max_used_entity_id++;
+
+			//TODO: Handle static entities.
+			auto index = dynamic_entities[handle.visibility][handle.collidability].InsertAtFirstGap(entity);
+			handle.de_pointer = &(dynamic_entities[handle.visibility][handle.collidability].elements[index].element); //TODO: Add a member method for this.
+
+			entity_registry[entity.id] = handle;
+
+			const StaticEntity* static_entity = handle.dynamics == dynamic ? handle.de_pointer : handle.se_pointer;
+
+			const std::vector<geo::vector_2d>& collision_vertices = GetShape(entity.id).collision_vertices;
+			const std::vector<uint16_t>& triangles = GetShape(entity.id).triangles;
+			if (GetShape(entity.id).collision_vertices.size() != 2) //If it's a polygon.
+			{
+				collision_shape_registry.emplace
+				(
+					entity.id, new TriangulatedPolyNaiveRotation{ static_entity->orientation, static_entity->position, collision_vertices, triangles }
+				);
+			}
+			else //If it's a circle.
+			{
+				geo::real radius = (collision_vertices[1] - collision_vertices[0]).length();
+				collision_shape_registry.emplace
+				(
+					entity.id, new Circle{ static_entity->orientation, static_entity->position, radius }
+				);
+			}
+		}
+		entity_handles_to_add.clear();
+		entities_to_add.clear();
+	}
+
+	Universe::EntityShape& Universe::GetShape(def::entity_id entity)
+	{
+		return shape_registry.at(entity_registry.at(entity).shape);
+	}
+
+	Universe::CollisionBehavior& Universe::GetCollisionBehavior(def::entity_id entity)
+	{
+		return collision_behavior_registry.at(entity_registry.at(entity).shape);
 	}
 
 	void Universe::EntityTurnDegree(DynamicEntity& entity, engine_type engine, geo::radian rotation)
@@ -316,7 +466,16 @@ namespace entity
 		geo::point_2d position,
 		geo::vector_2d velocity)
 	{
-		if (entity_registry.count(entity) > 0) return;
+		if (entity_registry.count(entity) > 0)
+		{
+			util::Log(util::warn, "Entity cannot be created, id " + std::to_string(entity) + " is already in use.");
+			return;
+		}
+		if (entity > max_used_entity_id) max_used_entity_id = entity;
+		else {
+			util::Log(util::warn, "Requested id " + std::to_string(entity) + " is not greater than max_used_entity_id.");
+		}
+		util::Log(util::trace, "Entity " + std::to_string(entity) + " has been created.");
 
 		EntityHandle handle{ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr };
 		if (dynamics == dynamic)
@@ -341,7 +500,7 @@ namespace entity
 			StaticEntity static_entity;
 			static_entity.id = entity;
 			static_entity.orientation = orientation;
-			static_entity.position = position; //TODO: Also add shape.
+			static_entity.position = position;
 			auto index = static_entities[visibility][collidability].InsertAtFirstGap(static_entity);
 			handle.se_pointer = &(static_entities[visibility][collidability].elements[index].element);
 		}
@@ -368,21 +527,45 @@ namespace entity
 		}
 	}
 
-	SimplePartition& Universe::GetVision(def::entity_id entity)
+	void Universe::QueueEntitySpawn( //No entity_id parameter. That can only be assigned right before insertion.
+		def::owner_id owner,
+		def::shape_id shape,
+		def::texture_id texture,
+		engine_type engine,
+		dynamics_class dynamics,
+		visibility_class visibility,
+		collidability_class collidability,
+		geo::radian orientation,
+		geo::point_2d position,
+		geo::vector_2d velocity)
 	{
-		if (entity_registry[entity].dynamics == dynamics_class::static_)
+		//TODO: Add constructor, so that we can use emplace_back.
+		entity_handles_to_add.push_back({ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr, def::zero_seconds });
+		if (dynamics == dynamic)
 		{
-			return vision_partitioner.GetPartition(entity_registry[entity].se_pointer);
+			entities_to_add.emplace_back();
+			DynamicEntity& dynamic_entity = entities_to_add.back();
+			//TODO: Make all the following values configurable.
+			dynamic_entity.id = 0; //Dummy value. An entity id can only be assigned right before insertion.
+			dynamic_entity.orientation = orientation;
+			dynamic_entity.position = position;
+			dynamic_entity.angular_velocity = 3; //TODO: Clean up the logic around this, and/or maybe rename to max_angular_velocity, or even max_angular_speed.
+			dynamic_entity.velocity = velocity;
+			dynamic_entity.max_speed = 10;
+			dynamic_entity.inertial_velocity = { 0, 0 };
+			dynamic_entity.acceleration = { 0, 5 };
+			dynamic_entity.inertial_acceleration = { 0, 0 };
+			dynamic_entity.friction = 0;
 		}
 		else
 		{
-			return vision_partitioner.GetPartition(entity_registry[entity].de_pointer);
+			//TODO: Add support for static entities.
 		}
 	}
 
-	Universe::EntityShape& Universe::GetShape(def::entity_id entity)
+	void Universe::QueueEntityDestruct(def::entity_id entity)
 	{
-		return shape_registry.at(entity_registry.at(entity).shape);
+		entities_to_remove.emplace_back(entity);
 	}
 
 }

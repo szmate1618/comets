@@ -19,7 +19,7 @@ namespace entity
 	{
 	}
 
-	const geo::EmptyFrame& TriangulatedPolyPrecomputedRotation::GetBoundingBox()
+	geo::EmptyFrame TriangulatedPolyPrecomputedRotation::GetBoundingBox()
 	{
 		return { -10000, 10000, -10000, 10000 }; //TODO: Actually implement this.
 	}
