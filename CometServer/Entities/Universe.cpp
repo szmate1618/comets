@@ -378,7 +378,7 @@ namespace entity
 		{
 			EntityHandle& entity = entity_registry.at(entity_id);
 			//The `1 + ` offset is because of the metadata in StaticLinkedList. A bit ugly, but it does the job.
-			size_t index = 1 + entity.de_pointer - &(*dynamic_entities[entity.visibility][entity.collidability].begin());
+			size_t index = dynamic_entities[entity.visibility][entity.collidability].IndexOf(entity.de_pointer);
 			dynamic_entities[entity.visibility][entity.collidability].RemoveAt(index);
 			collision_shape_registry.erase(entity_id);
 			entity_registry.erase(entity_id);
