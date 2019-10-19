@@ -392,6 +392,7 @@ namespace entity
 			EntityHandle& handle = entity_handles_to_add.at(i);
 			DynamicEntity& entity = entities_to_add.at(i);
 			entity.id = max_used_entity_id + 1;
+			max_used_entity_id++;
 
 			//TODO: Handle static entities.
 			auto index = dynamic_entities[handle.visibility][handle.collidability].InsertAtFirstGap(entity);
@@ -471,7 +472,7 @@ namespace entity
 		}
 		if (entity > max_used_entity_id) max_used_entity_id = entity;
 		else {
-			util::Log(util::warn, "Requested id " + std::to_string(entity) + " is smaller than max_used_entity_id.");
+			util::Log(util::warn, "Requested id " + std::to_string(entity) + " is not greater than max_used_entity_id.");
 		}
 		util::Log(util::trace, "Entity " + std::to_string(entity) + " has been created.");
 
