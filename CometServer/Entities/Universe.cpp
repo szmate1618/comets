@@ -430,6 +430,11 @@ namespace entity
 		entities_to_add.clear();
 	}
 
+	const EntityHandle& Universe::GetEntityHandle(def::entity_id entity_id)
+	{
+		return entity_registry.at(entity_id);
+	}
+
 	Universe::EntityShape& Universe::GetShape(def::entity_id entity)
 	{
 		return shape_registry.at(entity_registry.at(entity).shape);

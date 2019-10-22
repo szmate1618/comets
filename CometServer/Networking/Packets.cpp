@@ -131,6 +131,7 @@ namespace net
 	void ShapeDescriptionPayload::DeepCopyFrom(const ShapeDescriptionPayload& that)
 	{
 		this->entity_id = that.entity_id;
+		this->texture_id = that.texture_id;
 		this->vertex_count = that.vertex_count;
 		this->triangle_count = that.triangle_count;
 		std::memcpy(this->vertices, that.vertices, that.vertex_count);
@@ -141,6 +142,7 @@ namespace net
 	bool ShapeDescriptionPayload::operator==(const ShapeDescriptionPayload& other) const
 	{
 		if (!(entity_id == other.entity_id)) return false;
+		if (!(texture_id == other.texture_id)) return false;
 		if (!(vertex_count == other.vertex_count)) return false;
 		if (!(triangle_count == other.triangle_count)) return false;
 		for (int i = 0; i < vertex_count * 2; ++i)
@@ -163,6 +165,7 @@ namespace net
 	{
 		uint8_t* packet_data_current = packet_data_start;
 		packet_data_current += io_mode::Process(packet_data_current, entity_id);
+		packet_data_current += io_mode::Process(packet_data_current, texture_id);
 		packet_data_current += io_mode::Process(packet_data_current, vertex_count);
 		packet_data_current += io_mode::Process(packet_data_current, triangle_count);
 		for (float* i = vertices; i - vertices < vertex_count * 2; ++i) //TODO: Somehow handle overindexing.

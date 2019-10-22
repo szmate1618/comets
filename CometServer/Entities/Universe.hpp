@@ -45,6 +45,7 @@ namespace entity
 		void TestVisibility();
 		SimplePartition& GetVision(def::entity_id);
 		void ExecuteQueuedOperations();
+		const EntityHandle& GetEntityHandle(def::entity_id);
 
 		struct EntityShape
 		{

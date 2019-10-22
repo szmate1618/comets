@@ -115,6 +115,7 @@ namespace net
 	public:
 
 		def::entity_id entity_id;
+		def::texture_id texture_id;
 		uint16_t vertex_count;
 		uint16_t triangle_count;
 		float* vertices;
