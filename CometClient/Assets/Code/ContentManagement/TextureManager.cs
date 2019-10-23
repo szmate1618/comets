@@ -7,7 +7,7 @@ public class TextureManager
 {
 	private static Dictionary<UInt32, Texture> textures = new Dictionary<UInt32, Texture>();
 
-	private const UInt32 placeholderTextureId = UInt32.MaxValue;
+	private const UInt32 placeholderTextureId = 0;
 
 	//This path is relative to the application directory.
 	private const string texturesPath = "../Textures";
