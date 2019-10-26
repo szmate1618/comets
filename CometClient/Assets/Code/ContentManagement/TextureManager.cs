@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+
 public class TextureManager
 {
 	private static Dictionary<UInt32, Texture> textures = new Dictionary<UInt32, Texture>();
