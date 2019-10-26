@@ -30,19 +30,19 @@ namespace entity
 	bool AbstractTriangulatedPoly::CollideInto(geo::EmptyFrame myframe, geo::EmptyFrame otherframe, AbstractTriangulatedPoly& other)
 	{
 		int arr_counter = 0;
-		for (int i = 0; i < vertices.size(); ++i)
+		for (size_t i = 0; i < vertices.size(); ++i)
 		{
 			if (vertices[i].transformed(orientation, position).is_inside(myframe) &&
 				vertices[i].transformed(orientation, position).is_inside(otherframe))
 			{
-				arr[arr_counter] = i;
+				arr[arr_counter] = static_cast<int>(i);
 				arr_counter++;
 			}
 		}
 		arr[arr_counter] = -1; //TODO: Add checks for overindexing.
 		arr_counter++;
 		int other_start = arr_counter;
-		for(int i = 0; i < other.triangles.size() / 3; ++i)
+		for(size_t i = 0; i < other.triangles.size() / 3; ++i)
 		{
 			//TODO: By Unity convention, vertices are enumerated in a clockwise winding order.
 			//Maybe this extra information could be used to speed up the collision check.
@@ -54,7 +54,7 @@ namespace entity
 				point_b.is_inside(otherframe) ||
 				point_c.is_inside(otherframe))
 			{
-				arr[arr_counter] = i;
+				arr[arr_counter] = static_cast<int>(i);
 				arr_counter++;
 			}
 		}
