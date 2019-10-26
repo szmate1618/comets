@@ -135,8 +135,10 @@ namespace server
 
 	net::ShapeDescriptionPayload& GameServer::ExportStrategy::ExportImport(const net::ShapeRequestPayload& srp) const
 	{
+		const entity::EntityHandle& entity_handle = game_server.universe.GetEntityHandle(srp.entity_id);
 		entity::Universe::EntityShape& entity_shape = game_server.universe.GetShape(srp.entity_id);
 		game_server.shape_description_payload.entity_id = srp.entity_id;
+		game_server.shape_description_payload.texture_id = entity_handle.texture;
 		game_server.shape_description_payload.vertex_count = static_cast<uint16_t>(entity_shape.vertices.size() / 2);
 		game_server.shape_description_payload.triangle_count = static_cast<uint16_t>(entity_shape.triangles.size() / 3);
 		game_server.shape_description_payload.vertices = &entity_shape.vertices[0];

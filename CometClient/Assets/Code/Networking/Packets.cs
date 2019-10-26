@@ -9,6 +9,7 @@ namespace net
 	using uint16_t = UInt16;
 	using uint32_t = UInt32;
 	using entity_id = UInt32; //TODO: Find some way to emulate global typedefs.
+	using texture_id = UInt32;
 
 	enum packet_type { client_input, server_state, shape_request, shape_description };
 
@@ -120,6 +121,7 @@ namespace net
 	class ShapeDescription : BinarySerializable
 	{
 		public entity_id entity_id;
+		public texture_id texture_id;
 		public uint16_t vertex_count;
 		public uint16_t triangle_count;
 		public float[] vertices;
@@ -130,6 +132,7 @@ namespace net
 		{
 			int current_index = start_index;
 			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref entity_id);
+			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref texture_id);
 			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref vertex_count);
 			current_index += net.BinarySerializer.Process(io_mode, packet_data, current_index, ref triangle_count);
 			for (int i = 0; i < vertex_count * 2; i++)
