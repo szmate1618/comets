@@ -24,7 +24,7 @@ namespace entity
 		//TODO: Investigate if circle collision checks need frames at all or not.
 		//Probably not, because a circle should only be in 1 collision partition at once, since it doesn't have multiple vertices.
 		//TODO: Remove friend class declaration in AbstractTriangulatedPoly, add public getters instead.
-		for (int i = 0; i < that.triangles.size() / 3; ++i)
+		for (size_t i = 0; i < that.triangles.size() / 3; ++i)
 		{
 			//TODO: By Unity convention, vertices are enumerated in a clockwise winding order.
 			//Maybe this extra information could be used to speed up the collision check.
