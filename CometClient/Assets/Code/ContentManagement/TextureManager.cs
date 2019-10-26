@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TextureManager
 {
-	private static Dictionary<UInt32, Texture> textures = new Dictionary<UInt32, Texture>();
+	private Dictionary<UInt32, Texture> textures = new Dictionary<UInt32, Texture>();
 
 	private const UInt32 placeholderTextureId = 0;
 
