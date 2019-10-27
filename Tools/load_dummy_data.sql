@@ -23,7 +23,7 @@ INSERT INTO Entities
 (2,			3,			2,			1,			'inertial',			'dynamic',	'visible',	'collidable',	10,			10,			0),
 (3,			4,			0,			1,			'inertial',			'dynamic',	'visible',	'collidable',	0,			10,			0),
 (4,			1,			0,			1,			'anti_inertial',	'dynamic',	'visible',	'collidable',	-10,		0,			0),
-(5,			1,			3,			1,			'para_inertial',	'dynamic',	'visible',	'collidable',	0,			-10,		0),
+(5,			1,			3,			3,			'para_inertial',	'dynamic',	'visible',	'collidable',	0,			-10,		0),
 (6,			1,			5,			1,			'inertial',			'dynamic',	'visible',	'collidable',	20,			0,			0),
 (7,			2,			5,			1,			'inertial',			'dynamic',	'visible',	'collidable',	25,			0,			0),
 (8,			0,			6,			1,			'inertial',			'dynamic',	'visible',	'collidable',	45,			-20,		0),
