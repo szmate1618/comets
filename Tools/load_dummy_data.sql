@@ -26,8 +26,8 @@ INSERT INTO Entities
 (5,			1,			3,			3,			'para_inertial',	'dynamic',	'visible',	'collidable',	0,			-10,		0),
 (6,			1,			5,			4,			'inertial',			'dynamic',	'visible',	'collidable',	20,			0,			0),
 (7,			2,			5,			4,			'inertial',			'dynamic',	'visible',	'collidable',	25,			0,			0),
-(8,			0,			6,			1,			'inertial',			'dynamic',	'visible',	'collidable',	45,			-20,		0),
-(9,			0,			7,			1,			'inertial',			'dynamic',	'visible',	'collidable',	45,			0,			0),
-(10,		0,			8,			1,			'inertial',			'dynamic',	'visible',	'collidable',	45,			20,			0);
+(8,			0,			6,			5,			'inertial',			'dynamic',	'visible',	'collidable',	45,			-20,		0),
+(9,			0,			7,			6,			'inertial',			'dynamic',	'visible',	'collidable',	45,			0,			0),
+(10,		0,			8,			7,			'inertial',			'dynamic',	'visible',	'collidable',	45,			20,			0);
 
 COMMIT;
