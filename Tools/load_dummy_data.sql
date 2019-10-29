@@ -28,6 +28,7 @@ INSERT INTO Entities
 (7,			2,			5,			4,			'inertial',			'dynamic',	'visible',	'collidable',	25,			0,			0),
 (8,			0,			6,			5,			'inertial',			'dynamic',	'visible',	'collidable',	45,			-20,		0),
 (9,			0,			7,			6,			'inertial',			'dynamic',	'visible',	'collidable',	45,			0,			0),
-(10,		0,			8,			7,			'inertial',			'dynamic',	'visible',	'collidable',	45,			20,			0);
+(10,		0,			8,			7,			'inertial',			'dynamic',	'visible',	'collidable',	45,			20,			0),
+(11,		0,			9,			9,			'inertial',			'dynamic',	'visible',	'collidable',	-25,		0,			0);
 
 COMMIT;
