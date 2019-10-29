@@ -28,7 +28,8 @@ CREATE TABLE CollisionBehaviors
 	Condition TEXT,
 	Action TEXT,
 	Parameter1 INTEGER,
-	Parameter2 INTEGER
+	Parameter2 INTEGER,
+	Parameter3 INTEGER
 );
 
 CREATE TABLE Entities

@@ -11,10 +11,10 @@ INSERT INTO Users
 --Fill table Shapes.
 
 INSERT INTO CollisionBehaviors
-(ShapeID,	Condition,				Action,		Parameter1,	Parameter2) VALUES
-(8,			'on_collision_take',	'explode',	0,			-1),
-(7,			'on_collision_take',	'explode',	4,			8),
-(6,			'on_collision_take',	'explode',	4,			7);
+(ShapeID,	Condition,				Action,		Parameter1,	Parameter2, Parameter3) VALUES
+(8,			'on_collision_take',	'explode',	0,			-1,			-1),
+(7,			'on_collision_take',	'explode',	4,			8,			7),
+(6,			'on_collision_take',	'explode',	4,			7,			6);
 
 INSERT INTO Entities
 (EntityID,	OwnerID,	ShapeID,	TextureID,	Engine,				Dynamics,	Visibility,	Collidability,	PositionX,	PositionY,	Orientation) VALUES
