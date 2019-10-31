@@ -7,6 +7,7 @@
 #include "..\Utilities\sqlite3.h"
 #include "..\Utilities\StaticLinkedList.hpp"
 #include "..\Definitions\TimeAndNetwork.hpp"
+#include "..\Definitions\Gameplay.hpp"
 
 #include <map>
 #include <unordered_map>
@@ -61,8 +62,9 @@ namespace entity
 		{
 			enum class Condition { on_collision_take, on_collision_give } condition;
 			enum class Action { explode } action;
-			int parameter1;
-			int parameter2;
+			def::behavior_parameter parameter1;
+			def::behavior_parameter parameter2;
+			def::behavior_parameter parameter3;
 		};
 
 		CollisionBehavior& GetCollisionBehavior(def::entity_id); //TODO: entity_id and shape_id should be incompatible types.

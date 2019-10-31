@@ -2,7 +2,6 @@
 #include "TriangulatedPolyNaiveRotation.hpp"
 #include "Circle.hpp"
 #include "..\Utilities\Logger.hpp"
-#include "..\Definitions\Gameplay.hpp"
 
 #include <sstream>
 #include <cassert>
@@ -82,7 +81,7 @@ namespace entity
 		sqlite3_exec //TODO: Add error handling.
 		(
 			db_connection,
-			"SELECT ShapeID, Condition, Action, Parameter1, Parameter2 FROM CollisionBehaviors;",
+			"SELECT ShapeID, Condition, Action, Parameter1, Parameter2, Parameter3 FROM CollisionBehaviors;",
 			[](void* void_universe, int, char** argv, char**) //TODO: This belongs in Utilities.
 			{
 				Universe* universe = static_cast<Universe*>(void_universe);
@@ -92,9 +91,10 @@ namespace entity
 				else if (std::strcmp("on_collision_give", argv[1]) == 0) condition = CollisionBehavior::Condition::on_collision_give;
 				CollisionBehavior::Action action;
 				if (std::strcmp("explode", argv[2]) == 0) action = CollisionBehavior::Action::explode;
-				int parameter1 = std::atoi(argv[3]);
-				int parameter2 = std::atoi(argv[4]);
-				universe->collision_behavior_registry.emplace(shape_id, CollisionBehavior{ condition, action, parameter1, parameter2 });
+				def::behavior_parameter parameter1 = std::atoi(argv[3]);
+				def::behavior_parameter parameter2 = std::atoi(argv[4]);
+				def::behavior_parameter parameter3 = std::atoi(argv[5]);
+				universe->collision_behavior_registry.emplace(shape_id, CollisionBehavior{ condition, action, parameter1, parameter2, parameter3 });
 				return 0;
 			},
 			static_cast<void*>(this),
@@ -320,7 +320,7 @@ namespace entity
 									{
 										QueueEntitySpawn(entity_registry.at(p_entity1->id).owner,
 											collision_behavior.parameter2,
-											entity_registry.at(p_entity1->id).texture,
+											collision_behavior.parameter3,
 											inertial,
 											dynamic,
 											visible,
