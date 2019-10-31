@@ -225,7 +225,7 @@ namespace entity
 		SpawnEntity(max_used_entity_id + 1, //TODO: Actually avoid collisions.
 			entity_registry[entity.id].owner,
 			4, //Completely arbitrary shape_id. TODO: Make this less arbitrary.
-			1, //Completely arbitrary texture_id. TODO: Same as above.
+			10, //Completely arbitrary texture_id. TODO: Same as above.
 			anti_intertial,
 			dynamic,
 			visible,

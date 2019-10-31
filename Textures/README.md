@@ -11,3 +11,4 @@
 * 5-asteroid_0-1024x1024.png
 * 6-asteroid_1-1024x1024.png
 * 7-asteroid_2-1024x1024.png
+* 10-bullet-256x256.png
