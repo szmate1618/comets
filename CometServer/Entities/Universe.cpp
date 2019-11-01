@@ -238,12 +238,11 @@ namespace entity
 
 	void Universe::EntityFireWithCooldown(def::time duration, DynamicEntity& entity)
 	{
-		if (entity_registry[entity.id].weapon_cooldown <= def::zero_seconds)
+		if (simulation_time > entity_registry[entity.id].weapon_last_fired + def::default_weapon_cooldown)
 		{
 			EntityFire(duration, entity);
-			entity_registry[entity.id].weapon_cooldown = def::default_weapon_cooldown;
+			entity_registry[entity.id].weapon_last_fired = simulation_time;
 		}
-		entity_registry[entity.id].weapon_cooldown -= duration;
 	}
 
 	void Universe::EntityWarp(def::time duration, DynamicEntity& entity)
@@ -269,6 +268,8 @@ namespace entity
 				}
 			}
 		}
+
+		simulation_time += duration;
 	}
 
 	void Universe::TestCollisions()
