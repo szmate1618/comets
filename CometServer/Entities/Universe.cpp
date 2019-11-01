@@ -499,7 +499,7 @@ namespace entity
 			dynamic_entity.velocity = velocity;
 			dynamic_entity.max_speed = 10;
 			dynamic_entity.inertial_velocity = { 0, 0 };
-			dynamic_entity.acceleration = { 0, 5 };
+			dynamic_entity.acceleration = { 0, 20 };
 			dynamic_entity.inertial_acceleration = { 0, 0 };
 			dynamic_entity.friction = 0;
 			auto index = dynamic_entities[visibility][collidability].InsertAtFirstGap(dynamic_entity);
