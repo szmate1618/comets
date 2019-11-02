@@ -284,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\Camera\FisheyeCameraController.cs" />
+    <Compile Include="Assets\Code\ContentManagement\EntityFactory.cs" />
     <Compile Include="Assets\Code\ContentManagement\MeshFactory.cs" />
     <Compile Include="Assets\Code\ContentManagement\TextureManager.cs" />
     <Compile Include="Assets\Code\Definitions\Network.cs" />
