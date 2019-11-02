@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TextureManager
 {
+
 	private static Dictionary<UInt32, Texture> textures = new Dictionary<UInt32, Texture>();
 
 	private const UInt32 placeholderTextureId = 0;
@@ -54,4 +55,5 @@ public class TextureManager
 		if (textures.ContainsKey(texture_id)) return textures[texture_id];
 		else return textures[placeholderTextureId];
 	}
+
 }
