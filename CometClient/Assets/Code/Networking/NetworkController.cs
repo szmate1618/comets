@@ -125,16 +125,8 @@ public class NetworkController : MonoBehaviour
 					break;
 				case net.packet_type.shape_description:
 					shape_description.Process(net.BinarySerializer.IOMode.Read, receive_buffer, bytes_read);
-					GameObject entityGameObject = new GameObject("Entity#" + shape_description.entity_id);
-					entityGameObject.AddComponent<MeshFilter>();
-					entityGameObject.AddComponent<MeshRenderer>();
-					entityGameObject.GetComponent<MeshFilter>().mesh = MeshFactory.Create(shape_description.vertex_count, shape_description.triangle_count,
-						shape_description.vertices, shape_description.uvs, shape_description.triangles);
-					//TODO: Some kind of default material should be used here, so the fisheye could be turned off if desired.
-					entityGameObject.GetComponent<MeshRenderer>().material = new Material(Resources.Load<Shader>("Fisheye"));
-					entityGameObject.GetComponent<MeshRenderer>().material.mainTexture = TextureManager.GetTexture(shape_description.texture_id);
-					Destroy(entities[shape_description.entity_id]);
-					entities[shape_description.entity_id] = entityGameObject;
+					if (entities.ContainsKey(shape_description.entity_id)) Destroy(entities[shape_description.entity_id]);
+					entities[shape_description.entity_id] = EntityFactory.Create(shape_description);
 					break;
 			}
 		}
