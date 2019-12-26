@@ -121,8 +121,7 @@ public class NetworkController : MonoBehaviour
 							udp_client.Send(send_buffer, shape_request.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 							entities.Add(entity.entity_id, Instantiate(placeHolder));
 						}
-						entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
-						entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
+						entities[entity.entity_id].GetComponent<entity.EntityController>().UpdateState((float)entity.x, (float)entity.y, (float)entity.phi);
 					}
 					break;
 				case net.packet_type.shape_description:
@@ -133,15 +132,17 @@ public class NetworkController : MonoBehaviour
 					break;
 			}
 		}
+		
 		if (entities.ContainsKey(def.Network.my_entity_id))
 		{
 			mainCamera.transform.position =
-			new Vector3
-			(
-				entities[def.Network.my_entity_id].transform.position.x,
-				entities[def.Network.my_entity_id].transform.position.y,
-				mainCamera.transform.position.z
-			);
+				new Vector3
+				(
+					entities[def.Network.my_entity_id].transform.position.x,
+					entities[def.Network.my_entity_id].transform.position.y,
+					mainCamera.transform.position.z
+				);
+
 		}
 	}
 

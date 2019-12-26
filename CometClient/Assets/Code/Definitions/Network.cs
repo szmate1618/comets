@@ -2,7 +2,7 @@
 namespace def
 {
 
-	static class Network
+	public static class Network
 	{
 
 		//Socket parameters
@@ -19,6 +19,7 @@ namespace def
 
 		//TODO: Actually implement this behaviour.
 		public const uint my_entity_id = 0;
+
 	}
 
 }
