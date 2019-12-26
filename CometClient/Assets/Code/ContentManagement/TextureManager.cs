@@ -18,7 +18,7 @@ public class TextureManager
 	private const string placeholderTexturePath = "EntityTextures/placeholder";
 
 
-	static TextureManager()
+	public TextureManager()
 	{
 		textures.Add(placeholderTextureId, Resources.Load<Texture>(placeholderTexturePath));
 
@@ -34,7 +34,7 @@ public class TextureManager
 		if (!textures.ContainsKey(placeholderTextureId)) Debug.Log("Placeholder texture not loaded.");
 	}
 
-	private static void LoadTextureFromFile(string path)
+	private void LoadTextureFromFile(string path)
 	{
 		try
 		{
@@ -50,7 +50,7 @@ public class TextureManager
 		}
 	}
 
-	public static Texture GetTexture(UInt32 texture_id)
+	public Texture GetTexture(UInt32 texture_id)
 	{
 		if (textures.ContainsKey(texture_id)) return textures[texture_id];
 		else return textures[placeholderTextureId];

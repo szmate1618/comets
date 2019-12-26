@@ -21,9 +21,11 @@ public class NetworkController : MonoBehaviour
 	private IPEndPoint server;
 	private UdpClient udp_client;
 	private Dictionary<UInt32, GameObject> entities = new Dictionary<UInt32, GameObject>();
+	private EntityFactory entityFactory;
 
 	private void Start()
 	{
+		entityFactory = new EntityFactory();
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>
 			{
@@ -126,17 +128,21 @@ public class NetworkController : MonoBehaviour
 				case net.packet_type.shape_description:
 					shape_description.Process(net.BinarySerializer.IOMode.Read, receive_buffer, bytes_read);
 					if (entities.ContainsKey(shape_description.entity_id)) Destroy(entities[shape_description.entity_id]);
-					entities[shape_description.entity_id] = EntityFactory.Create(shape_description);
+					entities[shape_description.entity_id] = entityFactory.Create(shape_description);
+
 					break;
 			}
 		}
-		mainCamera.transform.position =
+		if (entities.ContainsKey(def.Network.my_entity_id))
+		{
+			mainCamera.transform.position =
 			new Vector3
 			(
 				entities[def.Network.my_entity_id].transform.position.x,
 				entities[def.Network.my_entity_id].transform.position.y,
 				mainCamera.transform.position.z
 			);
+		}
 	}
 
 }
