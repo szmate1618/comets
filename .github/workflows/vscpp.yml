@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: open CometServer folder
-      run: cd CometServer
+      run: cd comets/CometServer
     - name: build solution
       run: >
            "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
