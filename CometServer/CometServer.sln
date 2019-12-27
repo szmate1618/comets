@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "Server\Server.vcxproj", "{2C0E257E-9A0E-412B-A82F-6A82975CBA02}"
 	ProjectSection(ProjectDependencies) = postProject
+		{ADC0731F-025E-49FD-802B-E83833370954} = {ADC0731F-025E-49FD-802B-E83833370954}
 		{4E5D9065-F9DE-441C-9590-41ECD764479F} = {4E5D9065-F9DE-441C-9590-41ECD764479F}
+		{5AF0E594-159D-4D02-A914-9E0277E72305} = {5AF0E594-159D-4D02-A914-9E0277E72305}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuadTree", "QuadTree\QuadTree.vcxproj", "{82599A88-58C0-44F0-98A8-699D21BD3391}"
@@ -13,6 +15,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Geometry", "Geometry\Geometry.vcxproj", "{291D4DC1-0954-4228-A20E-BA9269FEE141}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Entities", "Entities\Entities.vcxproj", "{ADC0731F-025E-49FD-802B-E83833370954}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D514D115-835C-488B-BE29-970C2CC0F2E0} = {D514D115-835C-488B-BE29-970C2CC0F2E0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{0F133736-76BC-47C3-9A88-1C567778A5C0}"
 	ProjectSection(ProjectDependencies) = postProject
