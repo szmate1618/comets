@@ -9,7 +9,9 @@ on:
     - master
 
 jobs:
-  build:
+  build-and-test-server:
+    
+    name: Build and test server
 
     runs-on: windows-latest
     
@@ -20,9 +22,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: build solution
+    - name: Build solution
       run: >
            cd CometServer &&
            "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
            CometServer.sln /p:Configuration=${{ matrix.configuration }};Platform=${{ matrix.platform }}
+      shell: cmd
+    - name: Run unit tests
+      run: >
+           cd CometServer\${{ matrix.platform }}\${{ matrix.configuration }} &&
+           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\VSTest.Console.exe"
+           Test.dll
       shell: cmd
