@@ -25,5 +25,4 @@ jobs:
     - name: build solution
       env:
         MSBuild: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe
-      run: |
-           %MSBuild% CometServer.sln /p:Configuration=${{ matrix.configuration }};Platform=${{ matrix.platform }}
+      run: $MSBuild CometServer.sln /p:Configuration=${{ matrix.configuration }};Platform=${{ matrix.platform }}
