@@ -11,14 +11,14 @@ namespace net
 	using entity_id = UInt32; //TODO: Find some way to emulate global typedefs.
 	using texture_id = UInt32;
 
-	enum packet_type { client_input, server_state, shape_request, shape_description };
+	public enum packet_type { client_input, server_state, shape_request, shape_description };
 
-	interface BinarySerializable
+	public interface BinarySerializable
 	{
 		int Process(net.BinarySerializer.IOMode io_mode, Byte[] packet_data, int start_index);
 	}
 
-	class Header : BinarySerializable
+	public class Header : BinarySerializable
 	{
 		public uint8_t protocol_id;
 		public uint32_t sequence_number;
@@ -34,7 +34,7 @@ namespace net
 		}
 	};
 
-	class ServerHeader : BinarySerializable
+	public class ServerHeader : BinarySerializable
 	{
 		public Header common_header;
 		public uint32_t ack;
@@ -50,7 +50,7 @@ namespace net
 		}
 	};
 
-	class ClientInputPayload : BinarySerializable
+	public class ClientInputPayload : BinarySerializable
 	{
 		public entity_id entity_id;
 		public uint8_t duration;
@@ -71,7 +71,7 @@ namespace net
 		}
 	};
 
-	class ServerObject : BinarySerializable
+	public class ServerObject : BinarySerializable
 	{
 		public entity_id entity_id; //TODO: Originally this was called 'type'. Find out why.
 		public double phi;
@@ -89,7 +89,7 @@ namespace net
 		}
 	};
 
-	class ServerStatePayload : BinarySerializable
+	public class ServerStatePayload : BinarySerializable
 	{
 		public uint16_t count;
 		public ServerObject[] objects;
@@ -106,7 +106,7 @@ namespace net
 		}
 	};
 
-	class ShapeRequest : BinarySerializable
+	public class ShapeRequest : BinarySerializable
 	{
 		public entity_id entity_id;
 
@@ -118,7 +118,7 @@ namespace net
 		}
 	};
 
-	class ShapeDescription : BinarySerializable
+	public class ShapeDescription : BinarySerializable
 	{
 		public entity_id entity_id;
 		public texture_id texture_id;
@@ -151,7 +151,7 @@ namespace net
 		}
 	};
 
-	class Packet<H, P> where H : BinarySerializable where P : BinarySerializable
+	public class Packet<H, P> where H : BinarySerializable where P : BinarySerializable
 	{
 		public H header;
 		public P payload;

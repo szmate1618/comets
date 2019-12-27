@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace net
 {
 
-	class BinarySerializer
+	public class BinarySerializer
 	{
 
 		[StructLayout(LayoutKind.Explicit)]

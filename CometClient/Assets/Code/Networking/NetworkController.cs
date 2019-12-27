@@ -21,14 +21,11 @@ public class NetworkController : MonoBehaviour
 	private IPEndPoint server;
 	private UdpClient udp_client;
 	private Dictionary<UInt32, GameObject> entities = new Dictionary<UInt32, GameObject>();
-
-	private TextureManager textureManager;
+	private EntityFactory entityFactory;
 
 	private void Start()
 	{
-		//Loading textures.
-		textureManager = new TextureManager();
-
+		entityFactory = new EntityFactory();
 		client_input =
 			new net.Packet<net.Header, net.ClientInputPayload>
 			{
@@ -123,33 +120,31 @@ public class NetworkController : MonoBehaviour
 							//nor does it throw any exceptions.
 							udp_client.Send(send_buffer, shape_request.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 							entities.Add(entity.entity_id, Instantiate(placeHolder));
+							entities[entity.entity_id].AddComponent<entity.EntityController>();
 						}
-						entities[entity.entity_id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * (float)entity.phi);
-						entities[entity.entity_id].transform.position = new Vector3((float)entity.x, (float)entity.y, 0);
+						entities[entity.entity_id].GetComponent<entity.EntityController>().UpdateState((float)entity.x, (float)entity.y, (float)entity.phi);
 					}
 					break;
 				case net.packet_type.shape_description:
 					shape_description.Process(net.BinarySerializer.IOMode.Read, receive_buffer, bytes_read);
-					GameObject entityGameObject = new GameObject("Entity#" + shape_description.entity_id);
-					entityGameObject.AddComponent<MeshFilter>();
-					entityGameObject.AddComponent<MeshRenderer>();
-					entityGameObject.GetComponent<MeshFilter>().mesh = MeshFactory.Create(shape_description.vertex_count, shape_description.triangle_count,
-						shape_description.vertices, shape_description.uvs, shape_description.triangles);
-					//TODO: Some kind of default material should be used here, so the fisheye could be turned off if desired.
-					entityGameObject.GetComponent<MeshRenderer>().material = new Material(Resources.Load<Shader>("Fisheye"));
-					entityGameObject.GetComponent<MeshRenderer>().material.mainTexture = textureManager.GetTexture(shape_description.texture_id);
-					Destroy(entities[shape_description.entity_id]);
-					entities[shape_description.entity_id] = entityGameObject;
+					if (entities.ContainsKey(shape_description.entity_id)) Destroy(entities[shape_description.entity_id]);
+					entities[shape_description.entity_id] = entityFactory.Create(shape_description);
+
 					break;
 			}
 		}
-		mainCamera.transform.position =
-			new Vector3
-			(
-				entities[def.Network.my_entity_id].transform.position.x,
-				entities[def.Network.my_entity_id].transform.position.y,
-				mainCamera.transform.position.z
-			);
+
+		if (entities.ContainsKey(def.Network.my_entity_id))
+		{
+			mainCamera.transform.position =
+				new Vector3
+				(
+					entities[def.Network.my_entity_id].transform.position.x,
+					entities[def.Network.my_entity_id].transform.position.y,
+					mainCamera.transform.position.z
+				);
+
+		}
 	}
 
 }
