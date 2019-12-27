@@ -1,0 +1,29 @@
+name: Visual Studio C++ CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        platform: [Win32, x64]
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: open CometServer folder
+      run: cd CometServer
+    - name: build solution
+      env:
+        MSBuild: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe
+      run: |
+           %MSBuild% CometServer.sln /p:Configuration=${{ matrix.configuration }};Platform=${{ matrix.platform }}
