@@ -120,6 +120,7 @@ public class NetworkController : MonoBehaviour
 							//nor does it throw any exceptions.
 							udp_client.Send(send_buffer, shape_request.Process(net.BinarySerializer.IOMode.Write, send_buffer, 0));
 							entities.Add(entity.entity_id, Instantiate(placeHolder));
+							entities[entity.entity_id].AddComponent<entity.EntityController>();
 						}
 						entities[entity.entity_id].GetComponent<entity.EntityController>().UpdateState((float)entity.x, (float)entity.y, (float)entity.phi);
 					}
@@ -132,7 +133,7 @@ public class NetworkController : MonoBehaviour
 					break;
 			}
 		}
-		
+
 		if (entities.ContainsKey(def.Network.my_entity_id))
 		{
 			mainCamera.transform.position =
