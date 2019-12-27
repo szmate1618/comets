@@ -1,4 +1,5 @@
 # Comets
+![](https://github.com/szmate1618/hello-world/comets/.github/workflows/vscpp.yml/badge.svg)
 ## Currently looks like this
 ![Yay!!!](Images/yay.gif)
 ## What is this?
