@@ -1,5 +1,5 @@
 # Comets
-![](https://github.com/szmate1618/comets/workflows/Visual%20Studio%20C%2B%2B%20CI/badge.svg)
+[![](https://github.com/szmate1618/comets/workflows/Visual%20Studio%20C%2B%2B%20CI/badge.svg)](https://github.com/szmate1618/comets/actions)
 ## Currently looks like this
 ![Yay!!!](Images/yay.gif)
 ## What is this?
