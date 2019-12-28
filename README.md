@@ -1,7 +1,7 @@
 # Comets
 [![](https://github.com/szmate1618/comets/workflows/Visual%20Studio%20C%2B%2B%20CI/badge.svg)](https://github.com/szmate1618/comets/actions)
 ## Currently looks like this
-![Yay!!!](Images/yay2.gif)
+![Yay!!!](Images/yay2.gif)<br/>
 Minus the lossy compression.
 ## What is this?
 A heavily work-in-progress, open world, networked multiplayer remake of [Asteroids](https://en.wikipedia.org/wiki/Asteroids_(video_game)),
