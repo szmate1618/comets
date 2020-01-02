@@ -294,7 +294,6 @@
     <Compile Include="Assets\Code\Definitions\Gameplay.cs" />
     <Compile Include="Assets\Code\Definitions\Network.cs" />
     <Compile Include="Assets\Code\Entities\EntityController.cs" />
-    <Compile Include="Assets\Code\MainMenu\FetchNews.cs" />
     <Compile Include="Assets\Code\Networking\BinarySerializer.cs" />
     <Compile Include="Assets\Code\Networking\NetworkController.cs" />
     <Compile Include="Assets\Code\Networking\Packets.cs" />
