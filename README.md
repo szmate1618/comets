@@ -11,11 +11,11 @@ It's crafted with extensibility and performance in mind. With adaptive space par
 and with specialized data structures optimized for memory locality, it will hopefully be able to simulate tens of thousands of dynamic game objects.
 ## Current development environment
 * Microsoft Visual Studio Community 2017 Version 15.9.17
-* Microsoft .NET Framework Version 4.7.03056
+* Microsoft .NET Framework Version 4.x
 * Unity 2018.4.14f1
 * Blender 2.79b
 ## Minimal development environment that worked at some point
 * Microsoft Visual Studio Community 2017 Version 15.7.3
-* Microsoft .NET Framework Version 4.7.03056
+* Microsoft .NET Framework Version 3.5
 * Unity 2017.3.1f1
 * Blender 2.79b
