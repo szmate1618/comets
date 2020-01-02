@@ -12,7 +12,7 @@ and with specialized data structures optimized for memory locality, it will hope
 ## Current development environment
 * Microsoft Visual Studio Community 2017 Version 15.9.17
 * Microsoft .NET Framework Version 4.7.03056
-* Unity 2017.3.1f1
+* Unity 2018.4.14f1
 * Blender 2.79b
 ## Minimal development environment that worked at some point
 * Microsoft Visual Studio Community 2017 Version 15.7.3
