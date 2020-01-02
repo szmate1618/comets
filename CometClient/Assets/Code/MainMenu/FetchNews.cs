@@ -9,7 +9,11 @@ public class FetchNews : MonoBehaviour
 
 	private string ParseNews(string rawText)
 	{
-		return rawText;
+		//TODO: This is good enough for now, but in the real system, news should
+		//have a fixed, specific format, e.g. JSON, or just plain text without any markup,
+		//so we don't need to change this function every time
+		//we make a small change on the news page of the website.
+		return rawText.Replace("<h1>", "").Replace("</h1>", "");
 	}
 
 	public void Start ()
