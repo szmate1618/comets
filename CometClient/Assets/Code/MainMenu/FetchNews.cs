@@ -10,16 +10,6 @@ using UnityEngine.UI;
 public class FetchNews : MonoBehaviour
 {
 
-	//This is from https://stackoverflow.com/questions/4926676/mono-https-webrequest-fails-with-the-authentication-or-decryption-has-failed.
-	public bool MyRemoteCertificateValidationCallback(
-		System.Object sender,
-		X509Certificate certificate,
-		X509Chain chain,
-		SslPolicyErrors sslPolicyErrors)
-	{
-		return true;
-	}
-
 	private string ParseNews(string rawText)
 	{
 		return "asdsadas";
@@ -27,7 +17,7 @@ public class FetchNews : MonoBehaviour
 
 	public void Start ()
 	{
-		ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+		ServicePointManager.ServerCertificateValidationCallback += (p1,p2,p3,p4)  => true;
 
 		string html;
 		string newsUrl = @"https://szmate1618.github.io/comets-website/news/recent.html";
