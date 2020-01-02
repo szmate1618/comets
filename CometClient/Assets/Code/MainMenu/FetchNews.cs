@@ -12,13 +12,11 @@ public class FetchNews : MonoBehaviour
 
 	private string ParseNews(string rawText)
 	{
-		return "asdsadas";
+		return rawText;
 	}
 
 	public void Start ()
 	{
-		ServicePointManager.ServerCertificateValidationCallback += (p1,p2,p3,p4)  => true;
-
 		string html;
 		string newsUrl = @"https://szmate1618.github.io/comets-website/news/recent.html";
 
