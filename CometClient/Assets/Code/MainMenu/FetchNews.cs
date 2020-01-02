@@ -34,4 +34,5 @@ public class FetchNews : MonoBehaviour
 
 		GetComponent<Text>().text = ParseNews(html);
 	}
+
 }
