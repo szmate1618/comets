@@ -21,7 +21,6 @@ public class FetchNews : MonoBehaviour
 		string newsUrl = @"https://szmate1618.github.io/comets-website/news/recent.html";
 
 		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(newsUrl);
-		//request.AutomaticDecompression = DecompressionMethods.GZip;
 
 		using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
 		using (Stream stream = response.GetResponseStream())
