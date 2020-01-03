@@ -1,10 +1,7 @@
-from flask import Flask
-
-from project.users import users_blueprint
+from project import create_app
 
 
-app = Flask(__name__)
-app.register_blueprint(users_blueprint)
+app = create_app('flask.cfg')
 
 @app.route('/')
 def index():
