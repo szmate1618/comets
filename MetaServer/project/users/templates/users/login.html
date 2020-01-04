@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>This is a Heading</h1>
-	<p>This is a paragraph.</p>
+<h1>Log in</h1>
+<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.email_address.label }}<br>
+		{{ form.email_address }}
+	</p>
+	<p>
+		{{ form.password.label }}<br>
+		{{ form.password(size=32) }}
+	</p>
+	<p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+	<p>{{ form.submit() }}</p>
+</form>
 {% endblock %}
