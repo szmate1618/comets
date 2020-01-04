@@ -6,7 +6,7 @@
 	{{ form.hidden_tag() }}
 	<p>
 		{{ form.email_address.label }}<br>
-		{{ form.email_address }}
+		{{ form.email_address(size=32) }}
 	</p>
 	<p>
 		{{ form.password.label }}<br>
