@@ -13,7 +13,7 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
 	email_address = EmailField('Email', validators=[DataRequired()])
 	password = PasswordField('Password', validators=[DataRequired()])
-	remember_me = BooleanField('Remember Me')
+	remember_me = BooleanField('Remember me')
 	submit = SubmitField('Log In')
 
 class ForgottenPasswordForm(FlaskForm):
