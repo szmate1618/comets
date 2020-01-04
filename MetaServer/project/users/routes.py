@@ -1,16 +1,17 @@
 from flask import render_template
 
 from . import users_blueprint
+from .forms import LoginForm
 
 
 @users_blueprint.route('/register')
 def register():
-	return render_template('users/register.html')
+	return render_template('users/register.html', title='Register')
 
 @users_blueprint.route('/login')
 def login():
-	return render_template('users/login.html')
+	return render_template('users/login.html', title='Log in', form=LoginForm())
 
 @users_blueprint.route('/forgotten_password')
 def forgotten_password():
-	return render_template('users/forgotten_password.html')
+	return render_template('users/forgotten_password.html', title='Forgotten password')
