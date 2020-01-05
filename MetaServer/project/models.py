@@ -1,4 +1,6 @@
-from . import db
+from datetime import datetime
+
+from project import db
 
 
 #For the better or worse, we are using the same naming convention here
@@ -17,7 +19,7 @@ class User(db.Model):
 class LoginEvent(db.Model):
 	__tablename__ = 'LoginEvents'
 	LoginEventID = db.Column(db.Integer, primary_key=True)
-	UserID = db.Column(db.Integer, db.ForeignKey('User.UserID'))
+	UserID = db.Column(db.Integer, db.ForeignKey('Users.UserID'))
 	IPAddress = db.Column(db.String)
 	Timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
