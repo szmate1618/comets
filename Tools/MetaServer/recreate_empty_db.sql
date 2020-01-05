@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users
 (
 	UserID INTEGER PRIMARY KEY ASC,
-	UserName TEXT UNIQUE,
+	Username TEXT UNIQUE,
 	EmailAddress TEXT UNIQUE,
 	PasswordHash TEXT
 );
