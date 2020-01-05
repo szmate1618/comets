@@ -21,7 +21,7 @@ CREATE TABLE LoginEvents
 	LoginEventID INTEGER PRIMARY KEY ASC,
 	UserID INTEGER references Users(UserID),
 	IPAddress TEXT,
-	Date TEXT
+	Timestamp TEXT
 );
 
 COMMIT;
