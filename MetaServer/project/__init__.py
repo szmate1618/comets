@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from project.users import users_blueprint
-
 
 db = SQLAlchemy()
 
@@ -12,9 +10,8 @@ def create_app(config_filename=None):
 
 	db.init_app(app)
 
+	#This import must not precede the instantiation of `db`.
+	from project.users import users_blueprint
 	app.register_blueprint(users_blueprint)
 
 	return app
-
-
-from . import models
