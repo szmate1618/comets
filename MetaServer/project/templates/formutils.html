@@ -1,0 +1,15 @@
+<!--Based on
+	https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/
+	and 
+	https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
+-->
+
+{% macro render_field(field) %}
+<p>
+	{{ field.label }}<br>
+	{{ field(**kwargs)|safe }}<br>
+	{% for error in field.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+</p>
+{% endmacro %}
