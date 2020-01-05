@@ -8,10 +8,10 @@
 		{% endif %}
 	</head>
 	<body>
-		<a href={{ url_for('index') }}>Home</a>
-		<a href={{ url_for('users.register') }}>Register</a>
-		<a href={{ url_for('users.login') }}>Log in</a>
-		<a href={{ url_for('users.forgotten_password') }}>I forgot my password</a>
+		<a href="{{ url_for('index') }}">Home</a>
+		<a href="{{ url_for('users.register') }}">Register</a>
+		<a href="{{ url_for('users.login') }}">Log in</a>
+		<a href="{{ url_for('users.forgotten_password') }}">I forgot my password</a>
 		<hr>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
