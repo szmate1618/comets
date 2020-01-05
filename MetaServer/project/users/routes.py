@@ -2,12 +2,17 @@ from flask import render_template, flash, redirect, url_for
 
 from . import users_blueprint
 from .forms import RegisterForm, LoginForm, ForgottenPasswordForm
+from project.models import User, LoginEvent
+from project import db
 
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegisterForm()
 	if form.validate_on_submit():
+		new_user = User(Username=form.username.data, EmailAddress=form.email_address.data, PasswordHash='asdasd')
+		db.session.add(new_user)
+		db.session.commit()
 		flash(f"Registration sent. Please check your email ({form.email_address.data}) to confirm your registration.")
 		return redirect(url_for('index'))
 	return render_template('users/register.html', title='Register', form=form)
