@@ -8,7 +8,7 @@ class RegisterForm(FlaskForm):
 	email_address = EmailField('Email', validators=[DataRequired()])
 	username = StringField('Username', validators=[DataRequired()])
 	password = PasswordField('Password', validators=[DataRequired()])
-	confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
+	confirm_password = PasswordField('Confirm password', validators=[EqualTo('password', message='Passwords must match')])
 	submit = SubmitField('Register')
 
 class LoginForm(FlaskForm):
@@ -18,7 +18,5 @@ class LoginForm(FlaskForm):
 	submit = SubmitField('Log In')
 
 class ForgottenPasswordForm(FlaskForm):
-	username = StringField('Username', validators=[DataRequired()])
-	password = PasswordField('Password', validators=[DataRequired()])
-	confirm_password = PasswordField('Password', validators=[DataRequired()])
+	email_address = EmailField('Email', validators=[DataRequired()])
 	submit = SubmitField('Register')

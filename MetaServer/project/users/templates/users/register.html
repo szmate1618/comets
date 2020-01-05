@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>This is a Heading</h1>
-	<p>This is a paragraph.</p>
+<h1>Register</h1>
+<form action="" method="post">
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.email_address.label }}<br>
+		{{ form.email_address(size=32) }}
+	</p>
+	<p>
+		{{ form.username.label }}<br>
+		{{ form.username(size=32) }}
+	</p>
+	<p>
+		{{ form.password.label }}<br>
+		{{ form.password(size=32) }}
+	</p>
+	<p>
+		{{ form.confirm_password.label }}<br>
+		{{ form.confirm_password(size=32) }}
+	</p>
+	<p>{{ form.submit() }}</p>
+</form>
 {% endblock %}
