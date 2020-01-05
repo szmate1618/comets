@@ -15,3 +15,6 @@ def create_app(config_filename=None):
 	app.register_blueprint(users_blueprint)
 
 	return app
+
+
+from . import models
