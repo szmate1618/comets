@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% if title %}
+		<title>Comets - {{ title }}</title>
+		{% else %}
+		<title>Comets</title>
+		{% endif %}
+	</head>
+	<body>
+		<a href="{{ url_for('index') }}">Home</a>
+		<a href="{{ url_for('users.register') }}">Register</a>
+		<a href="{{ url_for('users.login') }}">Log in</a>
+		<a href="{{ url_for('users.forgotten_password') }}">I forgot my password</a>
+		<hr>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+		{% block content %}{% endblock %}
+	</body>
+</html>

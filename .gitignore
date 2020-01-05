@@ -1,4 +1,4 @@
-# Game data database
+# Game data database.
 *.sqlite3
 
 ## Ignore Visual Studio and Unity temporary files, build results, and
