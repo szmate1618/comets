@@ -12,10 +12,18 @@ def register():
 		return redirect('/index')
 	return render_template('users/register.html', title='Register', form=form)
 
-@users_blueprint.route('/login')
+@users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-	return render_template('users/login.html', title='Log in', form=LoginForm())
+	form = LoginForm()
+	if form.validate_on_submit():
+		flash(f"Successfully logged in.")
+		return redirect('/index')
+	return render_template('users/login.html', title='Log in', form=form)
 
-@users_blueprint.route('/forgotten_password')
+@users_blueprint.route('/forgotten_password', methods=['GET', 'POST'])
 def forgotten_password():
-	return render_template('users/forgotten_password.html', title='Forgotten password', form=ForgottenPasswordForm())
+	form = ForgottenPasswordForm()
+	if form.validate_on_submit():
+		flash(f"New password sent to {form.email_address.data}. Please change it after first log in.")
+		return redirect('/index')
+	return render_template('users/forgotten_password.html', title='Forgotten password', form=form)
