@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div>This is a placeholder line.</div>
+	<h1>This is a placeholder line.</h1>
+	{% for post in news %}
+	<div class="news_post">
+		<h2>{{ post.title }}</h2>
+		<h5>posted at {{ post.creation_time }}</h5>
+		<h5>updated at {{ post.modification_time }}</h5>
+		<p>{{ post.content }}</p>
+	</div>
+	{% endfor %}
 {% endblock %}

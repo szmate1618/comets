@@ -1,0 +1,3 @@
+This is another placeholder line.
+
+Add some more funky characters for testing: áéíóőúűü.
