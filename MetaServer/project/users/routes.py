@@ -10,7 +10,8 @@ from project import db
 def register():
 	form = RegisterForm()
 	if form.validate_on_submit():
-		new_user = User(Username=form.username.data, EmailAddress=form.email_address.data, PasswordHash='asdasd')
+		new_user = User(Username=form.username.data, EmailAddress=form.email_address.data)
+		new_user.set_password(form.password.data)
 		db.session.add(new_user)
 		db.session.commit()
 		flash(f"Registration sent. Please check your email ({form.email_address.data}) to confirm your registration.")

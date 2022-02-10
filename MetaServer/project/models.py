@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from project import db
 
 
@@ -15,6 +17,12 @@ class User(db.Model):
 
 	def __repr__(self):
 		return f"<User({ID},{Username},{EmailAddress},{PasswordHash})>"
+
+	def set_password(self, password):
+		self.PasswordHash = generate_password_hash(password)
+
+	def check_password(self, password):
+		return check_password_hash(self.PasswordHash, password)
 
 class LoginEvent(db.Model):
 	__tablename__ = 'LoginEvents'
