@@ -9,8 +9,12 @@
 	</head>
 	<body>
 		<a href="{{ url_for('index') }}">Home</a>
+		{% if current_user.is_anonymous %}
 		<a href="{{ url_for('users.register') }}">Register</a>
 		<a href="{{ url_for('users.login') }}">Log in</a>
+		{% else %}
+		<a href="{{ url_for('users.logout') }}">Log out</a>
+		{% endif %}
 		<a href="{{ url_for('users.forgotten_password') }}">I forgot my password</a>
 		<hr>
 		{% with messages = get_flashed_messages() %}

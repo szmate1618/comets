@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, url_for
+from flask_login import current_user, login_user, logout_user
 
 from . import users_blueprint
 from .forms import RegisterForm, LoginForm, ForgottenPasswordForm
@@ -20,11 +21,24 @@ def register():
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('index'))
 	form = LoginForm()
 	if form.validate_on_submit():
-		flash(f"Successfully logged in.")
+		user = User.query.filter_by(EmailAddress=form.email_address.data).first()
+		if user is None or not user.check_password(form.password.data):
+			flash('Invalid username or password.')
+			return redirect(url_for('login'))
+		login_user(user, remember=form.remember_me.data)
+		flash("Logged in successfully.")
 		return redirect(url_for('index'))
 	return render_template('users/login.html', title='Log in', form=form)
+
+@users_blueprint.route('/logout')
+def logout():
+	logout_user()
+	flash("Logged out successfully.")
+	return redirect(url_for('index'))
 
 @users_blueprint.route('/forgotten_password', methods=['GET', 'POST'])
 def forgotten_password():
