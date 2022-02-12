@@ -1,0 +1,8 @@
+{% macro render_news_post(post) %}
+<fieldset class="news_post">
+	<legend>{{ post.title }}</legend>
+	<h5>posted at {{ post.creation_time }}</h5>
+	<h5>updated at {{ post.modification_time }}</h5>
+	<p>{{ post.content }}</p>
+</fieldset>
+{% endmacro %}

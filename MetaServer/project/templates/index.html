@@ -1,22 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<p>
-		<pre>
+{% from "newsutils.html" import render_news_post %}
+	<pre>
 __________      .__                           __________
 \______   \____ |  | ___.__.___  __ __________\____    /
  |     ___/  _ \|  |<   |  |\  \/ // __ \_  __ \/     / 
  |    |  (  <_> )  |_\___  | \   /\  ___/|  | \/     /_ 
  |____|   \____/|____/ ____|  \_/  \___  >__| /_______ \
                      \/                \/             \/
-		</pre>
-	</p>
+	</pre>
 	{% for post in news %}
-	<fieldset class="news_post">
-		<legend>{{ post.title }}</legend>
-		<h5>posted at {{ post.creation_time }}</h5>
-		<h5>updated at {{ post.modification_time }}</h5>
-		<p>{{ post.content }}</p>
-	</fieldset>
+	{{ render_news_post(post) }}
 	{% endfor %}
 {% endblock %}
