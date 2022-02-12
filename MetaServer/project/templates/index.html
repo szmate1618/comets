@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>This is a placeholder line.</h1>
+	<p>
+		<pre>
+__________      .__                           __________
+\______   \____ |  | ___.__.___  __ __________\____    /
+ |     ___/  _ \|  |<   |  |\  \/ // __ \_  __ \/     / 
+ |    |  (  <_> )  |_\___  | \   /\  ___/|  | \/     /_ 
+ |____|   \____/|____/ ____|  \_/  \___  >__| /_______ \
+                     \/                \/             \/
+		</pre>
+	</p>
 	{% for post in news %}
-	<div class="news_post">
-		<h2>{{ post.title }}</h2>
+	<fieldset class="news_post">
+		<legend>{{ post.title }}</legend>
 		<h5>posted at {{ post.creation_time }}</h5>
 		<h5>updated at {{ post.modification_time }}</h5>
 		<p>{{ post.content }}</p>
-	</div>
+	</fieldset>
 	{% endfor %}
 {% endblock %}

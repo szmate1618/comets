@@ -1,0 +1,14 @@
+body {
+	background-color: #222;
+	color: #0A0;
+}
+
+fieldset {
+	border: 10px solid;
+	border-style: double;
+}
+
+legend:hover {
+	background-color: #0A0;
+	color: #222;
+}
