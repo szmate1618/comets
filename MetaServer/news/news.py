@@ -11,7 +11,6 @@ class Post:
 		self.modification_time = modification_time
 
 class News:
-
 	parent_directory_path = os.path.dirname(os.path.realpath(__file__))
 	parent_directory_name = os.path.basename(parent_directory_path)
 	posts_folder_name = 'posts'
