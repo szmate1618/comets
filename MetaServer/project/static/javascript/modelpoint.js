@@ -32,12 +32,12 @@ function ModelPoint(x, y) {
 
 	this.InTriangle = function(modelPointA, modelPointB, modelPointC)
 	{
-		modelPointAB = modelPointB - modelPointA;
-		modelPointBC = modelPointC - modelPointB;
-		modelPointCA = modelPointA - modelPointC;
-		sign1 = ab.LengthCross(this - modelPointA);
-		sign2 = bc.LengthCross(this - modelPointB);
-		sign3 = ca.LengthCross(this - modelPointC);
+		modelPointAB = modelPointB.Subtract(modelPointA);
+		modelPointBC = modelPointC.Subtract(modelPointB);
+		modelPointCA = modelPointA.Subtract(modelPointC);
+		sign1 = modelPointAB.LengthCross(this.Subtract(modelPointA));
+		sign2 = modelPointBC.LengthCross(this.Subtract(modelPointB));
+		sign3 = modelPointCA.LengthCross(this.Subtract(modelPointC));
 		return (sign1 >= 0) && (sign2 >= 0) && (sign3 >= 0) || (sign1 <= 0) && (sign2 <= 0) && (sign3 <= 0); 
 	}
 	
