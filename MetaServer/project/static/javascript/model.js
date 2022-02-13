@@ -1,6 +1,6 @@
-import {ModelPoint} from 'modelpoint.js';
-import {ModelRectangle} from 'modelrectangle.js';
-import {ModelTriangle} from 'modeltriangle.js';
+import {ModelPoint} from './modelpoint.js';
+import {ModelRectangle} from './modelrectangle.js';
+import {ModelTriangle} from './modeltriangle.js';
 
 
 function Model(numberOfPoints) {
@@ -8,9 +8,9 @@ function Model(numberOfPoints) {
 	this.selection = [];
 	this.grid = [];
 
-	phi = 2 * Math.PI / numberOfPoints;
-	radius = 0.5 / Math.sin(phi / 2);
-	pos = new ModelPoint(0, radius);
+	const phi = 2 * Math.PI / numberOfPoints;
+	const radius = 0.5 / Math.sin(phi / 2);
+	var pos = new ModelPoint(0, radius);
 	for (let i = 0; i < numberOfPoints; i++)
 	{
 		this.points.push(new ModelPoint(pos.x, pos.y));
@@ -144,4 +144,4 @@ function Model(numberOfPoints) {
 	};
 }
 
-export default Model;
+export {Model};

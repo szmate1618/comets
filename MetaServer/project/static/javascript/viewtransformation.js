@@ -12,4 +12,4 @@ function ViewTransformation(zoom, offset_x, offset_y) {
 	};
 }
 
-export default ViewTransformation;
+export {ViewTransformation};

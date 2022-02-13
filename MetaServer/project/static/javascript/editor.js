@@ -1,5 +1,9 @@
+import {Model} from './model.js';
+import {ViewTransformation} from './viewtransformation.js';
+
+
 /*
-Based on
+Image loading is based on
 https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
 */
 
@@ -20,3 +24,13 @@ function handleImage(e){
 	}
 	reader.readAsDataURL(e.target.files[0]);
 }
+
+
+function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
+	this.normalColor = normalColor;
+	this.selectionColor = selectionColor;
+	this.model = new Model(10);
+	this.viewTransofrmation = new ViewTransformation();
+}
+
+var editor = new Editor();

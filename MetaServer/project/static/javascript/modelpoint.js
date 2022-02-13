@@ -67,4 +67,4 @@ function ModelPoint(x, y) {
 	};
 }
 
-export default ModelPoint;
+export {ModelPoint};
