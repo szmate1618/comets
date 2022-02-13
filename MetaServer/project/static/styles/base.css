@@ -1,11 +1,13 @@
 :root {
 	--main-background-color: #222;
 	--main-text-color: #0A0;
+	--main-font-family: "Lucida Console", "Courier New", monospace;
 }
 
 body {
 	background-color: var(--main-background-color);
 	color: var(--main-text-color);
+	font-family: var(--main-font-family);
 }
 hr {
 	border-top: 1em solid;
@@ -51,9 +53,9 @@ a::after {
 	content: "]";
 }
 input {
-
 	background-color: var(--main-background-color);
 	color: var(--main-text-color);
+	font-family: var(--main-font-family);
 	border: solid;
 	outline: none;
 }
