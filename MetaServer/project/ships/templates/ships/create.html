@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% from "formutils.html" import render_field %}
+<h1>Create</h1>
+<form action="" method="post">
+	{{ form.hidden_tag() }}
+	{{ render_field(form.texture, size=32) }}
+	{{ render_field(form.shipname, size=32) }}
+	<p>{{ form.submit() }}</p>
+</form>
+<fieldset class="editor">
+	<legend>Ship Editor v1.0</legend>
+	<canvas id="editor_canvas">
+	</canvas>
+</fieldset>
+<script src="{{url_for('static', filename='javascript/editor.js')}}"></script>
+{% endblock %}

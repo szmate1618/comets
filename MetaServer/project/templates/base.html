@@ -18,6 +18,9 @@
 		<a href="{{ url_for('users.logout') }}">Log out</a>
 		{% endif %}
 		<a href="{{ url_for('users.forgotten_password') }}">I forgot my password</a>
+		{% if not current_user.is_anonymous %}
+		<a href="{{ url_for('ships.create') }}">Create</a>
+		{% endif %}
 		<hr>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
