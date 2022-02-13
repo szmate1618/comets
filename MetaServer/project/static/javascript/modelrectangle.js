@@ -29,7 +29,7 @@ function ModelRectangle(modelPoint1, modelPoint2) {
 	this.Contains = function(modelPoint) {
 	{
 		return (min_x <= modelPoint.x && modelPoint.x <= max_x && min_y <= modelPoint.y && modelPoint.y <= max_y);
-	}
+	};
 }
 
 export default ModelRectangle;
