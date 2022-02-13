@@ -1,3 +1,8 @@
+/*
+Based on
+https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
+*/
+
 var imageLoader = document.getElementById('texture');
 	imageLoader.addEventListener('change', handleImage, false);
 var canvas = document.getElementById('editor_canvas');
@@ -9,8 +14,6 @@ function handleImage(e){
 	reader.onload = function(event){
 		var img = new Image();
 		img.onload = function(){
-			//canvas.width = img.width;
-			//canvas.height = img.height;
 			ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 		}
 		img.src = event.target.result;
