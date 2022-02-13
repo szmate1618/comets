@@ -1,0 +1,55 @@
+:root {
+	--main-background-color: #222;
+	--main-text-color: #0A0;
+}
+
+body {
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+}
+hr {
+	border-top: 1em solid;
+	border-style: double;
+}
+
+.news_post {
+	border: 1em solid;
+	border-style: double;
+	margin-bottom: 2em;
+}
+
+a {
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: var(--main-text-color);
+	color: var(--main-background-color);
+	text-decoration: none;
+}
+
+a::before {
+	content: "[";
+}
+a::after {
+	content: "]";
+}
+input {
+
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+	border: solid;
+	outline: none;
+}
+
+input[type=submit] {
+	background-color: var(--main-text-color);
+	color: var(--main-background-color);
+}
+
+input[type=submit]:hover {
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+}

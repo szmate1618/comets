@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% from "newsutils.html" import render_news_post %}
+	<pre>
+__________      .__                           __________
+\______   \____ |  | ___.__.___  __ __________\____    /
+ |     ___/  _ \|  |<   |  |\  \/ // __ \_  __ \/     / 
+ |    |  (  <_> )  |_\___  | \   /\  ___/|  | \/     /_ 
+ |____|   \____/|____/ ____|  \_/  \___  >__| /_______ \
+                     \/                \/             \/
+	</pre>
+	{% for post in news %}
+	{{ render_news_post(post) }}
+	{% endfor %}
+{% endblock %}

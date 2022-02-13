@@ -21,6 +21,7 @@ and with specialized data structures optimized for memory locality, it will hope
 * Microsoft .NET Framework Version 4.x
 * Unity 2018.4.14f1
 * Blender 2.79b
+* Python 3.9.7 (and specific versions of Python packages described in MetaServer/requirements.txt)
 
 ## Minimal development environment that worked at some point
 * Microsoft Visual Studio Community 2017 Version 15.7.3

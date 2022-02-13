@@ -1,0 +1,5 @@
+# Ignore Python virtual environment.
+venv
+
+# Meta data database
+*.sqlite3
