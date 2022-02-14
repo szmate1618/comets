@@ -14,8 +14,8 @@ function Model(numberOfPoints) {
 	for (let i = 0; i < numberOfPoints; i++)
 	{
 		this.points.push(new ModelPoint(pos.x, pos.y));
-		x = Math.cos(phi) * pos.x - Math.sin(phi) * pos.y;
-		y = Math.sin(phi) * pos.x + Math.cos(phi) * pos.y;
+		let x = Math.cos(phi) * pos.x - Math.sin(phi) * pos.y;
+		let y = Math.sin(phi) * pos.x + Math.cos(phi) * pos.y;
 		pos.x = x;
 		pos.y = y;
 	}
