@@ -1,5 +1,6 @@
 import {Model} from './model.js';
 import {ViewTransformation} from './viewtransformation.js';
+import {EditorControl} from './editorcontrol.js';
 
 
 /*
@@ -25,11 +26,23 @@ function handleImage(e){
 	reader.readAsDataURL(e.target.files[0]);
 }
 
-function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
+function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
+	this.canvas = canvas;
+	this.ctx = canvas.getContext('2d');
 	this.normalColor = normalColor;
 	this.selectionColor = selectionColor;
 	this.model = new Model(10);
-	this.viewTransformation = new ViewTransformation(100.0, canvas.width / 2, canvas.height / 2);
+	this.viewTransformation = new ViewTransformation(100.0, this.canvas.width / 2, this.canvas.height / 2);
+
+	this.CreateGradient = function(modelPoint1, modelPoint2, color1, color2)
+	{
+		let canvasPoint1 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint1);
+		let canvasPoint2 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint2);
+		let gradient = this.ctx.createLinearGradient(canvasPoint1.x, canvasPoint1.y, canvasPoint2.x, canvasPoint2.y);
+		gradient.addColorStop(0, color1);
+		gradient.addColorStop(1, color2);
+		return gradient;
+	}
 
 	this.Draw = function() {
 		var points = this.model.points;
@@ -37,7 +50,7 @@ function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
 		var grid = this.model.grid;
 
 		grid.forEach(function(modelTriangle, index, arr) {
-			this.DrawTriangle(ctx, this.normalColor, modelTriangle);
+			this.DrawTriangle(this.ctx, this.normalColor, modelTriangle);
 		})
 
 		var lineColor;
@@ -45,7 +58,7 @@ function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
 		for (let i = 0; i < points.length; i++)
 		{
 			let nextModelPoint = points[(i + 1) % points.length];
-			this.DrawLine(ctx, this.normalColor, points[i], nextModelPoint);
+			this.DrawLine(this.ctx, this.normalColor, points[i], nextModelPoint);
 
 			if (selection.includes(points[i]))
 			{
@@ -55,23 +68,23 @@ function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
 				}
 				else
 				{
-					//lineColor = CreateGradient(points[i], nextModelPoint, selectioncolor, normalcolor);
+					lineColor = this.CreateGradient(points[i], nextModelPoint, this.selectionColor, this.normalColor);
 				}
-				this.DrawLine(ctx, lineColor, points[i], nextModelPoint);
-				this.DrawMarker(ctx, this.selectionColor, points[i]);
+				this.DrawLine(this.ctx, lineColor, points[i], nextModelPoint);
+				this.DrawMarker(this.ctx, this.selectionColor, points[i]);
 			}
 			else
 			{
 				if (selection.includes(nextModelPoint))
 				{
-					//lineColor = CreateGradient(points[i], nextModelPoint, normalcolor, selectioncolor);
+					lineColor = this.CreateGradient(points[i], nextModelPoint, this.normalColor, this.selectionColor);
 				}
 				else
 				{
 					lineColor = this.normalColor;
 				}
-				this.DrawLine(ctx, lineColor, points[i], nextModelPoint);
-				this.DrawMarker(ctx, this.normalColor, points[i]);
+				this.DrawLine(this.ctx, lineColor, points[i], nextModelPoint);
+				this.DrawMarker(this.ctx, this.normalColor, points[i]);
 			}
 		}
 		//pictureBox1.Invalidate();
@@ -79,28 +92,31 @@ function Editor(normalColor = '#00AA00', selectionColor = 'DDDDDD') {
 
 	this.DrawMarker = function(ctx, fillStyle, modelPoint) {
 		let drawPoint = this.viewTransformation.ModelPointToCanvasPoint(modelPoint);
-		ctx.fillStyle = fillStyle;
-		ctx.fillRect(drawPoint.x - 2, drawPoint.y - 2, 5, 5);
+		this.ctx.fillStyle = fillStyle;
+		this.ctx.fillRect(drawPoint.x - 2, drawPoint.y - 2, 5, 5);
 	};
 
 	this.DrawLine = function(ctx, strokeStyle, modelPoint1, modelPoint2) {
 		let drawPoint1 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint1);
 		let drawPoint2 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint2);
-		ctx.strokeStyle = strokeStyle;
-		ctx.moveTo(drawPoint1.x, drawPoint1.y);
-		ctx.lineTo(drawPoint2.x, drawPoint2.y);
-		ctx.stroke();
+		this.ctx.strokeStyle = strokeStyle;
+		this.ctx.moveTo(drawPoint1.x, drawPoint1.y);
+		this.ctx.lineTo(drawPoint2.x, drawPoint2.y);
+		this.ctx.stroke();
 	};
 
 	this.DrawTriangle = function(ctx, strokeStyle, modelTriangle) {
 		let drawPointA = this.viewTransformation.ModelPointToCanvasPoint(modelTriangle.a);
 		let drawPointB = this.viewTransformation.ModelPointToCanvasPoint(modelTriangle.b);
 		let drawPointC = this.viewTransformation.ModelPointToCanvasPoint(modelTriangle.c);
-		this.DrawLine(ctx, strokeStyle, drawPointA, drawPointB);
-		this.DrawLine(ctx, strokeStyle, drawPointB, drawPointC);
-		this.DrawLine(ctx, strokeStyle, drawPointC, drawPointA);
+		this.DrawLine(this.ctx, strokeStyle, drawPointA, drawPointB);
+		this.DrawLine(this.ctx, strokeStyle, drawPointB, drawPointC);
+		this.DrawLine(this.ctx, strokeStyle, drawPointC, drawPointA);
 	};
 }
 
-var editor = new Editor();
-editor.Draw();
+var editor = new Editor(canvas);
+var editorControl = new EditorControl(editor);
+
+
+export {Editor};

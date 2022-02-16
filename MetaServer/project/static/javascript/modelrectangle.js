@@ -1,8 +1,8 @@
 function ModelRectangle(modelPoint1, modelPoint2) {
-	min_x;
-	max_x;
-	min_y;
-	max_y;
+	this.min_x;
+	this.max_x;
+	this.min_y;
+	this.max_y;
 
 	if (modelPoint1.x < modelPoint2.x)
 	{
@@ -26,7 +26,7 @@ function ModelRectangle(modelPoint1, modelPoint2) {
 	}
 
 	this.Contains = function(modelPoint) {
-		return (min_x <= modelPoint.x && modelPoint.x <= max_x && min_y <= modelPoint.y && modelPoint.y <= max_y);
+		return (this.min_x <= modelPoint.x && modelPoint.x <= this.max_x && this.min_y <= modelPoint.y && modelPoint.y <= this.max_y);
 	};
 }
 

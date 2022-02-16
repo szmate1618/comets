@@ -63,11 +63,11 @@ function Model(numberOfPoints) {
 	};
 
 	this.SelectNearest = function(modelPoint) {
-		mindist = Number.MAX_VALUE;
-		minindex = -1;
+		var mindist = Number.MAX_VALUE;
+		var minindex = -1;
 		for (let i = 0; i < this.points.length; i++)
 		{
-			dist = Math.Sqrt(Math.pow(this.points[i].x - modelPoint.x, 2) + Math.pow(this.points[i].y - modelPoint.y, 2 ));
+			var dist = Math.sqrt(Math.pow(this.points[i].x - modelPoint.x, 2) + Math.pow(this.points[i].y - modelPoint.y, 2 ));
 			if (dist < mindist)
 			{
 				mindist = dist;
@@ -80,9 +80,10 @@ function Model(numberOfPoints) {
 
 	this.SelectArea = function(modelRectangle) {
 		this.selection = [];
+		let _this = this;
 		this.points.forEach(function(modelPoint, index, arr) {
 			if (modelRectangle.Contains(modelPoint)) {
-				this.selection.push(modelPoint);
+				_this.selection.push(modelPoint);
 			}
 		})
 	};
@@ -109,7 +110,7 @@ function Model(numberOfPoints) {
 	};
 
 	this.GetCenter = function(modelPointArray) {
-		center = new ModelPoint(0,0);
+		var center = new ModelPoint(0,0);
 		for (let i = 0; i < modelPointArray.length; i++)
 		{
 			center.x += modelPointArray[i].x;
@@ -121,7 +122,7 @@ function Model(numberOfPoints) {
 	};
 
 	this.Normalize = function() {
-		center = this.GetCenter(points);
+		var center = this.GetCenter(points);
 		this.TranslateAll(-center);
 
 		distance = 0;
@@ -139,7 +140,7 @@ function Model(numberOfPoints) {
 	};
 
 	this.MoveTo = function(destinationModelPoint) {
-		center = this.GetCenter(this.selection);
+		var center = this.GetCenter(this.selection);
 		this.Translate(destinationModelPoint.Subtract(center));
 	};
 }

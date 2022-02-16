@@ -1,3 +1,6 @@
+import {ModelPoint} from './modelpoint.js';
+
+
 function ViewTransformation(zoom, offset_x, offset_y) {
 	this.zoom = zoom;
 	this.offset_x = offset_x;
