@@ -3,29 +3,6 @@ import {ViewTransformation} from './viewtransformation.js';
 import {EditorControl} from './editorcontrol.js';
 
 
-/*
-Image loading is based on
-https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
-*/
-
-var imageLoader = document.getElementById('texture');
-	imageLoader.addEventListener('change', handleImage, false);
-var canvas = document.getElementById('editor_canvas');
-var ctx = canvas.getContext('2d');
-
-
-function handleImage(e){
-	var reader = new FileReader();
-	reader.onload = function(event){
-		var img = new Image();
-		img.onload = function(){
-			ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-		}
-		img.src = event.target.result;
-	}
-	reader.readAsDataURL(e.target.files[0]);
-}
-
 function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 	this.canvas = canvas;
 	this.ctx = canvas.getContext('2d');
@@ -33,6 +10,7 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 	this.selectionColor = selectionColor;
 	this.model = new Model(10);
 	this.viewTransformation = new ViewTransformation(100.0, this.canvas.width / 2, this.canvas.height / 2);
+	this.texture = new Image();
 
 	this.CreateGradient = function(modelPoint1, modelPoint2, color1, color2)
 	{
@@ -49,6 +27,8 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 		var selection = this.model.selection;
 		var grid = this.model.grid;
 
+		this.ctx.drawImage(this.texture, 0, 0, this.canvas.width, this.canvas.height)
+
 		grid.forEach(function(modelTriangle, index, arr) {
 			this.DrawTriangle(this.ctx, this.normalColor, modelTriangle);
 		})
@@ -58,7 +38,7 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 		for (let i = 0; i < points.length; i++)
 		{
 			let nextModelPoint = points[(i + 1) % points.length];
-			this.DrawLine(this.ctx, this.normalColor, points[i], nextModelPoint);
+			//this.DrawLine(this.ctx, this.normalColor, points[i], nextModelPoint);
 
 			if (selection.includes(points[i]))
 			{
@@ -87,18 +67,18 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 				this.DrawMarker(this.ctx, this.normalColor, points[i]);
 			}
 		}
-		//pictureBox1.Invalidate();
 	};
 
 	this.DrawMarker = function(ctx, fillStyle, modelPoint) {
 		let drawPoint = this.viewTransformation.ModelPointToCanvasPoint(modelPoint);
 		this.ctx.fillStyle = fillStyle;
-		this.ctx.fillRect(drawPoint.x - 2, drawPoint.y - 2, 5, 5);
+		this.ctx.fillRect(drawPoint.x - 3, drawPoint.y - 3, 7, 7);
 	};
 
 	this.DrawLine = function(ctx, strokeStyle, modelPoint1, modelPoint2) {
 		let drawPoint1 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint1);
 		let drawPoint2 = this.viewTransformation.ModelPointToCanvasPoint(modelPoint2);
+		this.ctx.beginPath();
 		this.ctx.strokeStyle = strokeStyle;
 		this.ctx.moveTo(drawPoint1.x, drawPoint1.y);
 		this.ctx.lineTo(drawPoint2.x, drawPoint2.y);
@@ -115,6 +95,7 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 	};
 }
 
+var canvas = document.getElementById('editor_canvas');
 var editor = new Editor(canvas);
 var editorControl = new EditorControl(editor);
 
