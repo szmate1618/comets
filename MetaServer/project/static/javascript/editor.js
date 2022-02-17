@@ -27,6 +27,7 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 		var selection = this.model.selection;
 		var grid = this.model.grid;
 
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.ctx.drawImage(this.texture, 0, 0, this.canvas.width, this.canvas.height)
 
 		grid.forEach(function(modelTriangle, index, arr) {

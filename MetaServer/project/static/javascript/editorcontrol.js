@@ -30,9 +30,9 @@ https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canv
 	};
 
 	this.GetMouseCoordinates = function(event) {
-		const rect = this.editor.canvas.getBoundingClientRect()
-		const x = event.clientX - rect.left
-		const y = event.clientY - rect.top
+		const rect = this.editor.canvas.getBoundingClientRect();
+		const x = event.clientX - rect.left;
+		const y = event.clientY - rect.top;
 		return {x: x, y: y};
 	};
 	

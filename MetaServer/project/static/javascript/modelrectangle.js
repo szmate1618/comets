@@ -14,7 +14,7 @@ function ModelRectangle(modelPoint1, modelPoint2) {
 		this.min_x = modelPoint2.x;
 		this.max_x = modelPoint1.x;
 	}
-	if (modelPoint1.y < modelPoint2.x)
+	if (modelPoint1.y < modelPoint2.y)
 	{
 		this.min_y = modelPoint1.y;
 		this.max_y = modelPoint2.y;
