@@ -67,4 +67,5 @@ function ModelPoint(x, y) {
 	};
 }
 
+
 export {ModelPoint};

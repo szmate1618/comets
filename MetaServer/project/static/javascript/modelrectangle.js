@@ -30,4 +30,5 @@ function ModelRectangle(modelPoint1, modelPoint2) {
 	};
 }
 
+
 export {ModelRectangle};

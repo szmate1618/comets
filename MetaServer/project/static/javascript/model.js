@@ -145,4 +145,5 @@ function Model(numberOfPoints) {
 	};
 }
 
+
 export {Model};

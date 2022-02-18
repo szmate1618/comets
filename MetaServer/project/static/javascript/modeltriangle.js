@@ -4,4 +4,5 @@ function ModelTriangle(modelPointA, modelPointB, modelPointC) {
 	this.c = modelPointC;
 }
 
+
 export {ModelTriangle};
