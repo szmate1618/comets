@@ -96,9 +96,5 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 	};
 }
 
-var canvas = document.getElementById('editor_canvas');
-var editor = new Editor(canvas);
-var editorControl = new EditorControl(editor);
-
 
 export {Editor};
