@@ -210,10 +210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c473fc2eac72b4b429b1807af4b47e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1304200938}
   backgroundTile: {fileID: 7916405709700832278, guid: 63d377e0b4a3ef94f87f9b30eaed7b4a,
     type: 3}
-  columnCount: 4
-  rowCount: 4
+  columnCount: 1
+  rowCount: 1
   tileWidth: 256
   tileHeight: 256
 --- !u!4 &1223202600
