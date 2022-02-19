@@ -1,4 +1,4 @@
-﻿Shader "FisheyeShader"
+﻿Shader "FisheyeShader2"
 {
 	Properties
 	{
@@ -37,7 +37,15 @@
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.vertex.xy /= max(sqrt((length(o.vertex.xy) + 1) * 10), 0.000001);
+
+				if (length(o.vertex.xy) > 0.75)
+				{
+					float2 unit = normalize(o.vertex.xy);
+					float2 excess = o.vertex.xy - unit * 0.75;
+					excess.xy /= max(sqrt((length(excess.xy) + 1) * 10), 0.000001);
+					o.vertex.xy = unit * 0.75 + excess;
+				}
+
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
 			}

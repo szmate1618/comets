@@ -18,7 +18,7 @@ public class EntityFactory
 			shapeDescription.vertices, shapeDescription.uvs, shapeDescription.triangles);
 		//TODO: Some kind of default material should be used here, so the fisheye could be turned off if desired.
 		entity.AddComponent<MeshRenderer>();
-		entity.GetComponent<MeshRenderer>().material = new Material(Resources.Load<Shader>("Fisheye"))
+		entity.GetComponent<MeshRenderer>().material = new Material(Resources.Load<Shader>("Fisheye2"))
 		{
 			mainTexture = textureManager.GetTexture(shapeDescription.texture_id)
 		};
