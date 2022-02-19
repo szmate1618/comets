@@ -589,7 +589,7 @@ PlayerSettings:
   facebookStatus: 1
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 6
   cloudProjectId: 9aa43425-ebd8-4bfa-a4cb-a4d22d6e4429
   framebufferDepthMemorylessMode: 0
   projectName: CometClient

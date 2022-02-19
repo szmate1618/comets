@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 1304200940}
   - component: {fileID: 1304200939}
   - component: {fileID: 1304200943}
+  - component: {fileID: 1304200944}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -412,6 +413,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fisheyeShader: {fileID: 4800000, guid: fb2516ea631ee9f4097b109c9315dfbc, type: 3}
+--- !u!114 &1304200944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304200938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d313710897b55a24fa44dd058722ad99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1989732393
 GameObject:
   m_ObjectHideFlags: 0
