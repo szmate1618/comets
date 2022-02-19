@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    void Update()
-    {
+	void Update()
+	{
 		float orthographicSize = Camera.main.orthographicSize;
 		orthographicSize += Input.GetAxis("zoom") * 10;
 		orthographicSize = Mathf.Clamp(orthographicSize, 5, 100);
