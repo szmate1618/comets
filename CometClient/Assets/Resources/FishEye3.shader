@@ -43,6 +43,7 @@
 					float2 unit = normalize(o.vertex.xy);
 					float2 excess = o.vertex.xy - unit * 0.75;
 					excess.xy /= max(sqrt((length(excess.xy) + 1) * 10), 0.000001);
+					//excess.xy /= 4;
 					o.vertex.xy = unit * 0.75 + excess;
 				}
 
