@@ -21,11 +21,11 @@ public class BackgroundManager : MonoBehaviour
 			for (int j = 0; j < columnCount; j++)
 			{
 				tiles[i, j] = Instantiate(backgroundTile);
-				tiles[i, j].transform.localScale = new Vector3(tileWidth, tileHeight, 1);
+				tiles[i, j].transform.localScale = new Vector3(tileWidth / 2.0f, tileHeight / 2.0f, 1);
 				tiles[i, j].transform.position = new Vector3(
 					-(tileWidth * columnCount) / 2.0f + tileWidth / 2.0f + tileWidth * i, 
 					-(tileHeight * rowCount) / 2.0f + tileHeight / 2.0f + tileHeight * j,
-					9
+					10.0f
 				);
 			}
 		}
