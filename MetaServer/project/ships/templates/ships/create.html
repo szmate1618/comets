@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% from "formutils.html" import render_field %}
+<h1>Create</h1>
+<form action="" method="post">
+	{{ form.hidden_tag() }}
+	{{ render_field(form.texture, size=32) }}
+	{{ render_field(form.shipname, size=32) }}
+	<p>{{ form.submit() }}</p>
+</form>
+<fieldset class="editor">
+	<legend>Ship Editor v1.0</legend>
+	<canvas  width="700" height="700" id="editor_canvas">
+	</canvas>
+</fieldset>
+<button type="button" id="symmetrize_x_button">Symmetrize on X</button>
+<button type="button" id="symmetrize_y_button">Symmetrize on Y</button>
+<script type="module" src="{{url_for('static', filename='javascript/editormain.js')}}" defer></script>
+{% endblock %}

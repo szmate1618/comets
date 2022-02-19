@@ -24,7 +24,7 @@ namespace Editor
                 min_x = p2.x;
                 max_x = p1.x;
             }
-            if (p1.y < p2.x)
+            if (p1.y < p2.y)
             {
                 min_y = p1.y;
                 max_y = p2.y;

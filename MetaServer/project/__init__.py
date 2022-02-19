@@ -21,4 +21,7 @@ def create_app(config_filename=None):
 	from project.users import users_blueprint
 	app.register_blueprint(users_blueprint)
 
+	from project.ships import ships_blueprint
+	app.register_blueprint(ships_blueprint)
+
 	return app
