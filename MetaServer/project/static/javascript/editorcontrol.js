@@ -76,7 +76,6 @@ https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canv
 		));
 		_this.editor.Draw();
 	}, false);
-
 }
 
 

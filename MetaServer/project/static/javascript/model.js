@@ -34,8 +34,8 @@ function Model(numberOfPoints) {
 
 		while (ap.length > 3)
 		{
-			biggest_angle = 0;  // Is there always an angle bigger than this? What if the user turns it inside out?
-							    // Yeah, turning it inside out is problematic.
+			biggest_angle = 0;	// Is there always an angle bigger than this? What if the user turns it inside out?
+								// Yeah, turning it inside out is problematic.
 			ba_index = -1;
 			for (let i = 0; i < ap.length; i++)
 			{

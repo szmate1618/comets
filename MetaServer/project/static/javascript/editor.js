@@ -39,7 +39,6 @@ function Editor(canvas, normalColor = '#00AA00', selectionColor = '#DDDDDD') {
 		for (let i = 0; i < points.length; i++)
 		{
 			let nextModelPoint = points[(i + 1) % points.length];
-			//this.DrawLine(this.ctx, this.normalColor, points[i], nextModelPoint);
 
 			if (selection.includes(points[i]))
 			{

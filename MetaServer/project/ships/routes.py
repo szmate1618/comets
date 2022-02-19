@@ -3,8 +3,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 from . import ships_blueprint
 from .forms import CreateForm
-#from project.models import User, LoginEvent
-#from project import db
 
 
 @ships_blueprint.route('/create', methods=['GET', 'POST'])
