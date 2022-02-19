@@ -14,7 +14,7 @@ public class BackgroundManager : MonoBehaviour
 	private GameObject[,] tiles;
 
 	void Start()
- {
+	{
 		tiles = new GameObject[rowCount, columnCount];
 		for (int i = 0; i < rowCount; i++)
 		{
@@ -29,10 +29,10 @@ public class BackgroundManager : MonoBehaviour
 				);
 			}
 		}
- }
+	}
 
- void Update()
- {
+	void Update()
+	{
 		for (int i = 0; i < rowCount; i++)
 		{
 			for (int j = 0; j < columnCount; j++)
