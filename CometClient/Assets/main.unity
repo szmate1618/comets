@@ -213,8 +213,8 @@ MonoBehaviour:
   mainCamera: {fileID: 1304200938}
   backgroundTile: {fileID: 7916405709700832278, guid: 63d377e0b4a3ef94f87f9b30eaed7b4a,
     type: 3}
-  columnCount: 1
-  rowCount: 1
+  columnCount: 2
+  rowCount: 2
   tileWidth: 256
   tileHeight: 256
 --- !u!4 &1223202600
