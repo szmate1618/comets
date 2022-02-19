@@ -14,5 +14,7 @@
 	<canvas  width="700" height="700" id="editor_canvas">
 	</canvas>
 </fieldset>
-<script src="{{url_for('static', filename='javascript/editormain.js')}}" defer></script>
+<button type="button" id="symmetrize_x_button">Symmetrize on X</button>
+<button type="button" id="symmetrize_y_button">Symmetrize on Y</button>
+<script type="module" src="{{url_for('static', filename='javascript/editormain.js')}}" defer></script>
 {% endblock %}

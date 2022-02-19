@@ -30,7 +30,7 @@ function Model(numberOfPoints) {
 	
 	this.CalculateGrid = function() {
 		this.grid = [];
-		ap = [...this.points];
+		let ap = [...this.points];
 
 		while (ap.length > 3)
 		{
@@ -62,20 +62,24 @@ function Model(numberOfPoints) {
 		this.grid.push(new ModelTriangle(ap[0], ap[1], ap[2]));
 	};
 
-	this.SelectNearest = function(modelPoint) {
+	this.GetNearest = function(modelPoint, targetModelPoints = this.points) {
 		var mindist = Number.MAX_VALUE;
 		var minindex = -1;
-		for (let i = 0; i < this.points.length; i++)
+		for (let i = 0; i < targetModelPoints.length; i++)
 		{
-			var dist = Math.sqrt(Math.pow(this.points[i].x - modelPoint.x, 2) + Math.pow(this.points[i].y - modelPoint.y, 2 ));
+			var dist = Math.sqrt(Math.pow(targetModelPoints[i].x - modelPoint.x, 2) + Math.pow(targetModelPoints[i].y - modelPoint.y, 2 ));
 			if (dist < mindist)
 			{
 				mindist = dist;
 				minindex = i;
 			}
 		}
+		return targetModelPoints[minindex];
+	};
+
+	this.SelectNearest = function(modelPoint) {
 		this.selection = [];
-		this.selection.push(this.points[minindex]);
+		this.selection.push(this.GetNearest(modelPoint));
 	};
 
 	this.SelectArea = function(modelRectangle) {
@@ -142,6 +146,36 @@ function Model(numberOfPoints) {
 	this.MoveTo = function(destinationModelPoint) {
 		var center = this.GetCenter(this.selection);
 		this.Translate(destinationModelPoint.Subtract(center));
+	};
+	
+	this.SymmetrizeOnXAxis = function() {
+		let mirroredPoints = JSON.parse(JSON.stringify(this.points));
+		
+		for (let i = 0; i < mirroredPoints.length; i++)
+		{
+			mirroredPoints[i].y *= -1;
+		}
+		
+		for (let i = 0; i < this.points.length; i++)
+		{
+			let closestMirroredPoint = this.GetNearest(this.points[i], mirroredPoints);
+			this.points[i] = new ModelPoint((this.points[i].x + closestMirroredPoint.x) / 2,(this.points[i].y + closestMirroredPoint.y) / 2)
+		}
+	};
+	
+	this.SymmetrizeOnYAxis = function() {
+		let mirroredPoints = JSON.parse(JSON.stringify(this.points));
+		
+		for (let i = 0; i < mirroredPoints.length; i++)
+		{
+			mirroredPoints[i].x *= -1;
+		}
+		
+		for (let i = 0; i < this.points.length; i++)
+		{
+			let closestMirroredPoint = this.GetNearest(this.points[i], mirroredPoints);
+			this.points[i] = new ModelPoint((this.points[i].x + closestMirroredPoint.x) / 2,(this.points[i].y + closestMirroredPoint.y) / 2)
+		}
 	};
 }
 

@@ -6,6 +6,8 @@ function EditorControl(editor) {
 	this.editor = editor;
 	this.areaSelectionStart = {x: 0, y: 0};
 	this.texture = document.getElementById('texture');
+	this.symmetrize_x_button = document.getElementById('symmetrize_x_button');
+	this.symmetrize_y_button = document.getElementById('symmetrize_y_button');
 	let _this = this;
 
 /*
@@ -18,12 +20,22 @@ https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canv
 			let image = new Image();
 			image.onload = function(){
 				_this.editor.texture = image;
-				_this.editor.Draw(image);
+				_this.editor.Draw();
 			}
 			image.src = event.target.result;
 		}
 		reader.readAsDataURL(event.target.files[0]);
 	}, false);
+
+	this.symmetrize_x_button.addEventListener('click', function(event) {
+		_this.editor.model.SymmetrizeOnXAxis();
+		_this.editor.Draw();
+	}, false)
+
+	this.symmetrize_y_button.addEventListener('click', function(event) {
+		_this.editor.model.SymmetrizeOnYAxis();
+		_this.editor.Draw();
+	}, false)
 
 	this.CanvasPointsAlmostEqual = function(canvasPoint1, canvasPoint2, tolerance = 0) {
 		return (Math.abs(canvasPoint1.x - canvasPoint2.x) <= tolerance && Math.abs(canvasPoint1.y - canvasPoint2.y) <= tolerance);

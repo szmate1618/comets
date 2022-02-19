@@ -52,7 +52,7 @@ a::before {
 a::after {
 	content: "]";
 }
-input {
+input, button {
 	background-color: var(--main-background-color);
 	color: var(--main-text-color);
 	font-family: var(--main-font-family);
@@ -60,12 +60,12 @@ input {
 	outline: none;
 }
 
-input[type=submit] {
+input[type=submit], button {
 	background-color: var(--main-text-color);
 	color: var(--main-background-color);
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, button:hover {
 	background-color: var(--main-background-color);
 	color: var(--main-text-color);
 }
