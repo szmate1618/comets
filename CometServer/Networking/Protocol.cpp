@@ -130,17 +130,37 @@ namespace net
 		{
 			//TODO: Why write the buffer for entities we don't send anyway?
 			packet.payload = &(payloads[i]);
-			size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
-			assert(bytes_written < def::max_packet_size && "Buffer overflow error.");
-			if (registry.Contains(entities[i]))
+
+			//TODO: This code makes assumptions about the internals of packets.
+			//Factor this into a separate method or class somehow, preferably somewhere around the packets, add tests.
+			uint16_t remaining_count = packet.payload->count;
+			uint16_t max_per_packet_count = static_cast<uint16_t>((sizeof(buffer) - sizeof(ServerHeader) - sizeof(packet.payload->count)) / sizeof(ServerObject));
+			ServerObject* first_object = packet.payload->objects;
+
+			do
 			{
-				socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written)); //TODO: Maybe tracelog sent bytes.
-				sequence_number++;
-			}
-			else
-			{
-				//TODO: Errorlog this.
-			}
+				uint16_t current_per_packet_count = __min(max_per_packet_count, remaining_count);
+				packet.payload->count = current_per_packet_count;
+				remaining_count -= current_per_packet_count;
+
+				size_t bytes_written = packet.IO<Write>(buffer); //TODO: Handle overflow.
+				assert(bytes_written < def::max_packet_size && "Buffer overflow error.");
+
+				//TODO: Consider making these operation non-destructive.
+				packet.payload->objects += packet.payload->count;
+
+				if (registry.Contains(entities[i]))
+				{
+					socket.Send(registry.GetAddress(entities[i]), buffer, static_cast<int>(bytes_written)); //TODO: Maybe tracelog sent bytes.
+					sequence_number++;
+				}
+				else
+				{
+					//TODO: Errorlog this.
+				}
+			} while (remaining_count > 0); //TODO: Maybe a for loop would be more obviously finite.
+
+			packet.payload->objects = first_object;
 		}
 	}
 
