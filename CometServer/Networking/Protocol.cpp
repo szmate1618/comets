@@ -158,7 +158,7 @@ namespace net
 				{
 					//TODO: Errorlog this.
 				}
-			} while (remaining_count > 0); //TODO: Maybe a for loop with be more obviously finite.
+			} while (remaining_count > 0); //TODO: Maybe a for loop would be more obviously finite.
 
 			packet.payload->objects = first_object;
 		}
