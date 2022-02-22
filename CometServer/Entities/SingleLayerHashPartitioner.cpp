@@ -21,7 +21,7 @@ namespace entity
 	void SingleLayerHashPartitioner::Insert(StaticEntity* entity)
 	{
 		//TODO: Insert into all containing partitions based on bounding box.
-		std::pair<int64_t, int64_t> position{ static_cast<int64_t>(entity->position.x) / 128, static_cast<int64_t>(entity->position.y) / 128 };
+		std::pair<int64_t, int64_t> position{ static_cast<int64_t>(entity->position.x) / 32, static_cast<int64_t>(entity->position.y) / 32 };
 		if (partitions_map.count(position) == 0)
 		{
 			partitions.emplace_back();
