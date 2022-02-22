@@ -5,7 +5,7 @@
 
 #include <unordered_map>
 #include <utility>
-#include <vector>
+#include <list>
 
 
 namespace entity
@@ -19,8 +19,8 @@ namespace entity
 		~SingleLayerHashPartitioner();
 		void Reset();
 		void Insert(StaticEntity*);
-		std::vector<SimplePartition>::const_iterator begin() const;
-		std::vector<SimplePartition>::const_iterator end() const;
+		std::list<SimplePartition>::const_iterator begin() const;
+		std::list<SimplePartition>::const_iterator end() const;
 
 		//A rudimentary hash implementation for std::pair based on this
 		//https://en.cppreference.com/w/cpp/utility/hash
@@ -37,8 +37,8 @@ namespace entity
 	protected:
 
 		// TODO: Consider using a geo::vector_2d.
-		std::unordered_map<std::pair<double, double>, SimplePartition*, pair_hash> partitions_map;
-		std::vector<SimplePartition> partitions;
+		std::unordered_map<std::pair<int64_t, int64_t>, SimplePartition*, pair_hash> partitions_map;
+		std::list<SimplePartition> partitions;
 
 	private:
 	};
