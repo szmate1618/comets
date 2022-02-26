@@ -2,7 +2,7 @@
 
 #include "Entities.hpp"
 #include "EntityHandle.hpp"
-#include "SimplePartitioner.hpp"
+#include "SingleLayerHashPartitioner.hpp"
 #include "SimpleVisionPartitioner.hpp"
 #include "..\Utilities\sqlite3.h"
 #include "..\Utilities\StaticLinkedList.hpp"
@@ -87,7 +87,7 @@ namespace entity
 			{ visible,{ { collidable,{} },{ uncollidable,{} } } },
 			{ invisible,{ { collidable,{} },{ uncollidable,{} } } }
 		};
-		SimplePartitioner collision_partitioner;
+		SingleLayerHashPartitioner collision_partitioner;
 		SimpleVisionPartitioner vision_partitioner;
 
 		//TODO: Maybe these should go into a separate class.

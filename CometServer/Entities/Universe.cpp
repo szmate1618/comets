@@ -486,7 +486,7 @@ namespace entity
 		else {
 			util::Log(util::warn, "Requested id " + std::to_string(entity) + " is not greater than max_used_entity_id.");
 		}
-		util::Log(util::trace, "Entity " + std::to_string(entity) + " has been created.");
+		util::Log(util::trace, "Entity " + std::to_string(entity) + " has been created with shape_id " + std::to_string(shape) + ".");
 
 		EntityHandle handle{ owner, shape, texture, engine, dynamics, visibility, collidability, nullptr };
 		if (dynamics == dynamic)
