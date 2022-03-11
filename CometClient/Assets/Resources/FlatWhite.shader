@@ -1,4 +1,6 @@
-﻿Shader "FlatWhite"
+﻿//Based on this:
+//https://docs.unity3d.com/Manual/SL-Material.html
+Shader "FlatWhite"
 {
 	SubShader
 	{
