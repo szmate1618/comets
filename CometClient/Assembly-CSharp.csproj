@@ -76,6 +76,7 @@
     <None Include="Assets\Resources\FishEye.shader" />
     <None Include="Assets\Resources\FishEye2.shader" />
     <None Include="Assets\Resources\FishEye3.shader" />
+    <None Include="Assets\Resources\FlatWhite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/git_repos/comets/CometClient/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

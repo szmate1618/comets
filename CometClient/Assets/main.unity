@@ -290,8 +290,8 @@ Camera:
     y: 0
     width: 0.8
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: -10
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 40
@@ -318,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304200938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -408,7 +408,6 @@ GameObject:
   - component: {fileID: 2059686164}
   - component: {fileID: 2059686163}
   - component: {fileID: 2059686166}
-  - component: {fileID: 2059686161}
   m_Layer: 0
   m_Name: Radar Camera
   m_TagString: MainCamera
@@ -416,18 +415,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2059686161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059686160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d313710897b55a24fa44dd058722ad99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &2059686163
 Behaviour:
   m_ObjectHideFlags: 0
@@ -446,7 +433,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -458,8 +445,8 @@ Camera:
     y: 0.6444
     width: 0.2
     height: 0.3555
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0
+  far clip plane: 5
   field of view: 60
   orthographic: 1
   orthographic size: 400
@@ -486,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059686160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -499,9 +486,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059686160}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c75132c74c5a6647b9b41088ea0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fisheyeShader: {fileID: 4800000, guid: fb2516ea631ee9f4097b109c9315dfbc, type: 3}
+  fisheyeShader: {fileID: 4800000, guid: 3930a13da37162b4eb1825fe27f1a65e, type: 3}
