@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\Camera\CameraController.cs" />
-    <Compile Include="Assets\Code\Camera\FisheyeCameraController.cs" />
+    <Compile Include="Assets\Code\Camera\CameraShaderController.cs" />
     <Compile Include="Assets\Code\ContentManagement\BackgroundManager.cs" />
     <Compile Include="Assets\Code\ContentManagement\EntityFactory.cs" />
     <Compile Include="Assets\Code\ContentManagement\MeshFactory.cs" />

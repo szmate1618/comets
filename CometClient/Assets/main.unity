@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c75132c74c5a6647b9b41088ea0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fisheyeShader: {fileID: 4800000, guid: fb2516ea631ee9f4097b109c9315dfbc, type: 3}
+  shader: {fileID: 4800000, guid: fb2516ea631ee9f4097b109c9315dfbc, type: 3}
 --- !u!114 &1304200944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,4 +491,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c75132c74c5a6647b9b41088ea0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fisheyeShader: {fileID: 4800000, guid: 3930a13da37162b4eb1825fe27f1a65e, type: 3}
+  shader: {fileID: 4800000, guid: 3930a13da37162b4eb1825fe27f1a65e, type: 3}

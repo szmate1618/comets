@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
 
-public class FisheyeCameraController : MonoBehaviour
+public class CameraShaderController : MonoBehaviour
 {
-	public Shader fisheyeShader;
+	public Shader shader;
 
 	private void Start ()
 	{
-		GetComponent<Camera>().SetReplacementShader(fisheyeShader, "");
+		GetComponent<Camera>().SetReplacementShader(shader, "");
 	}
 
 	void OnPreCull()
