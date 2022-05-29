@@ -6,9 +6,9 @@ public class CameraController : MonoBehaviour
 {
 	void Update()
 	{
-		float orthographicSize = Camera.main.orthographicSize;
+		float orthographicSize = GetComponent<Camera>().orthographicSize;
 		orthographicSize += Input.GetAxis("zoom") * 10;
 		orthographicSize = Mathf.Clamp(orthographicSize, 5, 100);
-		Camera.main.orthographicSize = orthographicSize;
+		GetComponent<Camera>().orthographicSize = orthographicSize;
 	}
 }

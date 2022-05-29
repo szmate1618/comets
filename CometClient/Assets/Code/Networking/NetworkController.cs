@@ -9,6 +9,7 @@ public class NetworkController : MonoBehaviour
 {
 
 	public GameObject mainCamera;
+	public GameObject radarCamera;
 	public GameObject placeHolder;
 
 	private net.Packet<net.Header, net.ClientInputPayload> client_input;
@@ -143,6 +144,8 @@ public class NetworkController : MonoBehaviour
 					entities[def.Network.my_entity_id].transform.position.y,
 					mainCamera.transform.position.z
 				);
+
+			radarCamera.transform.position = mainCamera.transform.position;
 
 		}
 	}
